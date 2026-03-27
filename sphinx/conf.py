@@ -12,8 +12,11 @@ author = 'infinite-cloisters'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+master_doc = 'index'
 
-extensions = []
+extensions = ['recommonmark', 'sphinx_markdown_tables']
+
+source_suffix = {'.rst': 'restructuredtext', '.md': 'markdown'}
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']

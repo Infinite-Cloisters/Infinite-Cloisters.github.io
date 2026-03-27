@@ -15,3 +15,6 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
+   docs/wsl/index
+
+欢迎来到Infinite-Cloisters的随记文档

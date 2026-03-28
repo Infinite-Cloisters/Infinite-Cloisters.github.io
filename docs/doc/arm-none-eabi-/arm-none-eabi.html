@@ -45,6 +45,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门(Getting Started)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ARM-NONE-EABI-工具链使用</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">在 Windows 上安装 ARM GNU Toolchain（用于单片机/STM32 开发）</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">概要</a></li>
@@ -102,14 +103,17 @@
 </section>
 <section id="id3">
 <h2>下载与安装<a class="headerlink" href="#id3" title="链接到此标题。"></a></h2>
-<ol>
-<li><p>前往官方页面下载 ARM GNU Toolchain（Windows 安装包）：</p>
-<p>https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads</p>
-</li>
-<li><p>下载 <code class="docutils literal notranslate"><span class="pre">.msi</span></code>（或压缩包）后按提示安装。记下安装目录，例如默认可能为：</p>
+<ol class="simple">
+<li><p>前往官方页面下载 ARM GNU Toolchain（Windows 安装包）：</p></li>
+</ol>
+<p><a class="reference external" href="https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads">&quot;工具链下载地址&quot;</a></p>
+<ol class="simple">
+<li><p>下载 <code class="docutils literal notranslate"><span class="pre">.msi</span></code>（或压缩包）后按提示安装。记下安装目录，例如默认可能为：</p></li>
+</ol>
 <p><code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Arm\GNU</span> <span class="pre">Toolchain\mingw-w64-x86_64-arm-none-eabi\bin</span></code></p>
-</li>
-<li><p>将工具链的 <code class="docutils literal notranslate"><span class="pre">bin</span></code> 目录加入系统 <code class="docutils literal notranslate"><span class="pre">PATH</span></code>（建议为当前用户环境变量）。在 PowerShell（以普通用户）中可执行：</p>
+<ol class="simple">
+<li><p>将工具链的 <code class="docutils literal notranslate"><span class="pre">bin</span></code> 目录加入系统 <code class="docutils literal notranslate"><span class="pre">PATH</span></code>（建议为当前用户环境变量）。在 PowerShell（以普通用户）中可执行：</p></li>
+</ol>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 将工具链目录追加到当前用户的 Path（请根据实际路径修改）</span>
 <span class="nv">$toolPath</span> <span class="p">=</span> <span class="s1">&#39;C:\Program Files\Arm\GNU Toolchain\mingw-w64-x86_64-arm-none-eabi\bin&#39;</span>
 <span class="no">[Environment]</span><span class="p">::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span><span class="s1">&#39;Path&#39;</span><span class="p">,</span> <span class="nv">$env:Path</span> <span class="p">+</span> <span class="s1">&#39;;&#39;</span> <span class="p">+</span> <span class="nv">$toolPath</span><span class="p">,</span> <span class="s1">&#39;User&#39;</span><span class="p">)</span>
@@ -118,14 +122,13 @@
 </pre></div>
 </div>
 <p>注意：如果路径中包含空格，请按示例完整使用引号并替换为实际路径。</p>
-</li>
-<li><p>安装完成后验证：</p>
+<ol class="simple">
+<li><p>安装完成后验证：</p></li>
+</ol>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">arm-none-eabi-gcc</span> <span class="p">-</span><span class="n">-version</span>
 <span class="n">arm-none-eabi-objdump</span> <span class="p">-</span><span class="n">-version</span>
 </pre></div>
 </div>
-</li>
-</ol>
 </section>
 <section id="id4">
 <h2>安装构建工具（必须）<a class="headerlink" href="#id4" title="链接到此标题。"></a></h2>

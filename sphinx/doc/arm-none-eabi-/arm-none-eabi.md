@@ -14,30 +14,30 @@
 
 1. 前往官方页面下载 ARM GNU Toolchain（Windows 安装包）：
 
-	https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
+["工具链下载地址"](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
 
 2. 下载 `.msi`（或压缩包）后按提示安装。记下安装目录，例如默认可能为：
 
-	`C:\Program Files\Arm\GNU Toolchain\mingw-w64-x86_64-arm-none-eabi\bin`
+`C:\Program Files\Arm\GNU Toolchain\mingw-w64-x86_64-arm-none-eabi\bin`
 
 3. 将工具链的 `bin` 目录加入系统 `PATH`（建议为当前用户环境变量）。在 PowerShell（以普通用户）中可执行：
 
-	```powershell
-	# 将工具链目录追加到当前用户的 Path（请根据实际路径修改）
-	$toolPath = 'C:\Program Files\Arm\GNU Toolchain\mingw-w64-x86_64-arm-none-eabi\bin'
-	[Environment]::SetEnvironmentVariable('Path', $env:Path + ';' + $toolPath, 'User')
-	# 使当前会话立即可用
-	$env:Path += ';' + $toolPath
-	```
+```powershell
+# 将工具链目录追加到当前用户的 Path（请根据实际路径修改）
+$toolPath = 'C:\Program Files\Arm\GNU Toolchain\mingw-w64-x86_64-arm-none-eabi\bin'
+[Environment]::SetEnvironmentVariable('Path', $env:Path + ';' + $toolPath, 'User')
+# 使当前会话立即可用
+$env:Path += ';' + $toolPath
+```
 
-	注意：如果路径中包含空格，请按示例完整使用引号并替换为实际路径。
+注意：如果路径中包含空格，请按示例完整使用引号并替换为实际路径。
 
 4. 安装完成后验证：
 
-	```powershell
-	arm-none-eabi-gcc --version
-	arm-none-eabi-objdump --version
-	```
+```powershell
+arm-none-eabi-gcc --version
+arm-none-eabi-objdump --version
+```
 
 ## 安装构建工具（必须）
 

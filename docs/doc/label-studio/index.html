@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Linux踩坑记录 &mdash; docs 0.1.0 文档</title>
+  <title>Label Studio 系列 &mdash; docs 0.1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -23,8 +23,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
-    <link rel="next" title="Linux 相关" href="linux.html" />
-    <link rel="prev" title="在 VSCode 上使用 WSL2" href="../wsl/wsl_use.html" /> 
+    <link rel="next" title="Backend_ml 接入" href="backend.html" />
+    <link rel="prev" title="在 Windows 上安装 ARM GNU Toolchain（用于单片机/STM32 开发）" href="../arm-none-eabi-/arm-none-eabi.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,12 +49,12 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门(Getting Started)</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Linux踩坑记录</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="linux.html">Linux 相关</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi-/index.html">ARM-NONE-EABI-工具链使用</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Label Studio 系列</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backend.html">Backend_ml 接入</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi-/index.html">ARM-NONE-EABI-工具链使用</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a></li>
 </ul>
 
         </div>
@@ -71,9 +71,9 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Linux踩坑记录</li>
+      <li class="breadcrumb-item active">Label Studio 系列</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/doc/linux/index.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../../_sources/doc/label-studio/index.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -81,15 +81,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="linux">
-<h1>Linux踩坑记录<a class="headerlink" href="#linux" title="链接到此标题。"></a></h1>
-<p>11年左右，我开始接触使用虚拟机安装安卓x86系统，过渡到使用实体机安装多系统，后来又接触了国产Linux系统，比如说deepinv15、fydeos等
-现在从manjaro到archlinux期间踩过不少坑，记录下来以备后续参考。</p>
+  <section id="label-studio">
+<h1>Label Studio 系列<a class="headerlink" href="#label-studio" title="链接到此标题。"></a></h1>
+<p>比较难绷的系列，主要是一些 Label Studio 的使用教程和相关工具的介绍。</p>
+<p>本人在backend_ml上赤过一坨大的——新旧api混乱, 官网文档和demo也很难绷。</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="linux.html">Linux 相关</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="linux.html#archlinux-aur">ArchLinux AUR源下载问题</a></li>
-<li class="toctree-l2"><a class="reference internal" href="linux.html#timeshiftbtrfs">Timeshift恢复Btrfs后出问题</a></li>
+<li class="toctree-l1"><a class="reference internal" href="backend.html">Backend_ml 接入</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#model">后端model加载</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#id1">后端获取图片</a></li>
+<li class="toctree-l2"><a class="reference internal" href="backend.html#brush">返回brush类标注</a></li>
 </ul>
 </li>
 </ul>
@@ -100,8 +101,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="../wsl/wsl_use.html" class="btn btn-neutral float-left" title="在 VSCode 上使用 WSL2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="linux.html" class="btn btn-neutral float-right" title="Linux 相关" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../arm-none-eabi-/arm-none-eabi.html" class="btn btn-neutral float-left" title="在 Windows 上安装 ARM GNU Toolchain（用于单片机/STM32 开发）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="backend.html" class="btn btn-neutral float-right" title="Backend_ml 接入" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,0 +1,187 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backend_ml 接入 &mdash; docs 0.1.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=d786bb5c"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/translations.js?v=540d3cec"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="prev" title="Label Studio 系列" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            docs
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门(Getting Started)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi-/index.html">ARM-NONE-EABI-工具链使用</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Label Studio 系列</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Backend_ml 接入</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#model">后端model加载</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">后端获取图片</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#brush">返回brush类标注</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">docs</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Label Studio 系列</a></li>
+      <li class="breadcrumb-item active">Backend_ml 接入</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/label-studio/backend.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="backend-ml">
+<h1>Backend_ml 接入<a class="headerlink" href="#backend-ml" title="链接到此标题。"></a></h1>
+<section id="model">
+<h2>后端model加载<a class="headerlink" href="#model" title="链接到此标题。"></a></h2>
+<p>模型需要放置在开头，不要放在类里面</p>
+</section>
+<section id="id1">
+<h2>后端获取图片<a class="headerlink" href="#id1" title="链接到此标题。"></a></h2>
+<p>下面代码是（我写的）代码中截取的部分，虽然没有变量说明，但大家应该也能看懂吧？</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">image_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">image_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">):</span>
+    <span class="c1"># 通过网络路径直接获取，无auth（看具体情况）</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">image_url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># 本地labelstudio获取，要求auth</span>
+    <span class="n">full_url</span> <span class="o">=</span> <span class="n">LABEL_STUDIO_HOST</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">image_url</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">full_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Token </span><span class="si">{</span><span class="n">LABEL_STUDIO_API_KEY</span><span class="si">}</span><span class="s1">&#39;</span><span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">raw</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="brush">
+<h2>返回brush类标注<a class="headerlink" href="#brush" title="链接到此标题。"></a></h2>
+<p>图像分割brush标注官网没啥资料，我给出一部分代码逻辑，为了篇幅省略了一些异常检测。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 模型的返回</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">label_studio_ml.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelResponse</span>
+<span class="c1"># Label Studio 转换工具 - 用于 RLE 编码</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">label_studio_converter</span><span class="w"> </span><span class="kn">import</span> <span class="n">brush</span>
+
+<span class="n">mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_predict_img</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span>
+
+<span class="c1"># 这玩意似乎有些bug</span>
+<span class="n">from_name</span><span class="p">,</span> <span class="n">to_name</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_first_tag_occurence</span><span class="p">(</span><span class="s1">&#39;BrushLabels&#39;</span><span class="p">,</span><span class="s1">&#39;Image&#39;</span><span class="p">)</span>
+<span class="c1"># 这里的标签名称应与 label_config 中定义的标签一致</span>
+<span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsed_label_config</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">][</span><span class="s1">&#39;labels&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># 为掩码生成 RLE 编码</span>
+<span class="n">rle_value</span> <span class="o">=</span> <span class="n">brush</span><span class="o">.</span><span class="n">mask2rle</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+<span class="c1"># 结果必要的一些标签</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">4</span><span class="p">],</span>
+    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;brushlabels&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;from_name&#39;</span><span class="p">:</span> <span class="n">from_name</span><span class="p">,</span>
+    <span class="s1">&#39;to_name&#39;</span><span class="p">:</span> <span class="n">to_name</span><span class="p">,</span>
+    <span class="s1">&#39;original_width&#39;</span><span class="p">:</span> <span class="n">image_width</span><span class="p">,</span>
+    <span class="s1">&#39;original_height&#39;</span><span class="p">:</span> <span class="n">image_height</span><span class="p">,</span>
+    <span class="s1">&#39;image_rotation&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;rle&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rle&#39;</span><span class="p">:</span> <span class="n">rle_value</span><span class="p">,</span>
+        <span class="s2">&quot;brushlabels&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>  <span class="c1"># 这里的标签名称应与 label_config 中定义的标签一致</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;readonly&#39;</span><span class="p">:</span> <span class="kc">False</span>
+<span class="p">}</span>
+<span class="c1"># 总体返回的内容</span>
+<span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+    <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">result</span><span class="p">],</span>
+    <span class="s1">&#39;model_version&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;model_version&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_prediction_score</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+<span class="p">})</span> 
+
+<span class="c1"># 这个就是返回值了</span>
+<span class="k">return</span> <span class="n">ModelResponse</span><span class="p">(</span><span class="n">predictions</span><span class="o">=</span><span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="index.html" class="btn btn-neutral float-left" title="Label Studio 系列" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, infinite-cloisters。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

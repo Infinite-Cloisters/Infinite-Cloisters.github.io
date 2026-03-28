@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>在 VSCode 上使用 WSL2 &mdash; docs 0.1.0 文档</title>
+  <title>Linux踩坑记录 &mdash; docs 0.1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
 
@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
-    <link rel="next" title="Linux踩坑记录" href="../linux/index.html" />
-    <link rel="prev" title="在 Windows 上使用 WSL（以 Arch Linux 为例）" href="wsl.html" /> 
+    <link rel="next" title="Linux 相关" href="linux.html" />
+    <link rel="prev" title="在 VSCode 上使用 WSL2" href="../wsl/wsl_use.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,16 +45,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">WSL2入门(Getting Started)</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="wsl.html">在 Windows 上使用 WSL（以 Arch Linux 为例）</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">在 VSCode 上使用 WSL2</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">安装微软大战代码 :-)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#wsl">WSL文件路径相关</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门(Getting Started)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Linux踩坑记录</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linux.html">Linux 相关</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi-/index.html">ARM-NONE-EABI-工具链使用</a></li>
 </ul>
 
@@ -72,10 +67,9 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">WSL2入门(Getting Started)</a></li>
-      <li class="breadcrumb-item active">在 VSCode 上使用 WSL2</li>
+      <li class="breadcrumb-item active">Linux踩坑记录</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/doc/wsl/wsl_use.md.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../../_sources/doc/linux/index.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -83,34 +77,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="vscode-wsl2">
-<h1>在 VSCode 上使用 WSL2<a class="headerlink" href="#vscode-wsl2" title="链接到此标题。"></a></h1>
-<section id="id1">
-<h2>安装微软大战代码 :-)<a class="headerlink" href="#id1" title="链接到此标题。"></a></h2>
-<p>首先你需要安装VSCode，在安装过程中 <code class="docutils literal notranslate"><span class="pre">选择附加任务</span></code> 中请勾选以下勾选框</p>
-<ul class="simple">
-<li><p>将&quot;通过Code打开”操作添加到Windows资源管理器文件上下文菜单</p></li>
-<li><p>将“通过Code 打开″操作添加到Windows资源管理器自录上下文菜单</p></li>
-<li><p>将Code注册为受支持的文件类型的编辑器</p></li>
-<li><p>添加到PATH (重启后生效)</p></li>
+  <section id="linux">
+<h1>Linux踩坑记录<a class="headerlink" href="#linux" title="链接到此标题。"></a></h1>
+<p>11年左右，我开始接触使用虚拟机安装安卓x86系统，过渡到使用实体机安装多系统，后来又接触了国产Linux系统，比如说deepinv15、fydeos等
+现在从manjaro到archlinux期间踩过不少坑，记录下来以备后续参考。</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="linux.html">Linux 相关</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="linux.html#archlinux-aur">ArchLinux AUR源下载问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linux.html#timeshiftbtrfs">Timeshift恢复Btrfs后出问题</a></li>
 </ul>
-<p>安装WSL插件，通过远程资源管理器连接上你的WSL</p>
-</section>
-<section id="wsl">
-<h2>WSL文件路径相关<a class="headerlink" href="#wsl" title="链接到此标题。"></a></h2>
-<p>建议在/home文件夹创建文件目录</p>
-<p>/mnt/目录下对应的是Windows的C盘、D盘...</p>
-<p>也就是说可以通过该目录访问你Winodws内的文件，执行构建操作。</p>
-<p>Linux上使用构建工具比win平台效率更高，配置环境<strong>更简单</strong>！更<strong>不容易出错</strong>！</p>
-</section>
+</li>
+</ul>
+</div>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="wsl.html" class="btn btn-neutral float-left" title="在 Windows 上使用 WSL（以 Arch Linux 为例）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../linux/index.html" class="btn btn-neutral float-right" title="Linux踩坑记录" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../wsl/wsl_use.html" class="btn btn-neutral float-left" title="在 VSCode 上使用 WSL2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="linux.html" class="btn btn-neutral float-right" title="Linux 相关" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

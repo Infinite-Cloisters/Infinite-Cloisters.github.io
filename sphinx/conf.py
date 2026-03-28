@@ -15,7 +15,7 @@ release = '0.1.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 master_doc = 'index'
 
-extensions = ['recommonmark', 'sphinx_markdown_tables']
+extensions = ['recommonmark', 'sphinx_markdown_tables','sphinx_copybutton']
 
 source_suffix = {'.rst': 'restructuredtext', '.md': 'markdown'}
 

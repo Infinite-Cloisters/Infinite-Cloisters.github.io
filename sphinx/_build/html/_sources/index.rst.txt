@@ -12,7 +12,7 @@ DOCS Documentation
 
    doc/wsl/index
    doc/linux/index
-   doc/arm-none-eabi-/index
+   doc/arm-none-eabi/index
    doc/label-studio/index
 
 欢迎来到Infinite-Cloisters的随记文档

@@ -94,3 +94,4 @@ cmake --build build -j <threads>
 
 - ARM GNU Toolchain 下载：[官方下载链接](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads,"工具链下载")
 - CMake 官方网站：[CMake官网](https://cmake.org/,"官网")
+- CMake 菜鸟教材：[菜鸟教材](https://www.runoob.com/cmake/cmake-tutorial.html)

@@ -82,5 +82,4 @@ pacman -S arm-none-eabi-gcc arm-none-eabi-newlib arm-none-eabi-gdb cmake ninja g
 
 根据项目需要选择并安装其他包。
 
-
 如果终端中文表现**异常**请参考Linux踩坑记录

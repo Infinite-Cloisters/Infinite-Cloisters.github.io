@@ -53,6 +53,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Linux 相关</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#archlinux-aur">ArchLinux AUR源下载问题</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#timeshiftbtrfs">Timeshift恢复Btrfs后出问题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">终端中文表现为乱码</a></li>
 </ul>
 </li>
 </ul>
@@ -119,6 +120,19 @@ sudo<span class="w"> </span>nano<span class="w"> </span>/etc/fstab
 </pre></div>
 </div>
 </section>
+<section id="id1">
+<h2>终端中文表现为乱码<a class="headerlink" href="#id1" title="链接到此标题。"></a></h2>
+</section>
+<p>首先需要编辑<code class="docutils literal notranslate"><span class="pre">/etc/locale.gen</span></code>文件</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>nano<span class="w"> </span>/etc/locale.gen
+</pre></div>
+</div>
+<p>将 en_US.UTF-8和zh_CN.UTF-8取消注释,在终端输入</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>locale-gen
+</pre></div>
+</div>
+<p>生成配置文件后还需要安装合适的中文字体，如<code class="docutils literal notranslate"><span class="pre">noto-sans-cjk</span></code></p>
+<p>基本上能解决大部分显示异常的问题</p>
 </section>
 
 

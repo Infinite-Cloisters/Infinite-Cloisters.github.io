@@ -82,18 +82,5 @@ pacman -S arm-none-eabi-gcc arm-none-eabi-newlib arm-none-eabi-gdb cmake ninja g
 
 根据项目需要选择并安装其他包。
 
-## 9. 在 VS Code 中通过 WSL 工作
 
-- 安装 VS Code 的 Remote - WSL 扩展。
-- 打开命令面板（Ctrl+Shift+P），选择 "Remote-WSL: New Window"。
-- 在 WSL 窗口中打开要编辑的项目文件夹。
-- 在 VS Code 中打开终端即可运行 Linux 命令。
-
-注意：
-
-- Linux 下不能直接运行 Windows 的 `.exe`（例如 `arm-none-eabi-gcc.exe`），请在 WSL 环境中使用对应的 Linux 工具链。
-- 在 VS Code 的工具链/扩展配置中，确保选择的是 WSL 内的工具而非 Windows 本地的工具链。
-
----
-
-如果你希望我把文档改为加入更多场景（如 WSL2 设置、GUI 支持或系统备份），我可以继续扩展相关内容。 
+如果终端中文表现**异常**请参考Linux踩坑记录

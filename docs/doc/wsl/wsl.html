@@ -58,7 +58,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#id3">6. 更新镜像源（提高下载速度）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#archlinuxcn">7. 添加 archlinuxcn 源（可选）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">8. 安装需要的开发包</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vs-code-wsl">9. 在 VS Code 中通过 WSL 工作</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="wsl_use.html">在 VSCode 上使用 WSL2</a></li>
@@ -166,22 +165,7 @@
 </pre></div>
 </div>
 <p>根据项目需要选择并安装其他包。</p>
-</section>
-<section id="vs-code-wsl">
-<h2>9. 在 VS Code 中通过 WSL 工作<a class="headerlink" href="#vs-code-wsl" title="链接到此标题。"></a></h2>
-<ul class="simple">
-<li><p>安装 VS Code 的 Remote - WSL 扩展。</p></li>
-<li><p>打开命令面板（Ctrl+Shift+P），选择 &quot;Remote-WSL: New Window&quot;。</p></li>
-<li><p>在 WSL 窗口中打开要编辑的项目文件夹。</p></li>
-<li><p>在 VS Code 中打开终端即可运行 Linux 命令。</p></li>
-</ul>
-<p>注意：</p>
-<ul class="simple">
-<li><p>Linux 下不能直接运行 Windows 的 <code class="docutils literal notranslate"><span class="pre">.exe</span></code>（例如 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc.exe</span></code>），请在 WSL 环境中使用对应的 Linux 工具链。</p></li>
-<li><p>在 VS Code 的工具链/扩展配置中，确保选择的是 WSL 内的工具而非 Windows 本地的工具链。</p></li>
-</ul>
-<hr class="docutils" />
-<p>如果你希望我把文档改为加入更多场景（如 WSL2 设置、GUI 支持或系统备份），我可以继续扩展相关内容。</p>
+<p>如果终端中文表现<strong>异常</strong>请参考Linux踩坑记录</p>
 </section>
 </section>
 

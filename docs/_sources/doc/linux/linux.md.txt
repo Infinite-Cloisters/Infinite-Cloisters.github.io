@@ -22,7 +22,6 @@ makepkg
 sudo pacman -U <package>
 ```
 
-
 ## Timeshift恢复Btrfs后出问题
 
 可以参考[archlinux 简明指南](https://arch.icekylin.online/guide/advanced/system-ctl#%E7%B3%BB%E7%BB%9F%E5%BF%AB%E7%85%A7-%E5%A4%87%E4%BB%BD-%E4%B8%8E%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93)，文章中提到:
@@ -42,3 +41,21 @@ sudo nano /etc/fstab
 ```bash
 sudo btrfs sub list -u /
 ```
+
+>## 终端中文表现为乱码
+
+首先需要编辑`/etc/locale.gen`文件
+
+```bash
+sudo nano /etc/locale.gen
+```
+
+将 en_US.UTF-8和zh_CN.UTF-8取消注释,在终端输入
+
+```bash
+locale-gen
+```
+
+生成配置文件后还需要安装合适的中文字体，如`noto-sans-cjk`
+
+基本上能解决大部分显示异常的问题

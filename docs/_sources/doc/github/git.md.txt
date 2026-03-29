@@ -21,7 +21,7 @@ git push
 # 有些鉴权方式比如说GUI支持账户+密码，纯终端一般需要你手动创建auth token使用它进行仓库管理
 ```
 
-初学者可以配合GitHub Desktop或者VSCode进行辅助使用
+初学者可以配合GitHub Desktop或者VSCode进行辅助使用，此外**一定要合理使用`.gitignore`减少仓库大小**
 
 诸如gitee相比GitHub更快（在中国），使用的流程基本上都差不多。
 

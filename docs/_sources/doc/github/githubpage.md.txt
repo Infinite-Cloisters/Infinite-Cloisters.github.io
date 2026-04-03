@@ -85,12 +85,7 @@
 目标: 2606:50c0:8003::153
 ```
 
-如果你使用 Cloudflare，建议把这些记录保持为 DNS only，不要走代理，否则 GitHub Pages 可能无法正常校验域名或签发证书。
-
-#
-#
-
-如果你使用 Cloudflare，也可以把根域名通过 CNAME Flattening 指向 `用户名.github.io`，这样对外仍然是根域名访问，但解析过程由 Cloudflare 处理。
+如果你使用 Cloudflare，建议把这些记录保持为 DNS only，不要走代理，否则 GitHub Pages 可能无法正常校验域名或签发证书。你也可以把根域名通过 CNAME Flattening 指向 `用户名.github.io`，这样对外仍然是根域名访问，但解析过程由 Cloudflare 处理。
 
 ## 5. 让 GitHub Pages 识别自定义域名
 

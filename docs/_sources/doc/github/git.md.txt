@@ -11,6 +11,7 @@ git init
 # 添加文件
 git add *
 # 提交本地
+git commit # vim同款操作
 git commit -m "评论"
 # 添加远程源
 git remote add origin <url>

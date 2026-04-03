@@ -13,11 +13,9 @@
 ## 下载与安装
 
 1. 前往官方页面下载 ARM GNU Toolchain（Windows 安装包）：
-
 ["工具链下载地址"](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
 
 2. 下载 `.msi`（或压缩包）后按提示安装。记下安装目录，例如默认可能为：
-
 `C:\Program Files\Arm\GNU Toolchain\mingw-w64-x86_64-arm-none-eabi\bin`
 
 3. 将工具链的 `bin` 目录加入系统 `PATH`（建议为当前用户环境变量）。在 PowerShell（以普通用户）中可执行：
@@ -30,7 +28,7 @@ $toolPath = 'C:\Program Files\Arm\GNU Toolchain\mingw-w64-x86_64-arm-none-eabi\b
 $env:Path += ';' + $toolPath
 ```
 
-注意：如果路径中包含空格，请按示例完整使用引号并替换为实际路径。
+注意：如果路径中包含空格，请按示例完整使用引号并替换为实际路径。  
 
 4. 安装完成后验证：
 

@@ -62,17 +62,13 @@
 <li class="toctree-l4"><a class="reference internal" href="#id5">添加自己的域名</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id6"></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7"></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id8">5. 让 GitHub Pages 识别自定义域名</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">5. 让 GitHub Pages 识别自定义域名</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#github">GitHub 侧的域名验证（可选）</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">6. 验证是否生效</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">7. 更新站点</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">8. 小结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">6. 验证是否生效</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">7. 更新站点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">8. 小结</a></li>
 </ul>
 </li>
 </ul>
@@ -180,18 +176,11 @@
 目标: 2606:50c0:8003::153
 </pre></div>
 </div>
-<p>如果你使用 Cloudflare，建议把这些记录保持为 DNS only，不要走代理，否则 GitHub Pages 可能无法正常校验域名或签发证书。</p>
-</section>
+<p>如果你使用 Cloudflare，建议把这些记录保持为 DNS only，不要走代理，否则 GitHub Pages 可能无法正常校验域名或签发证书。你也可以把根域名通过 CNAME Flattening 指向 <code class="docutils literal notranslate"><span class="pre">用户名.github.io</span></code>，这样对外仍然是根域名访问，但解析过程由 Cloudflare 处理。</p>
 </section>
 </section>
 <section id="id6">
-<h1><a class="headerlink" href="#id6" title="链接到此标题。"></a></h1>
-</section>
-<section id="id7">
-<h1><a class="headerlink" href="#id7" title="链接到此标题。"></a></h1>
-<p>如果你使用 Cloudflare，也可以把根域名通过 CNAME Flattening 指向 <code class="docutils literal notranslate"><span class="pre">用户名.github.io</span></code>，这样对外仍然是根域名访问，但解析过程由 Cloudflare 处理。</p>
-<section id="id8">
-<h2>5. 让 GitHub Pages 识别自定义域名<a class="headerlink" href="#id8" title="链接到此标题。"></a></h2>
+<h2>5. 让 GitHub Pages 识别自定义域名<a class="headerlink" href="#id6" title="链接到此标题。"></a></h2>
 <p>域名解析做好以后，还要让 GitHub 知道你要使用哪个域名。</p>
 <p>做法有两种：</p>
 <ol class="simple">
@@ -214,8 +203,8 @@
 <p>这个流程通常用于组织主页、团队信息页或企业域名校验；如果你只是给个人仓库做 Pages 站点，通常只需要前面的 Pages 自定义域名配置。</p>
 </section>
 </section>
-<section id="id9">
-<h2>6. 验证是否生效<a class="headerlink" href="#id9" title="链接到此标题。"></a></h2>
+<section id="id7">
+<h2>6. 验证是否生效<a class="headerlink" href="#id7" title="链接到此标题。"></a></h2>
 <p>部署完成后，先检查这几个点：</p>
 <ol class="simple">
 <li><p>默认的 GitHub Pages 地址是否可以打开。</p></li>
@@ -225,12 +214,12 @@
 </ol>
 <p>如果样式或脚本加载失败，通常是静态资源路径不对，或者构建产物没有完整同步到 <code class="docutils literal notranslate"><span class="pre">docs/</span></code>。如果页面能打开但资源 404，优先检查构建产物和 <code class="docutils literal notranslate"><span class="pre">CNAME</span></code>、<code class="docutils literal notranslate"><span class="pre">.nojekyll</span></code> 是否都被复制到了发布目录。</p>
 </section>
-<section id="id10">
-<h2>7. 更新站点<a class="headerlink" href="#id10" title="链接到此标题。"></a></h2>
+<section id="id8">
+<h2>7. 更新站点<a class="headerlink" href="#id8" title="链接到此标题。"></a></h2>
 <p>以后只要修改 Sphinx 源文档，再重新执行构建并提交 <code class="docutils literal notranslate"><span class="pre">docs/</span></code> 目录即可。GitHub Pages 会自动重新部署，站点内容也会随之更新。</p>
 </section>
-<section id="id11">
-<h2>8. 小结<a class="headerlink" href="#id11" title="链接到此标题。"></a></h2>
+<section id="id9">
+<h2>8. 小结<a class="headerlink" href="#id9" title="链接到此标题。"></a></h2>
 <p>最稳妥的流程就是：本地用 Sphinx 生成静态文件，把产物放进 <code class="docutils literal notranslate"><span class="pre">docs/</span></code>，在 GitHub Pages 里选择这个目录作为发布源；如果需要域名，再通过 Cloudflare 配置 DNS 并在 Pages 中填写自定义域名。</p>
 </section>
 </section>

@@ -1,7 +1,7 @@
 # 全国大学生电子设计竞赛近年赛题
 
 | 年份 | 竞赛类型 | 赛题链接 |
-|------|---------|---------|
+| ------ | --------- | --------- |
 | **2025** | 全国竞赛 | [TI 杯 2025 年全国大学生电子设计竞赛赛题](https://www.nuedc-training.com.cn/index/news/details/new_id/335) |
 | **2024** | 赛区赛（TI杯初赛） | [2024年全国大学生电子设计竞赛赛区赛暨模拟电子系统设计专题赛(TI杯)初赛赛题](https://www.nuedc-training.com.cn/index/news/details/new_id/329) |
 | **2023** | 全国竞赛 | [TI 杯 2023年全国大学生电子设计竞赛赛题](https://www.nuedc-training.com.cn/index/news/details/new_id/310) |

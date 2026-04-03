@@ -56,15 +56,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#id1">先决条件</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#probe-rs">安装 probe-rs（参考）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">调试流程（概览）</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">1. 构建带符号的固件:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">1. 构建带符号的固件</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">2. 使用传统方式</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#vscode">2. 使用新版方式(VSCode官方插件只支持这个)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#arm-none-eabi-gdb-elf-gdb">3. 在主机端打开 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 并加载 ELF(以下都是传统gdb方案)：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gdb-gdb-server">4. 在 gdb 内连接到远端 GDB server：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">5. 初始化目标（可选）：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#server">6. 加载程序到目标（如果尚未由 server 自动加载）：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">7. 设置断点并运行：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">8. 使用单步、查看寄存器、内存等进行调试，结束后断开连接：</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arm-none-eabi-gdb-elf-gdb">3. 在主机端打开 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 并加载 ELF(以下都是传统gdb方案)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gdb-gdb-server">4. 在 gdb 内连接到远端 GDB server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">5. 初始化目标(可选)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server">6. 加载程序到目标(如果尚未由 server 自动加载)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">7. 设置断点并运行</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">8. 使用单步、查看寄存器、内存等进行调试，结束后断开连接</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#gdb">常用 gdb 命令速查</a></li>
@@ -127,20 +127,20 @@
 <li><p>cargo-flash</p></li>
 <li><p>cargo-embed</p></li>
 </ul>
-<p>接着建议安装VSCode probe-rs 拓展, <font color="green">即使没有安装成功</font>它也会询问是否安装probe-rs</p>
+<p>接着建议安装VSCode probe-rs 拓展, <font color="green">即使没有安装成功</font>它也会询问是否安装probe-rs.</p>
 </section>
 <section id="id2">
 <h2>调试流程（概览）<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
 <section id="id3">
-<h3>1. 构建带符号的固件:<a class="headerlink" href="#id3" title="链接到此标题。"></a></h3>
+<h3>1. 构建带符号的固件<a class="headerlink" href="#id3" title="链接到此标题。"></a></h3>
 <ul class="simple">
 <li><p>Rust：<code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span> <span class="pre">--target</span> <span class="pre">&lt;target&gt;</span></code>（生成 ELF）</p></li>
-<li><p>C/C++：(正常我们是这个)使用交叉编译器生成 ELF</p></li>
+<li><p>C/C++：(正常我们是这个)使用交叉编译器生成 ELF.</p></li>
 </ul>
 </section>
 <section id="id4">
 <h3>2. 使用传统方式<a class="headerlink" href="#id4" title="链接到此标题。"></a></h3>
-<p>启动一个 GDB server（由 probe-rs 提供），使目标硬件通过 probe 与主机建立通信。通常 probe-rs 会在某个端口（例如 3333）提供 GDB 协议服务。</p>
+<p>启动一个 GDB server(由 probe-rs 提供)，使目标硬件通过 probe 与主机建立通信.通常 probe-rs 会在某个端口(例如 3333)提供 GDB 协议服务.</p>
 <ul class="simple">
 <li><p>示例（启动 gdb server 的方式可能随工具不同而异）：</p></li>
 </ul>
@@ -148,7 +148,7 @@
 </pre></div>
 </div>
 <p>该命令会打开与 probe 的连接，并启动一个可供 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 连接的 GDB server。请参考你安装的 probe-rs 工具的具体子命令与选项。</p>
-<p>如果工具没有相关芯片可以使用<code class="docutils literal notranslate"> <span class="pre">--chip-description-path</span></code>选项替换<code class="docutils literal notranslate"><span class="pre">--chip</span></code>，描述文件可以通过<code class="docutils literal notranslate"><span class="pre">target-gen</span></code>转换标准cmsis的.pack文件获得</p>
+<p>如果工具没有相关芯片可以使用<code class="docutils literal notranslate"><span class="pre">--chip-description-path</span></code>选项替换<code class="docutils literal notranslate"><span class="pre">--chip</span></code>，描述文件可以通过<code class="docutils literal notranslate"><span class="pre">target-gen</span></code>转换标准cmsis的.pack文件获得</p>
 </section>
 <section id="vscode">
 <h3>2. 使用新版方式(VSCode官方插件只支持这个)<a class="headerlink" href="#vscode" title="链接到此标题。"></a></h3>
@@ -159,19 +159,19 @@
 <p>使用RTT来获取调试信息<a class="reference external" href="https://probe.rs/docs/tools/debugger/">具体操作办法参考官方</a></p>
 </section>
 <section id="arm-none-eabi-gdb-elf-gdb">
-<h3>3. 在主机端打开 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 并加载 ELF(以下都是传统gdb方案)：<a class="headerlink" href="#arm-none-eabi-gdb-elf-gdb" title="链接到此标题。"></a></h3>
+<h3>3. 在主机端打开 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 并加载 ELF(以下都是传统gdb方案)<a class="headerlink" href="#arm-none-eabi-gdb-elf-gdb" title="链接到此标题。"></a></h3>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">arm-none-eabi-gdb</span> <span class="p">&lt;</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">your</span><span class="p">.</span><span class="n">elf</span><span class="p">&gt;</span>
 </pre></div>
 </div>
 </section>
 <section id="gdb-gdb-server">
-<h3>4. 在 gdb 内连接到远端 GDB server：<a class="headerlink" href="#gdb-gdb-server" title="链接到此标题。"></a></h3>
+<h3>4. 在 gdb 内连接到远端 GDB server<a class="headerlink" href="#gdb-gdb-server" title="链接到此标题。"></a></h3>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">target</span> <span class="n">remote</span> <span class="p">:</span><span class="n">3333</span>
 </pre></div>
 </div>
 </section>
 <section id="id5">
-<h3>5. 初始化目标（可选）：<a class="headerlink" href="#id5" title="链接到此标题。"></a></h3>
+<h3>5. 初始化目标(可选)<a class="headerlink" href="#id5" title="链接到此标题。"></a></h3>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">monitor</span> <span class="n">reset</span> <span class="n">halt</span>
 <span class="c"># OR</span>
 <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">monitor</span> <span class="n">reset</span> <span class="n">init</span>
@@ -179,20 +179,20 @@
 </div>
 </section>
 <section id="server">
-<h3>6. 加载程序到目标（如果尚未由 server 自动加载）：<a class="headerlink" href="#server" title="链接到此标题。"></a></h3>
+<h3>6. 加载程序到目标(如果尚未由 server 自动加载)<a class="headerlink" href="#server" title="链接到此标题。"></a></h3>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">load</span>
 </pre></div>
 </div>
 </section>
 <section id="id6">
-<h3>7. 设置断点并运行：<a class="headerlink" href="#id6" title="链接到此标题。"></a></h3>
+<h3>7. 设置断点并运行<a class="headerlink" href="#id6" title="链接到此标题。"></a></h3>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">break</span> <span class="n">main</span>
 <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="k">continue</span>
 </pre></div>
 </div>
 </section>
 <section id="id7">
-<h3>8. 使用单步、查看寄存器、内存等进行调试，结束后断开连接：<a class="headerlink" href="#id7" title="链接到此标题。"></a></h3>
+<h3>8. 使用单步、查看寄存器、内存等进行调试，结束后断开连接<a class="headerlink" href="#id7" title="链接到此标题。"></a></h3>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">monitor</span> <span class="n">halt</span>
 <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">detach</span>
 </pre></div>

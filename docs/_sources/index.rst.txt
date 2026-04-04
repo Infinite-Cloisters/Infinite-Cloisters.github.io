@@ -13,6 +13,7 @@ DOCS Documentation
    doc/wsl/index
    doc/linux/index
    doc/arm-none-eabi/index
+   doc/rust-stm32/index
    doc/label-studio/index
    doc/github/index
    doc/nuedc/index

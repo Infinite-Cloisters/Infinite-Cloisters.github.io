@@ -11,8 +11,10 @@ cargo install probe-rs cargo-flash cargo-embed
 # 查看固件大小所要的包
 cargo install cargo-binutils
 rustup component add llvm-tools-preview
-# 查看固件大小
+# 查看固件大小，按需使用
 cargo size
+cargo size -- -A
+cargo size --release -- -A
 ```
 
 file path >> ./src/main.rs:

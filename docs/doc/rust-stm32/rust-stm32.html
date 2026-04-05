@@ -96,8 +96,10 @@
 <span class="c"># 查看固件大小所要的包</span>
 <span class="n">cargo</span> <span class="n">install</span> <span class="n">cargo-binutils</span>
 <span class="n">rustup</span> <span class="n">component</span> <span class="n">add</span> <span class="n">llvm-tools-preview</span>
-<span class="c"># 查看固件大小</span>
+<span class="c"># 查看固件大小，按需使用</span>
 <span class="n">cargo</span> <span class="n">size</span>
+<span class="n">cargo</span> <span class="n">size</span> <span class="p">--</span> <span class="n">-A</span>
+<span class="n">cargo</span> <span class="n">size</span> <span class="p">-</span><span class="n">-release</span> <span class="p">--</span> <span class="n">-A</span>
 </pre></div>
 </div>
 <p>file path &gt;&gt; ./src/main.rs:</p>

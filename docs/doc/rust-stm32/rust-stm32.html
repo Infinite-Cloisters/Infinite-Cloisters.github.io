@@ -88,18 +88,22 @@
   <section id="ruststm32">
 <h1>使用rust开发stm32体验<a class="headerlink" href="#ruststm32" title="链接到此标题。"></a></h1>
 <p>以下的示例是基于STM32F411的完整demo，需要安装rust相关工具链以及probe-rs</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 我喜欢gnu的工具链</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># gnu工具链</span>
 <span class="n">rustup</span> <span class="n">toolchain</span> <span class="n">install</span> <span class="n">stable-x86_64-pc-windows-gnu</span>
 <span class="n">rustup</span> <span class="k">default</span> <span class="n">stable-x86_64-pc-windows-gnu</span>
 <span class="c"># probe-rs</span>
 <span class="n">cargo</span> <span class="n">install</span> <span class="n">probe-rs</span> <span class="n">cargo-flash</span> <span class="n">cargo-embed</span>
 <span class="c"># 查看固件大小所要的包</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="n">cargo-bloat</span>
 <span class="n">cargo</span> <span class="n">install</span> <span class="n">cargo-binutils</span>
 <span class="n">rustup</span> <span class="n">component</span> <span class="n">add</span> <span class="n">llvm-tools-preview</span>
 <span class="c"># 查看固件大小，按需使用</span>
 <span class="n">cargo</span> <span class="n">size</span>
 <span class="n">cargo</span> <span class="n">size</span> <span class="p">--</span> <span class="n">-A</span>
 <span class="n">cargo</span> <span class="n">size</span> <span class="p">-</span><span class="n">-release</span> <span class="p">--</span> <span class="n">-A</span>
+
+<span class="n">cargo</span> <span class="n">bloat</span> <span class="p">-</span><span class="n">-release</span> <span class="c"># 查看最大的函数</span>
+<span class="n">cargo</span> <span class="n">bloat</span> <span class="p">-</span><span class="n">-release</span> <span class="p">-</span><span class="n">-crates</span><span class="c"># 只看你的 crate</span>
 </pre></div>
 </div>
 <p>file path &gt;&gt; ./src/main.rs:</p>
@@ -220,8 +224,12 @@ _stack_start = ORIGIN(RAM) + LENGTH(RAM);
 
 <span class="k">[profile.dev]</span>
 <span class="n">panic</span><span class="o">=</span><span class="s2">&quot;unwind&quot;</span>
+<span class="n">lto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
 <span class="k">[profile.release]</span>
 <span class="n">panic</span><span class="o">=</span><span class="s2">&quot;unwind&quot;</span>
+<span class="n">lto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">opt-level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;z&quot;</span>
 
 <span class="k">[build-dependencies]</span>
 <span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.2&quot;</span>
@@ -234,7 +242,19 @@ _stack_start = ORIGIN(RAM) + LENGTH(RAM);
 
 <span class="k">[build]</span>
 <span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;thumbv7em-none-eabihf&quot;</span>
-<span class="n">rustflags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;link-arg=-Tlink.x&quot;</span><span class="p">]</span>
+<span class="n">rustflags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;-C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;link-arg=-Tlink.x&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">]</span>
+
+<span class="k">[alias]</span>
+<span class="c1"># 示例 cargo bin</span>
+<span class="n">bin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;objcopy --release -- -O binary target/firmware.bin&quot;</span>
+<span class="n">hex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;objcopy --release -- -O ihex target/firmware.hex&quot;</span>
+
+<span class="n">size-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;size --release -- -A&quot;</span>
+<span class="n">bloat-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bloat --release&quot;</span>
+<span class="n">build-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;build --release&quot;</span>
+<span class="n">run-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;run --release&quot;</span>
 </pre></div>
 </div>
 </section>

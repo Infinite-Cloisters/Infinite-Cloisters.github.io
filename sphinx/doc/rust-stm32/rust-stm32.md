@@ -3,18 +3,22 @@
 以下的示例是基于STM32F411的完整demo，需要安装rust相关工具链以及probe-rs
 
 ```powershell
-# 我喜欢gnu的工具链
+# gnu工具链
 rustup toolchain install stable-x86_64-pc-windows-gnu
 rustup default stable-x86_64-pc-windows-gnu
 # probe-rs
 cargo install probe-rs cargo-flash cargo-embed
 # 查看固件大小所要的包
+cargo install cargo-bloat
 cargo install cargo-binutils
 rustup component add llvm-tools-preview
 # 查看固件大小，按需使用
 cargo size
 cargo size -- -A
 cargo size --release -- -A
+
+cargo bloat --release # 查看最大的函数
+cargo bloat --release --crates# 只看你的 crate
 ```
 
 file path >> ./src/main.rs:
@@ -142,8 +146,12 @@ bench = false
 
 [profile.dev]
 panic="unwind"
+lto = true
+
 [profile.release]
 panic="unwind"
+lto = true
+opt-level = "z"
 
 [build-dependencies]
 cc = "1.2"
@@ -158,5 +166,17 @@ runner = "probe-rs download --chip STM32F411CE"
 
 [build]
 target = "thumbv7em-none-eabihf"
-rustflags = ["-C", "link-arg=-Tlink.x"]
+rustflags = [
+    "-C", "link-arg=-Tlink.x",
+    ]
+
+[alias]
+# 示例 cargo bin
+bin = "objcopy --release -- -O binary target/firmware.bin"
+hex = "objcopy --release -- -O ihex target/firmware.hex"
+
+size-rel = "size --release -- -A"
+bloat-rel = "bloat --release"
+build-rel = "build --release"
+run-rel = "run --release"
 ```

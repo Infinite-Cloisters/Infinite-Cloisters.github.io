@@ -9,12 +9,16 @@
 - 已编译带符号的 ELF 文件（通常为 debug 构建）：例如 `target/<target>/debug/your-project`。
 - 已安装适当的交叉工具链：`arm-none-eabi-gdb`（来自 GNU Arm Embedded Toolchain 或通过包管理器）。
 
-## 安装 probe-rs（参考）
+## 安装 probe-rs（参考）或者pyocd
 
 安装 probe-rs (Windows)
 
 ```powershell
 irm https://github.com/probe-rs/probe-rs/releases/latest/download/probe-rs-tools-installer.ps1 | iex
+# 如果用rust可以使用
+cargo install probe-rs cargo-flash cargo-embed
+# pyocd系列，因为我个人不使用，所以不做介绍
+pip install pyocd
 ```
 
 安装完毕后应该能使用三个命令：

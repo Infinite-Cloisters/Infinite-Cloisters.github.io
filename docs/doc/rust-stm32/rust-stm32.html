@@ -88,28 +88,73 @@
   <section id="ruststm32">
 <h1>使用rust开发stm32体验<a class="headerlink" href="#ruststm32" title="链接到此标题。"></a></h1>
 <p>以下的示例是基于STM32F411的完整demo，需要安装rust相关工具链以及probe-rs</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 我喜欢gnu的工具链</span>
+<span class="n">rustup</span> <span class="n">toolchain</span> <span class="n">install</span> <span class="n">stable-x86_64-pc-windows-gnu</span>
+<span class="n">rustup</span> <span class="k">default</span> <span class="n">stable-x86_64-pc-windows-gnu</span>
+<span class="c"># probe-rs</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="n">probe-rs</span> <span class="n">cargo-flash</span> <span class="n">cargo-embed</span>
+<span class="c"># 查看固件大小所要的包</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="n">cargo-binutils</span>
+<span class="n">rustup</span> <span class="n">component</span> <span class="n">add</span> <span class="n">llvm-tools-preview</span>
+<span class="c"># 查看固件大小</span>
+<span class="n">cargo</span> <span class="n">size</span>
+</pre></div>
+</div>
 <p>file path &gt;&gt; ./src/main.rs:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#![no_std]</span>
 <span class="cp">#![no_main]</span>
-<span class="cp">#![deny(unsafe_code)]</span>
 
-<span class="k">use</span><span class="w"> </span><span class="n">stm32f4xx_hal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">hal</span><span class="p">;</span><span class="w"> </span><span class="c1">// memory layout + panic handler</span>
+
+<span class="k">use</span><span class="w"> </span><span class="n">stm32f4xx_hal</span><span class="p">::{</span><span class="bp">self</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">hal</span><span class="p">};</span><span class="w"> </span><span class="c1">// memory layout + panic handler</span>
+
 <span class="k">use</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">;</span>
-
 <span class="k">use</span><span class="w"> </span><span class="n">cortex_m_rt</span><span class="p">::</span><span class="n">entry</span><span class="p">;</span>
-<span class="k">use</span><span class="w"> </span><span class="n">core</span><span class="p">::</span><span class="n">panic</span><span class="p">::</span><span class="n">PanicInfo</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">interrupt</span><span class="p">;</span>
+
+<span class="k">use</span><span class="w"> </span><span class="n">core</span><span class="p">::</span><span class="n">cell</span><span class="p">::</span><span class="n">RefCell</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cortex_m</span><span class="p">::</span><span class="n">interrupt</span><span class="p">::</span><span class="n">Mutex</span><span class="p">;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">SERIAL1</span><span class="p">:</span><span class="w"> </span><span class="nc">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Serial</span><span class="o">&lt;</span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">USART1</span><span class="o">&gt;&gt;&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mutex</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">RefCell</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">));</span>
+
+<span class="c1">// use rtt_target::{rprintln, rtt_init_print};</span>
+
+<span class="k">use</span><span class="w"> </span><span class="n">defmt_rtt</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">_</span><span class="p">;</span><span class="w">  </span><span class="c1">// 全局日志通道，只需引入</span>
+<span class="k">use</span><span class="w"> </span><span class="n">panic_probe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">_</span><span class="p">;</span><span class="w"> </span><span class="c1">// 可选：panic 时打印 defmt 日志</span>
 
 <span class="cp">#[entry]</span>
 <span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pac</span><span class="p">::</span><span class="n">Peripherals</span><span class="p">::</span><span class="n">take</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">cp</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">pac</span><span class="p">::</span><span class="n">CorePeripherals</span><span class="p">::</span><span class="n">take</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">//rtt_init_print!();</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">RCC</span><span class="p">.</span><span class="n">constrain</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">Peripherals</span><span class="p">::</span><span class="n">take</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">cp</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">CorePeripherals</span><span class="p">::</span><span class="n">take</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">RCC</span><span class="p">.</span><span class="n">freeze</span><span class="p">(</span><span class="n">hal</span><span class="p">::</span><span class="n">rcc</span><span class="p">::</span><span class="n">Config</span><span class="p">::</span><span class="n">hse</span><span class="p">(</span><span class="mf">25.</span><span class="n">MHz</span><span class="p">()).</span><span class="n">sysclk</span><span class="p">(</span><span class="mf">100.</span><span class="n">MHz</span><span class="p">()));</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cp</span><span class="p">.</span><span class="n">SYST</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rcc</span><span class="p">.</span><span class="n">clocks</span><span class="p">);</span>
 
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">gpioc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">GPIOC</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">gpioa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">GPIOA</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="p">);</span>
+
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">led</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpioc</span><span class="p">.</span><span class="n">pc13</span><span class="p">.</span><span class="n">into_push_pull_output</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">usart1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">USART1</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">tx_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpioa</span><span class="p">.</span><span class="n">pa9</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">rx_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpioa</span><span class="p">.</span><span class="n">pa10</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">serial</span><span class="p">:</span><span class="w"> </span><span class="nc">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Serial</span><span class="o">&lt;</span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">USART1</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Serial</span><span class="p">::</span><span class="n">new</span><span class="p">(</span>
+<span class="w">        </span><span class="n">usart1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">(</span><span class="n">tx_pin</span><span class="p">,</span><span class="w"> </span><span class="n">rx_pin</span><span class="p">),</span>
+<span class="w">        </span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">config</span><span class="p">::</span><span class="n">Config</span><span class="p">::</span><span class="n">default</span><span class="p">().</span><span class="n">baudrate</span><span class="p">(</span><span class="mf">115_200.</span><span class="n">bps</span><span class="p">()),</span>
+<span class="w">        </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="p">,</span><span class="w">    </span>
+<span class="w">    </span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Enable USART1 interrupt</span>
+<span class="w">        </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">NVIC</span><span class="p">::</span><span class="n">unmask</span><span class="p">(</span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">Interrupt</span><span class="p">::</span><span class="n">USART1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">serial</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Event</span><span class="p">::</span><span class="n">RxNotEmpty</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">cortex_m</span><span class="p">::</span><span class="n">interrupt</span><span class="p">::</span><span class="n">free</span><span class="p">(</span><span class="o">|</span><span class="n">cs</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SERIAL1</span><span class="p">.</span><span class="n">borrow</span><span class="p">(</span><span class="n">cs</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">serial</span><span class="p">));</span>
+<span class="w">    </span><span class="p">});</span>
 
 <span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">led</span><span class="p">.</span><span class="n">set_low</span><span class="p">();</span>
@@ -119,10 +164,18 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="cp">#[panic_handler]</span>
-<span class="k">fn</span><span class="w"> </span><span class="nf">error_handler</span><span class="p">(</span><span class="n">_info</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">PanicInfo</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="cp">#[interrupt]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">USART1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cortex_m</span><span class="p">::</span><span class="n">interrupt</span><span class="p">::</span><span class="n">free</span><span class="p">(</span><span class="o">|</span><span class="n">cs</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">serial</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SERIAL1</span><span class="p">.</span><span class="n">borrow</span><span class="p">(</span><span class="n">cs</span><span class="p">).</span><span class="n">borrow_mut</span><span class="p">().</span><span class="n">as_mut</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">byte</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span><span class="p">.</span><span class="n">read</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//rprintln!(&quot;Received: {} (&#39;{}&#39;)&quot;, byte, byte as char);</span>
+<span class="w">                </span><span class="n">defmt</span><span class="p">::</span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Received: {} (&#39;{}&#39;)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">char</span><span class="p">);</span><span class="w">           </span><span class="c1">// 类似 info!</span>
+<span class="w">                </span><span class="c1">// Echo received byte</span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">byte</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -145,13 +198,19 @@ _stack_start = ORIGIN(RAM) + LENGTH(RAM);
 <span class="k">[dependencies]</span>
 <span class="n">embedded-hal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
 <span class="n">nb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.1&quot;</span>
+<span class="n">cortex-m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.7.7&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;critical-section-single-core&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
 <span class="n">cortex-m-rt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.7&quot;</span>
 <span class="n">panic-halt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
+<span class="c1"># rtt-target = &quot;0.6&quot;</span>
+<span class="n">defmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
+<span class="n">defmt-rtt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.1&quot;</span><span class="w">      </span><span class="c1"># RTT 传输后端</span>
+<span class="n">panic-probe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="w">    </span><span class="c1"># 可选：panic 时打印 defmt 日志</span>
 
 <span class="k">[dependencies.stm32f4xx-hal]</span>
 <span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.23.0&quot;</span>
 <span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;stm32f411&quot;</span><span class="p">]</span><span class="w"> </span><span class="c1"># replace the model of your microcontroller here</span>
 <span class="w">                         </span><span class="c1"># and add other required features</span>
+
 <span class="k">[[bin]]</span>
 <span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;blinky_f411&quot;</span>
 <span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>

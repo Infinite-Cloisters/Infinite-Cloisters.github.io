@@ -24,7 +24,7 @@
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
     <link rel="next" title="Rust STM32 开发" href="../rust-stm32/index.html" />
-    <link rel="prev" title="在 Windows 上安装 ARM GNU Toolchain（用于单片机/STM32 开发）" href="arm-none-eabi.html" /> 
+    <link rel="prev" title="在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)" href="arm-none-eabi.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,11 +51,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ARM Toolchain</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="arm-none-eabi.html">在 Windows 上安装 ARM GNU Toolchain（用于单片机/STM32 开发）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arm-none-eabi.html">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">先决条件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#probe-rs-pyocd">安装 probe-rs（参考）或者pyocd</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">调试流程（概览）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#probe-rs-pyocd">安装 probe-rs(参考)或者pyocd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">调试流程(概览)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id3">1. 构建带符号的固件</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">2. 使用传统方式</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#vscode">2. 使用新版方式(VSCode官方插件只支持这个)</a></li>
@@ -107,17 +107,17 @@
              
   <section id="arm-none-eabi-gdb-probe-rs">
 <h1>使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试<a class="headerlink" href="#arm-none-eabi-gdb-probe-rs" title="链接到此标题。"></a></h1>
-<p>本文档介绍在嵌入式开发中结合 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 与 <code class="docutils literal notranslate"><span class="pre">probe-rs</span></code> 工具链进行调试的常见流程、安装提示和常用命令示例。大部分玩嵌入式的同学用的是Windows且可能不太愿意折腾WSL，所以本文档基于Windows平台。</p>
-<p>参考文档：<a class="reference external" href="https://probe.rs/docs/">probe-rs 官方文档</a></p>
+<p>本文档介绍在嵌入式开发中结合 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 与 <code class="docutils literal notranslate"><span class="pre">probe-rs</span></code> 工具链进行调试的常见流程、安装提示和常用命令示例.大部分玩嵌入式的同学用的是Windows且可能不太愿意折腾WSL，所以本文档基于Windows平台.</p>
+<p>参考文档:<a class="reference external" href="https://probe.rs/docs/">probe-rs 官方文档</a></p>
 <section id="id1">
 <h2>先决条件<a class="headerlink" href="#id1" title="链接到此标题。"></a></h2>
 <ul class="simple">
-<li><p>已编译带符号的 ELF 文件（通常为 debug 构建）：例如 <code class="docutils literal notranslate"><span class="pre">target/&lt;target&gt;/debug/your-project</span></code>。</p></li>
-<li><p>已安装适当的交叉工具链：<code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code>（来自 GNU Arm Embedded Toolchain 或通过包管理器）。</p></li>
+<li><p>已编译带符号的 ELF 文件(通常为 debug 构建):例如 <code class="docutils literal notranslate"><span class="pre">target/&lt;target&gt;/debug/your-project</span></code>.</p></li>
+<li><p>已安装适当的交叉工具链:<code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code>(来自 GNU Arm Embedded Toolchain 或通过包管理器).</p></li>
 </ul>
 </section>
 <section id="probe-rs-pyocd">
-<h2>安装 probe-rs（参考）或者pyocd<a class="headerlink" href="#probe-rs-pyocd" title="链接到此标题。"></a></h2>
+<h2>安装 probe-rs(参考)或者pyocd<a class="headerlink" href="#probe-rs-pyocd" title="链接到此标题。"></a></h2>
 <p>安装 probe-rs (Windows)</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">irm </span><span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">releases</span><span class="p">/</span><span class="n">latest</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">probe-rs-tools-installer</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
 <span class="c"># 如果用rust可以使用</span>
@@ -126,7 +126,7 @@
 <span class="n">pip</span> <span class="n">install</span> <span class="n">pyocd</span>
 </pre></div>
 </div>
-<p>安装完毕后应该能使用三个命令：</p>
+<p>安装完毕后应该能使用三个命令:</p>
 <ul class="simple">
 <li><p>probe-rs</p></li>
 <li><p>cargo-flash</p></li>
@@ -135,29 +135,29 @@
 <p>接着建议安装VSCode probe-rs 拓展, <font color="green">即使没有安装成功</font>它也会询问是否安装probe-rs.</p>
 </section>
 <section id="id2">
-<h2>调试流程（概览）<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<h2>调试流程(概览)<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
 <section id="id3">
 <h3>1. 构建带符号的固件<a class="headerlink" href="#id3" title="链接到此标题。"></a></h3>
 <ul class="simple">
-<li><p>Rust：<code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span> <span class="pre">--target</span> <span class="pre">&lt;target&gt;</span></code>（生成 ELF）</p></li>
-<li><p>C/C++：(正常我们是这个)使用交叉编译器生成 ELF.</p></li>
+<li><p>Rust:<code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">build</span> <span class="pre">--target</span> <span class="pre">&lt;target&gt;</span></code>(生成 ELF)</p></li>
+<li><p>C/C++:(正常我们是这个)使用交叉编译器生成 ELF.</p></li>
 </ul>
 </section>
 <section id="id4">
 <h3>2. 使用传统方式<a class="headerlink" href="#id4" title="链接到此标题。"></a></h3>
 <p>启动一个 GDB server(由 probe-rs 提供)，使目标硬件通过 probe 与主机建立通信.通常 probe-rs 会在某个端口(例如 3333)提供 GDB 协议服务.</p>
 <ul class="simple">
-<li><p>示例（启动 gdb server 的方式可能随工具不同而异）：</p></li>
+<li><p>示例(启动 gdb server 的方式可能随工具不同而异):</p></li>
 </ul>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">probe-rs</span> <span class="n">gdb</span> <span class="p">-</span><span class="n">-chip</span> <span class="p">&lt;</span><span class="n">chip</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">path</span><span class="p">/</span><span class="n">to</span><span class="p">/</span><span class="n">your</span><span class="p">.</span><span class="n">elf</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<p>该命令会打开与 probe 的连接，并启动一个可供 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 连接的 GDB server。请参考你安装的 probe-rs 工具的具体子命令与选项。</p>
+<p>该命令会打开与 probe 的连接，并启动一个可供 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 连接的 GDB server.请参考你安装的 probe-rs 工具的具体子命令与选项.</p>
 <p>如果工具没有相关芯片可以使用<code class="docutils literal notranslate"><span class="pre">--chip-description-path</span></code>选项替换<code class="docutils literal notranslate"><span class="pre">--chip</span></code>，描述文件可以通过<code class="docutils literal notranslate"><span class="pre">target-gen</span></code>转换标准cmsis的.pack文件获得</p>
 </section>
 <section id="vscode">
 <h3>2. 使用新版方式(VSCode官方插件只支持这个)<a class="headerlink" href="#vscode" title="链接到此标题。"></a></h3>
-<p>这个可能配置有些繁琐，我没有在Clion中尝试过这个方法，此外probe-rs似乎不能用cortex-debug。</p>
+<p>这个可能配置有些繁琐，我没有在Clion中尝试过这个方法，此外probe-rs似乎不能用cortex-debug.</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">probe-rs</span> <span class="n">dap-server</span> <span class="no">[OPTIONS]</span> <span class="p">-</span><span class="n">-port</span> <span class="p">&lt;</span><span class="n">PORT</span><span class="p">&gt;</span>
 </pre></div>
 </div>
@@ -209,49 +209,49 @@
 <ul class="simple">
 <li><p>启动与连接</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span> <span class="pre">&lt;path/to.elf&gt;</span></code>：以符号文件启动 gdb</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">target</span> <span class="pre">remote</span> <span class="pre">:3333</span></code>：连接到本地 3333 端口的 GDB server</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span> <span class="pre">&lt;path/to.elf&gt;</span></code>:以符号文件启动 gdb</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target</span> <span class="pre">remote</span> <span class="pre">:3333</span></code>:连接到本地 3333 端口的 GDB server</p></li>
 </ul>
 </li>
 <li><p>断点与运行</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">SYMBOL</span></code> / <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">SYMBOL</span></code>：在函数或符号处设断点</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">*0xADDR</span></code>：在绝对地址设断点</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">delete</span></code>：删除断点</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">continue</span></code> / <code class="docutils literal notranslate"><span class="pre">c</span></code>：继续执行</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">step</span></code> / <code class="docutils literal notranslate"><span class="pre">s</span></code>：单步进入（会进入函数）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">next</span></code> / <code class="docutils literal notranslate"><span class="pre">n</span></code>：单步但不进入函数</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">finish</span></code>：执行至当前函数返回</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">SYMBOL</span></code> / <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">SYMBOL</span></code>:在函数或符号处设断点</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">break</span> <span class="pre">*0xADDR</span></code>:在绝对地址设断点</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delete</span></code>:删除断点</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">continue</span></code> / <code class="docutils literal notranslate"><span class="pre">c</span></code>:继续执行</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step</span></code> / <code class="docutils literal notranslate"><span class="pre">s</span></code>:单步进入(会进入函数)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">next</span></code> / <code class="docutils literal notranslate"><span class="pre">n</span></code>:单步但不进入函数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finish</span></code>:执行至当前函数返回</p></li>
 </ul>
 </li>
 <li><p>程序加载与控制</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">load</span></code>：将 ELF 加载到目标（在远端调试时常用）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">reset</span></code> / <code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">reset</span> <span class="pre">halt</span></code>：通过 gdb server 复位目标并暂停（server 实现支持时可用）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">halt</span></code> / <code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">resume</span></code>：通过 server 控制目标运行状态</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">load</span></code>:将 ELF 加载到目标(在远端调试时常用)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">reset</span></code> / <code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">reset</span> <span class="pre">halt</span></code>:通过 gdb server 复位目标并暂停(server 实现支持时可用)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">halt</span></code> / <code class="docutils literal notranslate"><span class="pre">monitor</span> <span class="pre">resume</span></code>:通过 server 控制目标运行状态</p></li>
 </ul>
 </li>
 <li><p>查看状态</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">registers</span></code>：显示寄存器</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">breakpoints</span></code>：列出断点</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">threads</span></code>：列出线程（若支持）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">thread</span> <span class="pre">apply</span> <span class="pre">all</span> <span class="pre">bt</span></code>：在所有线程上打印回溯</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">registers</span></code>:显示寄存器</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">breakpoints</span></code>:列出断点</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">info</span> <span class="pre">threads</span></code>:列出线程(若支持)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">thread</span> <span class="pre">apply</span> <span class="pre">all</span> <span class="pre">bt</span></code>:在所有线程上打印回溯</p></li>
 </ul>
 </li>
 <li><p>读取与写入内存/变量</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">x/&lt;n&gt;&lt;fmt&gt;</span> <span class="pre">ADDRESS</span></code>：以指定格式显示内存（例 <code class="docutils literal notranslate"><span class="pre">x/16xb</span> <span class="pre">0x20000000</span></code>）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">VAR</span></code> / <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">VAR</span></code>：打印变量（包含结构的字段）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">p/x</span> <span class="pre">$pc</span></code>：以十六进制打印程序计数器</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">VAR</span> <span class="pre">=</span> <span class="pre">VALUE</span></code>：修改变量（在允许的情况下）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">$pc</span> <span class="pre">=</span> <span class="pre">0xADDR</span></code>：修改寄存器</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x/&lt;n&gt;&lt;fmt&gt;</span> <span class="pre">ADDRESS</span></code>:以指定格式显示内存(例 <code class="docutils literal notranslate"><span class="pre">x/16xb</span> <span class="pre">0x20000000</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">VAR</span></code> / <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">VAR</span></code>:打印变量(包含结构的字段)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p/x</span> <span class="pre">$pc</span></code>:以十六进制打印程序计数器</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">VAR</span> <span class="pre">=</span> <span class="pre">VALUE</span></code>:修改变量(在允许的情况下)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">$pc</span> <span class="pre">=</span> <span class="pre">0xADDR</span></code>:修改寄存器</p></li>
 </ul>
 </li>
 <li><p>其它有用命令</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">layout</span> <span class="pre">asm</span></code>, <code class="docutils literal notranslate"><span class="pre">layout</span> <span class="pre">regs</span></code>：TUI 模式下显示汇编/寄存器（需启用 TUI）</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">maint</span> <span class="pre">print</span> <span class="pre">symbols</span></code>：调试符号信息（维护用途）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">layout</span> <span class="pre">asm</span></code>, <code class="docutils literal notranslate"><span class="pre">layout</span> <span class="pre">regs</span></code>:TUI 模式下显示汇编/寄存器(需启用 TUI)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maint</span> <span class="pre">print</span> <span class="pre">symbols</span></code>:调试符号信息(维护用途)</p></li>
 </ul>
 </li>
 </ul>
@@ -259,17 +259,17 @@
 <section id="id8">
 <h2>常见问题与调试技巧<a class="headerlink" href="#id8" title="链接到此标题。"></a></h2>
 <ul class="simple">
-<li><p>如果无法连接：确认 probe 已插好、电源正常，并且 probe-rs 的 gdb server 正在运行且监听端口（默认 3333）。</p></li>
-<li><p>符号不匹配或行号不正确：确保 gdb 中加载的 ELF 是用相同版本和构建选项生成的带符号二进制。</p></li>
-<li><p>硬件断点耗尽：部分芯片硬件断点数目有限，使用软件断点或将断点移到更集中位置。</p></li>
-<li><p>使用 <code class="docutils literal notranslate"><span class="pre">monitor</span></code> 前缀命令可以通过 gdb server 发送原始控制命令（server 支持的命令集不同，请参阅对应实现文档）。</p></li>
+<li><p>如果无法连接:确认 probe 已插好、电源正常，并且 probe-rs 的 gdb server 正在运行且监听端口(默认 3333).</p></li>
+<li><p>符号不匹配或行号不正确:确保 gdb 中加载的 ELF 是用相同版本和构建选项生成的带符号二进制.</p></li>
+<li><p>硬件断点耗尽:部分芯片硬件断点数目有限，使用软件断点或将断点移到更集中位置.</p></li>
+<li><p>使用 <code class="docutils literal notranslate"><span class="pre">monitor</span></code> 前缀命令可以通过 gdb server 发送原始控制命令(server 支持的命令集不同，请参阅对应实现文档).</p></li>
 </ul>
 </section>
 <section id="id9">
 <h2>参考<a class="headerlink" href="#id9" title="链接到此标题。"></a></h2>
 <ul class="simple">
-<li><p>probe-rs 官方仓库与文档（查看最新的子命令与使用示例）</p></li>
-<li><p>GNU Arm Embedded Toolchain 文档（关于 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 的使用）</p></li>
+<li><p>probe-rs 官方仓库与文档(查看最新的子命令与使用示例)</p></li>
+<li><p>GNU Arm Embedded Toolchain 文档(关于 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 的使用)</p></li>
 </ul>
 </section>
 </section>
@@ -278,7 +278,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="arm-none-eabi.html" class="btn btn-neutral float-left" title="在 Windows 上安装 ARM GNU Toolchain（用于单片机/STM32 开发）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="arm-none-eabi.html" class="btn btn-neutral float-left" title="在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="../rust-stm32/index.html" class="btn btn-neutral float-right" title="Rust STM32 开发" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

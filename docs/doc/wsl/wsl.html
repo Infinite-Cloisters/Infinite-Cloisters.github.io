@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>在 Windows 上使用 WSL（以 Arch Linux 为例） &mdash; Documentation 0.1.6 文档</title>
+  <title>在 Windows 上使用 WSL(以 Arch Linux 为例) &mdash; Documentation 0.1.6 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -49,14 +49,14 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">WSL2入门</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">在 Windows 上使用 WSL（以 Arch Linux 为例）</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">在 Windows 上使用 WSL(以 Arch Linux 为例)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#wsl">1. 安装 WSL</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linux">2. 安装 Linux 发行版</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1">3. （可选）设置默认发行版</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3. (可选)设置默认发行版</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">4. 启动已安装的发行版</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#arch">5. 更新发行版并安装软件包（Arch 示例）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">6. 更新镜像源（提高下载速度）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#archlinuxcn">7. 添加 archlinuxcn 源（可选）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arch">5. 更新发行版并安装软件包(Arch 示例)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">6. 更新镜像源(提高下载速度)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#archlinuxcn">7. 添加 archlinuxcn 源(可选)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">8. 安装需要的开发包</a></li>
 </ul>
 </li>
@@ -86,7 +86,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">WSL2入门</a></li>
-      <li class="breadcrumb-item active">在 Windows 上使用 WSL（以 Arch Linux 为例）</li>
+      <li class="breadcrumb-item active">在 Windows 上使用 WSL(以 Arch Linux 为例)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/doc/wsl/wsl.md.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -97,11 +97,11 @@
            <div itemprop="articleBody">
              
   <section id="windows-wsl-arch-linux">
-<h1>在 Windows 上使用 WSL（以 Arch Linux 为例）<a class="headerlink" href="#windows-wsl-arch-linux" title="链接到此标题。"></a></h1>
-<p>下面是快速上手步骤，包含常用命令与注意事项。</p>
+<h1>在 Windows 上使用 WSL(以 Arch Linux 为例)<a class="headerlink" href="#windows-wsl-arch-linux" title="链接到此标题。"></a></h1>
+<p>下面是快速上手步骤，包含常用命令与注意事项.</p>
 <section id="wsl">
 <h2>1. 安装 WSL<a class="headerlink" href="#wsl" title="链接到此标题。"></a></h2>
-<p>在 PowerShell（以管理员运行）中执行：</p>
+<p>在 PowerShell(以管理员运行)中执行：</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span>
 </pre></div>
 </div>
@@ -115,14 +115,14 @@
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>安装 Arch Linux（示例）：</p></li>
+<li><p>安装 Arch Linux(示例)：</p></li>
 </ul>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="p">-</span><span class="n">-install</span> <span class="n">archlinux</span>
 </pre></div>
 </div>
 </section>
 <section id="id1">
-<h2>3. （可选）设置默认发行版<a class="headerlink" href="#id1" title="链接到此标题。"></a></h2>
+<h2>3. (可选)设置默认发行版<a class="headerlink" href="#id1" title="链接到此标题。"></a></h2>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span> <span class="p">-</span><span class="n">-set-default</span> <span class="p">&lt;</span><span class="n">distribution</span> <span class="n">name</span><span class="p">&gt;</span>
 </pre></div>
 </div>
@@ -132,10 +132,10 @@
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">wsl</span>
 </pre></div>
 </div>
-<p>启动后会进入 Linux 终端（默认 shell）。</p>
+<p>启动后会进入 Linux 终端(默认 shell).</p>
 </section>
 <section id="arch">
-<h2>5. 更新发行版并安装软件包（Arch 示例）<a class="headerlink" href="#arch" title="链接到此标题。"></a></h2>
+<h2>5. 更新发行版并安装软件包(Arch 示例)<a class="headerlink" href="#arch" title="链接到此标题。"></a></h2>
 <p>更新软件包列表并升级系统：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pacman<span class="w"> </span>-Syu
 </pre></div>
@@ -146,14 +146,14 @@
 </div>
 </section>
 <section id="id3">
-<h2>6. 更新镜像源（提高下载速度）<a class="headerlink" href="#id3" title="链接到此标题。"></a></h2>
+<h2>6. 更新镜像源(提高下载速度)<a class="headerlink" href="#id3" title="链接到此标题。"></a></h2>
 <p>例如使用 reflector 选择中国的快速镜像并保存：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>reflector<span class="w"> </span>--country<span class="w"> </span>China<span class="w"> </span>--latest<span class="w"> </span><span class="m">10</span><span class="w"> </span>--sort<span class="w"> </span>rate<span class="w"> </span>--save<span class="w"> </span>/etc/pacman.d/mirrorlist
 </pre></div>
 </div>
 </section>
 <section id="archlinuxcn">
-<h2>7. 添加 archlinuxcn 源（可选）<a class="headerlink" href="#archlinuxcn" title="链接到此标题。"></a></h2>
+<h2>7. 添加 archlinuxcn 源(可选)<a class="headerlink" href="#archlinuxcn" title="链接到此标题。"></a></h2>
 <p>参考清华镜像帮助页面：</p>
 <p>https://mirrors.tuna.tsinghua.edu.cn/help/archlinuxcn/</p>
 </section>
@@ -163,11 +163,11 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pacman<span class="w"> </span>-S<span class="w"> </span>&lt;package-name&gt;
 </pre></div>
 </div>
-<p>示例（嵌入式交叉编译工具链与常见开发工具）：</p>
+<p>示例(嵌入式交叉编译工具链与常见开发工具)：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pacman<span class="w"> </span>-S<span class="w"> </span>arm-none-eabi-gcc<span class="w"> </span>arm-none-eabi-newlib<span class="w"> </span>arm-none-eabi-gdb<span class="w"> </span>cmake<span class="w"> </span>ninja<span class="w"> </span>git<span class="w"> </span>make<span class="w"> </span>gcc<span class="w"> </span>python
 </pre></div>
 </div>
-<p>根据项目需要选择并安装其他包。</p>
+<p>根据项目需要选择并安装其他包.</p>
 <p>如果终端中文表现<strong>异常</strong>请参考Linux踩坑记录</p>
 </section>
 </section>

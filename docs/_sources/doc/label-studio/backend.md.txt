@@ -6,11 +6,11 @@
 
 ## 后端获取图片
 
-下面代码是（我写的）代码中截取的部分，虽然没有变量说明，但大家应该也能看懂吧？
+下面代码是(我写的)代码中截取的部分，虽然没有变量说明，但大家应该也能看懂吧？
 
 ```python
 if image_url.startswith('http://') or image_url.startswith('https://'):
-    # 通过网络路径直接获取，无auth（看具体情况）
+    # 通过网络路径直接获取，无auth(看具体情况)
     response = requests.get(image_url, timeout=30)
     response.raise_for_status()
     img = Image.open(io.BytesIO(response.content))
@@ -22,7 +22,7 @@ else:
 
 ## 返回brush类标注
 
-图像分割brush标注官网没啥资料，我给出一部分代码逻辑，为了篇幅省略了一些异常检测。
+图像分割brush标注官网没啥资料，我给出一部分代码逻辑，为了篇幅省略了一些异常检测.
 
 ```python
 # 模型的返回

@@ -99,7 +99,7 @@
 </pre></div>
 </div>
 <p>没有成功把仓库拉下来，<strong>一种情况</strong>是某些aur软件autobuild版本滞后于实际仓库，即文件不存在拉不下来；</p>
-<p><strong>大部分情况</strong>是魔法出了问题，一旦存在特殊断流（被reset），git clone操作会被立即打断，这对网络稳定性有较高的要求。可以考虑浏览器手动下载，将文件放置在yay的缓存目录中<code class="docutils literal notranslate"><span class="pre">/home/用户名/.cache/yay/&lt;packname&gt;</span></code>，然后手动在终端运行</p>
+<p><strong>大部分情况</strong>是魔法出了问题，一旦存在特殊断流(被reset)，git clone操作会被立即打断，这对网络稳定性有较高的要求.可以考虑浏览器手动下载，将文件放置在yay的缓存目录中<code class="docutils literal notranslate"><span class="pre">/home/用户名/.cache/yay/&lt;packname&gt;</span></code>，然后手动在终端运行</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>makepkg
 </pre></div>
 </div>
@@ -111,14 +111,14 @@
 <section id="timeshiftbtrfs">
 <h2>Timeshift恢复Btrfs后出问题<a class="headerlink" href="#timeshiftbtrfs" title="链接到此标题。"></a></h2>
 <p>可以参考<a class="reference external" href="https://arch.icekylin.online/guide/advanced/system-ctl#%E7%B3%BB%E7%BB%9F%E5%BF%AB%E7%85%A7-%E5%A4%87%E4%BB%BD-%E4%B8%8E%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93">archlinux 简明指南</a>，文章中提到:</p>
-<p>Timeshift 恢复 Btrfs 快照时，可能出现由于子卷 ID 变更导致无法挂载目录而无法进入系统。</p>
+<p>Timeshift 恢复 Btrfs 快照时，可能出现由于子卷 ID 变更导致无法挂载目录而无法进入系统.</p>
 <p>使用 vim / nano 编辑器修改 /etc/fstab 文件</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>vim<span class="w"> </span>/etc/fstab
 <span class="c1"># or</span>
 sudo<span class="w"> </span>nano<span class="w"> </span>/etc/fstab
 </pre></div>
 </div>
-<p>删除 / 和 /home 条目中最后的 subvolid=xxx，也可以通过以下命令查看正确的 ID，手动更正 subvolid ：</p>
+<p>删除 / 和 /home 条目中最后的 subvolid=xxx，也可以通过以下命令查看正确的 ID，手动更正 subvolid:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>btrfs<span class="w"> </span>sub<span class="w"> </span>list<span class="w"> </span>-u<span class="w"> </span>/
 </pre></div>
 </div>

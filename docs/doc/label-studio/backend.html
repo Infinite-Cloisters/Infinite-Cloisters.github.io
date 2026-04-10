@@ -98,9 +98,9 @@
 </section>
 <section id="id1">
 <h2>后端获取图片<a class="headerlink" href="#id1" title="链接到此标题。"></a></h2>
-<p>下面代码是（我写的）代码中截取的部分，虽然没有变量说明，但大家应该也能看懂吧？</p>
+<p>下面代码是(我写的)代码中截取的部分，虽然没有变量说明，但大家应该也能看懂吧？</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">image_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;http://&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">image_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;https://&#39;</span><span class="p">):</span>
-    <span class="c1"># 通过网络路径直接获取，无auth（看具体情况）</span>
+    <span class="c1"># 通过网络路径直接获取，无auth(看具体情况)</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">image_url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
     <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
@@ -113,7 +113,7 @@
 </section>
 <section id="brush">
 <h2>返回brush类标注<a class="headerlink" href="#brush" title="链接到此标题。"></a></h2>
-<p>图像分割brush标注官网没啥资料，我给出一部分代码逻辑，为了篇幅省略了一些异常检测。</p>
+<p>图像分割brush标注官网没啥资料，我给出一部分代码逻辑，为了篇幅省略了一些异常检测.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 模型的返回</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">label_studio_ml.response</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelResponse</span>
 <span class="c1"># Label Studio 转换工具 - 用于 RLE 编码</span>

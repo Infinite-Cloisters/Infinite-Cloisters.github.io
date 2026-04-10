@@ -65,10 +65,10 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#git-filter-repo-python-git">使用 git-filter-repo (Python包) 清理 .git</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id7">1. 安装工具</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">2. 先做备份（建议）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">2. 先做备份(建议)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id9">3. 常见使用</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">4. 清理后检查（可选）</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id11">5. 推送到远程（重写历史后）</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">4. 清理后检查(可选)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">5. 推送到远程(重写历史后)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id12">6. 协作者需要做的事</a></li>
 </ul>
 </li>
@@ -129,36 +129,36 @@
 </pre></div>
 </div>
 <p>初学者可以配合GitHub Desktop或者VSCode进行辅助使用，此外<strong>一定要合理使用<code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>减少仓库大小</strong></p>
-<p>诸如gitee相比GitHub更快（在中国），使用的流程基本上都差不多。</p>
+<p>诸如gitee相比GitHub更快(在中国)，使用的流程基本上都差不多。</p>
 </section>
 <section id="id2">
 <h2>分支管理<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
 <p>分支用于隔离不同功能或修复任务，避免直接在主分支上修改。</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 查看本地分支（* 表示当前所在分支）</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 查看本地分支(* 表示当前所在分支)</span>
 <span class="n">git</span> <span class="n">branch</span>
 <span class="c"># 查看本地+远程分支</span>
 <span class="n">git</span> <span class="n">branch</span> <span class="n">-a</span>
 <span class="c"># 创建新分支</span>
 <span class="n">git</span> <span class="n">branch</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
 <span class="c"># 切换分支</span>
-<span class="n">git</span> <span class="k">switch</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span><span class="c"># 老命令也可以：git checkout feature/login</span>
+<span class="n">git</span> <span class="k">switch</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span> <span class="c"># 老命令也可以:git checkout feature/login</span>
 <span class="c"># 创建并切换到新分支</span>
-<span class="n">git</span> <span class="k">switch</span> <span class="n">-c</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span><span class="c"># 老命令也可以：git checkout -b feature/login</span>
+<span class="n">git</span> <span class="k">switch</span> <span class="n">-c</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span> <span class="c"># 老命令也可以:git checkout -b feature/login</span>
 <span class="c"># 开发完成后切回主分支</span>
 <span class="n">git</span> <span class="k">switch</span> <span class="n">main</span>
 <span class="c"># 将功能分支合并到当前分支</span>
 <span class="n">git</span> <span class="n">merge</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
-<span class="c"># 删除本地分支（已经合并）</span>
+<span class="c"># 删除本地分支(已经合并)</span>
 <span class="n">git</span> <span class="n">branch</span> <span class="n">-d</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
-<span class="c"># 强制删除本地分支（未合并也删除，谨慎）</span>
+<span class="c"># 强制删除本地分支(未合并也删除，谨慎)</span>
 <span class="n">git</span> <span class="n">branch</span> <span class="n">-D</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
 </pre></div>
 </div>
 <section id="id3">
 <h3>远程分支常见操作<a class="headerlink" href="#id3" title="链接到此标题。"></a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 首次推送分支并建立上游追踪关系（后续可直接 git push）</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 首次推送分支并建立上游追踪关系(后续可直接 git push)</span>
 <span class="n">git</span> <span class="n">push</span> <span class="n">-u</span> <span class="n">origin</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
-<span class="c"># 拉取远程更新（抓取并合并当前分支）</span>
+<span class="c"># 拉取远程更新(抓取并合并当前分支)</span>
 <span class="n">git</span> <span class="n">pull</span>
 <span class="c"># 仅抓取远程更新，不自动合并</span>
 <span class="n">git</span> <span class="n">fetch</span>
@@ -170,23 +170,23 @@
 <section id="id4">
 <h3>典型协作流程<a class="headerlink" href="#id4" title="链接到此标题。"></a></h3>
 <ol class="simple">
-<li><p>从 <code class="docutils literal notranslate"><span class="pre">main</span></code> 拉最新代码：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">main</span></code> + <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></li>
-<li><p>创建任务分支：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">feature/xxx</span></code></p></li>
-<li><p>本地开发并多次提交：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> + <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p></li>
-<li><p>推送到远程：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">feature/xxx</span></code></p></li>
+<li><p>从 <code class="docutils literal notranslate"><span class="pre">main</span></code> 拉最新代码:<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">main</span></code> + <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code></p></li>
+<li><p>创建任务分支:<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">feature/xxx</span></code></p></li>
+<li><p>本地开发并多次提交:<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> + <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p></li>
+<li><p>推送到远程:<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">-u</span> <span class="pre">origin</span> <span class="pre">feature/xxx</span></code></p></li>
 <li><p>发起 PR/MR，评审通过后合并到 <code class="docutils literal notranslate"><span class="pre">main</span></code></p></li>
-<li><p>删除无用分支（本地和远程）</p></li>
+<li><p>删除无用分支(本地和远程)</p></li>
 </ol>
 </section>
 <section id="id5">
 <h3>合并冲突处理<a class="headerlink" href="#id5" title="链接到此标题。"></a></h3>
-<p>当 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> 或 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> 出现冲突时：</p>
+<p>当 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> 或 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> 出现冲突时:</p>
 <ol class="simple">
 <li><p>用编辑器打开冲突文件，处理 <code class="docutils literal notranslate"><span class="pre">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span></code> <code class="docutils literal notranslate"><span class="pre">=======</span></code> <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span></code> 标记</p></li>
-<li><p>标记为已解决：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;冲突文件&gt;</span></code></p></li>
-<li><p>完成合并提交：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p></li>
+<li><p>标记为已解决:<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">&lt;冲突文件&gt;</span></code></p></li>
+<li><p>完成合并提交:<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p></li>
 </ol>
-<p>如果你在 rebase 过程中冲突：</p>
+<p>如果你在 rebase 过程中冲突:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 解决冲突并 add 之后继续</span>
 <span class="n">git</span> <span class="n">rebase</span> <span class="p">-</span><span class="n">-continue</span>
 <span class="c"># 放弃本次 rebase</span>
@@ -197,19 +197,19 @@
 <section id="id6">
 <h3>分支命名建议<a class="headerlink" href="#id6" title="链接到此标题。"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">feature/xxx</span></code>：新功能</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fix/xxx</span></code>：问题修复</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hotfix/xxx</span></code>：紧急修复</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">docs/xxx</span></code>：文档更新</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">feature/xxx</span></code>:新功能</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fix/xxx</span></code>:问题修复</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hotfix/xxx</span></code>:紧急修复</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/xxx</span></code>:文档更新</p></li>
 </ul>
 <p>保持分支短生命周期、小步提交，可以显著降低冲突概率。</p>
 </section>
 </section>
 <section id="git-filter-repo-python-git">
 <h2>使用 git-filter-repo (Python包) 清理 .git<a class="headerlink" href="#git-filter-repo-python-git" title="链接到此标题。"></a></h2>
-<p>适用场景：误提交了大文件、密钥、敏感配置，或者历史里有不需要保留的目录。</p>
+<p>适用场景:误提交了大文件、密钥、敏感配置，或者历史里有不需要保留的目录。</p>
 <blockquote>
-<div><p>注意：<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-repo</span></code> 会重写提交历史。已经推送到远程的仓库需要强制推送，并通知所有协作者重新同步。</p>
+<div><p>注意:<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">filter-repo</span></code> 会重写提交历史。已经推送到远程的仓库需要强制推送，并通知所有协作者重新同步。</p>
 </div></blockquote>
 <section id="id7">
 <h3>1. 安装工具<a class="headerlink" href="#id7" title="链接到此标题。"></a></h3>
@@ -220,7 +220,7 @@
 </div>
 </section>
 <section id="id8">
-<h3>2. 先做备份（建议）<a class="headerlink" href="#id8" title="链接到此标题。"></a></h3>
+<h3>2. 先做备份(建议)<a class="headerlink" href="#id8" title="链接到此标题。"></a></h3>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 推荐做一个镜像备份仓库</span>
 <span class="n">git</span> <span class="n">clone</span> <span class="p">-</span><span class="n">-mirror</span> <span class="p">&lt;</span><span class="n">repo-url</span><span class="p">&gt;</span> <span class="n">repo-backup</span><span class="p">.</span><span class="n">git</span>
 </pre></div>
@@ -228,23 +228,23 @@
 </section>
 <section id="id9">
 <h3>3. 常见使用<a class="headerlink" href="#id9" title="链接到此标题。"></a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 删除历史中的某个文件（例如密钥）</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 删除历史中的某个文件(例如密钥)</span>
 <span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-path</span> <span class="p">.</span><span class="n">env</span> <span class="p">-</span><span class="n">-invert-paths</span>
 <span class="c"># 删除历史中的某个目录</span>
 <span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-path</span> <span class="n">secrets</span><span class="p">/</span> <span class="p">-</span><span class="n">-invert-paths</span>
 <span class="c"># 删除历史中所有 .zip 文件</span>
 <span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-path-glob</span> <span class="p">*.</span><span class="n">zip</span> <span class="p">-</span><span class="n">-invert-paths</span>
-<span class="c"># 删除历史记录中所有大于 10M 的文件 （其实这个比较常用？）</span>
+<span class="c"># 删除历史记录中所有大于 10M 的文件 (其实这个比较常用？)</span>
 <span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-strip-blobs-bigger-than</span> <span class="n">10M</span> <span class="p">-</span><span class="n">-force</span>
-<span class="c"># 批量替换敏感字符串（先准备 replacements.txt）</span>
-<span class="c"># 格式示例：</span>
+<span class="c"># 批量替换敏感字符串(先准备 replacements.txt)</span>
+<span class="c"># 格式示例:</span>
 <span class="c"># old_token==&gt;REDACTED_TOKEN</span>
 <span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="o">-replace</span><span class="n">-text</span> <span class="n">replacements</span><span class="p">.</span><span class="n">txt</span>
 </pre></div>
 </div>
 </section>
 <section id="id10">
-<h3>4. 清理后检查（可选）<a class="headerlink" href="#id10" title="链接到此标题。"></a></h3>
+<h3>4. 清理后检查(可选)<a class="headerlink" href="#id10" title="链接到此标题。"></a></h3>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 查看历史是否仍有目标文件</span>
 <span class="n">git</span> <span class="n">log</span> <span class="p">-</span><span class="n">-all</span> <span class="p">--</span> <span class="p">.</span><span class="n">env</span>
 <span class="c"># 查看仓库对象体积情况</span>
@@ -253,7 +253,7 @@
 </div>
 </section>
 <section id="id11">
-<h3>5. 推送到远程（重写历史后）<a class="headerlink" href="#id11" title="链接到此标题。"></a></h3>
+<h3>5. 推送到远程(重写历史后)<a class="headerlink" href="#id11" title="链接到此标题。"></a></h3>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 注意一下清理可能会干掉远程分支，建议先查看一下当前远程分支，如果分支没有了需要重新添加远程仓库</span>
 <span class="n">git</span> <span class="n">remote</span> <span class="n">-v</span>
 <span class="c"># 强制推送当前分支</span>
@@ -265,7 +265,7 @@
 </section>
 <section id="id12">
 <h3>6. 协作者需要做的事<a class="headerlink" href="#id12" title="链接到此标题。"></a></h3>
-<p>重写历史后，协作者本地旧历史会与远程冲突。最稳妥方式是：</p>
+<p>重写历史后，协作者本地旧历史会与远程冲突。最稳妥方式是:</p>
 <ol class="simple">
 <li><p>备份本地未提交改动</p></li>
 <li><p>重新克隆仓库</p></li>

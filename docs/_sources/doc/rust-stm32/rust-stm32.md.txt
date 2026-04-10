@@ -105,7 +105,7 @@ fn USART1() {
 
 file path >> memory.x
 
-```x
+```shell
 MEMORY
 {
   RAM     : ORIGIN = 0x20000000,   LENGTH = 128K

@@ -186,13 +186,13 @@
 </pre></div>
 </div>
 <p>file path &gt;&gt; memory.x</p>
-<div class="highlight-x notranslate"><div class="highlight"><pre><span></span>MEMORY
-{
-  RAM     : ORIGIN = 0x20000000,   LENGTH = 128K
-  FLASH   : ORIGIN = 0x8000000,   LENGTH = 512K
-}
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>MEMORY
+<span class="o">{</span>
+<span class="w">  </span>RAM<span class="w">     </span>:<span class="w"> </span><span class="nv">ORIGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x20000000,<span class="w">   </span><span class="nv">LENGTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>128K
+<span class="w">  </span>FLASH<span class="w">   </span>:<span class="w"> </span><span class="nv">ORIGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x8000000,<span class="w">   </span><span class="nv">LENGTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>512K
+<span class="o">}</span>
 
-_stack_start = ORIGIN(RAM) + LENGTH(RAM);
+<span class="nv">_stack_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ORIGIN<span class="o">(</span>RAM<span class="o">)</span><span class="w"> </span>+<span class="w"> </span>LENGTH<span class="o">(</span>RAM<span class="o">)</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>file path &gt;&gt; Cargo.toml</p>

@@ -87,7 +87,9 @@
   <section id="rust-stm32">
 <span id="id1"></span><h1>Rust STM32 开发<a class="headerlink" href="#rust-stm32" title="链接到此标题。"></a></h1>
 <p>一次简单的尝试,不建议比赛时候使用,除非你的队友全是Rust开发者.</p>
-<p>rust对于部分国产单片机支持不够好,目前wch、gd32、at32、py32等支持尚可.</p>
+<p>rust对于部分国产单片机支持不够好,目前wch、gd、at、py等支持尚可.</p>
+<p>当然即使没有对应的hal,你也可以使用svd2rust来生成库文件,简单添加几个unsafe就能用了,但只能进行寄存器级别的操作,
+需要手动开启rt feature,否则entry会报错(不知道是不是我没配好).目前还没有找到一个比较好的解决方案,如果有的话欢迎告诉我.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="rust-stm32.html">使用rust开发stm32体验</a></li>

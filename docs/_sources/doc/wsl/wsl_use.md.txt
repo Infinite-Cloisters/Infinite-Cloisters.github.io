@@ -11,7 +11,7 @@
 
 下一步就是安装WSL插件，通过远程资源管理器连接上你的WSL
 
-## 9. 在 VSCode 中通过 WSL 工作
+## 在 VSCode 中通过 WSL 工作
 
 - 安装 VSCode 的 Remote - WSL 扩展。
 - 打开命令面板（Ctrl+Shift+P），选择 "Remote-WSL: New Window"。
@@ -22,7 +22,6 @@
 
 - Linux 下不能直接运行 Windows 的 `.exe`（例如 `arm-none-eabi-gcc.exe`），请在 WSL 环境中使用对应的 Linux 工具链。
 - 在 VS Code 的工具链/扩展配置中，确保选择的是 WSL 内的工具而非 Windows 本地的工具链。
-
 
 ## WSL文件路径相关
 

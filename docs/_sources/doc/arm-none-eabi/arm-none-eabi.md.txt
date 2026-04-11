@@ -55,9 +55,9 @@ winget install Ninja-build.Ninja
 ## 开发环境建议
 
 - CLion:对 CMake 支持良好，可与 STM32CubeMX 结合(在 CubeMX 中选择导出为 CubeIDE ).
-- VS Code:推荐安装扩展 `CMake Tools`(管理构建)和 `CMake Language Support`(CMake 高亮/提示).
+- VS Code:推荐安装扩展 `CMake Tools`(管理构建)和`CMake IntelliSence`(推荐)或者 `CMake Language Support`(CMake 高亮/提示).
 
-  - 注意:`CMake Language Support` 需要 `dotnet`(.NET RUNTIME)以启用某些功能，请在 VS Code 设置中配置 `dotnet` 可执行路径(不一定需要 .net 6).
+  - 注意:`CMake Language Support` 需要 `dotnet`(.NET RUNTIME)以启用某些功能，请在 VS Code 设置中配置 `dotnet` 可执行路径(不一定需要 .net 6). `CMake IntelliSence` 是无需要dotnet.
 
 ## CMake 使用示例
 

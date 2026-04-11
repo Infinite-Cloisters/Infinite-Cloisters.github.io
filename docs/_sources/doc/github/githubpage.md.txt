@@ -107,7 +107,7 @@
 1. 打开组织的 Settings.
 2. 进入 Security 里的 Verified and approved domains.
 3. 点击 Add a domain,输入你要验证的域名.
-4. 按 GitHub 提示到 DNS 服务商那里添加一条 TXT 记录.**注意这个txt记录要包括复制部分+你的域名！**
+4. 按 GitHub 提示到 DNS 服务商那里添加一条 TXT 记录.**注意这个txt记录要包括复制部分+你的域名!**
 5. 等 DNS 生效后回到 GitHub,继续验证并完成确认.
 
 GitHub 会给你一个专门的 TXT 记录名和值,照着填写即可.DNS 生效可能需要一点时间,官方说明里最长可能要等 72 小时.验证完成后,如果只是为了拿到 Verified 标识,TXT 记录可以按需删除.

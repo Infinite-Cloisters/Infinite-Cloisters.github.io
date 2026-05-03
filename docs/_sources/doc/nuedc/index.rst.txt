@@ -6,6 +6,7 @@
 .. toctree::
     nuedc
     prepare
+    faq
     problem
     
 .. role:: raw-html(raw)

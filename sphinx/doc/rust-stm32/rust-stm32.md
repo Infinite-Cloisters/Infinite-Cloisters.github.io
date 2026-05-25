@@ -4,13 +4,14 @@
 
 ```powershell
 # gnu工具链
-rustup toolchain install stable-x86_64-pc-windows-gnu
+rustup toolchain install stable-x86_64-pc-windows-gnu 
 rustup default stable-x86_64-pc-windows-gnu
 # probe-rs
-cargo install probe-rs cargo-flash cargo-embed
+cargo install probe-rs cargo-flash cargo-embed cargo cargo-update
+# cargo install-update -a 是用于更新rust install安装的工具
 # 查看固件大小所要的包
-cargo install cargo-bloat
-cargo install cargo-binutils
+cargo install cargo-bloat cargo-binutils
+# 如果安装失败可以尝试 --lock 参数避免本地包与原工程不一致，例如cargo install office2pdf --lock
 rustup component add llvm-tools-preview
 # 查看固件大小，按需使用
 cargo size

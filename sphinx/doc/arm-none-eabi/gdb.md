@@ -50,15 +50,13 @@ probe-rs gdb --chip <chip> <path/to/your.elf>
 
 如果工具没有相关芯片可以使用`--chip-description-path`选项替换`--chip`，描述文件可以通过`target-gen`转换标准cmsis的.pack文件获得
 
-### 2. 使用新版方式(VSCode官方插件只支持这个)
+### 2. 使用新版方式(VSCode官方插件只支持这个，更友好)
 
-这个可能配置有些繁琐，我没有在Clion中尝试过这个方法，此外probe-rs似乎不能用cortex-debug.
+我没有在Clion中尝试过这个方法，但是Vscode中调试Py32是成功的，此外probe-rs不能用cortex-debug.
 
-```powershell
-probe-rs dap-server [OPTIONS] --port <PORT>
-```
+[具体操作办法参考官方](https://probe.rs/docs/tools/debugger/)
 
-使用RTT来获取调试信息[具体操作办法参考官方](https://probe.rs/docs/tools/debugger/)
+简而言之，就是配置好`launch.json`就能实现调试了，断点、单步读取变量都没有太大问题。
 
 ### 3. 在主机端打开 `arm-none-eabi-gdb` 并加载 ELF(以下都是传统gdb方案)
 
@@ -69,7 +67,7 @@ arm-none-eabi-gdb <path/to/your.elf>
 ### 4. 在 gdb 内连接到远端 GDB server
 
 ```powershell
-(gdb) target remote :3333
+(gdb) target remote :1337
 ```
 
 ### 5. 初始化目标(可选)
@@ -99,6 +97,8 @@ arm-none-eabi-gdb <path/to/your.elf>
 (gdb) monitor halt
 (gdb) detach
 ```
+
+使用Clion中自定义gdb服务器可以简化每次繁琐的命令输入，自行查阅相关资料配置(也就是你先输入一边预设，以后点击按钮就是Clion帮你敲命令)
 
 ## 常用 gdb 命令速查
 

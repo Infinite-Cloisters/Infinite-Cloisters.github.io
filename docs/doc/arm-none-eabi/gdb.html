@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试 &mdash; Documentation 0.1.6 文档</title>
+  <title>使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试 &mdash; Documentation 0.1.8 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=b9123300"></script>
+      <script src="../../_static/documentation_options.js?v=41b75b8c"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -58,7 +58,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id2">调试流程(概览)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id3">1. 构建带符号的固件</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">2. 使用传统方式</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#vscode">2. 使用新版方式(VSCode官方插件只支持这个)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vscode">2. 使用新版方式(VSCode官方插件只支持这个，更友好)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#arm-none-eabi-gdb-elf-gdb">3. 在主机端打开 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 并加载 ELF(以下都是传统gdb方案)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gdb-gdb-server">4. 在 gdb 内连接到远端 GDB server</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id5">5. 初始化目标(可选)</a></li>
@@ -156,12 +156,10 @@
 <p>如果工具没有相关芯片可以使用<code class="docutils literal notranslate"><span class="pre">--chip-description-path</span></code>选项替换<code class="docutils literal notranslate"><span class="pre">--chip</span></code>，描述文件可以通过<code class="docutils literal notranslate"><span class="pre">target-gen</span></code>转换标准cmsis的.pack文件获得</p>
 </section>
 <section id="vscode">
-<h3>2. 使用新版方式(VSCode官方插件只支持这个)<a class="headerlink" href="#vscode" title="链接到此标题。"></a></h3>
-<p>这个可能配置有些繁琐，我没有在Clion中尝试过这个方法，此外probe-rs似乎不能用cortex-debug.</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">probe-rs</span> <span class="n">dap-server</span> <span class="no">[OPTIONS]</span> <span class="p">-</span><span class="n">-port</span> <span class="p">&lt;</span><span class="n">PORT</span><span class="p">&gt;</span>
-</pre></div>
-</div>
-<p>使用RTT来获取调试信息<a class="reference external" href="https://probe.rs/docs/tools/debugger/">具体操作办法参考官方</a></p>
+<h3>2. 使用新版方式(VSCode官方插件只支持这个，更友好)<a class="headerlink" href="#vscode" title="链接到此标题。"></a></h3>
+<p>我没有在Clion中尝试过这个方法，但是Vscode中调试Py32是成功的，此外probe-rs不能用cortex-debug.</p>
+<p><a class="reference external" href="https://probe.rs/docs/tools/debugger/">具体操作办法参考官方</a></p>
+<p>简而言之，就是配置好<code class="docutils literal notranslate"><span class="pre">launch.json</span></code>就能实现调试了，断点、单步读取变量都没有太大问题。</p>
 </section>
 <section id="arm-none-eabi-gdb-elf-gdb">
 <h3>3. 在主机端打开 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 并加载 ELF(以下都是传统gdb方案)<a class="headerlink" href="#arm-none-eabi-gdb-elf-gdb" title="链接到此标题。"></a></h3>
@@ -171,7 +169,7 @@
 </section>
 <section id="gdb-gdb-server">
 <h3>4. 在 gdb 内连接到远端 GDB server<a class="headerlink" href="#gdb-gdb-server" title="链接到此标题。"></a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">target</span> <span class="n">remote</span> <span class="p">:</span><span class="n">3333</span>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">target</span> <span class="n">remote</span> <span class="p">:</span><span class="n">1337</span>
 </pre></div>
 </div>
 </section>
@@ -202,6 +200,7 @@
 <span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">detach</span>
 </pre></div>
 </div>
+<p>使用Clion中自定义gdb服务器可以简化每次繁琐的命令输入，自行查阅相关资料配置(也就是你先输入一边预设，以后点击按钮就是Clion帮你敲命令)</p>
 </section>
 </section>
 <section id="gdb">

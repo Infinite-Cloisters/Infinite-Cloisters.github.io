@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>使用rust开发stm32体验 &mdash; Documentation 0.1.6 文档</title>
+  <title>使用rust开发stm32体验 &mdash; Documentation 0.1.8 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -14,7 +14,7 @@
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=b9123300"></script>
+      <script src="../../_static/documentation_options.js?v=41b75b8c"></script>
       <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
       <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -89,13 +89,14 @@
 <h1>使用rust开发stm32体验<a class="headerlink" href="#ruststm32" title="链接到此标题。"></a></h1>
 <p>以下的示例是基于STM32F411的完整demo，需要安装rust相关工具链以及probe-rs</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># gnu工具链</span>
-<span class="n">rustup</span> <span class="n">toolchain</span> <span class="n">install</span> <span class="n">stable-x86_64-pc-windows-gnu</span>
+<span class="n">rustup</span> <span class="n">toolchain</span> <span class="n">install</span> <span class="n">stable-x86_64-pc-windows-gnu</span> 
 <span class="n">rustup</span> <span class="k">default</span> <span class="n">stable-x86_64-pc-windows-gnu</span>
 <span class="c"># probe-rs</span>
-<span class="n">cargo</span> <span class="n">install</span> <span class="n">probe-rs</span> <span class="n">cargo-flash</span> <span class="n">cargo-embed</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="n">probe-rs</span> <span class="n">cargo-flash</span> <span class="n">cargo-embed</span> <span class="n">cargo</span> <span class="n">cargo-update</span>
+<span class="c"># cargo install-update -a 是用于更新rust install安装的工具</span>
 <span class="c"># 查看固件大小所要的包</span>
-<span class="n">cargo</span> <span class="n">install</span> <span class="n">cargo-bloat</span>
-<span class="n">cargo</span> <span class="n">install</span> <span class="n">cargo-binutils</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="n">cargo-bloat</span> <span class="n">cargo-binutils</span>
+<span class="c"># 如果安装失败可以尝试 --lock 参数避免本地包与原工程不一致，例如cargo install office2pdf --lock</span>
 <span class="n">rustup</span> <span class="n">component</span> <span class="n">add</span> <span class="n">llvm-tools-preview</span>
 <span class="c"># 查看固件大小，按需使用</span>
 <span class="n">cargo</span> <span class="n">size</span>

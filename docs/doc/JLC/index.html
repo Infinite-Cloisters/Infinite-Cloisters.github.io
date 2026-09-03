@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rust STM32 开发 &mdash; Documentation 0.1.9 文档</title>
+  <title>南京理工大学嘉立创杯新生电赛 &mdash; Documentation 0.1.9 文档</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
@@ -23,8 +23,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="搜索" href="../../search.html" />
-    <link rel="next" title="使用rust开发stm32体验" href="rust-stm32.html" />
-    <link rel="prev" title="使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试" href="../arm-none-eabi/gdb.html" /> 
+    <link rel="next" title="开发环境与工具链选择" href="guide.html" />
+    <link rel="prev" title="全国大学生电子设计竞赛近年赛题" href="../nuedc/problem.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -51,14 +51,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Rust STM32 开发</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="rust-stm32.html">使用rust开发stm32体验</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">南京理工大学嘉立创杯新生电赛</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.html">开发环境与工具链选择</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -75,9 +75,9 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Rust STM32 开发</li>
+      <li class="breadcrumb-item active">南京理工大学嘉立创杯新生电赛</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/doc/rust-stm32/index.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../../_sources/doc/JLC/index.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -85,15 +85,33 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="rust-stm32">
-<span id="id1"></span><h1>Rust STM32 开发<a class="headerlink" href="#rust-stm32" title="链接到此标题。"></a></h1>
-<p>一次简单的尝试,不建议比赛时候使用,除非你的队友全是Rust开发者.</p>
-<p>rust对于部分国产单片机支持不够好,目前wch、gd、at、py等支持尚可.</p>
-<p>当然即使没有对应的hal,你也可以使用svd2rust来生成库文件,简单添加几个unsafe就能用了,但只能进行寄存器级别的操作,
-需要手动开启rt feature,否则entry会报错(不知道是不是我没配好).目前还没有找到一个比较好的解决方案,如果有的话欢迎告诉我.</p>
+  <section id="jlc">
+<span id="id1"></span><h1>南京理工大学嘉立创杯新生电赛<a class="headerlink" href="#jlc" title="链接到此标题。"></a></h1>
+<p>本人已经从南理工毕业进入其他院校读研，这些是我在南理工期间参加嘉立创杯新生电赛助教的随记文档，记录了我在比赛中遇到的问题和解决方案，希望能对后来的参赛者有所帮助。</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="rust-stm32.html">使用rust开发stm32体验</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">开发环境与工具链选择</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#id2">方案速览</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#stm32cubemx">零、通用的第一步:STM32CubeMX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#vscode-eide-cubemx-probe-rs">一、VSCode + EIDE + CubeMX + probe-rs（推荐）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.html#id3">1.1 装什么</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.html#cubemx-eide">1.2 CubeMX 生成 + EIDE 导入</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.html#id4">1.3 编译期最常见的三个坑</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.html#probe-rs">1.4 用 probe-rs 插件调试（照官方文档来）</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#clion-stm32cubemx">二、CLion + STM32CubeMX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#stm32cubeide-stm32cubemx">三、STM32CubeIDE + STM32CubeMX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#keil-mdk5-stm32cubemx">四、Keil MDK5 + STM32CubeMX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#rust">五、关于用 Rust 开发（个人不建议）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#git">六、强烈建议:学会用 Git 做版本管理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="guide.html#id5">最小可用流程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guide.html#id6">几条实操建议</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#id7">参考</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
@@ -102,8 +120,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="../arm-none-eabi/gdb.html" class="btn btn-neutral float-left" title="使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="rust-stm32.html" class="btn btn-neutral float-right" title="使用rust开发stm32体验" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../nuedc/problem.html" class="btn btn-neutral float-left" title="全国大学生电子设计竞赛近年赛题" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="guide.html" class="btn btn-neutral float-right" title="开发环境与工具链选择" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

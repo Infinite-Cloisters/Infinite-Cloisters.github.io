@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>开发环境与工具链选择 &mdash; Documentation 0.1.9 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=53716796"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/translations.js?v=540d3cec"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="prev" title="南京理工大学嘉立创杯新生电赛" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">南京理工大学嘉立创杯新生电赛</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">开发环境与工具链选择</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">方案速览</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stm32cubemx">零、通用的第一步:STM32CubeMX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vscode-eide-cubemx-probe-rs">一、VSCode + EIDE + CubeMX + probe-rs（推荐）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">1.1 装什么</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cubemx-eide">1.2 CubeMX 生成 + EIDE 导入</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">1.3 编译期最常见的三个坑</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#probe-rs">1.4 用 probe-rs 插件调试（照官方文档来）</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#clion-stm32cubemx">二、CLion + STM32CubeMX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stm32cubeide-stm32cubemx">三、STM32CubeIDE + STM32CubeMX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keil-mdk5-stm32cubemx">四、Keil MDK5 + STM32CubeMX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rust">五、关于用 Rust 开发（个人不建议）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git">六、强烈建议:学会用 Git 做版本管理</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">最小可用流程</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">几条实操建议</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">参考</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">南京理工大学嘉立创杯新生电赛</a></li>
+      <li class="breadcrumb-item active">开发环境与工具链选择</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/JLC/guide.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>开发环境与工具链选择<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
+<p>这篇写给第一次摸单片机、要在几天内把板子跑起来的同学。</p>
+<p>先说结论:<strong>工具链不重要,能把代码烧进去、能在线打断点调试、能随时回退代码,才是真的</strong>。</p>
+<p>下面几套方案我都列出来,各有适用场景。如果你拿不定主意,直接照 <strong>方案一（VSCode + EIDE + probe-rs）</strong> 搭,跨平台、免费、不限代码大小、下载器随便换。</p>
+<section id="id2">
+<h2>方案速览<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>方案</th>
+<th>费用</th>
+<th>平台</th>
+<th>代码大小限制</th>
+<th>下载器</th>
+<th>上手难度</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VSCode + EIDE + CubeMX + probe-rs</td>
+<td>全免费</td>
+<td>Win / Linux / macOS</td>
+<td>无</td>
+<td>ST-Link / J-Link / DAPLink / ...</td>
+<td>中</td>
+<td>个人推荐,配置一次到处能用</td>
+</tr>
+<tr>
+<td>CLion + CubeMX</td>
+<td>学生免费</td>
+<td>Win / Linux / macOS</td>
+<td>无</td>
+<td>ST-Link / J-Link / DAPLink（OpenOCD）</td>
+<td>中</td>
+<td>代码补全和重构最强</td>
+</tr>
+<tr>
+<td>STM32CubeIDE + CubeMX</td>
+<td>全免费</td>
+<td>Win / Linux / macOS</td>
+<td>无</td>
+<td><strong>基本只有 ST-Link 好用</strong></td>
+<td>低</td>
+<td>官方一体机,开箱即用</td>
+</tr>
+<tr>
+<td>Keil MDK5 + CubeMX</td>
+<td>收费（有 Lite 版）</td>
+<td>仅 Windows</td>
+<td>未授权 32KB</td>
+<td>ST-Link / J-Link / ULINK / CMSIS-DAP</td>
+<td>低</td>
+<td>资料最多,但<strong>联网/授权折腾</strong></td>
+</tr>
+</tbody>
+</table></section>
+<hr class="docutils" />
+<section id="stm32cubemx">
+<h2>零、通用的第一步:STM32CubeMX<a class="headerlink" href="#stm32cubemx" title="链接到此标题。"></a></h2>
+<p>上面四套方案里,CubeMX 是共用的。它的作用只有一个:<strong>用图形界面配好时钟树和外设,然后生成初始化代码</strong>。</p>
+<p>几个必须记住的点:</p>
+<ol class="simple">
+<li><p><strong>安装路径不要有中文、不要有空格。</strong> CubeMX 基于 Java,路径里出现中文/空格会在生成代码时各种玄学报错。</p></li>
+<li><p>需要先装 JRE/JDK,再装 CubeMX;首次使用要在线下载对应系列的 HAL 包（F1/F4/G4/H7...）。</p></li>
+<li><p><strong>Toolchain / IDE 选项决定了你后面走哪条路</strong>:</p></li>
+</ol>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>你想走的路</th>
+<th>Project Manager → Toolchain / IDE 选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VSCode + EIDE（GCC）</td>
+<td><code>Makefile</code></td>
+</tr>
+<tr>
+<td>CLion</td>
+<td><code>CMake</code></td>
+</tr>
+<tr>
+<td>STM32CubeIDE</td>
+<td><code>STM32CubeIDE</code></td>
+</tr>
+<tr>
+<td>Keil</td>
+<td><code>MDK-ARM</code></td>
+</tr>
+</tbody>
+</table><ol class="simple">
+<li><p><strong>用户代码只能写在 <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">USER</span> <span class="pre">CODE</span> <span class="pre">BEGIN</span> <span class="pre">xxx</span> <span class="pre">*/</span></code> 和 <code class="docutils literal notranslate"><span class="pre">/*</span> <span class="pre">USER</span> <span class="pre">CODE</span> <span class="pre">END</span> <span class="pre">xxx</span> <span class="pre">*/</span></code> 之间</strong>,写在外面,下次点 GENERATE CODE 就会被覆盖掉,一天白干。这句话值得背下来。</p></li>
+<li><p>建议在 Code Generator 里勾选 <code class="docutils literal notranslate"><span class="pre">Generate</span> <span class="pre">peripheral</span> <span class="pre">initialization</span> <span class="pre">as</span> <span class="pre">a</span> <span class="pre">pair</span> <span class="pre">of</span> <span class="pre">.c/.h</span> <span class="pre">files</span></code>,外设分文件,找代码好找。</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="vscode-eide-cubemx-probe-rs">
+<h2>一、VSCode + EIDE + CubeMX + probe-rs（推荐）<a class="headerlink" href="#vscode-eide-cubemx-probe-rs" title="链接到此标题。"></a></h2>
+<p>分工是这样的:</p>
+<ul class="simple">
+<li><p><strong>STM32CubeMX</strong> —— 生成 Makefile 工程（时钟、外设、HAL 初始化）</p></li>
+<li><p><strong>EIDE（Embedded IDE 插件）</strong> —— 工程管理 + 调用 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code> 编译,产出 <code class="docutils literal notranslate"><span class="pre">.elf</span></code></p></li>
+<li><p><strong>probe-rs（CLI）+ VSCode probe-rs 插件</strong> —— 烧录 + 在线调试（打断点、看变量、看寄存器）</p></li>
+</ul>
+<section id="id3">
+<h3>1.1 装什么<a class="headerlink" href="#id3" title="链接到此标题。"></a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>组件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VSCode</td>
+<td>装官方版即可</td>
+</tr>
+<tr>
+<td>ARM GNU Toolchain</td>
+<td><code>arm-none-eabi-gcc</code>,装完把 <code>bin</code> 目录加进 PATH,<code>arm-none-eabi-gcc -v</code> 能出版本就 OK</td>
+</tr>
+<tr>
+<td>插件 <code>Embedded IDE</code>（EIDE）</td>
+<td>国产插件,工程管理和编译都靠它</td>
+</tr>
+<tr>
+<td>插件 <code>C/C++</code></td>
+<td>代码补全、跳转</td>
+</tr>
+<tr>
+<td>插件 <code>probe-rs</code>（ID: <code>probe-rs.probe-rs-debugger</code>）</td>
+<td>调试适配器,装完如果它找不到 probe-rs 会提示你装</td>
+</tr>
+<tr>
+<td>probe-rs CLI</td>
+<td>核心工具,见下</td>
+</tr>
+</tbody>
+</table><p>装 probe-rs（Windows,PowerShell）:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">irm </span><span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">releases</span><span class="p">/</span><span class="n">latest</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">probe-rs-tools-installer</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
+</pre></div>
+</div>
+<p>Linux / macOS 可以用 <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">install</span> <span class="pre">probe-rs-tools</span></code>,或者直接去 GitHub Releases 下载。</p>
+<p>装完验证:</p>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">probe-rs</span> <span class="p">-</span><span class="n">-version</span>
+<span class="n">probe-rs</span> <span class="n">chip</span> <span class="n">list</span> <span class="p">|</span> <span class="nb">Select-String</span> <span class="n">STM32</span>      <span class="c"># 查你的芯片在 probe-rs 里叫什么名字</span>
+<span class="n">probe-rs</span> <span class="n">list</span>                                  <span class="c"># 看看下载器被识别出来没有</span>
+</pre></div>
+</div>
+</section>
+<section id="cubemx-eide">
+<h3>1.2 CubeMX 生成 + EIDE 导入<a class="headerlink" href="#cubemx-eide" title="链接到此标题。"></a></h3>
+<ol class="simple">
+<li><p>CubeMX 里 Toolchain / IDE 选 <strong>Makefile</strong>,GENERATE CODE。</p></li>
+<li><p>VSCode 打开工程目录,EIDE 面板 → 导入项目 → Makefile 项目,选中工程目录。</p></li>
+<li><p>EIDE 里确认:工具链路径指向 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code>、芯片型号选对、链接脚本指向 CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">*_FLASH.ld</span></code>。</p></li>
+</ol>
+<blockquote>
+<div><p>如果 EIDE 解析 Makefile 不顺,还有条笨但稳的路:<strong>新建空工程（选对应芯片的 GCC 模板）,然后把 CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">Core/</span></code>、<code class="docutils literal notranslate"><span class="pre">Drivers/</span></code>、<code class="docutils literal notranslate"><span class="pre">Middlewares/</span></code>、启动文件和 <code class="docutils literal notranslate"><span class="pre">.ld</span></code> 拷进去</strong>,再手动补 Include Paths 和宏定义（<code class="docutils literal notranslate"><span class="pre">USE_HAL_DRIVER</span></code>、<code class="docutils literal notranslate"><span class="pre">STM32F407xx</span></code> 这类）。</p>
+</div></blockquote>
+</section>
+<section id="id4">
+<h3>1.3 编译期最常见的三个坑<a class="headerlink" href="#id4" title="链接到此标题。"></a></h3>
+<ol class="simple">
+<li><p><strong>FPU 没开</strong>:带硬件浮点的芯片（F4/F7/H7/G4）默认可能是 <code class="docutils literal notranslate"><span class="pre">soft</span></code>,FreeRTOS 的 <code class="docutils literal notranslate"><span class="pre">port.c</span></code> 会报 <code class="docutils literal notranslate"><span class="pre">selected</span> <span class="pre">FPU</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">support</span> <span class="pre">instruction</span></code>。到 Target Options 里把 FPU 改成 <code class="docutils literal notranslate"><span class="pre">fpv4-sp-d16</span></code>（M4）/ <code class="docutils literal notranslate"><span class="pre">fpv5-d16</span></code>（M7）。</p></li>
+<li><p><strong>链接脚本语法错误</strong>:CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">.ld</span></code> 偶尔会出现 <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">AT&gt;</span> <span class="pre">FLASH</span></code> 这类缺参数的写法,手动改成 <code class="docutils literal notranslate"><span class="pre">&gt;RAM</span> <span class="pre">AT&gt;</span> <span class="pre">FLASH</span></code>,<code class="docutils literal notranslate"><span class="pre">_estack</span></code> 写成 <code class="docutils literal notranslate"><span class="pre">ORIGIN(RAM)</span> <span class="pre">+</span> <span class="pre">LENGTH(RAM)</span></code>。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">undefined</span> <span class="pre">reference</span></code></strong>:源文件没加全,尤其 FreeRTOS 的 <code class="docutils literal notranslate"><span class="pre">portable/GCC/ARM_CMxF</span></code> 目录和 HAL 驱动 <code class="docutils literal notranslate"><span class="pre">Src</span></code> 目录。</p></li>
+</ol>
+</section>
+<section id="probe-rs">
+<h3>1.4 用 probe-rs 插件调试（照官方文档来）<a class="headerlink" href="#probe-rs" title="链接到此标题。"></a></h3>
+<p>probe-rs 的 VSCode 插件走的是微软 DAP 协议,<code class="docutils literal notranslate"><span class="pre">launch.json</span></code> 里 <code class="docutils literal notranslate"><span class="pre">type</span></code> 固定写 <code class="docutils literal notranslate"><span class="pre">probe-rs-debug</span></code>。</p>
+<p><strong>关键点:它不挑语言。</strong> 只要你有带符号的 <code class="docutils literal notranslate"><span class="pre">.elf</span></code> 和芯片名,C 工程、C++ 工程、汇编工程都能调,不是 Rust 专属。</p>
+<p>最小可用配置（改三处就能跑:芯片名、elf 路径、svd 路径）:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;probe-rs-debug&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;probe-rs Debug&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;cwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;chip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;STM32F407ZETx&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;flashingConfig&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;flashingEnabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;haltAfterReset&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;formatOptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;binaryFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;elf&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;coreConfigs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;coreIndex&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;programBinary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build/YourProject.elf&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;svdFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;STM32F407.svd&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;consoleLogLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Console&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>常用可选字段,按需加:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+<th>什么时候用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>probe</code></td>
+<td><code>"VID:PID"</code> 或 <code>"VID:PID:&lt;Serial&gt;"</code></td>
+<td>电脑上插了多个下载器,指定用哪个</td>
+</tr>
+<tr>
+<td><code>speed</code></td>
+<td>SWD 时钟（kHz）,如 <code>24000</code></td>
+<td>连接不稳定就往下调,比如 <code>1000</code></td>
+</tr>
+<tr>
+<td><code>connectUnderReset</code></td>
+<td>拉住复位线再连</td>
+<td>程序把 SWD 引脚配成别的功能、或者跑飞了连不上时</td>
+</tr>
+<tr>
+<td><code>wireProtocol</code></td>
+<td><code>"Swd"</code> / <code>"Jtag"</code></td>
+<td>默认 SWD</td>
+</tr>
+<tr>
+<td><code>allowEraseAll</code></td>
+<td>允许整片擦除</td>
+<td>芯片锁死时解锁</td>
+</tr>
+<tr>
+<td><code>chipDescriptionPath</code></td>
+<td>自定义芯片描述文件</td>
+<td>probe-rs 官方没有你的芯片（部分国产 MCU）,用 <code>target-gen</code> 从 CMSIS <code>.pack</code> 转换</td>
+</tr>
+<tr>
+<td><code>runtimeExecutable</code></td>
+<td>默认 <code>probe-rs</code></td>
+<td>改成了非标准安装路径时用</td>
+</tr>
+<tr>
+<td><code>server</code></td>
+<td><code>"127.0.0.1:50000"</code></td>
+<td>连接一个独立的 <code>probe-rs dap-server</code>（远程调试场景）</td>
+</tr>
+</tbody>
+</table><p><code class="docutils literal notranslate"><span class="pre">coreConfigs</span></code> 里还能开 RTT(不用串口就能打 log,速度快到可以放进中断):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;coreConfigs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;coreIndex&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;programBinary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build/YourProject.elf&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;svdFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;STM32F407.svd&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;rttEnabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;rttChannelFormats&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;channelNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;dataFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;showTimestamps&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>几个提醒:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">svdFile</span></code> 强烈建议配</strong>。配上之后 VSCode 里能直接展开外设寄存器每一位,调底层外设时省一半命。SVD 文件去 Keil 的 Pack 包或者芯片厂商官网找。</p></li>
+<li><p>插件目前官方标注仍是 <strong>pre-production / Alpha</strong>,偶尔会抽风。抽风时的退路是 <code class="docutils literal notranslate"><span class="pre">probe-rs</span> <span class="pre">gdb</span> <span class="pre">--chip</span> <span class="pre">&lt;chip&gt;</span> <span class="pre">your.elf</span></code> 起一个 GDB server,再用 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gdb</span></code> 连上去手动调——流程见本站《使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试》。</p></li>
+<li><p><strong>probe-rs 和 Cortex-Debug 不能混用</strong>。EIDE 自带的烧录器（JLink / STLink / OpenOCD / pyOCD）也能下载,但调试这边统一走 probe-rs,别两套混着配。</p></li>
+<li><p>支持的下载器比想象中多:ST-Link v2/v2-1/v3、J-Link、CMSIS-DAP / DAPLink、Raspberry Pi Debug Probe、FTDI 方案、ESP USB Bridge 等。<strong>这意味着你换一块板子、换一个下载器,配置几乎不用改。</strong></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="clion-stm32cubemx">
+<h2>二、CLion + STM32CubeMX<a class="headerlink" href="#clion-stm32cubemx" title="链接到此标题。"></a></h2>
+<p>CubeMX 里 Toolchain / IDE 选 <strong>CMake</strong>,生成完直接用 CLion 打开目录即可。</p>
+<p>优点:</p>
+<ul class="simple">
+<li><p><strong>代码补全、重构、静态检查是这几套方案里最强的</strong>,写业务逻辑体验最好。</p></li>
+<li><p>内置嵌入式调试支持:配一个 OpenOCD 的 board cfg（或者 ST-LINK server）,点虫子图标就能断点调试。</p></li>
+<li><p>跨平台,和 VSCode 方案一样,不绑死 ST-Link。</p></li>
+</ul>
+<p>要注意的:</p>
+<ul class="simple">
+<li><p>仍然需要自己装 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code>,并在 CLion 的 Toolchains 里指过去。</p></li>
+<li><p>需要写/改一份 <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> 和 OpenOCD 的 <code class="docutils literal notranslate"><span class="pre">.cfg</span></code>,对没碰过 CMake 的同学有一点门槛。</p></li>
+<li><p>授权:学生可申请免费教育许可（JetBrains 对非商业用途的政策这几年有变化,以官网当前政策为准）。</p></li>
+</ul>
+<p>适合:<strong>代码量大、有队友写复杂逻辑（比如上位机协议解析、状态机）</strong> 的场景。</p>
+</section>
+<hr class="docutils" />
+<section id="stm32cubeide-stm32cubemx">
+<h2>三、STM32CubeIDE + STM32CubeMX<a class="headerlink" href="#stm32cubeide-stm32cubemx" title="链接到此标题。"></a></h2>
+<p>ST 官方的一体化 IDE,基于 Eclipse,<strong>自带 CubeMX</strong>,装完就能用,不需要额外配工具链。</p>
+<p>优点:</p>
+<ul class="simple">
+<li><p>开箱即用,零配置,下载装好就能点灯。</p></li>
+<li><p>免费的、无代码大小限制。</p></li>
+<li><p>官方维护,和 HAL 库版本绑定得最好,不容易出现&quot;库和工具对不上&quot;的怪问题。</p></li>
+<li><p>交叉编译、烧录、调试、CubeMX 配置全在一个软件里,对纯新手最友好。</p></li>
+</ul>
+<p>局限（这是我最在意的一点）:</p>
+<ul class="simple">
+<li><p><strong>调试基本绑死 ST-Link</strong>。虽然理论上可以外接 J-Link（装 Segger 插件）或 CMSIS-DAP,但配置过程比较折腾、体验一般。队里如果用的是便宜的 DAPLink / 其他下载器,或者其他品牌的芯片,这套就不太顺手。</p></li>
+<li><p>Eclipse 系 IDE 界面偏老旧,启动慢、吃内存,代码补全体验不如 CLion / VSCode。</p></li>
+<li><p>工程文件（<code class="docutils literal notranslate"><span class="pre">*.cproject</span></code>、<code class="docutils literal notranslate"><span class="pre">.settings/</span></code>）比较脆弱,<strong>拷给别人或者换电脑时经常要重新导入</strong>。</p></li>
+</ul>
+<p>适合:<strong>第一次接触单片机、只想快点把板子跑起来</strong>的同学。等熟悉了再迁移到 VSCode / CLion。</p>
+</section>
+<hr class="docutils" />
+<section id="keil-mdk5-stm32cubemx">
+<h2>四、Keil MDK5 + STM32CubeMX<a class="headerlink" href="#keil-mdk5-stm32cubemx" title="链接到此标题。"></a></h2>
+<p>经典方案,国内教程最多,实验室和老项目里到处都是。CubeMX 里 Toolchain / IDE 选 <strong>MDK-ARM</strong>。</p>
+<p>优点:</p>
+<ul class="simple">
+<li><p><strong>网上资料最多</strong>,遇到报错几乎都能搜到答案,这一点在比赛通宵的时候价值极高。</p></li>
+<li><p>调试器成熟稳定,逻辑分析仪（Logic Analyzer）、Event Recorder 这些好用的东西是 Keil 的强项。</p></li>
+<li><p>队友/学长大概率会,出问题有人问。</p></li>
+</ul>
+<p>坑（说实话这几年我越来越不推荐它了）:</p>
+<ul class="simple">
+<li><p><strong>对网络有要求</strong>。安装器件支持包（Pack Installer）要联网;授权（License）注册也要联网,换了网卡、重装系统、换电脑都可能要重新处理。比赛现场网络不好的时候很尴尬。</p></li>
+<li><p><strong>未授权版本有 32KB 代码大小限制</strong>。HAL 库本身就挺占地方,稍微用点 FreeRTOS + LVGL 就爆了。</p></li>
+<li><p><strong>只有 Windows</strong>。</p></li>
+<li><p>AC5 / AC6 编译器版本差异会带来一些移植问题,老工程换编译器容易出一堆 warning 甚至 error。</p></li>
+<li><p>编辑器本身比较古老,没有好用的现代补全和重构。</p></li>
+</ul>
+<p>适合:<strong>维护已有 Keil 工程、或者队里有人很熟 Keil</strong> 的情况。新开工程我更建议前面三套。</p>
+<blockquote>
+<div><p>如果你实在要装 Keil:记得用管理员权限、安装路径不要有中文、先装 Keil 再装 Pack、装完立刻备份一份 license 相关的信息。</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="rust">
+<h2>五、关于用 Rust 开发（个人不建议）<a class="headerlink" href="#rust" title="链接到此标题。"></a></h2>
+<p>Rust 写嵌入式确实很香——所有权模型能在编译期掐掉一大类内存 bug,<code class="docutils literal notranslate"><span class="pre">embedded-hal</span></code> 生态这几年也做得很漂亮。probe-rs、RTT、<code class="docutils literal notranslate"><span class="pre">defmt</span></code> 这套工具链就是 Rust 社区做起来的,我们前面用的东西其实都沾了它的光（本站也有 Rust 开发 STM32 的尝鲜记录,感兴趣可以去翻）。</p>
+<p><strong>但我不建议比赛/入门阶段用 Rust,原因是实打实的:</strong></p>
+<ol class="simple">
+<li><p><strong>学习曲线陡。</strong> 生命周期、借用检查、<code class="docutils literal notranslate"><span class="pre">no_std</span></code>、PAC/HAL 分层、<code class="docutils literal notranslate"><span class="pre">.cargo/config.toml</span></code> + <code class="docutils literal notranslate"><span class="pre">memory.x</span></code> + 链接脚本,光把工程跑起来就要啃一堆概念。比赛只有几天,不划算。</p></li>
+<li><p><strong>资料量差一个数量级。</strong> STM32 的 HAL 库教程一搜一大把,Rust 的 <code class="docutils literal notranslate"><span class="pre">stm32f4xx-hal</span></code> 遇到冷门外设基本只能翻 docs.rs 和源码。</p></li>
+<li><p><strong>队友协作成本高。</strong> 队里只要有一个人不会 Rust,整套工具链对他就是黑盒,分工会很难受。</p></li>
+<li><p><strong>芯片支持看运气。</strong> 主流 ST 系列没问题,国产替代（PY32、CH32、AT32 这类）在 probe-rs / Rust HAL 侧的支持参差不齐,而比赛里你完全可能临时换芯片。</p></li>
+</ol>
+<p>我的建议:<strong>先把 C + HAL 这套走通,项目做完、有空了,再拿 Rust 复刻一个小 demo 玩玩。</strong> 那时候你会发现很多概念（寄存器、中断、DMA）已经懂了,学 Rust 只剩下学语言本身,体验会好非常多。</p>
+</section>
+<hr class="docutils" />
+<section id="git">
+<h2>六、强烈建议:学会用 Git 做版本管理<a class="headerlink" href="#git" title="链接到此标题。"></a></h2>
+<p>这条不是可选项。<strong>比赛里最常见的翻车不是写不出代码,而是&quot;刚才还好好的,改了两行就全崩了,还不知道改了哪两行&quot;。</strong></p>
+<p>学会 Git,最直接的收益就是:<strong>改坏了能从云端拉回来。</strong></p>
+<section id="id5">
+<h3>最小可用流程<a class="headerlink" href="#id5" title="链接到此标题。"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>init<span class="w">                        </span><span class="c1"># 或者 git clone &lt;仓库地址&gt;</span>
+git<span class="w"> </span>add<span class="w"> </span>.<span class="w">                       </span><span class="c1"># 把改动放进暂存区</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;增加 PID 参数整定&quot;</span><span class="w">   </span><span class="c1"># 提交,写人话,别写 &quot;update&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w">            </span><span class="c1"># 推到云端</span>
+</pre></div>
+</div>
+<p>改坏了想回退:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status<span class="w">                      </span><span class="c1"># 看看动了哪些文件</span>
+git<span class="w"> </span>diff<span class="w">                        </span><span class="c1"># 看看具体改了什么</span>
+git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>Core/Src/main.c<span class="w"> </span><span class="c1"># 丢掉这个文件的改动</span>
+git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD~1<span class="w">         </span><span class="c1"># 干脆回退到上一次提交(注意:之后就找不回来了)</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w">               </span><span class="c1"># 看历史提交</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>几条实操建议<a class="headerlink" href="#id6" title="链接到此标题。"></a></h3>
+<ol class="simple">
+<li><p><strong>每个阶段性成果都 commit 一次</strong>。一个功能调通了就提交,别攒一天。commit message 写清楚做了什么,未来的你会感谢现在的你。</p></li>
+<li><p><strong>一定要推到云端</strong>（Gitee / GitHub / GitLab,建议开私有仓库）。只在本地 commit,硬盘挂了就全没了。</p></li>
+<li><p><strong>配好 <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code></strong>,别把编译产物传上去,否则仓库几天就几百 MB、clone 慢得要死:</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># 编译产物
+build/
+Debug/
+Release/
+Objects/
+Listings/
+*.o
+*.elf
+*.axf
+*.hex
+*.bin
+*.map
+
+# CubeMX / IDE
+.mxproject
+.settings/
+.cproject
+.project
+*.launch
+.vscode/settings.json
+
+# 系统
+.DS_Store
+Thumbs.db
+</pre></div>
+</div>
+<ol class="simple">
+<li><p><strong>不要提交 CubeMX 的 <code class="docutils literal notranslate"><span class="pre">.ioc</span></code> 之外的中间文件</strong>,但 <code class="docutils literal notranslate"><span class="pre">.ioc</span></code> <strong>必须提交</strong>——它是你的引脚和时钟配置,是最重要的文件之一。</p></li>
+<li><p><strong>多人协作时提前分工好文件</strong>。两个人同时改 <code class="docutils literal notranslate"><span class="pre">main.c</span></code> 必然冲突。CubeMX 生成的文件尽量让一个人改,业务代码分文件写。</p></li>
+<li><p>命令行不习惯就用 GUI:VSCode 左侧源代码管理面板、Git Graph 插件、SourceTree、GitHub Desktop 都行。但 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> / <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> / <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span></code> 这三个命令,还是建议记一下,救命的时候最快。</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h2>参考<a class="headerlink" href="#id7" title="链接到此标题。"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://probe.rs/docs/">probe-rs 官方文档</a> —— 尤其是 Debugger 一节的 <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> 完整字段说明</p></li>
+<li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=probe-rs.probe-rs-debugger">probe-rs VSCode 插件</a></p></li>
+<li><p>B 站 UP 主 <strong>keysking</strong> —— STM32 HAL 库系列教程,讲得清楚,入门强烈推荐</p></li>
+<li><p>本站其他相关文档:</p>
+<ul>
+<li><p>《使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试》</p></li>
+<li><p>《使用 rust 开发 stm32 体验》</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://www.cad.qzz.io">https://www.cad.qzz.io</a> —— 随记文档主页（Readthedoc 镜像:<a class="reference external" href="https://def.qzz.io">https://def.qzz.io</a>）</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="index.html" class="btn btn-neutral float-left" title="南京理工大学嘉立创杯新生电赛" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, infinite-cloisters。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

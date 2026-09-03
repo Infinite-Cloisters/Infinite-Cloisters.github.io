@@ -17,6 +17,7 @@ DOCS Documentation
    doc/label-studio/index
    doc/github/index
    doc/nuedc/index
+   doc/JLC/index
 
 欢迎来到Infinite-Cloisters的随记文档
 

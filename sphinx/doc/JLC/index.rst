@@ -7,6 +7,6 @@
 
 .. toctree::
     guide
-    
+
 .. role:: raw-html(raw)
    :format: html

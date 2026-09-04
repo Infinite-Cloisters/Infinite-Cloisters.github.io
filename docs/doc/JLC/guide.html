@@ -58,16 +58,16 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">开发环境与工具链选择</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">方案速览</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stm32cubemx">零、通用的第一步:STM32CubeMX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vscode-eide-cubemx-probe-rs">一、VSCode + EIDE + CubeMX + probe-rs（推荐）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vscode-eide-cubemx-probe-rs">一、VSCode + EIDE + CubeMX + probe-rs（我个人比较喜欢的）</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id3">1.1 装什么</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cubemx-eide">1.2 CubeMX 生成 + EIDE 导入</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">1.3 编译期最常见的三个坑</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#probe-rs">1.4 用 probe-rs 插件调试（照官方文档来）</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#clion-stm32cubemx">二、CLion + STM32CubeMX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#stm32cubeide-stm32cubemx">三、STM32CubeIDE + STM32CubeMX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#keil-mdk5-stm32cubemx">四、Keil MDK5 + STM32CubeMX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clion-stm32cubemx-st">二、CLion + STM32CubeMX（体验下来ST系列很舒服，但是其他厂家的配置需要一定动手能力）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stm32cubeide-stm32cubemx">三、STM32CubeIDE + STM32CubeMX（懒人必备）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#keil-mdk5-stm32cubemx">四、Keil MDK5 + STM32CubeMX（经典，教程比较多，但页面和路径管理太落后了）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rust">五、关于用 Rust 开发（个人不建议）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#git">六、强烈建议:学会用 Git 做版本管理</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id5">最小可用流程</a></li>
@@ -110,7 +110,7 @@
 <h1>开发环境与工具链选择<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
 <p>这篇写给第一次摸单片机、要在几天内把板子跑起来的同学。内含AI扩写内容，但我看了一下应该没有太大问题。</p>
 <p>先说结论:<strong>工具链不重要,能把代码烧进去、能在线打断点调试、能随时回退代码,才是真的</strong>。</p>
-<p>下面几套方案我都列出来,各有适用场景。如果你拿不定主意,直接照 <strong>方案一（VSCode + EIDE + probe-rs）</strong> 搭,跨平台、免费、不限代码大小、下载器随便换。</p>
+<p>下面几套方案我都列出来,各有适用场景。如果你拿不定主意,直接照 <strong>方案一（VSCode + EIDE + probe-rs）</strong> 搭,跨平台、免费、不限代码大小、下载器随便换，也是电源组那边喜欢用的开放方案。</p>
 <section id="id2">
 <h2>方案速览<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
 <table border="1" class="docutils">
@@ -184,11 +184,11 @@
 <tbody>
 <tr>
 <td>VSCode + EIDE（GCC）</td>
-<td><code>Makefile</code></td>
+<td><code>CMake/Makefile</code></td>
 </tr>
 <tr>
 <td>CLion</td>
-<td><code>CMake</code></td>
+<td><code>STM32CubeIDE</code></td>
 </tr>
 <tr>
 <td>STM32CubeIDE</td>
@@ -206,11 +206,11 @@
 </section>
 <hr class="docutils" />
 <section id="vscode-eide-cubemx-probe-rs">
-<h2>一、VSCode + EIDE + CubeMX + probe-rs（推荐）<a class="headerlink" href="#vscode-eide-cubemx-probe-rs" title="链接到此标题。"></a></h2>
+<h2>一、VSCode + EIDE + CubeMX + probe-rs（我个人比较喜欢的）<a class="headerlink" href="#vscode-eide-cubemx-probe-rs" title="链接到此标题。"></a></h2>
 <p>分工是这样的:</p>
 <ul class="simple">
-<li><p><strong>STM32CubeMX</strong> —— 生成 Makefile 工程（时钟、外设、HAL 初始化）</p></li>
-<li><p><strong>EIDE（Embedded IDE 插件）</strong> —— 工程管理 + 调用 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code> 编译,产出 <code class="docutils literal notranslate"><span class="pre">.elf</span></code></p></li>
+<li><p><strong>STM32CubeMX</strong> —— 生成 CMake/Makefile 工程（时钟、外设、HAL 初始化）</p></li>
+<li><p><strong>EIDE（Embedded IDE 插件）</strong> —— 工程管理 + 调用 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code> 编译,产出 <code class="docutils literal notranslate"><span class="pre">.elf</span></code>,这个需要配一遍各种目录，但其实vscode有cmake相关插件一键编译</p></li>
 <li><p><strong>probe-rs（CLI）+ VSCode probe-rs 插件</strong> —— 烧录 + 在线调试（打断点、看变量、看寄存器）</p></li>
 </ul>
 <section id="id3">
@@ -233,7 +233,7 @@
 </tr>
 <tr>
 <td>插件 <code>Embedded IDE</code>（EIDE）</td>
-<td>国产插件,工程管理和编译都靠它</td>
+<td>小白科研忽略上面一列直接在在里面下载工具链</td>
 </tr>
 <tr>
 <td>插件 <code>C/C++</code></td>
@@ -263,12 +263,12 @@
 <section id="cubemx-eide">
 <h3>1.2 CubeMX 生成 + EIDE 导入<a class="headerlink" href="#cubemx-eide" title="链接到此标题。"></a></h3>
 <ol class="simple">
-<li><p>CubeMX 里 Toolchain / IDE 选 <strong>Makefile</strong>,GENERATE CODE。</p></li>
-<li><p>VSCode 打开工程目录,EIDE 面板 → 导入项目 → Makefile 项目,选中工程目录。</p></li>
+<li><p>CubeMX 里 Toolchain / IDE 选 <strong>CMAKE or Makefile</strong>,GENERATE CODE。</p></li>
+<li><p>VSCode 打开工程目录,EIDE 面板 → 新建项目 → 其他步骤参考网络。</p></li>
 <li><p>EIDE 里确认:工具链路径指向 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code>、芯片型号选对、链接脚本指向 CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">*_FLASH.ld</span></code>。</p></li>
 </ol>
 <blockquote>
-<div><p>如果 EIDE 解析 Makefile 不顺,还有条笨但稳的路:<strong>新建空工程（选对应芯片的 GCC 模板）,然后把 CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">Core/</span></code>、<code class="docutils literal notranslate"><span class="pre">Drivers/</span></code>、<code class="docutils literal notranslate"><span class="pre">Middlewares/</span></code>、启动文件和 <code class="docutils literal notranslate"><span class="pre">.ld</span></code> 拷进去</strong>,再手动补 Include Paths 和宏定义（<code class="docutils literal notranslate"><span class="pre">USE_HAL_DRIVER</span></code>、<code class="docutils literal notranslate"><span class="pre">STM32F407xx</span></code> 这类）。</p>
+<div><p>具体新建项目的其他步骤<strong>新建同名空工程（选对应芯片的 GCC 模板）,然后把 CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">Core/</span></code>、<code class="docutils literal notranslate"><span class="pre">Drivers/</span></code>、<code class="docutils literal notranslate"><span class="pre">Middlewares/</span></code>、启动文件和 <code class="docutils literal notranslate"><span class="pre">.ld</span></code> 链接进去</strong>,再手动补 Include Paths 和宏定义（<code class="docutils literal notranslate"><span class="pre">USE_HAL_DRIVER</span></code>、<code class="docutils literal notranslate"><span class="pre">STM32F407xx</span></code> 这类）。</p>
 </div></blockquote>
 </section>
 <section id="id4">
@@ -277,6 +277,7 @@
 <li><p><strong>FPU 没开</strong>:带硬件浮点的芯片（F4/F7/H7/G4）默认可能是 <code class="docutils literal notranslate"><span class="pre">soft</span></code>,FreeRTOS 的 <code class="docutils literal notranslate"><span class="pre">port.c</span></code> 会报 <code class="docutils literal notranslate"><span class="pre">selected</span> <span class="pre">FPU</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">support</span> <span class="pre">instruction</span></code>。到 Target Options 里把 FPU 改成 <code class="docutils literal notranslate"><span class="pre">fpv4-sp-d16</span></code>（M4）/ <code class="docutils literal notranslate"><span class="pre">fpv5-d16</span></code>（M7）。</p></li>
 <li><p><strong>链接脚本语法错误</strong>:CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">.ld</span></code> 偶尔会出现 <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">AT&gt;</span> <span class="pre">FLASH</span></code> 这类缺参数的写法,手动改成 <code class="docutils literal notranslate"><span class="pre">&gt;RAM</span> <span class="pre">AT&gt;</span> <span class="pre">FLASH</span></code>,<code class="docutils literal notranslate"><span class="pre">_estack</span></code> 写成 <code class="docutils literal notranslate"><span class="pre">ORIGIN(RAM)</span> <span class="pre">+</span> <span class="pre">LENGTH(RAM)</span></code>。</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">undefined</span> <span class="pre">reference</span></code></strong>:源文件没加全,尤其 FreeRTOS 的 <code class="docutils literal notranslate"><span class="pre">portable/GCC/ARM_CMxF</span></code> 目录和 HAL 驱动 <code class="docutils literal notranslate"><span class="pre">Src</span></code> 目录。</p></li>
+<li><p>不要随便动<code class="docutils literal notranslate"><span class="pre">-lto</span></code>,代码关键记得加<code class="docutils literal notranslate"><span class="pre">__IO</span></code>防止优化，合理使用<code class="docutils literal notranslate"><span class="pre">__attribute__和#pragma</span></code>就行函数级别优化，有些时序比较严格的利用这个可以让编译器不优化。</p></li>
 </ol>
 </section>
 <section id="probe-rs">
@@ -392,13 +393,13 @@
 </section>
 </section>
 <hr class="docutils" />
-<section id="clion-stm32cubemx">
-<h2>二、CLion + STM32CubeMX<a class="headerlink" href="#clion-stm32cubemx" title="链接到此标题。"></a></h2>
-<p>CubeMX 里 Toolchain / IDE 选 <strong>CMake</strong>,生成完直接用 CLion 打开目录即可。</p>
+<section id="clion-stm32cubemx-st">
+<h2>二、CLion + STM32CubeMX（体验下来ST系列很舒服，但是其他厂家的配置需要一定动手能力）<a class="headerlink" href="#clion-stm32cubemx-st" title="链接到此标题。"></a></h2>
+<p>CubeMX 里 Toolchain / IDE 选 <strong>STM32CubeIDE</strong>,生成完直接用 CLion 打开目录即可。</p>
 <p>优点:</p>
 <ul class="simple">
 <li><p><strong>代码补全、重构、静态检查是这几套方案里最强的</strong>,写业务逻辑体验最好。</p></li>
-<li><p>内置嵌入式调试支持:配一个 OpenOCD 的 board cfg（或者 ST-LINK server）,点虫子图标就能断点调试。</p></li>
+<li><p>内置嵌入式调试支持:配一个 OpenOCD 的 board cfg（或者 ST-LINK server）,点虫子图标就能断点调试，也可以用其他的比如说probe-rs、pyocd但是配置稍微麻烦，不做介绍自行了解。</p></li>
 <li><p>跨平台,和 VSCode 方案一样,不绑死 ST-Link。</p></li>
 </ul>
 <p>要注意的:</p>
@@ -411,7 +412,7 @@
 </section>
 <hr class="docutils" />
 <section id="stm32cubeide-stm32cubemx">
-<h2>三、STM32CubeIDE + STM32CubeMX<a class="headerlink" href="#stm32cubeide-stm32cubemx" title="链接到此标题。"></a></h2>
+<h2>三、STM32CubeIDE + STM32CubeMX（懒人必备）<a class="headerlink" href="#stm32cubeide-stm32cubemx" title="链接到此标题。"></a></h2>
 <p>ST 官方的一体化 IDE,基于 Eclipse,<strong>自带 CubeMX</strong>,装完就能用,不需要额外配工具链。</p>
 <p>优点:</p>
 <ul class="simple">
@@ -430,7 +431,7 @@
 </section>
 <hr class="docutils" />
 <section id="keil-mdk5-stm32cubemx">
-<h2>四、Keil MDK5 + STM32CubeMX<a class="headerlink" href="#keil-mdk5-stm32cubemx" title="链接到此标题。"></a></h2>
+<h2>四、Keil MDK5 + STM32CubeMX（经典，教程比较多，但页面和路径管理太落后了）<a class="headerlink" href="#keil-mdk5-stm32cubemx" title="链接到此标题。"></a></h2>
 <p>经典方案,国内教程最多,实验室和老项目里到处都是。CubeMX 里 Toolchain / IDE 选 <strong>MDK-ARM</strong>。</p>
 <p>优点:</p>
 <ul class="simple">

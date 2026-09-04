@@ -4,7 +4,7 @@
 
 先说结论:**工具链不重要,能把代码烧进去、能在线打断点调试、能随时回退代码,才是真的**。
 
-下面几套方案我都列出来,各有适用场景。如果你拿不定主意,直接照 **方案一（VSCode + EIDE + probe-rs）** 搭,跨平台、免费、不限代码大小、下载器随便换。
+下面几套方案我都列出来,各有适用场景。如果你拿不定主意,直接照 **方案一（VSCode + EIDE + probe-rs）** 搭,跨平台、免费、不限代码大小、下载器随便换，也是电源组那边喜欢用的开放方案。
 
 ## 方案速览
 
@@ -29,8 +29,8 @@
 
 | 你想走的路 | Project Manager → Toolchain / IDE 选 |
 | --- | --- |
-| VSCode + EIDE（GCC） | `Makefile` |
-| CLion | `CMake` |
+| VSCode + EIDE（GCC） | `CMake/Makefile` |
+| CLion | `STM32CubeIDE` |
 | STM32CubeIDE | `STM32CubeIDE` |
 | Keil | `MDK-ARM` |
 
@@ -39,12 +39,12 @@
 
 ---
 
-## 一、VSCode + EIDE + CubeMX + probe-rs（推荐）
+## 一、VSCode + EIDE + CubeMX + probe-rs（我个人比较喜欢的）
 
 分工是这样的:
 
-- **STM32CubeMX** —— 生成 Makefile 工程（时钟、外设、HAL 初始化）
-- **EIDE（Embedded IDE 插件）** —— 工程管理 + 调用 `arm-none-eabi-gcc` 编译,产出 `.elf`
+- **STM32CubeMX** —— 生成 CMake/Makefile 工程（时钟、外设、HAL 初始化）
+- **EIDE（Embedded IDE 插件）** —— 工程管理 + 调用 `arm-none-eabi-gcc` 编译,产出 `.elf`,这个需要配一遍各种目录，但其实vscode有cmake相关插件一键编译
 - **probe-rs（CLI）+ VSCode probe-rs 插件** —— 烧录 + 在线调试（打断点、看变量、看寄存器）
 
 ### 1.1 装什么
@@ -53,7 +53,7 @@
 | --- | --- |
 | VSCode | 装官方版即可 |
 | ARM GNU Toolchain | `arm-none-eabi-gcc`,装完把 `bin` 目录加进 PATH,`arm-none-eabi-gcc -v` 能出版本就 OK |
-| 插件 `Embedded IDE`（EIDE） | 国产插件,工程管理和编译都靠它 |
+| 插件 `Embedded IDE`（EIDE） | 小白科研忽略上面一列直接在在里面下载工具链 |
 | 插件 `C/C++` | 代码补全、跳转 |
 | 插件 `probe-rs`（ID: `probe-rs.probe-rs-debugger`） | 调试适配器,装完如果它找不到 probe-rs 会提示你装 |
 | probe-rs CLI | 核心工具,见下 |
@@ -76,17 +76,18 @@ probe-rs list                                  # 看看下载器被识别出来�
 
 ### 1.2 CubeMX 生成 + EIDE 导入
 
-1. CubeMX 里 Toolchain / IDE 选 **Makefile**,GENERATE CODE。
-2. VSCode 打开工程目录,EIDE 面板 → 导入项目 → Makefile 项目,选中工程目录。
+1. CubeMX 里 Toolchain / IDE 选 **CMAKE or Makefile**,GENERATE CODE。
+2. VSCode 打开工程目录,EIDE 面板 → 新建项目 → 其他步骤参考网络。
 3. EIDE 里确认:工具链路径指向 `arm-none-eabi-gcc`、芯片型号选对、链接脚本指向 CubeMX 生成的 `*_FLASH.ld`。
 
-> 如果 EIDE 解析 Makefile 不顺,还有条笨但稳的路:**新建空工程（选对应芯片的 GCC 模板）,然后把 CubeMX 生成的 `Core/`、`Drivers/`、`Middlewares/`、启动文件和 `.ld` 拷进去**,再手动补 Include Paths 和宏定义（`USE_HAL_DRIVER`、`STM32F407xx` 这类）。
+> 具体新建项目的其他步骤**新建同名空工程（选对应芯片的 GCC 模板）,然后把 CubeMX 生成的 `Core/`、`Drivers/`、`Middlewares/`、启动文件和 `.ld` 链接进去**,再手动补 Include Paths 和宏定义（`USE_HAL_DRIVER`、`STM32F407xx` 这类）。
 
 ### 1.3 编译期最常见的三个坑
 
 1. **FPU 没开**:带硬件浮点的芯片（F4/F7/H7/G4）默认可能是 `soft`,FreeRTOS 的 `port.c` 会报 `selected FPU does not support instruction`。到 Target Options 里把 FPU 改成 `fpv4-sp-d16`（M4）/ `fpv5-d16`（M7）。
 2. **链接脚本语法错误**:CubeMX 生成的 `.ld` 偶尔会出现 `> AT> FLASH` 这类缺参数的写法,手动改成 `>RAM AT> FLASH`,`_estack` 写成 `ORIGIN(RAM) + LENGTH(RAM)`。
 3. **`undefined reference`**:源文件没加全,尤其 FreeRTOS 的 `portable/GCC/ARM_CMxF` 目录和 HAL 驱动 `Src` 目录。
+4. 不要随便动`-lto`,代码关键记得加`__IO`防止优化，合理使用`__attribute__和#pragma`就行函数级别优化，有些时序比较严格的利用这个可以让编译器不优化。
 
 ### 1.4 用 probe-rs 插件调试（照官方文档来）
 
@@ -168,14 +169,14 @@ probe-rs 的 VSCode 插件走的是微软 DAP 协议,`launch.json` 里 `type` �
 
 ---
 
-## 二、CLion + STM32CubeMX
+## 二、CLion + STM32CubeMX（体验下来ST系列很舒服，但是其他厂家的配置需要一定动手能力）
 
-CubeMX 里 Toolchain / IDE 选 **CMake**,生成完直接用 CLion 打开目录即可。
+CubeMX 里 Toolchain / IDE 选 **STM32CubeIDE**,生成完直接用 CLion 打开目录即可。
 
 优点:
 
 - **代码补全、重构、静态检查是这几套方案里最强的**,写业务逻辑体验最好。
-- 内置嵌入式调试支持:配一个 OpenOCD 的 board cfg（或者 ST-LINK server）,点虫子图标就能断点调试。
+- 内置嵌入式调试支持:配一个 OpenOCD 的 board cfg（或者 ST-LINK server）,点虫子图标就能断点调试，也可以用其他的比如说probe-rs、pyocd但是配置稍微麻烦，不做介绍自行了解。
 - 跨平台,和 VSCode 方案一样,不绑死 ST-Link。
 
 要注意的:
@@ -188,7 +189,7 @@ CubeMX 里 Toolchain / IDE 选 **CMake**,生成完直接用 CLion 打开目录�
 
 ---
 
-## 三、STM32CubeIDE + STM32CubeMX
+## 三、STM32CubeIDE + STM32CubeMX（懒人必备）
 
 ST 官方的一体化 IDE,基于 Eclipse,**自带 CubeMX**,装完就能用,不需要额外配工具链。
 
@@ -209,7 +210,7 @@ ST 官方的一体化 IDE,基于 Eclipse,**自带 CubeMX**,装完就能用,不�
 
 ---
 
-## 四、Keil MDK5 + STM32CubeMX
+## 四、Keil MDK5 + STM32CubeMX（经典，教程比较多，但页面和路径管理太落后了）
 
 经典方案,国内教程最多,实验室和老项目里到处都是。CubeMX 里 Toolchain / IDE 选 **MDK-ARM**。
 

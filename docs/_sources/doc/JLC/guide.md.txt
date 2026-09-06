@@ -30,6 +30,7 @@
 | 你想走的路 | Project Manager → Toolchain / IDE 选 |
 | --- | --- |
 | VSCode + EIDE（GCC） | `CMake/Makefile/MDK-ARM` |
+| VSCode + EIDE（GCC） | `CMake/Makefile/MDK-ARM` |
 | CLion | `STM32CubeIDE` |
 | STM32CubeIDE | `STM32CubeIDE` |
 | Keil | `MDK-ARM` |
@@ -58,6 +59,17 @@
 | probe-rs CLI | **必须** 烧录 + 在线调试（打断点、看变量、看寄存器） |
 
 如果你用`STM32CubeIDE for Visual Studio Code`，请忽略下面内容
+| VSCode | **必须** |
+| STM32CubeMX | **必须** 生成 CMake/Makefile 工程|
+| ARM GNU Toolchain | **可选**  `bin` 目录加进 PATH 环境变量,`arm-none-eabi-gcc -v` 能出版本就 OK |
+| 插件 `Embedded IDE`（EIDE） | **可选** 小白直接在在里面下载一系列工具链 |
+| 插件 `STM32CubeIDE for Visual Studio Code` | **可选** CubeIDE的vscode版本，EIDE和这个二选一 |
+| 插件 `C/C++` | **必须** 代码补全、跳转 |
+| 插件 `CMake Tools` | **可选** 直接使用CMake进行编译 |
+| 插件 `probe-rs` | **必须** 调试适配器,装完如果它找不到 probe-rs 会提示你装，如果用cubeide插件这个就不用了 |
+| probe-rs CLI | **必须** 烧录 + 在线调试（打断点、看变量、看寄存器） |
+
+如果你用`STM32CubeIDE for Visual Studio Code`，请忽略下面内容
 
 装 probe-rs（Windows,PowerShell）:
 
@@ -74,12 +86,16 @@ probe-rs --version
 ```
 
 ### 1.2 CubeMX 生成 + EIDE 手 动 导入
+### 1.2 CubeMX 生成 + EIDE 手 动 导入
 
 1. CubeMX 里 Toolchain / IDE 选 **CMAKE or Makefile**,GENERATE CODE。
+2. VSCode 打开工程目录,EIDE 面板 → 新建项目 → 其他步骤参考下文。 如果是`MDK-ARM`就直接导入。
 2. VSCode 打开工程目录,EIDE 面板 → 新建项目 → 其他步骤参考下文。 如果是`MDK-ARM`就直接导入。
 3. EIDE 里确认:工具链路径指向 `arm-none-eabi-gcc`、芯片型号选对、链接脚本指向 CubeMX 生成的 `*_FLASH.ld`。
 
 > 具体新建项目的其他步骤**新建同名空工程（选对应芯片的 GCC 模板）,然后把 CubeMX 生成的 `Core/`、`Drivers/`、`Middlewares/`、启动文件和 `.ld` 链接进去**,再手动补 Include Paths 和宏定义（`USE_HAL_DRIVER`、`STM32F407xx` 这类）。
+
+这种方案虽然没有CMake配合插件直接编译方便，但胜在简单、通用性好。
 
 这种方案虽然没有CMake配合插件直接编译方便，但胜在简单、通用性好。
 
@@ -95,6 +111,8 @@ probe-rs --version
 probe-rs 的 VSCode 插件走的是微软 DAP 协议,`launch.json` 里 `type` 固定写 `probe-rs-debug`。
 
 **关键点:它不挑语言。** 只要你有带符号的 `.elf` 和芯片名,C 工程、C++ 工程、汇编工程都能调,不是 Rust 专属。
+
+此外，这个东西是基于rust的，理论上直接写好`.cargo`内的配置文件，就可以直接使用预设命令一键下载。
 
 此外，这个东西是基于rust的，理论上直接写好`.cargo`内的配置文件，就可以直接使用预设命令一键下载。
 
@@ -186,11 +204,13 @@ CubeMX 里 Toolchain / IDE 选 **STM32CubeIDE**,生成完直接用 CLion 打开�
 
 - 仍然需要自己装 `arm-none-eabi-gcc`,并在 CLion 的 Toolchains 里指过去。
 - 学生可申请免费教育许可
+- 学生可申请免费教育许可
 
 适合:**代码量大、有队友写复杂逻辑（比如上位机协议解析、状态机）** 的场景。
 
 ---
 
+## 三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）
 ## 三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）
 
 ST 官方的一体化 IDE,基于 Eclipse,**自带 CubeMX**,装完就能用,不需要额外配工具链。
@@ -205,8 +225,10 @@ ST 官方的一体化 IDE,基于 Eclipse,**自带 CubeMX**,装完就能用,不�
 局限（这是我最在意的一点）:
 
 - **调试绑死 ST-Link**。虽然理论上可以外接 J-Link（装 Segger 插件）或 CMSIS-DAP,但配置过程比较折腾。
+- **调试绑死 ST-Link**。虽然理论上可以外接 J-Link（装 Segger 插件）或 CMSIS-DAP,但配置过程比较折腾。
 - Eclipse 系 IDE 界面偏老旧,启动慢、吃内存,代码补全体验不如 CLion / VSCode。
 
+个人建议直接使用 VSCode / CLion。
 个人建议直接使用 VSCode / CLion。
 
 ---

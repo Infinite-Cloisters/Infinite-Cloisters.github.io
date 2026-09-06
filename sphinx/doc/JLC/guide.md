@@ -29,7 +29,7 @@
 
 | 你想走的路 | Project Manager → Toolchain / IDE 选 |
 | --- | --- |
-| VSCode + EIDE（GCC） | `CMake/Makefile` |
+| VSCode + EIDE（GCC） | `CMake/Makefile/MDK-ARM` |
 | CLion | `STM32CubeIDE` |
 | STM32CubeIDE | `STM32CubeIDE` |
 | Keil | `MDK-ARM` |
@@ -39,24 +39,25 @@
 
 ---
 
-## 一、VSCode + EIDE + CubeMX + probe-rs（我个人比较喜欢的）
+## 一、VSCode + EIDE + STM32CubeMX + Probe-rs（我个人比较喜欢的）
 
-分工是这样的:
+如果你打算直接使用CMake完成编译，请参考["VSCode使用CMake编译STM32"](https://blog.csdn.net/qq_42839452/article/details/153870471)，这个其实就是另外一个方案中CLion帮你干的活，选择使用VSCode单纯是为了轻量（CLion软件相对较重）。
 
-- **STM32CubeMX** —— 生成 CMake/Makefile 工程（时钟、外设、HAL 初始化）
-- **EIDE（Embedded IDE 插件）** —— 工程管理 + 调用 `arm-none-eabi-gcc` 编译,产出 `.elf`,这个需要配一遍各种目录，但其实vscode有cmake相关插件一键编译
-- **probe-rs（CLI）+ VSCode probe-rs 插件** —— 烧录 + 在线调试（打断点、看变量、看寄存器）
-
-### 1.1 装什么
+### 1.1 可能需要的软件或插件
 
 | 组件 | 说明 |
 | --- | --- |
-| VSCode | 装官方版即可 |
-| ARM GNU Toolchain | `arm-none-eabi-gcc`,装完把 `bin` 目录加进 PATH,`arm-none-eabi-gcc -v` 能出版本就 OK |
-| 插件 `Embedded IDE`（EIDE） | 小白科研忽略上面一列直接在在里面下载工具链 |
-| 插件 `C/C++` | 代码补全、跳转 |
-| 插件 `probe-rs`（ID: `probe-rs.probe-rs-debugger`） | 调试适配器,装完如果它找不到 probe-rs 会提示你装 |
-| probe-rs CLI | 核心工具,见下 |
+| VSCode | **必须** |
+| STM32CubeMX | **必须** 生成 CMake/Makefile 工程|
+| ARM GNU Toolchain | **可选**  `bin` 目录加进 PATH 环境变量,`arm-none-eabi-gcc -v` 能出版本就 OK |
+| 插件 `Embedded IDE`（EIDE） | **可选** 小白直接在在里面下载一系列工具链 |
+| 插件 `STM32CubeIDE for Visual Studio Code` | **可选** CubeIDE的vscode版本，EIDE和这个二选一 |
+| 插件 `C/C++` | **必须** 代码补全、跳转 |
+| 插件 `CMake Tools` | **可选** 直接使用CMake进行编译 |
+| 插件 `probe-rs` | **必须** 调试适配器,装完如果它找不到 probe-rs 会提示你装，如果用cubeide插件这个就不用了 |
+| probe-rs CLI | **必须** 烧录 + 在线调试（打断点、看变量、看寄存器） |
+
+如果你用`STM32CubeIDE for Visual Studio Code`，请忽略下面内容
 
 装 probe-rs（Windows,PowerShell）:
 
@@ -70,17 +71,17 @@ Linux / macOS 可以用 `cargo install probe-rs-tools`,或者直接去 GitHub Re
 
 ```powershell
 probe-rs --version
-probe-rs chip list | Select-String STM32      # 查你的芯片在 probe-rs 里叫什么名字
-probe-rs list                                  # 看看下载器被识别出来没有
 ```
 
-### 1.2 CubeMX 生成 + EIDE 导入
+### 1.2 CubeMX 生成 + EIDE 手 动 导入
 
 1. CubeMX 里 Toolchain / IDE 选 **CMAKE or Makefile**,GENERATE CODE。
-2. VSCode 打开工程目录,EIDE 面板 → 新建项目 → 其他步骤参考网络。
+2. VSCode 打开工程目录,EIDE 面板 → 新建项目 → 其他步骤参考下文。 如果是`MDK-ARM`就直接导入。
 3. EIDE 里确认:工具链路径指向 `arm-none-eabi-gcc`、芯片型号选对、链接脚本指向 CubeMX 生成的 `*_FLASH.ld`。
 
 > 具体新建项目的其他步骤**新建同名空工程（选对应芯片的 GCC 模板）,然后把 CubeMX 生成的 `Core/`、`Drivers/`、`Middlewares/`、启动文件和 `.ld` 链接进去**,再手动补 Include Paths 和宏定义（`USE_HAL_DRIVER`、`STM32F407xx` 这类）。
+
+这种方案虽然没有CMake配合插件直接编译方便，但胜在简单、通用性好。
 
 ### 1.3 编译期最常见的三个坑
 
@@ -94,6 +95,8 @@ probe-rs list                                  # 看看下载器被识别出来�
 probe-rs 的 VSCode 插件走的是微软 DAP 协议,`launch.json` 里 `type` 固定写 `probe-rs-debug`。
 
 **关键点:它不挑语言。** 只要你有带符号的 `.elf` 和芯片名,C 工程、C++ 工程、汇编工程都能调,不是 Rust 专属。
+
+此外，这个东西是基于rust的，理论上直接写好`.cargo`内的配置文件，就可以直接使用预设命令一键下载。
 
 最小可用配置（改三处就能跑:芯片名、elf 路径、svd 路径）:
 
@@ -182,14 +185,13 @@ CubeMX 里 Toolchain / IDE 选 **STM32CubeIDE**,生成完直接用 CLion 打开�
 要注意的:
 
 - 仍然需要自己装 `arm-none-eabi-gcc`,并在 CLion 的 Toolchains 里指过去。
-- 需要写/改一份 `CMakeLists.txt` 和 OpenOCD 的 `.cfg`,对没碰过 CMake 的同学有一点门槛。
-- 授权:学生可申请免费教育许可（JetBrains 对非商业用途的政策这几年有变化,以官网当前政策为准）。
+- 学生可申请免费教育许可
 
 适合:**代码量大、有队友写复杂逻辑（比如上位机协议解析、状态机）** 的场景。
 
 ---
 
-## 三、STM32CubeIDE + STM32CubeMX（懒人必备）
+## 三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）
 
 ST 官方的一体化 IDE,基于 Eclipse,**自带 CubeMX**,装完就能用,不需要额外配工具链。
 
@@ -202,11 +204,10 @@ ST 官方的一体化 IDE,基于 Eclipse,**自带 CubeMX**,装完就能用,不�
 
 局限（这是我最在意的一点）:
 
-- **调试基本绑死 ST-Link**。虽然理论上可以外接 J-Link（装 Segger 插件）或 CMSIS-DAP,但配置过程比较折腾、体验一般。队里如果用的是便宜的 DAPLink / 其他下载器,或者其他品牌的芯片,这套就不太顺手。
+- **调试绑死 ST-Link**。虽然理论上可以外接 J-Link（装 Segger 插件）或 CMSIS-DAP,但配置过程比较折腾。
 - Eclipse 系 IDE 界面偏老旧,启动慢、吃内存,代码补全体验不如 CLion / VSCode。
-- 工程文件（`*.cproject`、`.settings/`）比较脆弱,**拷给别人或者换电脑时经常要重新导入**。
 
-适合:**第一次接触单片机、只想快点把板子跑起来**的同学。等熟悉了再迁移到 VSCode / CLion。
+个人建议直接使用 VSCode / CLion。
 
 ---
 

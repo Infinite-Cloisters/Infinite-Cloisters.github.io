@@ -58,15 +58,15 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">开发环境与工具链选择</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">方案速览</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stm32cubemx">零、通用的第一步:STM32CubeMX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vscode-eide-cubemx-probe-rs">一、VSCode + EIDE + CubeMX + probe-rs（我个人比较喜欢的）</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">1.1 装什么</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cubemx-eide">1.2 CubeMX 生成 + EIDE 导入</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vscode-eide-stm32cubemx-probe-rs">一、VSCode + EIDE + STM32CubeMX + Probe-rs（我个人比较喜欢的）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">1.1 可能需要的软件或插件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cubemx-eide">1.2 CubeMX 生成 + EIDE 手 动 导入</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">1.3 编译期最常见的三个坑</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#probe-rs">1.4 用 probe-rs 插件调试（照官方文档来）</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#clion-stm32cubemx-st">二、CLion + STM32CubeMX（体验下来ST系列很舒服，但是其他厂家的配置需要一定动手能力）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#stm32cubeide-stm32cubemx">三、STM32CubeIDE + STM32CubeMX（懒人必备）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stm32cubeide-stm32cubemx-clion">三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#keil-mdk5-stm32cubemx">四、Keil MDK5 + STM32CubeMX（经典，教程比较多，但页面和路径管理太落后了）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rust">五、关于用 Rust 开发（个人不建议）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#git">六、强烈建议:学会用 Git 做版本管理</a><ul>
@@ -184,7 +184,7 @@
 <tbody>
 <tr>
 <td>VSCode + EIDE（GCC）</td>
-<td><code>CMake/Makefile</code></td>
+<td><code>CMake/Makefile/MDK-ARM</code></td>
 </tr>
 <tr>
 <td>CLion</td>
@@ -205,16 +205,11 @@
 </ol>
 </section>
 <hr class="docutils" />
-<section id="vscode-eide-cubemx-probe-rs">
-<h2>一、VSCode + EIDE + CubeMX + probe-rs（我个人比较喜欢的）<a class="headerlink" href="#vscode-eide-cubemx-probe-rs" title="链接到此标题。"></a></h2>
-<p>分工是这样的:</p>
-<ul class="simple">
-<li><p><strong>STM32CubeMX</strong> —— 生成 CMake/Makefile 工程（时钟、外设、HAL 初始化）</p></li>
-<li><p><strong>EIDE（Embedded IDE 插件）</strong> —— 工程管理 + 调用 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code> 编译,产出 <code class="docutils literal notranslate"><span class="pre">.elf</span></code>,这个需要配一遍各种目录，但其实vscode有cmake相关插件一键编译</p></li>
-<li><p><strong>probe-rs（CLI）+ VSCode probe-rs 插件</strong> —— 烧录 + 在线调试（打断点、看变量、看寄存器）</p></li>
-</ul>
+<section id="vscode-eide-stm32cubemx-probe-rs">
+<h2>一、VSCode + EIDE + STM32CubeMX + Probe-rs（我个人比较喜欢的）<a class="headerlink" href="#vscode-eide-stm32cubemx-probe-rs" title="链接到此标题。"></a></h2>
+<p>如果你打算直接使用CMake完成编译，请参考<a class="reference external" href="https://blog.csdn.net/qq_42839452/article/details/153870471">&quot;VSCode使用CMake编译STM32&quot;</a>，这个其实就是另外一个方案中CLion帮你干的活，选择使用VSCode单纯是为了轻量（CLion软件相对较重）。</p>
 <section id="id3">
-<h3>1.1 装什么<a class="headerlink" href="#id3" title="链接到此标题。"></a></h3>
+<h3>1.1 可能需要的软件或插件<a class="headerlink" href="#id3" title="链接到此标题。"></a></h3>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -225,51 +220,63 @@
 <tbody>
 <tr>
 <td>VSCode</td>
-<td>装官方版即可</td>
+<td><strong>必须</strong></td>
+</tr>
+<tr>
+<td>STM32CubeMX</td>
+<td><strong>必须</strong> 生成 CMake/Makefile 工程</td>
 </tr>
 <tr>
 <td>ARM GNU Toolchain</td>
-<td><code>arm-none-eabi-gcc</code>,装完把 <code>bin</code> 目录加进 PATH,<code>arm-none-eabi-gcc -v</code> 能出版本就 OK</td>
+<td><strong>可选</strong>  <code>bin</code> 目录加进 PATH 环境变量,<code>arm-none-eabi-gcc -v</code> 能出版本就 OK</td>
 </tr>
 <tr>
 <td>插件 <code>Embedded IDE</code>（EIDE）</td>
-<td>小白科研忽略上面一列直接在在里面下载工具链</td>
+<td><strong>可选</strong> 小白直接在在里面下载一系列工具链</td>
+</tr>
+<tr>
+<td>插件 <code>STM32CubeIDE for Visual Studio Code</code></td>
+<td><strong>可选</strong> CubeIDE的vscode版本，EIDE和这个二选一</td>
 </tr>
 <tr>
 <td>插件 <code>C/C++</code></td>
-<td>代码补全、跳转</td>
+<td><strong>必须</strong> 代码补全、跳转</td>
 </tr>
 <tr>
-<td>插件 <code>probe-rs</code>（ID: <code>probe-rs.probe-rs-debugger</code>）</td>
-<td>调试适配器,装完如果它找不到 probe-rs 会提示你装</td>
+<td>插件 <code>CMake Tools</code></td>
+<td><strong>可选</strong> 直接使用CMake进行编译</td>
+</tr>
+<tr>
+<td>插件 <code>probe-rs</code></td>
+<td><strong>必须</strong> 调试适配器,装完如果它找不到 probe-rs 会提示你装，如果用cubeide插件这个就不用了</td>
 </tr>
 <tr>
 <td>probe-rs CLI</td>
-<td>核心工具,见下</td>
+<td><strong>必须</strong> 烧录 + 在线调试（打断点、看变量、看寄存器）</td>
 </tr>
 </tbody>
-</table><p>装 probe-rs（Windows,PowerShell）:</p>
+</table><p>如果你用<code class="docutils literal notranslate"><span class="pre">STM32CubeIDE</span> <span class="pre">for</span> <span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">Code</span></code>，请忽略下面内容</p>
+<p>装 probe-rs（Windows,PowerShell）:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">irm </span><span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">releases</span><span class="p">/</span><span class="n">latest</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">probe-rs-tools-installer</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
 </pre></div>
 </div>
 <p>Linux / macOS 可以用 <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">install</span> <span class="pre">probe-rs-tools</span></code>,或者直接去 GitHub Releases 下载。</p>
 <p>装完验证:</p>
 <div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">probe-rs</span> <span class="p">-</span><span class="n">-version</span>
-<span class="n">probe-rs</span> <span class="n">chip</span> <span class="n">list</span> <span class="p">|</span> <span class="nb">Select-String</span> <span class="n">STM32</span>      <span class="c"># 查你的芯片在 probe-rs 里叫什么名字</span>
-<span class="n">probe-rs</span> <span class="n">list</span>                                  <span class="c"># 看看下载器被识别出来没有</span>
 </pre></div>
 </div>
 </section>
 <section id="cubemx-eide">
-<h3>1.2 CubeMX 生成 + EIDE 导入<a class="headerlink" href="#cubemx-eide" title="链接到此标题。"></a></h3>
+<h3>1.2 CubeMX 生成 + EIDE 手 动 导入<a class="headerlink" href="#cubemx-eide" title="链接到此标题。"></a></h3>
 <ol class="simple">
 <li><p>CubeMX 里 Toolchain / IDE 选 <strong>CMAKE or Makefile</strong>,GENERATE CODE。</p></li>
-<li><p>VSCode 打开工程目录,EIDE 面板 → 新建项目 → 其他步骤参考网络。</p></li>
+<li><p>VSCode 打开工程目录,EIDE 面板 → 新建项目 → 其他步骤参考下文。 如果是<code class="docutils literal notranslate"><span class="pre">MDK-ARM</span></code>就直接导入。</p></li>
 <li><p>EIDE 里确认:工具链路径指向 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code>、芯片型号选对、链接脚本指向 CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">*_FLASH.ld</span></code>。</p></li>
 </ol>
 <blockquote>
 <div><p>具体新建项目的其他步骤<strong>新建同名空工程（选对应芯片的 GCC 模板）,然后把 CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">Core/</span></code>、<code class="docutils literal notranslate"><span class="pre">Drivers/</span></code>、<code class="docutils literal notranslate"><span class="pre">Middlewares/</span></code>、启动文件和 <code class="docutils literal notranslate"><span class="pre">.ld</span></code> 链接进去</strong>,再手动补 Include Paths 和宏定义（<code class="docutils literal notranslate"><span class="pre">USE_HAL_DRIVER</span></code>、<code class="docutils literal notranslate"><span class="pre">STM32F407xx</span></code> 这类）。</p>
 </div></blockquote>
+<p>这种方案虽然没有CMake配合插件直接编译方便，但胜在简单、通用性好。</p>
 </section>
 <section id="id4">
 <h3>1.3 编译期最常见的三个坑<a class="headerlink" href="#id4" title="链接到此标题。"></a></h3>
@@ -284,6 +291,7 @@
 <h3>1.4 用 probe-rs 插件调试（照官方文档来）<a class="headerlink" href="#probe-rs" title="链接到此标题。"></a></h3>
 <p>probe-rs 的 VSCode 插件走的是微软 DAP 协议,<code class="docutils literal notranslate"><span class="pre">launch.json</span></code> 里 <code class="docutils literal notranslate"><span class="pre">type</span></code> 固定写 <code class="docutils literal notranslate"><span class="pre">probe-rs-debug</span></code>。</p>
 <p><strong>关键点:它不挑语言。</strong> 只要你有带符号的 <code class="docutils literal notranslate"><span class="pre">.elf</span></code> 和芯片名,C 工程、C++ 工程、汇编工程都能调,不是 Rust 专属。</p>
+<p>此外，这个东西是基于rust的，理论上直接写好<code class="docutils literal notranslate"><span class="pre">.cargo</span></code>内的配置文件，就可以直接使用预设命令一键下载。</p>
 <p>最小可用配置（改三处就能跑:芯片名、elf 路径、svd 路径）:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
@@ -405,14 +413,13 @@
 <p>要注意的:</p>
 <ul class="simple">
 <li><p>仍然需要自己装 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code>,并在 CLion 的 Toolchains 里指过去。</p></li>
-<li><p>需要写/改一份 <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> 和 OpenOCD 的 <code class="docutils literal notranslate"><span class="pre">.cfg</span></code>,对没碰过 CMake 的同学有一点门槛。</p></li>
-<li><p>授权:学生可申请免费教育许可（JetBrains 对非商业用途的政策这几年有变化,以官网当前政策为准）。</p></li>
+<li><p>学生可申请免费教育许可</p></li>
 </ul>
 <p>适合:<strong>代码量大、有队友写复杂逻辑（比如上位机协议解析、状态机）</strong> 的场景。</p>
 </section>
 <hr class="docutils" />
-<section id="stm32cubeide-stm32cubemx">
-<h2>三、STM32CubeIDE + STM32CubeMX（懒人必备）<a class="headerlink" href="#stm32cubeide-stm32cubemx" title="链接到此标题。"></a></h2>
+<section id="stm32cubeide-stm32cubemx-clion">
+<h2>三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）<a class="headerlink" href="#stm32cubeide-stm32cubemx-clion" title="链接到此标题。"></a></h2>
 <p>ST 官方的一体化 IDE,基于 Eclipse,<strong>自带 CubeMX</strong>,装完就能用,不需要额外配工具链。</p>
 <p>优点:</p>
 <ul class="simple">
@@ -423,11 +430,10 @@
 </ul>
 <p>局限（这是我最在意的一点）:</p>
 <ul class="simple">
-<li><p><strong>调试基本绑死 ST-Link</strong>。虽然理论上可以外接 J-Link（装 Segger 插件）或 CMSIS-DAP,但配置过程比较折腾、体验一般。队里如果用的是便宜的 DAPLink / 其他下载器,或者其他品牌的芯片,这套就不太顺手。</p></li>
+<li><p><strong>调试绑死 ST-Link</strong>。虽然理论上可以外接 J-Link（装 Segger 插件）或 CMSIS-DAP,但配置过程比较折腾。</p></li>
 <li><p>Eclipse 系 IDE 界面偏老旧,启动慢、吃内存,代码补全体验不如 CLion / VSCode。</p></li>
-<li><p>工程文件（<code class="docutils literal notranslate"><span class="pre">*.cproject</span></code>、<code class="docutils literal notranslate"><span class="pre">.settings/</span></code>）比较脆弱,<strong>拷给别人或者换电脑时经常要重新导入</strong>。</p></li>
 </ul>
-<p>适合:<strong>第一次接触单片机、只想快点把板子跑起来</strong>的同学。等熟悉了再迁移到 VSCode / CLion。</p>
+<p>个人建议直接使用 VSCode / CLion。</p>
 </section>
 <hr class="docutils" />
 <section id="keil-mdk5-stm32cubemx">

@@ -16,6 +16,8 @@
 - 实验课 03：绘图（选学，TikZ 与 pgfplots）
 
 .. toctree::
+    :maxdepth: 1
+
     prepare
     lab1
     lab2

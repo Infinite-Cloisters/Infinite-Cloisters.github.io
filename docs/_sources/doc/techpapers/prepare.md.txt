@@ -62,6 +62,50 @@ MiKTeX 仅提供 Windows 和 macOS 的独立安装包，在 Linux 下的安装�
 mpm --set-repository=https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/win32/miktex/tm/packages/
 ```
 
+## 安装失败排查
+
+安装器中途报错退出、下载或解压阶段卡死、装完之后 `xelatex` 在某个终端里莫名其妙找不到——这类问题多数不是 TeX Live 本身的问题，而是下面两类环境因素。它们同样是 `install-latex-guide-zh-cn.pdf` 里已经指出过的：**中文用户名**，以及**终端环境被其他工具链污染**。
+
+### 1. 系统用中文作为用户名
+
+Windows 用户名是中文时，安装器在处理临时文件路径时可能因路径含非 ASCII 字符而出错，典型表现是安装进行到一半突然失败。指南给出的办法是给安装过程单独指定一个纯英文的临时目录：
+
+```
+mkdir C:\temp
+set TEMP=C:\temp
+set TMP=C:\temp
+```
+
+这三条要在同一个命令行窗口里依次执行，然后**在该窗口内**运行 `install-tl.bat`，让安装器继承改过的环境变量。换个窗口再运行就不生效了。
+
+### 2. 终端环境被 mingw / jdk / conda / msys 污染
+
+安装前先看一眼当前的 `PATH`：
+
+```
+echo %path:;=&echo.%
+```
+
+一是确认其中包含 `C:\Windows\system32`；二是检查有没有混进 mingw、jdk、Cygwin 相关的内容。指南的建议是：**安装期间把这些条目暂时删除**，等 TeX Live 装完之后再重新加回去，并且放到 TeX Live 自己的路径之后。
+
+原因不难理解：conda、MSYS2、mingw、JDK 这类工具都会把自己的一整套运行时目录插到 `PATH` 的最前面。安装器和 `tlmgr` 在调用外部程序、加载 dll 时，可能优先命中这些目录里的同名文件，于是安装过程失败，或者出现「在某个终端里能用、换个终端就报错」这种看起来很玄学的结果。
+
+指南里还顺带提到两个容易被忽略的干扰源：**2345 好压**一类压缩软件可能影响安装，建议先卸载、装完 TeX Live 后换用其他同类软件；以及**不要安装第三方安全软件**，它会拦截安装器的写入操作。
+
+> **备注**
+>
+> 上面两条（中文用户名、环境变量冲突）的处理办法出自 `install-latex-guide-zh-cn.pdf` 的第 1.1 节与第 1.1.3 节，此处只是转述要点，完整上下文与后续步骤请以原文为准。
+
+### 3. conda / MSYS：直接在自己的终端里安装
+
+如果 conda 或 MSYS2 是你的日常主力环境，把它们的路径从 `PATH` 里删掉并不现实。这时可以换个思路：不跟它们抢 `PATH`，而是在它们各自的终端环境内部安装 TeX Live，从根上避开冲突。
+
+例如在conda终端中:
+
+```powershell
+(Base) C:\Users\28035> <path>/install-tl.bat
+```
+
 ## 什么时候会用到它
 
 编译时若报 `File 'xxx.sty' not found`，说明本地缺这个宏包，先 `tlmgr install xxx` 补装；如果下载卡住或超时，多半是镜像源没换，回到上面第一步。

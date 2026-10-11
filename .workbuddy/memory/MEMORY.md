@@ -7,7 +7,7 @@
 
 - 源码在 `sphinx/`，构建产物在 `docs/`（GitHub Pages 直接吃 `docs/`）。
 - 构建链：`make -C sphinx html` → `cp -r sphinx/_build/html/* ./docs/` → `python strip_query_strings.py ./docs`
-  - **最后一步必须跑**：`strip_query_strings.py` 去掉 Sphinx 生成的 `?v=<hash>` 缓存串，否则 GitHub Pages 上 CSS/JS 404。校验：`grep -rlo "?v=[0-9a-f]" docs --include=*.html | wc -l` 应为 0。
+  - **最后一步必须跑**：`strip_query_strings.py` 去掉 Sphinx 生成的 `?v=<hash>` 缓存串，否则 GitHub Pages 上 CSS/JS 404。校验：`grep -rlo "?v=[0-9a-f]" docs --include=*.html | wc -l` 应为 0。**这一步必须真跑**——曾出现过脚本报告 `30/30 modified` 但改动没落盘、查询串仍在的情况，重跑一次即正常；凡是脚本自称改了多少个文件，都以 grep 计数为准。
   - `build.sh` / `build.ps1` 里的 `make clean` 与 `rm -rf ./docs/*` 会触发沙箱批量删除拦截，**不要照跑**；直接增量 `make html` + `cp -r` 覆盖即可。
   - 还需保证 `docs/.nojekyll` 与 `docs/CNAME` 存在。
 - `conf.py`：`extensions = ['recommonmark','sphinx_markdown_tables','sphinx_copybutton']`，`source_suffix = {'.rst':'restructuredtext', '.md':'markdown'}`，主题 `sphinx_rtd_theme`，`language='zh_CN'`，`html_static_path=['_static']`。
@@ -22,6 +22,16 @@
 4. **Markdown 表格必须顶格**、前后留空行——缩进在列表项里 recommonmark 不解析，会退化成普通段落。
 5. **CJK 标题下划线**：docutils 按双宽计字符，N 个汉字需要 ≥2N 个 `=`。
 6. **`.. toctree::` 必须放在第一个章节标题之前**。RST directive 归属于「最近一个在它之前的章节标题」，插了新章节在 toctree 前面会让整棵目录树被吞进那一节，侧栏层级全错。
+7. **`.. toctree::` 的选项块与条目之间必须有空行**：
+   ```rst
+   .. toctree::
+       :maxdepth: 1
+
+       prepare
+       lab1
+   ```
+   少了那个空行，docutils 会把 `prepare`/`lab1` 当成选项去解析，报 `ERROR: Error in "toctree" directive: invalid option block.`，并且**整棵 toctree 被静默丢弃** → 该目录下所有文档报 `WARNING: document isn't included in any toctree`，侧栏只剩文档标题、层级全平。排查口诀：只要看到 `toc.not_included`，先查 toctree 选项块后的空行。
+8. **验证 toctree 是否真的生效**：`make -C sphinx html` 后 grep `invalid option block` 应为空；再检查产物里 `<h2>`/`<section>` 的兄弟关系，**不要**用「toctree 是否在第一个 `<section>` 之前」判断——文档标题本身就会生成一层 `<section>`。
 
 ## 文档写作约定（用户明确要求）
 

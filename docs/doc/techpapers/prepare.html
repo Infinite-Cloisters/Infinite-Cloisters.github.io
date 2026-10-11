@@ -1,0 +1,190 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>环境准备：宏包与文档从哪里来 &mdash; Documentation 0.1.9 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+
+  
+      <script src="../../_static/jquery.js"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script src="../../_static/documentation_options.js"></script>
+      <script src="../../_static/doctools.js"></script>
+      <script src="../../_static/sphinx_highlight.js"></script>
+      <script src="../../_static/clipboard.min.js"></script>
+      <script src="../../_static/copybutton.js"></script>
+      <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="实验课 01：公式、表格、图等" href="lab1.html" />
+    <link rel="prev" title="西北工业大学科技论文写作" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">西北工业大学科技论文写作</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">环境准备：宏包与文档从哪里来</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">安装方法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-tl-zip">1. 下载并解压缩 install-tl.zip</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">2. 运行安装器</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">切换镜像</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miktex">MiKTeX</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">什么时候会用到它</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lab1.html">实验课 01：公式、表格、图等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab2.html">实验课 02：列表、算法、颜色等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab3.html">实验课 03：绘图（选学）</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">西北工业大学科技论文写作</a></li>
+      <li class="breadcrumb-item active">环境准备：宏包与文档从哪里来</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/techpapers/prepare.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>环境准备：宏包与文档从哪里来<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
+<p>CTAN（The Comprehensive TeX Archive Network）是几乎所有 TeX 排版系统相关材料的汇集地，编译引擎、宏包、字体的源代码与说明文档都在上面。绝大多数 LaTeX 宏包会先上传到 CTAN 核心站点，再同步到全球各镜像——也就是说，你缺的宏包、想查的宏包手册，基本都能在这里找到。</p>
+<p>CTAN 主站在国外，国内直连下载很慢。建议把 TeX 发行版的下载源换成清华 TUNA 镜像，配置方法见清华镜像站的帮助页：</p>
+<p><a class="reference external" href="https://mirrors.tuna.tsinghua.edu.cn/help/CTAN/">CTAN 镜像使用帮助 · 清华大学开源软件镜像站</a></p>
+<p>这一页值得完整读一遍。下面按原页面的结构把要点整理一份，方便对照查阅。</p>
+<blockquote>
+<div><p><strong>备注</strong></p>
+<p>本节内容整理自清华大学开源软件镜像站的 CTAN 帮助页，实际命令与下载地址请以原页面为准。</p>
+</div></blockquote>
+<section id="id2">
+<h2>安装方法<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<p>TeX Live 发行版的常见安装方法可以参考下面这份中文文档：</p>
+<p><a class="reference external" href="https://mirrors.tuna.tsinghua.edu.cn/CTAN/info/install-latex-guide-zh-cn/install-latex-guide-zh-cn.pdf">install-latex-guide-zh-cn.pdf</a></p>
+<p>除每年更新的完整版 ISO 镜像以外，CTAN 镜像中也包含<strong>在线安装器</strong>。这种方法可以使安装的所有宏包均为最新版本，但受网络连接状况影响较大。操作方法为（很可能需要管理员权限）。</p>
+<section id="install-tl-zip">
+<h3>1. 下载并解压缩 install-tl.zip<a class="headerlink" href="#install-tl-zip" title="链接到此标题。"></a></h3>
+<p>下载地址：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span><span class="o">/</span><span class="n">install</span><span class="o">-</span><span class="n">tl</span><span class="o">.</span><span class="n">zip</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>2. 运行安装器<a class="headerlink" href="#id3" title="链接到此标题。"></a></h3>
+<p>Windows 下双击运行其中的 <code class="docutils literal notranslate"><span class="pre">install-tl.bat</span></code>。如果有图形化界面，可以在进入安装器前的右下角按钮指定使用镜像源。Linux 下使用如下命令：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">perl</span> <span class="n">install</span><span class="o">-</span><span class="n">tl</span> <span class="o">--</span><span class="n">repository</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id4">
+<h2>切换镜像<a class="headerlink" href="#id4" title="链接到此标题。"></a></h2>
+<p>TeX Live 使用的 CTAN 镜像源可以从内置的包管理器 <code class="docutils literal notranslate"><span class="pre">tlmgr</span></code> 更改（很可能需要管理员权限）。在命令行中执行：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tlmgr</span> <span class="n">option</span> <span class="n">repository</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span>
+</pre></div>
+</div>
+<p>即可永久更改镜像源。如果只需要临时切换，可以用如下命令：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tlmgr</span> <span class="n">update</span> <span class="o">--</span><span class="nb">all</span> <span class="o">--</span><span class="n">repository</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span>
+</pre></div>
+</div>
+<p>其中的 <code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">--all</span></code> 指令可根据需要修改。</p>
+</section>
+<section id="miktex">
+<h2>MiKTeX<a class="headerlink" href="#miktex" title="链接到此标题。"></a></h2>
+<p>MiKTeX 发行版的特点在于仅安装用户需要的宏包，节省了磁盘空间占用，但在部分实现细节上与 TeX Live 有所出入。该发行版支持 Windows、Linux 和 macOS。</p>
+<p>MiKTeX 仅提供 Windows 和 macOS 的独立安装包，在 Linux 下的安装请参考官方文档。使用的 CTAN 镜像源可以从内置的 MiKTeX Console 图形化应用程序切换，也可以使用如下命令：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpm</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">repository</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">win32</span><span class="o">/</span><span class="n">miktex</span><span class="o">/</span><span class="n">tm</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h2>什么时候会用到它<a class="headerlink" href="#id5" title="链接到此标题。"></a></h2>
+<p>编译时若报 <code class="docutils literal notranslate"><span class="pre">File</span> <span class="pre">'xxx.sty'</span> <span class="pre">not</span> <span class="pre">found</span></code>，说明本地缺这个宏包，先 <code class="docutils literal notranslate"><span class="pre">tlmgr</span> <span class="pre">install</span> <span class="pre">xxx</span></code> 补装；如果下载卡住或超时，多半是镜像源没换，回到上面第一步。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="index.html" class="btn btn-neutral float-left" title="西北工业大学科技论文写作" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="lab1.html" class="btn btn-neutral float-right" title="实验课 01：公式、表格、图等" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, infinite-cloisters。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

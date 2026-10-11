@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>实验课 01：公式、表格、图等 &mdash; Documentation 0.1.9 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+
+  
+      <script src="../../_static/jquery.js"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script src="../../_static/documentation_options.js"></script>
+      <script src="../../_static/doctools.js"></script>
+      <script src="../../_static/sphinx_highlight.js"></script>
+      <script src="../../_static/clipboard.min.js"></script>
+      <script src="../../_static/copybutton.js"></script>
+      <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="实验课 02：列表、算法、颜色等" href="lab2.html" />
+    <link rel="prev" title="环境准备：宏包与文档从哪里来" href="prepare.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">西北工业大学科技论文写作</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="prepare.html">环境准备：宏包与文档从哪里来</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">实验课 01：公式、表格、图等</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">编译环境与导言区</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">实验题：公式 1（初级）行内公式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">实验题：公式 2（中级）行间公式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">实验题：公式 3（高级）复杂公式的多行排列</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">实验题：公式 4（选做）复杂公式综合</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">实验题：表格 1（初级）2×2 简单表格</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">实验题：表格 2（中级）带标题行和对齐设置的表格</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">实验题：表格 3（高级）复杂表格与单元格合并</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">实验题：表格 4（选做）复杂嵌套表格与列宽控制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">实验题：图片 1（初级）基本图片插入</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">实验题：图片 2（中级）调整图片大小与位置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">实验题：图片 3（高级）多张图片并排显示</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">实验题：图片 4（选做）图片与文字混排</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">小结</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="lab2.html">实验课 02：列表、算法、颜色等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab3.html">实验课 03：绘图（选学）</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">西北工业大学科技论文写作</a></li>
+      <li class="breadcrumb-item active">实验课 01：公式、表格、图等</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/techpapers/lab1.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>实验课 01：公式、表格、图等<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
+<p>本题集来自《科技论文写作》课程实验课 01《LaTeX 的使用（公式、表格、图等）》。每道题的代码框架都是一份<strong>完整可编译的文档</strong>，只需要把注释标记的位置补全。</p>
+<p>每道题都附有<strong>实际编译渲染的结果图</strong>（TeX Live 2026 + XeLaTeX），代码均可直接编译。</p>
+<section id="id2">
+<h2>编译环境与导言区<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<p>文档类使用 <code class="docutils literal notranslate"><span class="pre">ctexart</span></code>，导言区如下:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="nb">{</span>ctexart<span class="nb">}</span>  <span class="c">% 使用 ctexart 类来支持中文</span>
+<span class="k">\usepackage</span><span class="nb">{</span>graphicx<span class="nb">}</span>    <span class="c">% 插入图片的包</span>
+<span class="k">\usepackage</span><span class="nb">{</span>amsmath<span class="nb">}</span>     <span class="c">% 数学公式支持</span>
+<span class="k">\usepackage</span><span class="nb">{</span>biblatex<span class="nb">}</span>    <span class="c">% 引用文献的包</span>
+<span class="k">\usepackage</span><span class="nb">{</span>multirow<span class="nb">}</span>    <span class="c">% 多行表格支持</span>
+<span class="k">\usepackage</span><span class="nb">{</span>verbatim<span class="nb">}</span>    <span class="c">% 引入 verbatim 包来原样显示文本</span>
+<span class="k">\addbibresource</span><span class="nb">{</span>references.bib<span class="nb">}</span>  <span class="c">% 引用 bib 文件</span>
+
+<span class="k">\title</span><span class="nb">{</span>LaTex实验课1<span class="nb">}</span>
+<span class="k">\author</span><span class="nb">{</span>课堂作业<span class="nb">}</span>
+<span class="k">\date</span><span class="nb">{</span><span class="k">\today</span><span class="nb">}</span>
+</pre></div>
+</div>
+<p>正文结尾用 <code class="docutils literal notranslate"><span class="pre">\printbibliography</span></code> 自动生成参考文献，所以还需要一个 <code class="docutils literal notranslate"><span class="pre">references.bib</span></code> 文件:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">example1</span><span class="p">,</span>
+<span class="w">	</span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Author Name}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Title of the Paper}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Journal Name}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2023}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">volume</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">pages</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{1-10}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>编译方式</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ctexart</span></code> + 中文 → 必须用 <strong>XeLaTeX</strong> 编译（pdfLaTeX 会报编码错误）；用 <code class="docutils literal notranslate"><span class="pre">biblatex</span></code> 还要跑一遍 <strong>biber</strong> 才能出参考文献。</p></li>
+<li><p>完整流程：<code class="docutils literal notranslate"><span class="pre">xelatex</span> <span class="pre">→</span> <span class="pre">biber</span> <span class="pre">→</span> <span class="pre">xelatex</span> <span class="pre">→</span> <span class="pre">xelatex</span></code>。只跑 xelatex 也不影响正文排版，只是参考文献列表为空。</p></li>
+<li><p>在线环境（Overleaf）把编译器切成 XeLaTeX 即可。</p></li>
+</ul>
+<p>下面每道题给出的都是<strong>插入到对应 <code class="docutils literal notranslate"><span class="pre">\subsection</span></code> 下的内容</strong>，套用上面的导言区即可直接编译。</p>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>实验题：公式 1（初级）行内公式<a class="headerlink" href="#id3" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：在文本中插入行内公式 <code class="docutils literal notranslate"><span class="pre">e^{i\pi}</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">=</span> <span class="pre">0</span></code>，提示使用 <code class="docutils literal notranslate"><span class="pre">$...$</span></code>。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>这是一个简单的行内公式：<span class="s">$</span><span class="nb">e^{i</span><span class="nv">\pi</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="m">1</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="m">0</span><span class="s">$</span>。
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="行内公式" src="../../_images/lab1-01-inline-formula.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$...$</span></code> 是 <code class="docutils literal notranslate"><span class="pre">\(...\)</span></code> 的简写，行内公式不单独占行，行距会自动撑开。</p></li>
+<li><p>希腊字母用反斜杠命令：<code class="docutils literal notranslate"><span class="pre">\pi</span></code>。上标用 <code class="docutils literal notranslate"><span class="pre">^</span></code>，多字符上标必须加大括号（<code class="docutils literal notranslate"><span class="pre">e^{i\pi}</span></code> 不能写成 <code class="docutils literal notranslate"><span class="pre">e^i\pi</span></code>）。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>实验题：公式 2（中级）行间公式<a class="headerlink" href="#id4" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：插入二次方程求根公式，要求公式单独成行显示。提示使用 <code class="docutils literal notranslate"><span class="pre">\[</span> <span class="pre">...</span> <span class="pre">\]</span></code> 或 <code class="docutils literal notranslate"><span class="pre">$$</span> <span class="pre">...</span> <span class="pre">$$</span></code>。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>下面是二次方程求根公式：
+<span class="sb">\[</span>
+<span class="nb">	</span><span class="nv">\frac</span><span class="nb">{</span><span class="o">-</span><span class="nb">b </span><span class="nv">\pm</span><span class="nb"> </span><span class="nv">\sqrt</span><span class="nb">{b^</span><span class="m">2</span><span class="nb"> </span><span class="o">-</span><span class="nb"> </span><span class="m">4</span><span class="nb">ac}}{</span><span class="m">2</span><span class="nb">a}</span>
+<span class="s">\]</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="行间公式" src="../../_images/lab1-02-display-formula.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p>题目只要求排版<strong>求根公式本身</strong>，所以不要把 <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span></code> 也写进去。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\[</span> <span class="pre">...</span> <span class="pre">\]</span></code> 是 <code class="docutils literal notranslate"><span class="pre">equation*</span></code> 的简写，公式独占一行且<strong>不编号</strong>；要编号就用 <code class="docutils literal notranslate"><span class="pre">equation</span></code> 环境。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\frac{分子}{分母}</span></code> 生成分式，<code class="docutils literal notranslate"><span class="pre">\sqrt{...}</span></code> 生成根号，<code class="docutils literal notranslate"><span class="pre">\pm</span></code> 是正负号。</p></li>
+<li><p>不要用 <code class="docutils literal notranslate"><span class="pre">$$</span> <span class="pre">...</span> <span class="pre">$$</span></code>。它在 LaTeX 里属于 plain TeX 语法，在 <code class="docutils literal notranslate"><span class="pre">amsmath</span></code> 下会产生 <code class="docutils literal notranslate"><span class="pre">The</span> <span class="pre">\hbox</span> <span class="pre">is</span> <span class="pre">broken</span></code> 一类的低级错误，而且 <code class="docutils literal notranslate"><span class="pre">fleqn</span></code> 等选项对它无效。<strong>统一用 <code class="docutils literal notranslate"><span class="pre">\[</span> <span class="pre">...</span> <span class="pre">\]</span></code>。</strong></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2>实验题：公式 3（高级）复杂公式的多行排列<a class="headerlink" href="#id5" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：使用 <code class="docutils literal notranslate"><span class="pre">align</span></code> 环境排列下列公式:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>a + b = c
+x = y/z + √w
+</pre></div>
+</div>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>使用 <span class="k">\texttt</span><span class="nb">{</span>align<span class="nb">}</span> 环境排列多行公式：
+<span class="k">\begin</span><span class="nb">{</span>align<span class="nb">}</span>
+	a + b <span class="nb">&amp;</span>= c <span class="k">\\</span>
+	x <span class="nb">&amp;</span>= <span class="k">\frac</span><span class="nb">{</span>y<span class="nb">}{</span>z<span class="nb">}</span> + <span class="k">\sqrt</span><span class="nb">{</span>w<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>align<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="align 多行公式" src="../../_images/lab1-03-align.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">align</span></code> 环境里用 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 标记对齐点、<code class="docutils literal notranslate"><span class="pre">\\</span></code> 换行。对齐点必须<strong>每行都写</strong>，否则对齐会错乱。</p></li>
+<li><p>这里两行都在等号左侧对齐，所以写成 <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span> <span class="pre">&amp;=</span> <span class="pre">c</span></code>，<code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 放在 <code class="docutils literal notranslate"><span class="pre">=</span></code> 前面。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">align</span></code> 会给每行编号；不需要编号时用 <code class="docutils literal notranslate"><span class="pre">align*</span></code>，或对某一行用 <code class="docutils literal notranslate"><span class="pre">\nonumber</span></code>。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h2>实验题：公式 4（选做）复杂公式综合<a class="headerlink" href="#id6" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：排版一个包含希腊字母、角标、微分方程和矩阵运算的复杂公式。要求:</p>
+<ol class="simple">
+<li><p>微分方程部分使用上下标，如 <code class="docutils literal notranslate"><span class="pre">\frac{d^2y}{dx^2}</span> <span class="pre">=</span> <span class="pre">f(x)</span></code>；</p></li>
+<li><p>矩阵运算部分表示矩阵乘法与转置，如 <code class="docutils literal notranslate"><span class="pre">\mathbf{A}\mathbf{x}</span> <span class="pre">=</span> <span class="pre">\mathbf{b}</span></code>；</p></li>
+<li><p>综合符号：结合希腊字母、矩阵求导与积分符号，表示一个矩阵微分方程。</p></li>
+</ol>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>这里是一个复杂的微分方程和矩阵运算公式：
+
+<span class="sb">\[</span>
+<span class="nb">	</span><span class="nv">\frac</span><span class="nb">{d^</span><span class="m">2</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{y}</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb">}{dt^</span><span class="m">2</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="nv">\alpha</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{A} </span><span class="nv">\mathbf</span><span class="nb">{y}</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\beta</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{b},</span>
+<span class="nb">	</span><span class="nv">\quad</span><span class="nb"> </span><span class="nv">\text</span><span class="nb">{where} </span><span class="nv">\quad</span>
+<span class="nb">	</span><span class="nv">\mathbf</span><span class="nb">{A} </span><span class="o">=</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{pmatrix} a_{</span><span class="m">11</span><span class="nb">} &amp; a_{</span><span class="m">12</span><span class="nb">} </span><span class="nv">\\</span><span class="nb"> a_{</span><span class="m">21</span><span class="nb">} &amp; a_{</span><span class="m">22</span><span class="nb">} </span><span class="nv">\end</span><span class="nb">{pmatrix},</span>
+<span class="nb">	</span><span class="nv">\quad</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{y}</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{pmatrix} y_</span><span class="m">1</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"> y_</span><span class="m">2</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="nv">\end</span><span class="nb">{pmatrix}</span>
+<span class="s">\]</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="复杂公式" src="../../_images/lab1-04-complex-formula.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><strong>粗体向量/矩阵</strong>用 <code class="docutils literal notranslate"><span class="pre">\mathbf{}</span></code>（直立粗体）。想用斜体粗体可以加载 <code class="docutils literal notranslate"><span class="pre">bm</span></code> 宏包写 <code class="docutils literal notranslate"><span class="pre">\bm{A}</span></code>。</p></li>
+<li><p><strong>矩阵</strong>用 <code class="docutils literal notranslate"><span class="pre">pmatrix</span></code> 环境（带圆括号），元素之间用 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 分列、<code class="docutils literal notranslate"><span class="pre">\\</span></code> 分行。类似的还有 <code class="docutils literal notranslate"><span class="pre">bmatrix</span></code>（方括号）、<code class="docutils literal notranslate"><span class="pre">vmatrix</span></code>（竖线）、<code class="docutils literal notranslate"><span class="pre">matrix</span></code>（无括号）。</p></li>
+<li><p><strong>多字母下标</strong>要加大括号：<code class="docutils literal notranslate"><span class="pre">a_{11}</span></code>、<code class="docutils literal notranslate"><span class="pre">y_1(t)</span></code>。写成 <code class="docutils literal notranslate"><span class="pre">a_11</span></code> 会变成 <code class="docutils literal notranslate"><span class="pre">a₁1</span></code>。</p></li>
+<li><p><strong>希腊字母</strong>：<code class="docutils literal notranslate"><span class="pre">\alpha</span></code>、<code class="docutils literal notranslate"><span class="pre">\beta</span></code>、<code class="docutils literal notranslate"><span class="pre">\pi</span></code>、<code class="docutils literal notranslate"><span class="pre">\theta</span></code>；大写形式首字母大写（<code class="docutils literal notranslate"><span class="pre">\Gamma</span></code>、<code class="docutils literal notranslate"><span class="pre">\Delta</span></code>），但 <code class="docutils literal notranslate"><span class="pre">\Alpha</span></code>、<code class="docutils literal notranslate"><span class="pre">\Beta</span></code> 不存在——大写希腊字母与拉丁字母同形，直接写 <code class="docutils literal notranslate"><span class="pre">A</span></code>、<code class="docutils literal notranslate"><span class="pre">B</span></code>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\quad</span></code> 是一个汉字宽度的空白（<code class="docutils literal notranslate"><span class="pre">\qquad</span></code> 是两倍），<code class="docutils literal notranslate"><span class="pre">\text{...}</span></code> 里的内容是正体文本。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h2>实验题：表格 1（初级）2×2 简单表格<a class="headerlink" href="#id7" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：创建一个 2×2 的表格，内容为 A/B 和 C/D，表格要有边框。提示使用 <code class="docutils literal notranslate"><span class="pre">tabular</span></code> 环境并确保有 <code class="docutils literal notranslate"><span class="pre">|</span></code>。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|<span class="nb">}</span>
+		<span class="k">\hline</span>
+		A <span class="nb">&amp;</span> B <span class="k">\\</span>
+		<span class="k">\hline</span>
+		C <span class="nb">&amp;</span> D <span class="k">\\</span>
+		<span class="k">\hline</span>
+	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\caption</span><span class="nb">{</span>简单的2x2表格<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="2x2 表格" src="../../_images/lab1-05-basic-table.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{|c|c|}</span></code> 中每个 <code class="docutils literal notranslate"><span class="pre">c</span></code> 是一列（居中对齐），<code class="docutils literal notranslate"><span class="pre">|</span></code> 是竖线；<code class="docutils literal notranslate"><span class="pre">\hline</span></code> 是横线。</p></li>
+<li><p><strong>列与列之间用 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 分隔，行尾用 <code class="docutils literal notranslate"><span class="pre">\\</span></code>。最后一行也必须写 <code class="docutils literal notranslate"><span class="pre">\\</span></code></strong>，否则会报 <code class="docutils literal notranslate"><span class="pre">Misplaced</span> <span class="pre">\noalign</span></code> 错误——新手最常踩的坑。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">table</span></code> 是浮动体环境，<code class="docutils literal notranslate"><span class="pre">[h!]</span></code> 是位置参数（here，尽量放在当前位置）；<code class="docutils literal notranslate"><span class="pre">\caption</span></code> 生成表题。</p></li>
+<li><p>表格主体（<code class="docutils literal notranslate"><span class="pre">tabular</span></code>）负责排内容，<code class="docutils literal notranslate"><span class="pre">table</span></code> 负责浮动、编号和标题，两者不要混为一谈。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id8">
+<h2>实验题：表格 2（中级）带标题行和对齐设置的表格<a class="headerlink" href="#id8" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：创建 3×3 表格，表头为「编号 / 姓名 / 成绩」，数据为 <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">张三</span> <span class="pre">85</span></code>、<code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">李四</span> <span class="pre">90</span></code>、<code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">王五</span> <span class="pre">95</span></code>。要求<strong>姓名列左对齐、成绩列右对齐</strong>。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|l|r|<span class="nb">}</span>
+		<span class="k">\hline</span>
+		编号 <span class="nb">&amp;</span> 姓名 <span class="nb">&amp;</span> 成绩 <span class="k">\\</span>
+		<span class="k">\hline</span>
+		1 <span class="nb">&amp;</span> 张三 <span class="nb">&amp;</span> 85 <span class="k">\\</span>
+		2 <span class="nb">&amp;</span> 李四 <span class="nb">&amp;</span> 90 <span class="k">\\</span>
+		3 <span class="nb">&amp;</span> 王五 <span class="nb">&amp;</span> 95 <span class="k">\\</span>
+		<span class="k">\hline</span>
+	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\caption</span><span class="nb">{</span>带对齐设置的表格<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="带对齐的表格" src="../../_images/lab1-06-aligned-table.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul>
+<li><p>列格式符：<code class="docutils literal notranslate"><span class="pre">l</span></code> 左对齐、<code class="docutils literal notranslate"><span class="pre">c</span></code> 居中、<code class="docutils literal notranslate"><span class="pre">r</span></code> 右对齐、<code class="docutils literal notranslate"><span class="pre">p{宽度}</span></code> 指定宽度的左对齐段落列。</p></li>
+<li><p>数字列用 <code class="docutils literal notranslate"><span class="pre">r</span></code> 右对齐，位数不同时也能按位对齐，这是排版数字的惯例。</p></li>
+<li><p><strong>只在表头下画一条横线</strong>，数据行之间不加 <code class="docutils literal notranslate"><span class="pre">\hline</span></code>（完整横线只在表尾）。每行都加 <code class="docutils literal notranslate"><span class="pre">\hline</span></code> 会变成全网格表，学术论文里并不好看。</p></li>
+<li><p>想画标准三线表就加载 <code class="docutils literal notranslate"><span class="pre">booktabs</span></code>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\usepackage</span><span class="nb">{</span>booktabs<span class="nb">}</span>
+<span class="c">% 用 \toprule / \midrule / \bottomrule 替代 \hline</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">booktabs</span></code> 的规则是：<strong>不要与竖线同用</strong>，行距也会自动调得更舒展。</p>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h2>实验题：表格 3（高级）复杂表格与单元格合并<a class="headerlink" href="#id9" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：创建一个包含合并行与列操作的复杂表格。</p>
+<p>要求：第一行 <code class="docutils literal notranslate"><span class="pre">Header</span> <span class="pre">2</span></code> 合并第二、三列；第二行 <code class="docutils literal notranslate"><span class="pre">Merge</span> <span class="pre">Across</span> <span class="pre">Columns</span></code> 合并第二、三列；第四行 <code class="docutils literal notranslate"><span class="pre">Merge</span> <span class="pre">Down</span> <span class="pre">Rows</span></code> 合并两行的第一列。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|c|<span class="nb">}</span>
+		<span class="k">\hline</span>
+		Header 1 <span class="nb">&amp;</span> <span class="k">\multicolumn</span><span class="nb">{</span>2<span class="nb">}{</span>|c|<span class="nb">}{</span>Header 2<span class="nb">}</span> <span class="k">\\</span>            <span class="c">% 合并 Header 2</span>
+		<span class="k">\hline</span>
+		Row 1    <span class="nb">&amp;</span> <span class="k">\multicolumn</span><span class="nb">{</span>2<span class="nb">}{</span>|c|<span class="nb">}{</span>Merge Across Columns<span class="nb">}</span> <span class="k">\\</span> <span class="c">% 合并第二行</span>
+		<span class="k">\hline</span>
+		Row 2    <span class="nb">&amp;</span> Data A <span class="nb">&amp;</span> Data B <span class="k">\\</span>                          <span class="c">% 普通数据行</span>
+		<span class="k">\hline</span>
+		<span class="k">\multirow</span><span class="nb">{</span>2<span class="nb">}{</span>*<span class="nb">}{</span>Merge Down Rows<span class="nb">}</span> <span class="nb">&amp;</span> Data C <span class="nb">&amp;</span> Data D <span class="k">\\</span>    <span class="c">% 合并行操作</span>
+		<span class="k">\cline</span><span class="nb">{</span>2-3<span class="nb">}</span>
+		<span class="nb">&amp;</span> Data E <span class="nb">&amp;</span> Data F <span class="k">\\</span>                                  <span class="c">% 第二部分数据行</span>
+		<span class="k">\hline</span>
+	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\caption</span><span class="nb">{</span>复杂表格与单元格合并<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="合并单元格表格" src="../../_images/lab1-07-merged-table.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><strong>合并列</strong> 用 <code class="docutils literal notranslate"><span class="pre">\multicolumn{列数}{格式}{内容}</span></code>。注意格式参数要<strong>自己补上竖线</strong>，比如 <code class="docutils literal notranslate"><span class="pre">{c|}</span></code>，否则合并后会丢边框——本题最容易出错的地方。</p></li>
+<li><p><strong>合并行</strong> 用 <code class="docutils literal notranslate"><span class="pre">\multirow{行数}{宽度}{内容}</span></code>，宽度写 <code class="docutils literal notranslate"><span class="pre">*</span></code> 表示按内容自适应。</p></li>
+<li><p>合并 <code class="docutils literal notranslate"><span class="pre">n</span></code> 行后，<strong>接下来 n−1 行对应的那一格要空着</strong>（写成 <code class="docutils literal notranslate"><span class="pre">&amp;</span> <span class="pre">Data</span> <span class="pre">E</span> <span class="pre">&amp;</span> <span class="pre">Data</span> <span class="pre">F</span></code>，第一个 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> 前留空）。</p></li>
+<li><p>合并行内部的横线要用 <code class="docutils literal notranslate"><span class="pre">\cline{2-3}</span></code> 指定范围，不能用 <code class="docutils literal notranslate"><span class="pre">\hline</span></code>，否则会把合并的那一格从中间切断。</p></li>
+<li><p>需要更精确的垂直位置可以加位移参数：<code class="docutils literal notranslate"><span class="pre">\multirow{2}{*}[-0.5ex]{...}</span></code>。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id10">
+<h2>实验题：表格 4（选做）复杂嵌套表格与列宽控制<a class="headerlink" href="#id10" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：创建 7 行 4 列的复杂表格，要求:</p>
+<ol class="simple">
+<li><p>第一行标题行跨四列且居中；</p></li>
+<li><p>第二行第一列内容合并两行且文字居左；</p></li>
+<li><p>第三行第二列与第三列合并；</p></li>
+<li><p>第五行第四列嵌套一个 2×2 小表格（N1/N2/N3/N4）；</p></li>
+<li><p>所有列宽调整，第二列和第三列占总宽度的 50%。</p></li>
+</ol>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|p<span class="nb">{</span>2cm<span class="nb">}</span>|p<span class="nb">{</span>3cm<span class="nb">}</span>|p<span class="nb">{</span>3cm<span class="nb">}</span>|p<span class="nb">{</span>4cm<span class="nb">}</span>|<span class="nb">}</span>    <span class="c">% 设置列宽</span>
+		<span class="k">\hline</span>
+		<span class="k">\multicolumn</span><span class="nb">{</span>4<span class="nb">}{</span>|c|<span class="nb">}{</span>Complex Table Title<span class="nb">}</span> <span class="k">\\</span>   <span class="c">% 跨四列的标题行</span>
+		<span class="k">\hline</span>
+		<span class="k">\multirow</span><span class="nb">{</span>2<span class="nb">}{</span>*<span class="nb">}{</span>Row 1<span class="nb">}</span> <span class="nb">&amp;</span> Cell 1 <span class="nb">&amp;</span> Cell 2 <span class="nb">&amp;</span> Cell 3 <span class="k">\\</span> <span class="c">% 第一列跨两行</span>
+		<span class="k">\cline</span><span class="nb">{</span>2-4<span class="nb">}</span>
+		<span class="nb">&amp;</span> <span class="k">\multicolumn</span><span class="nb">{</span>2<span class="nb">}{</span>|c|<span class="nb">}{</span>Merge Across 2 Columns<span class="nb">}</span> <span class="nb">&amp;</span> Cell 3 <span class="k">\\</span> <span class="c">% 合并第二、三列</span>
+		<span class="k">\hline</span>
+		Row 2 <span class="nb">&amp;</span> Cell 4 <span class="nb">&amp;</span> Cell 5 <span class="nb">&amp;</span> Cell 6 <span class="k">\\</span>
+		<span class="k">\hline</span>
+		Row 3 <span class="nb">&amp;</span> Cell 7 <span class="nb">&amp;</span> Cell 8 <span class="nb">&amp;</span> <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|<span class="nb">}</span>  <span class="c">% 嵌套表格</span>
+			<span class="k">\hline</span>
+			N1 <span class="nb">&amp;</span> N2 <span class="k">\\</span>
+			<span class="k">\hline</span>
+			N3 <span class="nb">&amp;</span> N4 <span class="k">\\</span>
+			<span class="k">\hline</span>
+		<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span> <span class="k">\\</span>
+		<span class="k">\hline</span>
+	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\caption</span><span class="nb">{</span>复杂嵌套表格与列宽控制<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="嵌套表格" src="../../_images/lab1-08-nested-table.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p>列格式 <code class="docutils literal notranslate"><span class="pre">{|p{2cm}|p{3cm}|p{3cm}|p{4cm}|}</span></code> 总宽 12cm，其中第二、三列合计 6cm，<strong>正好 50%</strong>，满足题目第 5 条。想改成相对宽度可以用 <code class="docutils literal notranslate"><span class="pre">p{0.15\textwidth}</span></code> 这类写法。</p></li>
+<li><p><strong>嵌套表格</strong>就是在单元格里再写一个完整的 <code class="docutils literal notranslate"><span class="pre">tabular</span></code> 环境。嵌套表格自身不要再写 <code class="docutils literal notranslate"><span class="pre">\caption</span></code>，否则编号会乱。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p{宽度}</span></code> 是<strong>定宽段落列</strong>，可以自动换行；<code class="docutils literal notranslate"><span class="pre">l/c/r</span></code> 列不会换行，内容长了会把表格撑破。</p></li>
+<li><p>「第一列合并两行且文字居左」用 <code class="docutils literal notranslate"><span class="pre">\multirow{2}{*}{Row</span> <span class="pre">1}</span></code> 实现——因为第一列本身就是 <code class="docutils literal notranslate"><span class="pre">p{2cm}</span></code> 段落列，<strong>默认就是左对齐</strong>，不需要额外加 <code class="docutils literal notranslate"><span class="pre">\raggedright</span></code>。</p></li>
+<li><p>单元格里嵌套表格后垂直位置可能偏高或偏低，可以用 <code class="docutils literal notranslate"><span class="pre">\begin{tabular}[b]{...}</span></code> 或 <code class="docutils literal notranslate"><span class="pre">\raisebox</span></code> 微调。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id11">
+<h2>实验题：图片 1（初级）基本图片插入<a class="headerlink" href="#id11" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：插入一张图片并添加标题。使用占位符图片 <code class="docutils literal notranslate"><span class="pre">example-image-a</span></code>，提示使用 <code class="docutils literal notranslate"><span class="pre">graphicx</span></code> 宏包、<code class="docutils literal notranslate"><span class="pre">\includegraphics</span></code> 和 <code class="docutils literal notranslate"><span class="pre">\caption</span></code>。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\includegraphics</span><span class="na">[width=0.5\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入图片</span>
+	<span class="k">\caption</span><span class="nb">{</span>示例图片<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="基本图片插入" src="../../_images/lab1-09-basic-figure.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">example-image-a</span></code> 来自 <code class="docutils literal notranslate"><span class="pre">mwe</span></code> 宏包（TeX Live 中默认安装），<strong>不需要准备真实图片就能编译</strong>，非常适合做作业和测试排版。</p></li>
+<li><p>宽度取 <code class="docutils literal notranslate"><span class="pre">0.5\textwidth</span></code>（版心的一半）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\includegraphics[选项]{文件名}</span></code> 中<strong>不要写扩展名</strong>，LaTeX 会自己找 <code class="docutils literal notranslate"><span class="pre">.pdf</span></code>/<code class="docutils literal notranslate"><span class="pre">.png</span></code>/<code class="docutils literal notranslate"><span class="pre">.jpg</span></code>。</p></li>
+<li><p>常用选项：<code class="docutils literal notranslate"><span class="pre">width=</span></code>、<code class="docutils literal notranslate"><span class="pre">height=</span></code>、<code class="docutils literal notranslate"><span class="pre">scale=</span></code>、<code class="docutils literal notranslate"><span class="pre">angle=</span></code>。<strong>只指定 <code class="docutils literal notranslate"><span class="pre">width</span></code> 或 <code class="docutils literal notranslate"><span class="pre">height</span></code> 其中一个</strong>，同时指定两个会拉伸变形。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\centering</span></code> 在 <code class="docutils literal notranslate"><span class="pre">figure</span></code> 环境里让图片居中；位置不理想时可以用 <code class="docutils literal notranslate"><span class="pre">[htbp]</span></code>，或加 <code class="docutils literal notranslate"><span class="pre">\usepackage{float}</span></code> 后用 <code class="docutils literal notranslate"><span class="pre">[H]</span></code> 强制固定。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id12">
+<h2>实验题：图片 2（中级）调整图片大小与位置<a class="headerlink" href="#id12" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：插入图片，将其大小调整为<strong>文档宽度的 60%</strong>，并让图片<strong>居右显示</strong>。提示使用 <code class="docutils literal notranslate"><span class="pre">width</span></code> 参数和 <code class="docutils literal notranslate"><span class="pre">\raggedleft</span></code>。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
+	<span class="k">\raggedleft</span>
+	<span class="k">\includegraphics</span><span class="na">[width=0.6\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入图片并调整大小</span>
+	<span class="k">\caption</span><span class="nb">{</span>调整大小与位置的图片<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="调整大小与位置" src="../../_images/lab1-10-sized-figure.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">0.6\textwidth</span></code> 表示版心宽度的 60%。用相对宽度而不是绝对长度（如 <code class="docutils literal notranslate"><span class="pre">6cm</span></code>），换模板、换纸张大小时不会崩。</p></li>
+<li><p>对齐命令三兄弟：<code class="docutils literal notranslate"><span class="pre">\centering</span></code> 居中、<code class="docutils literal notranslate"><span class="pre">\raggedright</span></code> 左对齐、<code class="docutils literal notranslate"><span class="pre">\raggedleft</span></code> 右对齐，作用范围到环境结束为止。</p></li>
+<li><p><strong>注意顺序</strong>：<code class="docutils literal notranslate"><span class="pre">\raggedleft</span></code> 要写在 <code class="docutils literal notranslate"><span class="pre">\includegraphics</span></code> <strong>之前</strong>，写在后面无效。此时图片和 <code class="docutils literal notranslate"><span class="pre">\caption</span></code> 会一起被推到右边（图题也跟着靠右）。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id13">
+<h2>实验题：图片 3（高级）多张图片并排显示<a class="headerlink" href="#id13" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：插入两张图片并排显示，每张占文档宽度的 40%，且每张图片有独立标题。提示使用 <code class="docutils literal notranslate"><span class="pre">minipage</span></code> 环境。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.4<span class="k">\textwidth</span><span class="nb">}</span>
+		<span class="k">\includegraphics</span><span class="na">[width=\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入左侧图片</span>
+		<span class="k">\caption</span><span class="nb">{</span>左侧图片<span class="nb">}</span>
+	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.4<span class="k">\textwidth</span><span class="nb">}</span>
+		<span class="k">\includegraphics</span><span class="na">[width=\textwidth]</span><span class="nb">{</span>example-image-b<span class="nb">}</span>  <span class="c">% 插入右侧图片</span>
+		<span class="k">\caption</span><span class="nb">{</span>右侧图片<span class="nb">}</span>
+	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="并排图片" src="../../_images/lab1-11-side-by-side.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p>每格取 <code class="docutils literal notranslate"><span class="pre">0.4\textwidth</span></code>（不是 0.5 + 0.5）——留出空隙，两张图不会贴在一起，两侧还有余量。</p></li>
+<li><p><strong>两个 <code class="docutils literal notranslate"><span class="pre">minipage</span></code> 之间不能有空行</strong>，否则会插入段落分隔，导致第二个跑到下一行。这是并排排版失败最常见的原因。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">minipage</span></code> 里的 <code class="docutils literal notranslate"><span class="pre">\textwidth</span></code> 指的是 <strong>minipage 自己的宽度</strong>，不是整个版心，所以 <code class="docutils literal notranslate"><span class="pre">width=\textwidth</span></code> 正好填满一格。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[b]</span></code> 表示按<strong>底部对齐</strong>（<code class="docutils literal notranslate"><span class="pre">[t]</span></code> 顶部、<code class="docutils literal notranslate"><span class="pre">[c]</span></code> 居中），两张图高矮不一时用它对齐基线。</p></li>
+<li><p>每个 <code class="docutils literal notranslate"><span class="pre">minipage</span></code> 内直接用 <code class="docutils literal notranslate"><span class="pre">\caption</span></code>，两张子图拿到的是「图 1」「图 2」两个独立编号。生产环境建议加载 <code class="docutils literal notranslate"><span class="pre">subcaption</span></code> 宏包，用 <code class="docutils literal notranslate"><span class="pre">subfigure</span></code> 得到规范的 (a)(b) 子图编号。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id14">
+<h2>实验题：图片 4（选做）图片与文字混排<a class="headerlink" href="#id14" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：在文档中插入一张图片，图片占文档右侧 40%，左侧 60% 放置一段文字描述，要求图文并排显示。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.6<span class="k">\textwidth</span><span class="nb">}</span>
+		这是一段文字描述，它占据文档的 60<span class="k">\%</span> 宽度。图片放在文字的右侧，确保它们并排显示。
+	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.4<span class="k">\textwidth</span><span class="nb">}</span>
+		<span class="k">\includegraphics</span><span class="na">[width=\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入图片</span>
+		<span class="k">\caption</span><span class="nb">{</span>右侧图片<span class="nb">}</span>
+	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="图文混排" src="../../_images/lab1-12-text-figure.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p>思路和上一题一样，只是把一格换成文字。<strong>图文并排的本质就是把两块内容各自装进 <code class="docutils literal notranslate"><span class="pre">minipage</span></code>。</strong></p></li>
+<li><p>文字里要输出百分号必须转义：<code class="docutils literal notranslate"><span class="pre">60\%</span></code>，直接写 <code class="docutils literal notranslate"><span class="pre">%</span></code> 会把后面整行注释掉。</p></li>
+<li><p>文字比图片长很多时，<code class="docutils literal notranslate"><span class="pre">minipage</span></code> 高度不匹配会很难看，建议把短的一侧用 <code class="docutils literal notranslate"><span class="pre">[c]</span></code> 居中，或干脆把文字写在图片下方。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id15">
+<h2>小结<a class="headerlink" href="#id15" title="链接到此标题。"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>考点</th>
+<th>核心命令</th>
+<th>最常踩的坑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行内公式</td>
+<td><code>$...$</code></td>
+<td>多字符上下标没加 <code>{}</code></td>
+</tr>
+<tr>
+<td>行间公式</td>
+<td><code>\[ ... \]</code></td>
+<td>用了过时的 <code>$$ ... $$</code></td>
+</tr>
+<tr>
+<td>多行公式</td>
+<td><code>align</code> + <code>&amp;</code> + <code>\\</code></td>
+<td>漏写对齐符</td>
+</tr>
+<tr>
+<td>矩阵</td>
+<td><code>pmatrix</code> / <code>bmatrix</code></td>
+<td>用 <code>a_11</code> 代替 <code>a_{11}</code></td>
+</tr>
+<tr>
+<td>表格</td>
+<td><code>tabular</code> + <code>&amp;</code> + <code>\\</code></td>
+<td>最后一行漏 <code>\\</code></td>
+</tr>
+<tr>
+<td>合并列</td>
+<td><code>\multicolumn{n}{c|}{...}</code></td>
+<td>格式参数漏写竖线</td>
+</tr>
+<tr>
+<td>合并行</td>
+<td><code>\multirow{n}{*}{...}</code></td>
+<td>后续行没留空格子</td>
+</tr>
+<tr>
+<td>插图</td>
+<td><code>\includegraphics[width=...]</code></td>
+<td>文件名带扩展名</td>
+</tr>
+<tr>
+<td>并排排版</td>
+<td><code>minipage</code></td>
+<td>两个 minipage 之间留了空行</td>
+</tr>
+<tr>
+<td>百分号</td>
+<td><code>\%</code></td>
+<td>直接写 <code>%</code> 把整行注释掉</td>
+</tr>
+</tbody>
+</table></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="prepare.html" class="btn btn-neutral float-left" title="环境准备：宏包与文档从哪里来" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="lab2.html" class="btn btn-neutral float-right" title="实验课 02：列表、算法、颜色等" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, infinite-cloisters。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,535 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>实验课 03：绘图（选学） &mdash; Documentation 0.1.9 文档</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+
+  
+      <script src="../../_static/jquery.js"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+      <script src="../../_static/documentation_options.js"></script>
+      <script src="../../_static/doctools.js"></script>
+      <script src="../../_static/sphinx_highlight.js"></script>
+      <script src="../../_static/clipboard.min.js"></script>
+      <script src="../../_static/copybutton.js"></script>
+      <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="prev" title="实验课 02：列表、算法、颜色等" href="lab2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Documentation
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">西北工业大学科技论文写作</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="prepare.html">环境准备：宏包与文档从哪里来</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab1.html">实验课 01：公式、表格、图等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lab2.html">实验课 02：列表、算法、颜色等</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">实验课 03：绘图（选学）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">编译环境与导言区</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">实验题 1：绘制一个坐标系中的三角形</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#y-x2">实验题 2：绘制带网格和标注的函数 y = x²</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">实验题 3：绘制流程图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">实验题 4：绘制一棵二叉树</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">实验题 5：绘制正弦和余弦函数的叠加图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">实验题 6：绘制三维曲面图</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">拓展：高阶绘图展示</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">拓展 1：太阳系模型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">拓展 2：谢尔宾斯基地毯</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">拓展 3：动态电路模拟</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">小结</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">写在最后</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">西北工业大学科技论文写作</a></li>
+      <li class="breadcrumb-item active">实验课 03：绘图（选学）</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/doc/techpapers/lab3.md.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>实验课 03：绘图（选学）<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
+<p>本题集来自《科技论文写作》课程实验课 03《LaTeX 的使用（绘图）》。这一讲是选学内容，讲两件事:</p>
+<ul class="simple">
+<li><p><strong>TikZ</strong>：通用矢量绘图，适合画示意图、流程图、树、几何图形；</p></li>
+<li><p><strong>pgfplots</strong>：建立在 TikZ 之上的数据绘图宏包，适合画函数曲线、实验数据图、三维曲面。</p></li>
+</ul>
+<p>每道题都附有<strong>实际编译渲染的结果图</strong>（TeX Live 2026 + XeLaTeX），代码均可直接编译。</p>
+<p>论文里的插图有两种来源：<strong>MATLAB / Python 画好导出图片</strong>，或者<strong>直接用 TikZ/pgfplots 画</strong>。前者的缺点是分辨率和对齐难控制、字体不统一；后者的优点是矢量、字体与正文完全一致、可复用数据，缺点是三维图编译慢、上手成本高。</p>
+<section id="id2">
+<h2>编译环境与导言区<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<p>导言区:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="nb">{</span>ctexart<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>tikz<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>pgfplots<span class="nb">}</span>
+<span class="k">\usetikzlibrary</span><span class="nb">{</span>shapes.geometric, arrows, trees<span class="nb">}</span>
+<span class="k">\pgfplotsset</span><span class="nb">{</span>compat=1.16<span class="nb">}</span>   <span class="c">% 兼容版本，必写</span>
+<span class="k">\usepackage</span><span class="nb">{</span>animate<span class="nb">}</span>        <span class="c">% 如果需要动态展示</span>
+<span class="k">\usetikzlibrary</span><span class="nb">{</span>3d<span class="nb">}</span>
+<span class="k">\usepackage</span><span class="nb">{</span>circuitikz<span class="nb">}</span>     <span class="c">% 电路图（拓展题用）</span>
+<span class="k">\usepackage</span><span class="nb">{</span>biblatex<span class="nb">}</span>
+<span class="k">\addbibresource</span><span class="nb">{</span>references.bib<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译方式</strong>:</p>
+<ul class="simple">
+<li><p>含中文 → <strong>XeLaTeX</strong>。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">\pgfplotsset{compat=...}</span></code> 必须设置</strong>。不写会有警告，且不同版本的默认行为不一致，画出来的图可能和教程里不一样。这里取 <code class="docutils literal notranslate"><span class="pre">1.16</span></code>，用 TeX Live 2026 编译时会提示&quot;建议升到 1.18&quot;——升不升都能跑，<strong>但同一篇文档里要保持一致</strong>。</p></li>
+<li><p>TikZ 图编译较慢，调试时可以把图单独放在一个文件里编译，成功了再嵌回论文。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h2>实验题 1：绘制一个坐标系中的三角形<a class="headerlink" href="#id3" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：使用 TikZ 绘制一个二维直角坐标系中的三角形，并标注每个顶点的坐标（顶点为 (0,0)、(1,3)、(3,1)）。提示使用 <code class="docutils literal notranslate"><span class="pre">\draw</span></code> 画边、<code class="docutils literal notranslate"><span class="pre">\node</span></code> 标注顶点。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+	<span class="c">% 绘制坐标轴</span>
+	<span class="k">\draw</span><span class="na">[-&gt;]</span> (-2,0) -- (4,0) node[right] <span class="nb">{</span><span class="s">$</span><span class="nb">x</span><span class="s">$</span><span class="nb">}</span>;
+	<span class="k">\draw</span><span class="na">[-&gt;]</span> (0,-2) -- (0,4) node[above] <span class="nb">{</span><span class="s">$</span><span class="nb">y</span><span class="s">$</span><span class="nb">}</span>;
+
+	<span class="c">% 绘制三角形</span>
+	<span class="k">\draw</span> (0,0) -- (3,1) -- (1,3) -- cycle;
+
+	<span class="c">% 标注顶点</span>
+	<span class="k">\node</span> at (0,0) [below left] <span class="nb">{</span><span class="s">$</span><span class="o">(</span><span class="m">0</span><span class="nb">,</span><span class="m">0</span><span class="o">)</span><span class="s">$</span><span class="nb">}</span>;
+	<span class="k">\node</span> at (3,1) [below right] <span class="nb">{</span><span class="s">$</span><span class="o">(</span><span class="m">3</span><span class="nb">,</span><span class="m">1</span><span class="o">)</span><span class="s">$</span><span class="nb">}</span>;
+	<span class="k">\node</span> at (1,3) [above left] <span class="nb">{</span><span class="s">$</span><span class="o">(</span><span class="m">1</span><span class="nb">,</span><span class="m">3</span><span class="o">)</span><span class="s">$</span><span class="nb">}</span>;
+<span class="k">\end</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="坐标系中的三角形" src="../../_images/lab3-01-triangle.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">tikzpicture</span></code> 环境内部就是绘图区</strong>，坐标默认以左下角为原点，单位是 cm。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\draw[-&gt;]</span> <span class="pre">A</span> <span class="pre">--</span> <span class="pre">B</span></code> 画一条带箭头的线段；<code class="docutils literal notranslate"><span class="pre">-&gt;</span></code> 是箭头样式，可选 <code class="docutils literal notranslate"><span class="pre">-</span></code>（无箭头）、<code class="docutils literal notranslate"><span class="pre">&lt;-</span></code>、<code class="docutils literal notranslate"><span class="pre">&lt;-&gt;</span></code>、<code class="docutils literal notranslate"><span class="pre">-latex</span></code>、<code class="docutils literal notranslate"><span class="pre">-stealth</span></code> 等。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">--</span> <span class="pre">cycle</span></code></strong> 自动把路径首尾闭合，画三角形/多边形时不用手写回到起点。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">\node</span> <span class="pre">at</span> <span class="pre">(坐标)</span> <span class="pre">[位置参数]</span> <span class="pre">{内容}</span></code></strong> 在指定坐标放文本节点。位置参数决定文字相对坐标点的偏移方向：<code class="docutils literal notranslate"><span class="pre">above</span></code>、<code class="docutils literal notranslate"><span class="pre">below</span></code>、<code class="docutils literal notranslate"><span class="pre">left</span></code>、<code class="docutils literal notranslate"><span class="pre">right</span></code>、<code class="docutils literal notranslate"><span class="pre">above</span> <span class="pre">left</span></code>、<code class="docutils literal notranslate"><span class="pre">below</span> <span class="pre">right</span></code> 等。<code class="docutils literal notranslate"><span class="pre">\node</span></code> 的坐标和选项<strong>哪个在前都可以</strong>，<code class="docutils literal notranslate"><span class="pre">\node</span> <span class="pre">at</span> <span class="pre">(0,0)</span> <span class="pre">[below</span> <span class="pre">left]</span> <span class="pre">{...}</span></code> 等价于 <code class="docutils literal notranslate"><span class="pre">\node[below</span> <span class="pre">left]</span> <span class="pre">at</span> <span class="pre">(0,0)</span> <span class="pre">{...}</span></code>。</p></li>
+<li><p>坐标轴画得比图形范围大一圈（x 从 −2 到 4，y 从 −2 到 4），是让坐标轴&quot;伸出&quot;三角形的常规做法。</p></li>
+<li><p>想画更规范的函数图像，用 <code class="docutils literal notranslate"><span class="pre">pgfplots</span></code> 的 <code class="docutils literal notranslate"><span class="pre">axis</span></code> 环境（见下一题），比手画坐标轴省事得多。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="y-x2">
+<h2>实验题 2：绘制带网格和标注的函数 y = x²<a class="headerlink" href="#y-x2" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：使用 <code class="docutils literal notranslate"><span class="pre">pgfplots</span></code> 绘制 <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x^2</span></code> 的函数图像，为坐标轴加上网格和标注。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+	<span class="k">\begin</span><span class="nb">{</span>axis<span class="nb">}</span>[
+		xlabel=<span class="nb">{</span><span class="s">$</span><span class="nb">x</span><span class="s">$</span><span class="nb">}</span>, ylabel=<span class="nb">{</span><span class="s">$</span><span class="nb">y</span><span class="s">$</span><span class="nb">}</span>,
+		grid=major,             <span class="c">% 启用网格</span>
+		domain=-2:2, samples=100,
+		legend pos=north west
+		]
+		<span class="k">\addplot</span> <span class="nb">{</span>x<span class="nb">^</span>2<span class="nb">}</span>;         <span class="c">% 绘制函数 y = x^2</span>
+		<span class="k">\addlegendentry</span><span class="nb">{</span><span class="s">$</span><span class="nb">y </span><span class="o">=</span><span class="nb"> x^</span><span class="m">2</span><span class="s">$</span><span class="nb">}</span>
+	<span class="k">\end</span><span class="nb">{</span>axis<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="带网格的抛物线" src="../../_images/lab3-02-parabola.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">\begin{axis}</span></code> 环境</strong>是 pgfplots 的核心，它会自动画坐标轴、刻度、标签，比 TikZ 手画省事得多。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">grid=major</span></code></strong> 只画主刻度网格；<code class="docutils literal notranslate"><span class="pre">grid=both</span></code> 会同时开主次网格（更密），<code class="docutils literal notranslate"><span class="pre">grid=minor</span></code> 只画次网格。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">domain=-2:2,</span> <span class="pre">samples=100</span></code></strong> 控制 x 的取样范围和点数。<code class="docutils literal notranslate"><span class="pre">samples</span></code> 太少曲线会显得折线化，太多编译变慢，50~100 一般够用。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">\addlegendentry</span></code> 必须紧跟在对应的 <code class="docutils literal notranslate"><span class="pre">\addplot</span></code> 之后</strong>，中间隔了别的命令，图例就会串位。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">legend</span> <span class="pre">pos=north</span> <span class="pre">west</span></code> 把图例放在左上角，可选 <code class="docutils literal notranslate"><span class="pre">north</span> <span class="pre">east</span></code>、<code class="docutils literal notranslate"><span class="pre">south</span> <span class="pre">east</span></code>、<code class="docutils literal notranslate"><span class="pre">south</span> <span class="pre">west</span></code>、<code class="docutils literal notranslate"><span class="pre">outer</span> <span class="pre">north</span> <span class="pre">east</span></code>（放到图外）。</p></li>
+<li><p>pgfplots 会自动给曲线分配颜色和线型；曲线多了以后建议显式写 <code class="docutils literal notranslate"><span class="pre">\addplot[blue,</span> <span class="pre">thick]</span></code>。</p></li>
+<li><p><strong>学术论文里画数据图通常不建议加网格</strong>，期刊插图讲究简洁。这里按题目要求加即可。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h2>实验题 3：绘制流程图<a class="headerlink" href="#id4" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：绘制一个简单的流程图，包括「开始」「处理」「结束」三个步骤，并使用箭头连接。提示使用 <code class="docutils literal notranslate"><span class="pre">\node</span></code> 和 <code class="docutils literal notranslate"><span class="pre">\draw[-&gt;]</span></code>。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>[node distance=2cm]
+	<span class="c">% 定义节点样式</span>
+	<span class="k">\tikzstyle</span><span class="nb">{</span>process<span class="nb">}</span> = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, draw=black, fill=blue!30]
+	<span class="k">\tikzstyle</span><span class="nb">{</span>startstop<span class="nb">}</span> = [ellipse, minimum width=3cm, minimum height=1cm, draw=black, fill=red!30]
+
+	<span class="c">% 定义流程图节点</span>
+	<span class="k">\node</span> (start) [startstop] <span class="nb">{</span>开始<span class="nb">}</span>;
+	<span class="k">\node</span> (process) [process, below of=start] <span class="nb">{</span>处理<span class="nb">}</span>;
+	<span class="k">\node</span> (stop) [startstop, below of=process] <span class="nb">{</span>结束<span class="nb">}</span>;
+
+	<span class="c">% 连接节点</span>
+	<span class="k">\draw</span><span class="na">[-&gt;]</span> (start) -- (process);
+	<span class="k">\draw</span><span class="na">[-&gt;]</span> (process) -- (stop);
+<span class="k">\end</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="流程图" src="../../_images/lab3-03-flowchart.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">\usetikzlibrary{shapes.geometric}</span></code></strong> 提供 <code class="docutils literal notranslate"><span class="pre">ellipse</span></code>、<code class="docutils literal notranslate"><span class="pre">diamond</span></code>、<code class="docutils literal notranslate"><span class="pre">trapezium</span></code> 等节点形状（<code class="docutils literal notranslate"><span class="pre">rectangle</span></code> 是内置的），画流程图必须加载。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">\tikzstyle{名字}</span> <span class="pre">=</span> <span class="pre">[...]</span></code> 定义可复用的节点样式</strong>，流程图里所有椭圆长一个样，定义一次到处用，改颜色只改一行。</p>
+<blockquote>
+<div><p>注意：<code class="docutils literal notranslate"><span class="pre">\tikzstyle</span></code> 在新版 TikZ 中已被标记为<strong>过时写法</strong>，推荐改用 <code class="docutils literal notranslate"><span class="pre">\tikzset{名字/.style={...}}</span></code>，功能上等价。</p>
+</div></blockquote>
+</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">below</span> <span class="pre">of=start</span></code> 是旧版相对定位语法</strong>（没有等号）。TikZ 新语法是 <code class="docutils literal notranslate"><span class="pre">below=of</span> <span class="pre">start</span></code>，需要 <code class="docutils literal notranslate"><span class="pre">\usetikzlibrary{positioning}</span></code>——两者<strong>不能混用</strong>，用新语法时记得加库。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">node</span> <span class="pre">distance=2cm</span></code> 控制节点之间的默认间距。</p></li>
+<li><p>给节点命名（<code class="docutils literal notranslate"><span class="pre">(start)</span></code>、<code class="docutils literal notranslate"><span class="pre">(process)</span></code>）之后，用 <code class="docutils literal notranslate"><span class="pre">\draw</span> <span class="pre">(start)</span> <span class="pre">--</span> <span class="pre">(process);</span></code> 连线，TikZ 会<strong>自动找到节点边界</strong>，不会把线画进节点内部。</p></li>
+<li><p>流程图的形状约定：起止用椭圆/圆角矩形，处理用矩形，判断用菱形（<code class="docutils literal notranslate"><span class="pre">diamond</span></code>），输入输出用平行四边形（<code class="docutils literal notranslate"><span class="pre">trapezium</span></code>）。</p></li>
+<li><p>TikZ 默认的箭头很细，缩略图上几乎看不见，放大才能看清。想要更醒目可以写 <code class="docutils literal notranslate"><span class="pre">\draw[-&gt;,</span> <span class="pre">thick]</span></code>，或 <code class="docutils literal notranslate"><span class="pre">\draw[-{Stealth[length=2mm]},</span> <span class="pre">thick]</span></code>（后者需 <code class="docutils literal notranslate"><span class="pre">arrows.meta</span></code> 库）。</p></li>
+<li><p>复杂的流程图建议改用 <code class="docutils literal notranslate"><span class="pre">smartdiagram</span></code> 宏包，或者干脆用 draw.io 画好导出——<strong>TikZ 画大流程图的性价比很低</strong>。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h2>实验题 4：绘制一棵二叉树<a class="headerlink" href="#id5" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：使用 TikZ 绘制一棵三层的二叉树，根节点值为 1，每个节点的子节点值分别为其值乘以 2 和乘以 2 加 1（即 1 → 2,3 → 4,5,6,7）。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>[
+	level 1/.style=<span class="nb">{</span>sibling distance=4cm<span class="nb">}</span>,
+	level 2/.style=<span class="nb">{</span>sibling distance=2cm<span class="nb">}</span>,
+	edge from parent/.style=<span class="nb">{</span>draw,-latex<span class="nb">}</span>]
+
+	<span class="c">% 绘制根节点</span>
+	<span class="k">\node</span> <span class="nb">{</span>1<span class="nb">}</span>
+	child <span class="nb">{</span>node <span class="nb">{</span>2<span class="nb">}</span>
+		child <span class="nb">{</span>node <span class="nb">{</span>4<span class="nb">}}</span>
+		child <span class="nb">{</span>node <span class="nb">{</span>5<span class="nb">}}</span>
+	<span class="nb">}</span>
+	child <span class="nb">{</span>node <span class="nb">{</span>3<span class="nb">}</span>
+		child <span class="nb">{</span>node <span class="nb">{</span>6<span class="nb">}}</span>
+		child <span class="nb">{</span>node <span class="nb">{</span>7<span class="nb">}}</span>
+	<span class="nb">}</span>;
+<span class="k">\end</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="二叉树" src="../../_images/lab3-04-binary-tree.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">child</span> <span class="pre">{</span> <span class="pre">node</span> <span class="pre">{...}</span> <span class="pre">}</span></code></strong> 是 TikZ 的树语法，<strong>嵌套的 <code class="docutils literal notranslate"><span class="pre">child</span></code> 就是子节点</strong>。注意整棵树最后要以<strong>分号 <code class="docutils literal notranslate"><span class="pre">;</span></code></strong> 结束。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">level</span> <span class="pre">n/.style</span> <span class="pre">=</span> <span class="pre">{sibling</span> <span class="pre">distance</span> <span class="pre">=</span> <span class="pre">...}</span></code></strong> 控制第 n 层兄弟节点的水平间距。越往下节点越多，<code class="docutils literal notranslate"><span class="pre">sibling</span> <span class="pre">distance</span></code> 要逐层减半，否则底层节点会互相重叠——这是画树的关键。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">edge</span> <span class="pre">from</span> <span class="pre">parent/.style</span></code></strong> 控制父子连线的样式，这里设成 <code class="docutils literal notranslate"><span class="pre">{draw,-latex}</span></code>（带箭头）。<code class="docutils literal notranslate"><span class="pre">-latex</span></code> 需要 <code class="docutils literal notranslate"><span class="pre">\usetikzlibrary{arrows}</span></code>，导言区里已经加载。</p></li>
+<li><p>这里<strong>没有给节点加圆圈边框</strong>，所以就是纯数字节点。想画成圆圈加一句 <code class="docutils literal notranslate"><span class="pre">every</span> <span class="pre">node/.style={circle,</span> <span class="pre">draw,</span> <span class="pre">inner</span> <span class="pre">sep=1.5pt,</span> <span class="pre">minimum</span> <span class="pre">size=6mm}</span></code> 即可——<code class="docutils literal notranslate"><span class="pre">minimum</span> <span class="pre">size</span></code> 很重要，否则内容是 <code class="docutils literal notranslate"><span class="pre">1</span></code> 的节点会比 <code class="docutils literal notranslate"><span class="pre">4</span></code> 的小一圈。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">\usetikzlibrary{trees}</span></code> 是 <code class="docutils literal notranslate"><span class="pre">child</span></code> 语法所在的功能库，导言区里已经加载。</p></li>
+<li><p>学有余力可以直接用 <strong><code class="docutils literal notranslate"><span class="pre">forest</span></code></strong> 宏包，语法更简洁、自动排版宽度，画复杂树比原生 TikZ 舒服很多。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h2>实验题 5：绘制正弦和余弦函数的叠加图<a class="headerlink" href="#id6" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：绘制正弦函数 <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">sin(x)</span></code> 和余弦函数 <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">cos(x)</span></code>，并将它们叠加显示在同一张图中。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+	<span class="k">\begin</span><span class="nb">{</span>axis<span class="nb">}</span>[
+		xlabel=<span class="nb">{</span><span class="s">$</span><span class="nb">x</span><span class="s">$</span><span class="nb">}</span>, ylabel=<span class="nb">{</span><span class="s">$</span><span class="nb">y</span><span class="s">$</span><span class="nb">}</span>,
+		domain=0:6.28, samples=100,
+		legend pos=north east
+		]
+		<span class="k">\addplot</span> <span class="nb">{</span>sin(deg(x))<span class="nb">}</span>;   <span class="c">% 绘制正弦函数</span>
+		<span class="k">\addlegendentry</span><span class="nb">{</span><span class="s">$</span><span class="nv">\sin</span><span class="o">(</span><span class="nb">x</span><span class="o">)</span><span class="s">$</span><span class="nb">}</span>
+
+		<span class="k">\addplot</span> <span class="nb">{</span>cos(deg(x))<span class="nb">}</span>;   <span class="c">% 绘制余弦函数</span>
+		<span class="k">\addlegendentry</span><span class="nb">{</span><span class="s">$</span><span class="nv">\cos</span><span class="o">(</span><span class="nb">x</span><span class="o">)</span><span class="s">$</span><span class="nb">}</span>
+	<span class="k">\end</span><span class="nb">{</span>axis<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="正弦余弦叠加图" src="../../_images/lab3-05-sin-cos.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><strong>这是 pgfplots 最经典的坑：三角函数必须写 <code class="docutils literal notranslate"><span class="pre">sin(deg(x))</span></code>，不能写 <code class="docutils literal notranslate"><span class="pre">sin(x)</span></code>。</strong>
+pgfplots 内部按<strong>弧度</strong>计算三角函数，<code class="docutils literal notranslate"><span class="pre">deg(x)</span></code> 会把 x 从「角度」转成「弧度」，所以 <code class="docutils literal notranslate"><span class="pre">sin(deg(x))</span></code> 的意思是「把 x 当作角度值求正弦」。
+直接写 <code class="docutils literal notranslate"><span class="pre">sin(x)</span></code> 时 x 被当成弧度——<strong>在 <code class="docutils literal notranslate"><span class="pre">domain=0:6.28</span></code> 时画出来几乎一样，所以这个错误极其隐蔽</strong>；一旦改成 <code class="docutils literal notranslate"><span class="pre">domain=0:360</span></code>，不写 <code class="docutils literal notranslate"><span class="pre">deg()</span></code> 就会画出 57 个周期。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">domain=0:6.28</span></code></strong> 用小数代替 <code class="docutils literal notranslate"><span class="pre">2*pi</span></code>。其实 pgfplots 认识 <code class="docutils literal notranslate"><span class="pre">pi</span></code>，写 <code class="docutils literal notranslate"><span class="pre">domain=0:2*pi</span></code> 更清楚，二者等价。</p></li>
+<li><p>多条曲线<strong>直接写多个 <code class="docutils literal notranslate"><span class="pre">\addplot</span></code></strong> 即可，pgfplots 自动用不同颜色/线型区分，叠加在同一坐标系里。</p></li>
+<li><p>不设置 <code class="docutils literal notranslate"><span class="pre">mark</span></code> 时是纯线条；论文里多条曲线建议<strong>同时区分颜色和标记形状</strong>（如 <code class="docutils literal notranslate"><span class="pre">mark=*</span></code> / <code class="docutils literal notranslate"><span class="pre">mark=square*</span></code>），否则黑白打印时全糊。</p></li>
+<li><p>想让两张图上下排列并共用 x 轴，用 <code class="docutils literal notranslate"><span class="pre">\begin{groupplot}</span></code>（需 <code class="docutils literal notranslate"><span class="pre">\usepgfplotslibrary{groupplots}</span></code>）。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id7">
+<h2>实验题 6：绘制三维曲面图<a class="headerlink" href="#id7" title="链接到此标题。"></a></h2>
+<p><strong>题目</strong>：使用 <code class="docutils literal notranslate"><span class="pre">pgfplots</span></code> 绘制三维曲面图，曲面为 <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">x^2</span> <span class="pre">+</span> <span class="pre">y^2</span></code>。提示使用 <code class="docutils literal notranslate"><span class="pre">axis</span></code> 环境并设置网格样式。</p>
+<p><strong>答案</strong>:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+	<span class="k">\begin</span><span class="nb">{</span>axis<span class="nb">}</span>[
+		xlabel=<span class="nb">{</span><span class="s">$</span><span class="nb">x</span><span class="s">$</span><span class="nb">}</span>, ylabel=<span class="nb">{</span><span class="s">$</span><span class="nb">y</span><span class="s">$</span><span class="nb">}</span>, zlabel=<span class="nb">{</span><span class="s">$</span><span class="nb">z</span><span class="s">$</span><span class="nb">}</span>,
+		domain=-2:2, y domain=-2:2,
+		samples=30,
+		colormap/cool,
+		grid=major
+		]
+		<span class="k">\addplot</span>3[surf] <span class="nb">{</span>x<span class="nb">^</span>2 + y<span class="nb">^</span>2<span class="nb">}</span>;   <span class="c">% 绘制曲面 z = x^2 + y^2</span>
+	<span class="k">\end</span><span class="nb">{</span>axis<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="三维曲面" src="../../_images/lab3-06-surface3d.png" /></p>
+<p><strong>说明</strong>:</p>
+<ul class="simple">
+<li><p><strong>绘制三维图的写法是在 <code class="docutils literal notranslate"><span class="pre">axis</span></code> 里用 <code class="docutils literal notranslate"><span class="pre">\addplot3</span></code></strong>（注意后面有个 3），命令是 <code class="docutils literal notranslate"><span class="pre">\addplot3[surf]</span> <span class="pre">{表达式};</span></code>，<code class="docutils literal notranslate"><span class="pre">surf</span></code> 表示绘制曲面。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">domain</span></code> 控制 x 范围，<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">domain</span></code> 控制 y 范围</strong>。两个都要写，只写 <code class="docutils literal notranslate"><span class="pre">domain</span></code> 时 y 会用默认值，曲面范围不对。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">samples=30</span></code> 是「每一维」的采样点数</strong>，网格总数是 samples²，也就是 900 个小面片。<strong>这是三维图最吃性能的地方</strong>——<code class="docutils literal notranslate"><span class="pre">samples=50</span></code> 就是 2500 个面片，编译时间可能从几秒涨到一分钟。做作业时先用 20 调位置，最后再调到 30~40 出图。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">colormap/cool</span></code></strong> 是 <code class="docutils literal notranslate"><span class="pre">colormap=cool</span></code> 的另一种写法，效果一样。pgfplots 内置多套配色：<code class="docutils literal notranslate"><span class="pre">hot</span></code>、<code class="docutils literal notranslate"><span class="pre">cool</span></code>、<code class="docutils literal notranslate"><span class="pre">viridis</span></code>、<code class="docutils literal notranslate"><span class="pre">plasma</span></code>、<code class="docutils literal notranslate"><span class="pre">magma</span></code>、<code class="docutils literal notranslate"><span class="pre">jet</span></code>、<code class="docutils literal notranslate"><span class="pre">parula</span></code> 等（版本不同可用集合略有差异）。
+论文配色建议用<strong>感知均匀且色盲友好</strong>的 <code class="docutils literal notranslate"><span class="pre">viridis</span></code> / <code class="docutils literal notranslate"><span class="pre">plasma</span></code>，慎用彩虹色的 <code class="docutils literal notranslate"><span class="pre">jet</span></code>（人眼对它的亮度分辨不均匀，容易误读数据）。</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">view={方位角}{仰角}</span></code></strong> 控制观察视角，默认是 <code class="docutils literal notranslate"><span class="pre">{25}{30}</span></code>。多试几次找到最好看的角度。</p></li>
+<li><p>曲面本身的网格线由 <code class="docutils literal notranslate"><span class="pre">surf</span></code> 的 <code class="docutils literal notranslate"><span class="pre">shader</span></code> 选项控制。常用的有:</p></li>
+</ul>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>写法</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\addplot3[surf]</code></td>
+<td>默认，彩色小面片 + 网格线</td>
+</tr>
+<tr>
+<td><code>\addplot3[surf, shader=flat]</code></td>
+<td>平面着色，网格线清晰</td>
+</tr>
+<tr>
+<td><code>\addplot3[surf, shader=interp]</code></td>
+<td>平滑着色，无网格线</td>
+</tr>
+<tr>
+<td><code>\addplot3[mesh]</code></td>
+<td>只画网格线（线框）</td>
+</tr>
+</tbody>
+</table><ul class="simple">
+<li><p>三维曲面图基本只在答辩和报告里用，<strong>期刊论文中几乎见不到</strong>（只能展示一个角度）。数据本身是二维的，优先用等高线图或热力图。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id8">
+<h2>拓展：高阶绘图展示<a class="headerlink" href="#id8" title="链接到此标题。"></a></h2>
+<p>六道实验题之后还有三个拓展例子，用来体会 TikZ 的边界在哪。</p>
+<section id="id9">
+<h3>拓展 1：太阳系模型<a class="headerlink" href="#id9" title="链接到此标题。"></a></h3>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+	<span class="c">% 太阳</span>
+	<span class="k">\filldraw</span><span class="na">[fill=yellow]</span> (0,0) circle (1cm) node[above right] <span class="nb">{</span>太阳<span class="nb">}</span>;
+
+	<span class="c">% 绘制地球的轨道</span>
+	<span class="k">\draw</span><span class="na">[gray, dashed]</span> (0,0) circle (4cm);
+
+	<span class="c">% 地球</span>
+	<span class="k">\filldraw</span><span class="na">[fill=blue]</span> (4,0) circle (0.5cm) node[above right] <span class="nb">{</span>地球<span class="nb">}</span>;
+
+	<span class="c">% 绘制月亮的轨道</span>
+	<span class="k">\draw</span><span class="na">[gray, dashed]</span> (4,0) circle (1cm);
+
+	<span class="c">% 月亮</span>
+	<span class="k">\filldraw</span><span class="na">[fill=gray]</span> (5,0) circle (0.2cm) node[above right] <span class="nb">{</span>月亮<span class="nb">}</span>;
+<span class="k">\end</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="太阳系模型" src="../../_images/lab3-07-solar-system.png" /></p>
+<p><strong>说明</strong>：<code class="docutils literal notranslate"><span class="pre">\filldraw[fill=颜色]</span> <span class="pre">(圆心)</span> <span class="pre">circle</span> <span class="pre">(半径)</span></code> 画实心圆；<code class="docutils literal notranslate"><span class="pre">\draw[gray,</span> <span class="pre">dashed]</span></code> 画虚线轨道。三个天体只是<strong>静态</strong>画在一条直线上，不是动画——<code class="docutils literal notranslate"><span class="pre">animate</span></code> 宏包配合 <code class="docutils literal notranslate"><span class="pre">\multiframe</span></code> 才能做真正的动画（且需要 Acrobat 之类的阅读器支持）。</p>
+</section>
+<section id="id10">
+<h3>拓展 2：谢尔宾斯基地毯<a class="headerlink" href="#id10" title="链接到此标题。"></a></h3>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+	<span class="k">\fill</span><span class="na">[black]</span> (0,0) rectangle (9,9);
+	<span class="k">\foreach</span> <span class="k">\x</span> in <span class="nb">{</span>0,3,6<span class="nb">}</span>
+	<span class="k">\foreach</span> <span class="k">\y</span> in <span class="nb">{</span>0,3,6<span class="nb">}</span>
+	<span class="nb">{</span>
+		<span class="k">\fill</span><span class="na">[white]</span> (<span class="k">\x</span>+1,<span class="k">\y</span>+1) rectangle (<span class="k">\x</span>+2,<span class="k">\y</span>+2);
+	<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>tikzpicture<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="谢尔宾斯基地毯" src="../../_images/lab3-08-sierpinski.png" /></p>
+<p><strong>说明</strong>：<code class="docutils literal notranslate"><span class="pre">\foreach</span> <span class="pre">\x</span> <span class="pre">in</span> <span class="pre">{...}</span></code> 是 TikZ 的循环语法，<strong>两层嵌套 <code class="docutils literal notranslate"><span class="pre">\foreach</span></code> 就是遍历一个 3×3 网格</strong>。</p>
+<p>要说明的是：这段代码只挖掉了一层（9 个白方块），画出来的是<strong>谢尔宾斯基地毯的第一级近似</strong>，不是真正的分形。真正的分形要<strong>递归</strong>——在 TikZ 里可以用 <code class="docutils literal notranslate"><span class="pre">\pgfmathsetmacro</span></code> 配合递归宏实现，但代码量会大很多。这个例子更适合用来说明&quot;哪些图不该交给 TikZ&quot;。</p>
+</section>
+<section id="id11">
+<h3>拓展 3：动态电路模拟<a class="headerlink" href="#id11" title="链接到此标题。"></a></h3>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>circuitikz<span class="nb">}</span>
+	<span class="k">\draw</span> (0,0) to[battery1, l=<span class="s">$</span><span class="nb">V</span><span class="s">$</span>] (0,4)
+	to[R, l=<span class="s">$</span><span class="nb">R</span><span class="s">$</span>] (4,4)
+	to[C, l=<span class="s">$</span><span class="nb">C</span><span class="s">$</span>] (4,0) -- (0,0);
+<span class="k">\end</span><span class="nb">{</span>circuitikz<span class="nb">}</span>
+</pre></div>
+</div>
+<p><strong>编译结果</strong>:</p>
+<p><img alt="RC 电路" src="../../_images/lab3-09-circuit.png" /></p>
+<p><strong>说明</strong>：<code class="docutils literal notranslate"><span class="pre">circuitikz</span></code> 是画电路图的专用宏包，用 <code class="docutils literal notranslate"><span class="pre">to[元件类型,</span> <span class="pre">l=标签]</span></code> 的链式语法连接节点。常用元件：<code class="docutils literal notranslate"><span class="pre">battery1</span></code>（电池）、<code class="docutils literal notranslate"><span class="pre">R</span></code>（电阻）、<code class="docutils literal notranslate"><span class="pre">C</span></code>（电容）、<code class="docutils literal notranslate"><span class="pre">L</span></code>（电感）、<code class="docutils literal notranslate"><span class="pre">D</span></code>（二极管）。画电路图强烈推荐用它，比用 TikZ 裸画省事得多。</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id12">
+<h2>小结<a class="headerlink" href="#id12" title="链接到此标题。"></a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>考点</th>
+<th>核心写法</th>
+<th>最常踩的坑</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本图形</td>
+<td><code>tikzpicture</code> + <code>\draw</code> + <code>\node</code></td>
+<td>忘了 <code>cycle</code> 闭合路径</td>
+</tr>
+<tr>
+<td>节点定位</td>
+<td><code>below of=</code>（旧）/ <code>below=of</code>（新，需 <code>positioning</code>）</td>
+<td>新旧语法混用</td>
+</tr>
+<tr>
+<td>定义样式</td>
+<td><code>\tikzstyle{名}=[...]</code> / <code>\tikzset{名/.style={...}}</code></td>
+<td><code>\tikzstyle</code> 已是过时写法</td>
+</tr>
+<tr>
+<td>函数图像</td>
+<td><code>axis</code> + <code>\addplot</code></td>
+<td>采样点数太少，曲线折线化</td>
+</tr>
+<tr>
+<td>图例</td>
+<td><code>\addlegendentry</code></td>
+<td>没有紧跟 <code>\addplot</code></td>
+</tr>
+<tr>
+<td>流程图</td>
+<td>节点命名 + <code>\draw[-&gt;]</code></td>
+<td>没加载 <code>shapes.geometric</code>，画不出椭圆</td>
+</tr>
+<tr>
+<td>树形图</td>
+<td><code>child { node {} }</code></td>
+<td>忘了 <code>sibling distance</code> 逐层设置</td>
+</tr>
+<tr>
+<td>三角函数</td>
+<td><code>sin(deg(x))</code></td>
+<td><strong>写成 <code>sin(x)</code>，在 <code>domain=0:6.28</code> 下看不出问题</strong></td>
+</tr>
+<tr>
+<td>三维曲面</td>
+<td><code>\addplot3[surf]</code> + <code>y domain</code></td>
+<td>只写 <code>domain</code> 导致 y 范围不对</td>
+</tr>
+<tr>
+<td>编译性能</td>
+<td>降低 <code>samples</code></td>
+<td>三维图 samples 给太大，编译几分钟</td>
+</tr>
+</tbody>
+</table></section>
+<section id="id13">
+<h2>写在最后<a class="headerlink" href="#id13" title="链接到此标题。"></a></h2>
+<p>TikZ 和 pgfplots 的学习曲线不低，但<strong>收益是可复利的</strong>：一份画好的图，改个数据就能出下一版，改字号、改配色、改尺寸都不用重新导图。写学位论文时，你会庆幸当初没有用截图。</p>
+<p>不过也要清醒：<strong>TikZ 不是万能的</strong>。以下情况请直接用 Python / MATLAB 导出矢量图（PDF/EPS/SVG）再 <code class="docutils literal notranslate"><span class="pre">\includegraphics</span></code> 引入:</p>
+<ul class="simple">
+<li><p>数据量大、需要复杂的数据处理（拟合、滤波、统计）</p></li>
+<li><p>三维图、散点图、热力图矩阵</p></li>
+<li><p>真分形、大尺寸流程图、复杂系统框图（比如上面那个&quot;只做了一层&quot;的地毯）</p></li>
+</ul>
+<p>判断标准很简单：<strong>凡是「画得累」的图，就交给脚本；凡是「画得精细」的图，才交给 TikZ。</strong></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="lab2.html" class="btn btn-neutral float-left" title="实验课 02：列表、算法、颜色等" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2026, infinite-cloisters。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

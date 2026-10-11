@@ -69,15 +69,14 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#clion-stm32cubemx-st">二、CLion + STM32CubeMX（体验下来ST系列很舒服，但是其他厂家的配置需要一定动手能力）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stm32cubeide-stm32cubemx-clion">三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#keil-mdk5-stm32cubemx">四、Keil MDK5 + STM32CubeMX（经典，教程比较多，但页面和路径管理太落后了）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rust">五、关于用 Rust 开发（个人不建议）</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#git">六、强烈建议:学会用 Git 做版本管理</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id7">最小可用流程</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">几条实操建议</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">最小可用流程</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">几条实操建议</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">参考</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">参考</a></li>
 </ul>
 </li>
 </ul>
@@ -445,9 +444,6 @@
 <hr class="docutils" />
 <section id="stm32cubeide-stm32cubemx-clion">
 <h2>三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）<a class="headerlink" href="#stm32cubeide-stm32cubemx-clion" title="链接到此标题。"></a></h2>
-</section>
-<section id="id6">
-<h2>三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）<a class="headerlink" href="#id6" title="链接到此标题。"></a></h2>
 <p>ST 官方的一体化 IDE,基于 Eclipse,<strong>自带 CubeMX</strong>,装完就能用,不需要额外配工具链。</p>
 <p>优点:</p>
 <ul class="simple">
@@ -506,8 +502,8 @@
 <h2>六、强烈建议:学会用 Git 做版本管理<a class="headerlink" href="#git" title="链接到此标题。"></a></h2>
 <p>这条不是可选项。<strong>比赛里最常见的翻车不是写不出代码,而是&quot;刚才还好好的,改了两行就全崩了,还不知道改了哪两行&quot;。</strong></p>
 <p>学会 Git,最直接的收益就是:<strong>改坏了能从云端拉回来。</strong></p>
-<section id="id7">
-<h3>最小可用流程<a class="headerlink" href="#id7" title="链接到此标题。"></a></h3>
+<section id="id6">
+<h3>最小可用流程<a class="headerlink" href="#id6" title="链接到此标题。"></a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>init<span class="w">                        </span><span class="c1"># 或者 git clone &lt;仓库地址&gt;</span>
 git<span class="w"> </span>add<span class="w"> </span>.<span class="w">                       </span><span class="c1"># 把改动放进暂存区</span>
 git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;增加 PID 参数整定&quot;</span><span class="w">   </span><span class="c1"># 提交,写人话,别写 &quot;update&quot;</span>
@@ -523,8 +519,8 @@ git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> 
 </pre></div>
 </div>
 </section>
-<section id="id8">
-<h3>几条实操建议<a class="headerlink" href="#id8" title="链接到此标题。"></a></h3>
+<section id="id7">
+<h3>几条实操建议<a class="headerlink" href="#id7" title="链接到此标题。"></a></h3>
 <ol class="simple">
 <li><p><strong>每个阶段性成果都 commit 一次</strong>。一个功能调通了就提交,别攒一天。commit message 写清楚做了什么,未来的你会感谢现在的你。</p></li>
 <li><p><strong>一定要推到云端</strong>（Gitee / GitHub / GitLab,建议开私有仓库）。只在本地 commit,硬盘挂了就全没了。</p></li>
@@ -564,8 +560,8 @@ Thumbs.db
 </section>
 </section>
 <hr class="docutils" />
-<section id="id9">
-<h2>参考<a class="headerlink" href="#id9" title="链接到此标题。"></a></h2>
+<section id="id8">
+<h2>参考<a class="headerlink" href="#id8" title="链接到此标题。"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://probe.rs/docs/">probe-rs 官方文档</a> —— 尤其是 Debugger 一节的 <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> 完整字段说明</p></li>
 <li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=probe-rs.probe-rs-debugger">probe-rs VSCode 插件</a></p></li>

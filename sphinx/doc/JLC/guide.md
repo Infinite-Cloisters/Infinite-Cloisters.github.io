@@ -211,7 +211,6 @@ CubeMX 里 Toolchain / IDE 选 **STM32CubeIDE**,生成完直接用 CLion 打开�
 ---
 
 ## 三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）
-## 三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）
 
 ST 官方的一体化 IDE,基于 Eclipse,**自带 CubeMX**,装完就能用,不需要额外配工具链。
 

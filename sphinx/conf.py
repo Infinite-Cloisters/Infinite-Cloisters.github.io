@@ -31,14 +31,29 @@ language = 'zh_CN'
 # html_theme = 'shibuya'
 html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
-html_search_language = 'zh'
 
-try:
-    import jieba
-    html_search_options = {
-        'type': 'test',
-        'language': 'zh',
-        'tokenizer': 'jieba.sphinx_zh'
-    }
-except:
-    pass
+import sphinx
+from pathlib import Path
+from sphinx.search.zh import SearchChinese
+
+html_search_language = 'zh'
+jieba_dict = Path(__file__).parent / 'jieba_dict.txt'
+html_search_options = {'dict': str(jieba_dict)} if jieba_dict.is_file() else {}
+
+
+def zh_js_stemmer_code() -> str:
+    js_dir = Path(sphinx.__file__).parent / 'search' / 'minified-js'
+
+    base = (js_dir / 'base-stemmer.js').read_text(encoding='utf-8')
+    english = (js_dir / 'english-stemmer.js').read_text(encoding='utf-8')
+
+    return f'{base}\n{english}\nwindow.Stemmer = EnglishStemmer;'
+
+
+class ChineseSearch(SearchChinese):
+    js_stemmer_rawcode = '' 
+    js_stemmer_code = zh_js_stemmer_code()
+
+
+def setup(app):
+    app.add_search_language(ChineseSearch)

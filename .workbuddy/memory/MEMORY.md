@@ -7,10 +7,11 @@
 
 - 源码在 `sphinx/`，构建产物在 `docs/`（GitHub Pages 直接吃 `docs/`）。
 - 构建链：`make -C sphinx html` → `cp -r sphinx/_build/html/* ./docs/` → `python strip_query_strings.py ./docs`
-  - **最后一步必须跑**：`strip_query_strings.py` 去掉 Sphinx 生成的 `?v=<hash>` 缓存串，否则 GitHub Pages 上 CSS/JS 404。校验：`grep -rlo "?v=[0-9a-f]" docs --include=*.html | wc -l` 应为 0。**这一步必须真跑**——曾出现过脚本报告 `30/30 modified` 但改动没落盘、查询串仍在的情况，重跑一次即正常；凡是脚本自称改了多少个文件，都以 grep 计数为准。
+  - **最后一步必须跑**：`strip_query_strings.py` 去掉 Sphinx/主题生成的缓存串（`?v=<hash>` 与 pydata 系的 `?digest=<hash>`），否则 GitHub Pages 上 CSS/JS 404。校验：`grep -rlo '?v=[0-9a-f]\|?digest=' docs --include=*.html | wc -l` 应为 0。**这一步必须真跑**——曾出现过脚本报告 `30/30 modified` 但改动没落盘、查询串仍在的情况，重跑一次即正常；凡是脚本自称改了多少个文件，都以 grep 计数为准。
+  - ⚠️ **沙箱的目录视图会瞬时不一致**：`cp -r` 可能报「大量文件不存在 / Permission denied」，`ls` 可能只列出两个文件，`Path.rglob('*.html')` 可能返回 0 个。遇到「文件不见了」的结论**必须换一条新命令复核**，不要据此重跑构建或做破坏性操作（2026-10-12 曾两次误判）。
   - `build.sh` / `build.ps1` 里的 `make clean` 与 `rm -rf ./docs/*` 会触发沙箱批量删除拦截，**不要照跑**；直接增量 `make html` + `cp -r` 覆盖即可。
   - 还需保证 `docs/.nojekyll` 与 `docs/CNAME` 存在。
-- `conf.py`：`extensions = ['recommonmark','sphinx_markdown_tables','sphinx_copybutton']`，`source_suffix = {'.rst':'restructuredtext', '.md':'markdown'}`，主题 `sphinx_rtd_theme`，`language='zh_CN'`，`html_static_path=['_static']`。
+- `conf.py`：`extensions = ['recommonmark','sphinx_markdown_tables','sphinx_copybutton']`，`source_suffix = {'.rst':'restructuredtext', '.md':'markdown'}`，主题 **`sphinx_book_theme`**（pydata 系；早期用过 rtd/shibuya，都注释掉了），`language='zh_CN'`，`html_static_path=['_static']`。
 - 每个 doc 子目录有 `index.rst`（含 `.. _label:`、标题、`.. toctree::`），正文可用 `.md`。
 - **markdown 里不能写 RST 指令**（recommonmark 不认 `.. note::`，也不认 ```eval_rst 围栏块，后者还会报 Pygments lexer 警告）。想用主题的提示框必须写 `.rst`；markdown 只能用引用块 `> **备注**` 代替。markdown 中也不要写 toctree——toctree 统一放在该目录的 `index.rst` 里。
 
@@ -32,6 +33,38 @@
    ```
    少了那个空行，docutils 会把 `prepare`/`lab1` 当成选项去解析，报 `ERROR: Error in "toctree" directive: invalid option block.`，并且**整棵 toctree 被静默丢弃** → 该目录下所有文档报 `WARNING: document isn't included in any toctree`，侧栏只剩文档标题、层级全平。排查口诀：只要看到 `toc.not_included`，先查 toctree 选项块后的空行。
 8. **验证 toctree 是否真的生效**：`make -C sphinx html` 后 grep `invalid option block` 应为空；再检查产物里 `<h2>`/`<section>` 的兄弟关系，**不要**用「toctree 是否在第一个 `<section>` 之前」判断——文档标题本身就会生成一层 `<section>`。
+
+## 全文搜索（中文）—— 有上游 bug，已打补丁，别删
+
+**Sphinx 9.1.0 的 zh 搜索是坏的**（9.1.0 已是最新版，上游未修）。`sphinx/search/__init__.py:588` 用 `language_name` 拼 JS 别名：
+
+```python
+f'window.Stemmer = {self.lang.language_name}Stemmer;'
+```
+
+而 `SearchChinese.language_name = 'Chinese'`，它复用的词干文件却是 `js_stemmer_rawcode = 'english-stemmer.js'`（定义的是 `EnglishStemmer`）。于是 `_static/language_data.js` 末行成了 `window.Stemmer = ChineseStemmer;` → **该文件加载即抛 `ReferenceError`** → `searchtools.js` 跟着抛错、`Search.query` 挂不上 → 搜索页永远停在「正在搜索中..」，结果恒为空。
+
+修法在 `sphinx/conf.py` 里注册子类（**这段不能删**）：
+
+```python
+class _ChineseSearch(_SearchChinese):
+    lang = 'zh'                 # 覆盖内建注册表，使 html_search_language='zh' 用到本类
+    js_stemmer_rawcode = ''     # 置空 -> 走 self.lang.js_stemmer_code 分支
+    js_stemmer_code = _zh_js_stemmer_code()   # base + english + window.Stemmer = EnglishStemmer;
+
+def setup(app):
+    app.add_search_language(_ChineseSearch)
+```
+
+- 原理：`add_search_language(cls)` 做 `languages[cls.lang] = cls`，`IndexBuilder` 查 `languages.get(html_search_language)`，所以 `lang='zh'` 即可覆盖内建。
+- 必须用 `EnglishStemmer` 而非空 stemmer：Python 侧 `SearchChinese.stem()` 也用英文 snowball 词干处理拉丁词，两边要一致。
+- 副作用：不再往 `_static/` 拷 `base-stemmer.js`/`english-stemmer.js`（无任何引用的参考文件）。
+
+**jieba 是硬依赖**（在 requirements.txt 里）：`sphinx/search/zh.py` 是 `try: import jieba except ImportError:` → `cut_for_search` 永远 `yield from ()`，**没装也不报错**，只是索引里一个中文词都没有。排查中文搜索失败时先确认构建解释器（`C:\Users\28035\AppData\Local\Python\pythoncore-3.14-64\python.exe`，不是 PATH 里的 managed 3.13.12）里有 jieba。
+
+`html_search_options` **只认 `dict` 一个键**（自定义词典路径）。写 `type`/`language`/`tokenizer` 会被静默忽略；词典文件不存在时要走 `is_file()` 判断，别让异常被裸 `except` 吞掉。
+
+**排查手法（可复用）**：往页面 `<head>` 注入 `window.addEventListener('error', ...)` 探针把错误写进 `document.title`，再用 Edge headless `--virtual-time-budget=20000 --dump-dom` 读回；比猜快得多。搜索是否正常，看 `ul.search` 里的 `li` 条数。
 
 ## 文档写作约定（用户明确要求）
 

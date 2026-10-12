@@ -15,5 +15,8 @@ archlinux安装相关依赖(sphinx被自动安装):
 ```bash
 sudo pacman -Sy
 sudo pacman -S yay python
-yay -S python-sphinx-markdown-tables python-sphinx_rtd_theme python-sphinx-copybutton
+yay -S python-sphinx-markdown-tables python-sphinx-copybutton 
+#yay -S python-sphinx_rtd_theme 
+yay -S shibuya-bin
+
 ```

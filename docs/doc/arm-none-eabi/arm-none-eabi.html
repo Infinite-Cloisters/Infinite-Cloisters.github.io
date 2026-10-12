@@ -1,112 +1,171 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<html lang="zh-CN" data-accent-color="violet" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发) &mdash; Documentation 0.1.9 文档</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-
-  
-      <script src="../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=53716796"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../_static/translations.js?v=540d3cec"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="../../genindex.html" />
-    <link rel="search" title="搜索" href="../../search.html" />
-    <link rel="next" title="使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试" href="gdb.html" />
-    <link rel="prev" title="ARM Toolchain" href="index.html" /> 
-</head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            Documentation
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发) - Documentation 0.1.9 文档</title><link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试" href="gdb.html" /><link rel="prev" title="ARM Toolchain" href="index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      
+      
+      <strong>Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">ARM Toolchain</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">概要</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">适用场景</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">下载与安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">安装构建工具(必须)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">开发环境建议</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cmake">CMake 使用示例</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">常见问题与排查</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">实用命令汇总</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">参考链接</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../wsl/wsl.html">在 Windows 上使用 WSL(以 Arch Linux 为例)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wsl/wsl_use.html">在 VSCode 上使用 WSL2</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linux/linux.html">Linux 相关</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ARM Toolchain</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gdb.html">使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../techpapers/index.html">西北工业大学科技论文写作</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rust-stm32/rust-stm32.html">使用rust开发stm32体验</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../label-studio/backend.html">Backend_ml 接入</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../github/git.html">GIT工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../github/githubpage.html">使用 GitHub Pages 挂载静态网页</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/nuedc.html">电赛介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/prepare.html">赛事准备相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/problem.html">全国大学生电子设计竞赛近年赛题</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../JLC/guide.html">开发环境与工具链选择</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../techpapers/index.html">西北工业大学科技论文写作</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/prepare.html">环境准备：宏包与文档从哪里来</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/lab1.html">实验课 01：公式、表格、图等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/lab2.html">实验课 02：列表、算法、颜色等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/lab3.html">实验课 03：绘图（选学）</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Documentation</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="页面导航">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">ARM Toolchain</a></li>
-      <li class="breadcrumb-item active">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/doc/arm-none-eabi/arm-none-eabi.md.txt" rel="nofollow"> 查看页面源码</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="windows-arm-gnu-toolchain-stm32">
-<h1>在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)<a class="headerlink" href="#windows-arm-gnu-toolchain-stm32" title="链接到此标题。"></a></h1>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id1">&#27010;&#35201;</a></li>
+<li><a class="reference internal" href="#id2">&#36866;&#29992;&#22330;&#26223;</a></li>
+<li><a class="reference internal" href="#id3">&#19979;&#36733;&#19982;&#23433;&#35013;</a></li>
+<li><a class="reference internal" href="#id4">&#23433;&#35013;&#26500;&#24314;&#24037;&#20855;(&#24517;&#39035;)</a></li>
+<li><a class="reference internal" href="#id5">&#24320;&#21457;&#29615;&#22659;&#24314;&#35758;</a></li>
+<li><a class="reference internal" href="#cmake">CMake &#20351;&#29992;&#31034;&#20363;</a></li>
+<li><a class="reference internal" href="#id6">&#24120;&#35265;&#38382;&#39064;&#19982;&#25490;&#26597;</a></li>
+<li><a class="reference internal" href="#id7">&#23454;&#29992;&#21629;&#20196;&#27719;&#24635;</a></li>
+<li><a class="reference internal" href="#id8">&#21442;&#32771;&#38142;&#25509;</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">ARM Toolchain</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="windows-arm-gnu-toolchain-stm32">
+<h1>在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)<a class="headerlink" href="#windows-arm-gnu-toolchain-stm32" title="链接到此标题。">#</a></h1>
 <section id="id1">
-<h2>概要<a class="headerlink" href="#id1" title="链接到此标题。"></a></h2>
+<h2>概要<a class="headerlink" href="#id1" title="链接到此标题。">#</a></h2>
 <p>本文档说明在 Windows 平台上获取并配置 ARM GNU Toolchain，配合常见构建工具(CMake、Make/Ninja)以及在 VS Code / CLion 中进行开发的建议步骤与常见问题排查.</p>
 </section>
 <section id="id2">
-<h2>适用场景<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<h2>适用场景<a class="headerlink" href="#id2" title="链接到此标题。">#</a></h2>
 <ul class="simple">
 <li><p>使用 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-*</span></code> 系列工具链进行裸机/嵌入式开发(如 STM32、nRF 等).</p></li>
 <li><p>在 Windows 环境下使用 CMake + GNU 工具链构建工程.</p></li>
@@ -114,7 +173,7 @@
 </ul>
 </section>
 <section id="id3">
-<h2>下载与安装<a class="headerlink" href="#id3" title="链接到此标题。"></a></h2>
+<h2>下载与安装<a class="headerlink" href="#id3" title="链接到此标题。">#</a></h2>
 <ol class="simple">
 <li><p>前往官方页面下载 ARM GNU Toolchain(Windows 安装包):
 <a class="reference external" href="https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads">&quot;工具链下载地址&quot;</a></p></li>
@@ -122,29 +181,29 @@
 <code class="docutils literal notranslate"><span class="pre">C:\Program</span> <span class="pre">Files\Arm\GNU</span> <span class="pre">Toolchain\mingw-w64-x86_64-arm-none-eabi\bin</span></code></p></li>
 <li><p>将工具链的 <code class="docutils literal notranslate"><span class="pre">bin</span></code> 目录加入系统 <code class="docutils literal notranslate"><span class="pre">PATH</span></code>(建议为当前用户环境变量).在 PowerShell(以普通用户)中可执行:</p></li>
 </ol>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 将工具链目录追加到当前用户的 Path(请根据实际路径修改)</span>
-<span class="nv">$toolPath</span> <span class="p">=</span> <span class="s1">&#39;C:\Program Files\Arm\GNU Toolchain\mingw-w64-x86_64-arm-none-eabi\bin&#39;</span>
-<span class="no">[Environment]</span><span class="p">::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span><span class="s1">&#39;Path&#39;</span><span class="p">,</span> <span class="nv">$env:Path</span> <span class="p">+</span> <span class="s1">&#39;;&#39;</span> <span class="p">+</span> <span class="nv">$toolPath</span><span class="p">,</span> <span class="s1">&#39;User&#39;</span><span class="p">)</span>
-<span class="c"># 使当前会话立即可用</span>
-<span class="nv">$env:Path</span> <span class="p">+=</span> <span class="s1">&#39;;&#39;</span> <span class="p">+</span> <span class="nv">$toolPath</span>
-</pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># 将工具链目录追加到当前用户的 Path(请根据实际路径修改)</span>
+</span><span data-line="2"><span class="nv">$toolPath</span> <span class="p">=</span> <span class="s1">&#39;C:\Program Files\Arm\GNU Toolchain\mingw-w64-x86_64-arm-none-eabi\bin&#39;</span>
+</span><span data-line="3"><span class="no">[Environment]</span><span class="p">::</span><span class="n">SetEnvironmentVariable</span><span class="p">(</span><span class="s1">&#39;Path&#39;</span><span class="p">,</span> <span class="nv">$env:Path</span> <span class="p">+</span> <span class="s1">&#39;;&#39;</span> <span class="p">+</span> <span class="nv">$toolPath</span><span class="p">,</span> <span class="s1">&#39;User&#39;</span><span class="p">)</span>
+</span><span data-line="4"><span class="c"># 使当前会话立即可用</span>
+</span><span data-line="5"><span class="nv">$env:Path</span> <span class="p">+=</span> <span class="s1">&#39;;&#39;</span> <span class="p">+</span> <span class="nv">$toolPath</span>
+</span></pre></div>
 </div>
 <p>注意:如果路径中包含空格，请按示例完整使用引号并替换为实际路径.</p>
 <ol class="simple">
 <li><p>安装完成后验证:</p></li>
 </ol>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">arm-none-eabi-gcc</span> <span class="p">-</span><span class="n">-version</span>
-<span class="n">arm-none-eabi-objdump</span> <span class="p">-</span><span class="n">-version</span>
-</pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">arm-none-eabi-gcc</span> <span class="p">-</span><span class="n">-version</span>
+</span><span data-line="2"><span class="n">arm-none-eabi-objdump</span> <span class="p">-</span><span class="n">-version</span>
+</span></pre></div>
 </div>
 </section>
 <section id="id4">
-<h2>安装构建工具(必须)<a class="headerlink" href="#id4" title="链接到此标题。"></a></h2>
+<h2>安装构建工具(必须)<a class="headerlink" href="#id4" title="链接到此标题。">#</a></h2>
 <p>可使用 <code class="docutils literal notranslate"><span class="pre">winget</span></code> 安装常见构建工具与辅助工具:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">winget</span> <span class="n">install</span> <span class="n">cmake</span>
-<span class="n">winget</span> <span class="n">install</span> <span class="n">ezwinports</span><span class="p">.</span><span class="n">make</span>
-<span class="n">winget</span> <span class="n">install</span> <span class="n">Ninja-build</span><span class="p">.</span><span class="n">Ninja</span>
-</pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">winget</span> <span class="n">install</span> <span class="n">cmake</span>
+</span><span data-line="2"><span class="n">winget</span> <span class="n">install</span> <span class="n">ezwinports</span><span class="p">.</span><span class="n">make</span>
+</span><span data-line="3"><span class="n">winget</span> <span class="n">install</span> <span class="n">Ninja-build</span><span class="p">.</span><span class="n">Ninja</span>
+</span></pre></div>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cmake</span></code>:项目生成器</p></li>
@@ -153,7 +212,7 @@
 </ul>
 </section>
 <section id="id5">
-<h2>开发环境建议<a class="headerlink" href="#id5" title="链接到此标题。"></a></h2>
+<h2>开发环境建议<a class="headerlink" href="#id5" title="链接到此标题。">#</a></h2>
 <ul class="simple">
 <li><p>CLion:对 CMake 支持良好，可与 STM32CubeMX 结合(在 CubeMX 中选择导出为 CubeIDE ).</p></li>
 <li><p>VS Code:推荐安装扩展 <code class="docutils literal notranslate"><span class="pre">CMake</span> <span class="pre">Tools</span></code>(管理构建)和<code class="docutils literal notranslate"><span class="pre">CMake</span> <span class="pre">IntelliSence</span></code>(推荐)或者 <code class="docutils literal notranslate"><span class="pre">CMake</span> <span class="pre">Language</span> <span class="pre">Support</span></code>(CMake 高亮/提示).</p>
@@ -164,25 +223,25 @@
 </ul>
 </section>
 <section id="cmake">
-<h2>CMake 使用示例<a class="headerlink" href="#cmake" title="链接到此标题。"></a></h2>
+<h2>CMake 使用示例<a class="headerlink" href="#cmake" title="链接到此标题。">#</a></h2>
 <ol class="simple">
 <li><p>使用 MinGW Makefiles:</p></li>
 </ol>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="n">-B</span> <span class="n">build</span> <span class="n">-G</span> <span class="s2">&quot;MinGW Makefiles&quot;</span>
-<span class="n">cmake</span> <span class="p">-</span><span class="n">-build</span> <span class="n">build</span> <span class="p">-</span><span class="n">-target</span> <span class="n">all</span> <span class="n">-j</span> <span class="p">&lt;</span><span class="n">threads</span><span class="p">&gt;</span>
-</pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">cmake</span> <span class="n">-B</span> <span class="n">build</span> <span class="n">-G</span> <span class="s2">&quot;MinGW Makefiles&quot;</span>
+</span><span data-line="2"><span class="n">cmake</span> <span class="p">-</span><span class="n">-build</span> <span class="n">build</span> <span class="p">-</span><span class="n">-target</span> <span class="n">all</span> <span class="n">-j</span> <span class="p">&lt;</span><span class="n">threads</span><span class="p">&gt;</span>
+</span></pre></div>
 </div>
 <ol class="simple">
 <li><p>使用 Ninja(当已安装 <code class="docutils literal notranslate"><span class="pre">ninja</span></code> 时更推荐):</p></li>
 </ol>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">cmake</span> <span class="n">-B</span> <span class="n">build</span> <span class="n">-G</span> <span class="s2">&quot;Ninja&quot;</span>
-<span class="n">cmake</span> <span class="p">-</span><span class="n">-build</span> <span class="n">build</span> <span class="n">-j</span> <span class="p">&lt;</span><span class="n">threads</span><span class="p">&gt;</span>
-</pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">cmake</span> <span class="n">-B</span> <span class="n">build</span> <span class="n">-G</span> <span class="s2">&quot;Ninja&quot;</span>
+</span><span data-line="2"><span class="n">cmake</span> <span class="p">-</span><span class="n">-build</span> <span class="n">build</span> <span class="n">-j</span> <span class="p">&lt;</span><span class="n">threads</span><span class="p">&gt;</span>
+</span></pre></div>
 </div>
 <p>将 <code class="docutils literal notranslate"><span class="pre">&lt;threads&gt;</span></code> 替换为 CPU 核心数(合适值)或 直接不写 <code class="docutils literal notranslate"><span class="pre">-j</span> <span class="pre">&lt;threads&gt;</span></code> .</p>
 </section>
 <section id="id6">
-<h2>常见问题与排查<a class="headerlink" href="#id6" title="链接到此标题。"></a></h2>
+<h2>常见问题与排查<a class="headerlink" href="#id6" title="链接到此标题。">#</a></h2>
 <ul class="simple">
 <li><p>无法找到 <code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span></code>:确认 <code class="docutils literal notranslate"><span class="pre">PATH</span></code> 是否已正确追加且终端已重启或 <code class="docutils literal notranslate"><span class="pre">$env:Path</span></code> 已更新.可用 <code class="docutils literal notranslate"><span class="pre">Get-Command</span> <span class="pre">arm-none-eabi-gcc</span></code> 验证.</p></li>
 <li><p>链接或编译失败:检查使用的 CMake 工具链文件(<code class="docutils literal notranslate"><span class="pre">-DCMAKE_TOOLCHAIN_FILE=...</span></code>)是否指向正确的交叉编译器路径，以及 <code class="docutils literal notranslate"><span class="pre">CMAKE_C_COMPILER</span></code>/<code class="docutils literal notranslate"><span class="pre">CMAKE_ASM_COMPILER</span></code> 是否正确设置.</p></li>
@@ -190,7 +249,7 @@
 </ul>
 </section>
 <section id="id7">
-<h2>实用命令汇总<a class="headerlink" href="#id7" title="链接到此标题。"></a></h2>
+<h2>实用命令汇总<a class="headerlink" href="#id7" title="链接到此标题。">#</a></h2>
 <ul class="simple">
 <li><p>验证工具链:<code class="docutils literal notranslate"><span class="pre">arm-none-eabi-gcc</span> <span class="pre">--version</span></code></p></li>
 <li><p>显示 PATH 内容(PowerShell):<code class="docutils literal notranslate"><span class="pre">$env:Path</span> <span class="pre">-split</span> <span class="pre">';'</span></code></p></li>
@@ -198,7 +257,7 @@
 </ul>
 </section>
 <section id="id8">
-<h2>参考链接<a class="headerlink" href="#id8" title="链接到此标题。"></a></h2>
+<h2>参考链接<a class="headerlink" href="#id8" title="链接到此标题。">#</a></h2>
 <ul class="simple">
 <li><p>ARM GNU Toolchain 下载:<a class="reference external" href="https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads,%22%E5%B7%A5%E5%85%B7%E9%93%BE%E4%B8%8B%E8%BD%BD%22">官方下载链接</a></p></li>
 <li><p>CMake 官方网站:<a class="reference external" href="https://cmake.org/,%22%E5%AE%98%E7%BD%91%22">CMake官网</a></p></li>
@@ -207,35 +266,51 @@
 </section>
 </section>
 
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="index.html" class="btn btn-neutral float-left" title="ARM Toolchain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="gdb.html" class="btn btn-neutral float-right" title="使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; 版权所有 2026, infinite-cloisters。</p>
-  </div>
-
-  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
-   
-
-</footer>
-        </div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">ARM Toolchain</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="gdb.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试</div>
       </div>
-    </section>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, infinite-cloisters</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</footer>
+      <script src="../../_static/documentation_options.js?v=53716796"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/translations.js?v=540d3cec"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
 </html>

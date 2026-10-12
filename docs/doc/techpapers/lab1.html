@@ -1,198 +1,451 @@
+
 <!DOCTYPE html>
-<html lang="zh-CN" data-accent-color="violet" data-content_root="../../">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>实验课 01：公式、表格、图等 - Documentation 0.1.9 文档</title><link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="实验课 02：列表、算法、颜色等" href="lab2.html" /><link rel="prev" title="环境准备：宏包与文档从哪里来" href="prepare.html" /><script>
-    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
-    setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
-    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+
+
+<html lang="zh-CN" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>实验课 01：公式、表格、图等 &#8212; Documentation 0.1.9 文档</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=4418a689" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-}
-</style>
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=c587b00a"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../_static/translations.js?v=540d3cec"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'doc/techpapers/lab1';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="实验课 02：列表、算法、颜色等" href="lab2.html" />
+    <link rel="prev" title="环境准备：宏包与文档从哪里来" href="prepare.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="" />
+  
     
-  <meta property="og:type" content="website"/><meta property="og:title" content="实验课 01：公式、表格、图等"/>
-    <meta name="twitter:card" content="summary"/>
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
   </head>
-<body><div class="sy-head">
-  <div class="sy-head-blur"></div>
-  <div class="sy-head-inner sy-container mx-auto">
-    <a class="sy-head-brand" href="../../index.html">
-      
-      
-      <strong>Documentation</strong>
-    </a>
-    <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"></nav>
-      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
-  <input type="text" name="q" placeholder="搜索" />
-  <kbd>/</kbd>
-</form><div class="sy-head-socials"></div></div>
-    </div>
-    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
-data-aria-auto="切换到亮色模式"
-data-aria-light="切换到暗色模式"
-data-aria-dark="切换到自动模式">
-<i class="i-lucide theme-icon"></i>
-</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
-        <div class="hamburger">
-          <span class="hamburger_1"></span>
-          <span class="hamburger_2"></span>
-          <span class="hamburger_3"></span>
-        </div>
-      </button>
-    </div>
-  </div>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="版本警告"></aside>
 </div>
-<div class="sy-page sy-container flex mx-auto">
-  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
-    <div class="sy-lside-inner md:sticky">
-      <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><ul>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="当前页面">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Documentation 0.1.9 文档</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../wsl/wsl.html">在 Windows 上使用 WSL(以 Arch Linux 为例)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../wsl/wsl_use.html">在 VSCode 上使用 WSL2</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../linux/linux.html">Linux 相关</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/arm-none-eabi.html">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/gdb.html">使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../rust-stm32/rust-stm32.html">使用rust开发stm32体验</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../label-studio/backend.html">Backend_ml 接入</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../github/index.html">GitHub使用</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../github/git.html">GIT工具</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../github/githubpage.html">使用 GitHub Pages 挂载静态网页</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/nuedc.html">电赛介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/prepare.html">赛事准备相关</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/faq.html">FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/problem.html">全国大学生电子设计竞赛近年赛题</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../JLC/guide.html">开发环境与工具链选择</a></li>
 </ul>
-</li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">西北工业大学科技论文写作</a><ul class="current">
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">西北工业大学科技论文写作</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="prepare.html">环境准备：宏包与文档从哪里来</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">实验课 01：公式、表格、图等</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">实验课 01：公式、表格、图等</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab2.html">实验课 02：列表、算法、颜色等</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab3.html">实验课 03：绘图（选学）</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
-        </div>
-      </div>
     </div>
-  </aside>
-  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
-  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
-    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
-      <i class="i-lucide close"></i>
-    </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#id2">&#32534;&#35793;&#29615;&#22659;&#19982;&#23548;&#35328;&#21306;</a></li>
-<li><a class="reference internal" href="#id3">&#23454;&#39564;&#39064;&#65306;&#20844;&#24335; 1&#65288;&#21021;&#32423;&#65289;&#34892;&#20869;&#20844;&#24335;</a></li>
-<li><a class="reference internal" href="#id4">&#23454;&#39564;&#39064;&#65306;&#20844;&#24335; 2&#65288;&#20013;&#32423;&#65289;&#34892;&#38388;&#20844;&#24335;</a></li>
-<li><a class="reference internal" href="#id5">&#23454;&#39564;&#39064;&#65306;&#20844;&#24335; 3&#65288;&#39640;&#32423;&#65289;&#22797;&#26434;&#20844;&#24335;&#30340;&#22810;&#34892;&#25490;&#21015;</a></li>
-<li><a class="reference internal" href="#id6">&#23454;&#39564;&#39064;&#65306;&#20844;&#24335; 4&#65288;&#36873;&#20570;&#65289;&#22797;&#26434;&#20844;&#24335;&#32508;&#21512;</a></li>
-<li><a class="reference internal" href="#id7">&#23454;&#39564;&#39064;&#65306;&#34920;&#26684; 1&#65288;&#21021;&#32423;&#65289;2&#215;2 &#31616;&#21333;&#34920;&#26684;</a></li>
-<li><a class="reference internal" href="#id8">&#23454;&#39564;&#39064;&#65306;&#34920;&#26684; 2&#65288;&#20013;&#32423;&#65289;&#24102;&#26631;&#39064;&#34892;&#21644;&#23545;&#40784;&#35774;&#32622;&#30340;&#34920;&#26684;</a></li>
-<li><a class="reference internal" href="#id9">&#23454;&#39564;&#39064;&#65306;&#34920;&#26684; 3&#65288;&#39640;&#32423;&#65289;&#22797;&#26434;&#34920;&#26684;&#19982;&#21333;&#20803;&#26684;&#21512;&#24182;</a></li>
-<li><a class="reference internal" href="#id10">&#23454;&#39564;&#39064;&#65306;&#34920;&#26684; 4&#65288;&#36873;&#20570;&#65289;&#22797;&#26434;&#23884;&#22871;&#34920;&#26684;&#19982;&#21015;&#23485;&#25511;&#21046;</a></li>
-<li><a class="reference internal" href="#id11">&#23454;&#39564;&#39064;&#65306;&#22270;&#29255; 1&#65288;&#21021;&#32423;&#65289;&#22522;&#26412;&#22270;&#29255;&#25554;&#20837;</a></li>
-<li><a class="reference internal" href="#id12">&#23454;&#39564;&#39064;&#65306;&#22270;&#29255; 2&#65288;&#20013;&#32423;&#65289;&#35843;&#25972;&#22270;&#29255;&#22823;&#23567;&#19982;&#20301;&#32622;</a></li>
-<li><a class="reference internal" href="#id13">&#23454;&#39564;&#39064;&#65306;&#22270;&#29255; 3&#65288;&#39640;&#32423;&#65289;&#22810;&#24352;&#22270;&#29255;&#24182;&#25490;&#26174;&#31034;</a></li>
-<li><a class="reference internal" href="#id14">&#23454;&#39564;&#39064;&#65306;&#22270;&#29255; 4&#65288;&#36873;&#20570;&#65289;&#22270;&#29255;&#19982;&#25991;&#23383;&#28151;&#25490;</a></li>
-<li><a class="reference internal" href="#id15">&#23567;&#32467;</a></li>
-</ul>
-</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
-  </aside>
-  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
-  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
-<div class="sy-breadcrumbs" role="navigation">
-  <div class="sy-breadcrumbs-inner flex items-center">
-    <div class="md:hidden mr-3">
-      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
-        <i class="i-lucide menu"></i>
-      </button>
+</nav></div>
     </div>
-    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="../../index.html"><span itemprop="name">Documentation</span></a>
-        <span>/</span>
-        <meta itemprop="position" content="1" />
-      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="index.html"><span itemprop="name">西北工业大学科技论文写作</span></a>
-        <span>/</span>
-        <meta itemprop="position" content="2" />
-      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">实验课 01：公式、表格、图等</strong>
-        <meta itemprop="position" content="3" />
-      </li></ol>
-    <div class="xl:hidden ml-1">
-      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
-        aria-expanded="false">
-        <i class="i-lucide outdent"></i>
-      </button>
-    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-</div><div class="flex flex-col break-words justify-between">
-      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
-  <article class="yue" role="main">
-          <section id="id1">
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="下载此页面">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/doc/techpapers/lab1.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="下载源文件"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="列印成 PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="全屏模式"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="亮色"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="暗色"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>亮色</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>暗色</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>实验课 01：公式、表格、图等</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> 目录 </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">编译环境与导言区</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">实验题：公式 1（初级）行内公式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">实验题：公式 2（中级）行间公式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">实验题：公式 3（高级）复杂公式的多行排列</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">实验题：公式 4（选做）复杂公式综合</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">实验题：表格 1（初级）2×2 简单表格</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">实验题：表格 2（中级）带标题行和对齐设置的表格</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">实验题：表格 3（高级）复杂表格与单元格合并</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">实验题：表格 4（选做）复杂嵌套表格与列宽控制</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">实验题：图片 1（初级）基本图片插入</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">实验题：图片 2（中级）调整图片大小与位置</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">实验题：图片 3（高级）多张图片并排显示</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">实验题：图片 4（选做）图片与文字混排</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">小结</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
 <h1>实验课 01：公式、表格、图等<a class="headerlink" href="#id1" title="链接到此标题。">#</a></h1>
 <p>本题集来自《科技论文写作》课程实验课 01《LaTeX 的使用（公式、表格、图等）》。每道题的代码框架都是一份<strong>完整可编译的文档</strong>，只需要把注释标记的位置补全。</p>
 <p>每道题都附有<strong>实际编译渲染的结果图</strong>（TeX Live 2026 + XeLaTeX），代码均可直接编译。</p>
 <section id="id2">
 <h2>编译环境与导言区<a class="headerlink" href="#id2" title="链接到此标题。">#</a></h2>
 <p>文档类使用 <code class="docutils literal notranslate"><span class="pre">ctexart</span></code>，导言区如下:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\documentclass</span><span class="nb">{</span>ctexart<span class="nb">}</span>  <span class="c">% 使用 ctexart 类来支持中文</span>
-</span><span data-line="2"><span class="k">\usepackage</span><span class="nb">{</span>graphicx<span class="nb">}</span>    <span class="c">% 插入图片的包</span>
-</span><span data-line="3"><span class="k">\usepackage</span><span class="nb">{</span>amsmath<span class="nb">}</span>     <span class="c">% 数学公式支持</span>
-</span><span data-line="4"><span class="k">\usepackage</span><span class="nb">{</span>biblatex<span class="nb">}</span>    <span class="c">% 引用文献的包</span>
-</span><span data-line="5"><span class="k">\usepackage</span><span class="nb">{</span>multirow<span class="nb">}</span>    <span class="c">% 多行表格支持</span>
-</span><span data-line="6"><span class="k">\usepackage</span><span class="nb">{</span>verbatim<span class="nb">}</span>    <span class="c">% 引入 verbatim 包来原样显示文本</span>
-</span><span data-line="7"><span class="k">\addbibresource</span><span class="nb">{</span>references.bib<span class="nb">}</span>  <span class="c">% 引用 bib 文件</span>
-</span><span data-line="8">
-</span><span data-line="9"><span class="k">\title</span><span class="nb">{</span>LaTex实验课1<span class="nb">}</span>
-</span><span data-line="10"><span class="k">\author</span><span class="nb">{</span>课堂作业<span class="nb">}</span>
-</span><span data-line="11"><span class="k">\date</span><span class="nb">{</span><span class="k">\today</span><span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\documentclass</span><span class="nb">{</span>ctexart<span class="nb">}</span>  <span class="c">% 使用 ctexart 类来支持中文</span>
+<span class="k">\usepackage</span><span class="nb">{</span>graphicx<span class="nb">}</span>    <span class="c">% 插入图片的包</span>
+<span class="k">\usepackage</span><span class="nb">{</span>amsmath<span class="nb">}</span>     <span class="c">% 数学公式支持</span>
+<span class="k">\usepackage</span><span class="nb">{</span>biblatex<span class="nb">}</span>    <span class="c">% 引用文献的包</span>
+<span class="k">\usepackage</span><span class="nb">{</span>multirow<span class="nb">}</span>    <span class="c">% 多行表格支持</span>
+<span class="k">\usepackage</span><span class="nb">{</span>verbatim<span class="nb">}</span>    <span class="c">% 引入 verbatim 包来原样显示文本</span>
+<span class="k">\addbibresource</span><span class="nb">{</span>references.bib<span class="nb">}</span>  <span class="c">% 引用 bib 文件</span>
+
+<span class="k">\title</span><span class="nb">{</span>LaTex实验课1<span class="nb">}</span>
+<span class="k">\author</span><span class="nb">{</span>课堂作业<span class="nb">}</span>
+<span class="k">\date</span><span class="nb">{</span><span class="k">\today</span><span class="nb">}</span>
+</pre></div>
 </div>
 <p>正文结尾用 <code class="docutils literal notranslate"><span class="pre">\printbibliography</span></code> 自动生成参考文献，所以还需要一个 <code class="docutils literal notranslate"><span class="pre">references.bib</span></code> 文件:</p>
-<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nc">@article</span><span class="p">{</span><span class="nl">example1</span><span class="p">,</span>
-</span><span data-line="2"><span class="w">	</span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Author Name}</span><span class="p">,</span>
-</span><span data-line="3"><span class="w">	</span><span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Title of the Paper}</span><span class="p">,</span>
-</span><span data-line="4"><span class="w">	</span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Journal Name}</span><span class="p">,</span>
-</span><span data-line="5"><span class="w">	</span><span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2023}</span><span class="p">,</span>
-</span><span data-line="6"><span class="w">	</span><span class="na">volume</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10}</span><span class="p">,</span>
-</span><span data-line="7"><span class="w">	</span><span class="na">pages</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{1-10}</span>
-</span><span data-line="8"><span class="p">}</span>
-</span></pre></div>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">example1</span><span class="p">,</span>
+<span class="w">	</span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Author Name}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Title of the Paper}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Journal Name}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2023}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">volume</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10}</span><span class="p">,</span>
+<span class="w">	</span><span class="na">pages</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{1-10}</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p><strong>编译方式</strong>:</p>
 <ul class="simple">
@@ -207,8 +460,8 @@ data-aria-dark="切换到自动模式">
 <h2>实验题：公式 1（初级）行内公式<a class="headerlink" href="#id3" title="链接到此标题。">#</a></h2>
 <p><strong>题目</strong>：在文本中插入行内公式 <code class="docutils literal notranslate"><span class="pre">e^{i\pi}</span> <span class="pre">+</span> <span class="pre">1</span> <span class="pre">=</span> <span class="pre">0</span></code>，提示使用 <code class="docutils literal notranslate"><span class="pre">$...$</span></code>。</p>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1">这是一个简单的行内公式：<span class="s">$</span><span class="nb">e^{i</span><span class="nv">\pi</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="m">1</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="m">0</span><span class="s">$</span>。
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>这是一个简单的行内公式：<span class="s">$</span><span class="nb">e^{i</span><span class="nv">\pi</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="m">1</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="m">0</span><span class="s">$</span>。
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="行内公式" src="../../_images/lab1-01-inline-formula.png" /></p>
@@ -223,11 +476,11 @@ data-aria-dark="切换到自动模式">
 <h2>实验题：公式 2（中级）行间公式<a class="headerlink" href="#id4" title="链接到此标题。">#</a></h2>
 <p><strong>题目</strong>：插入二次方程求根公式，要求公式单独成行显示。提示使用 <code class="docutils literal notranslate"><span class="pre">\[</span> <span class="pre">...</span> <span class="pre">\]</span></code> 或 <code class="docutils literal notranslate"><span class="pre">$$</span> <span class="pre">...</span> <span class="pre">$$</span></code>。</p>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1">下面是二次方程求根公式：
-</span><span data-line="2"><span class="sb">\[</span>
-</span><span data-line="3"><span class="nb">	</span><span class="nv">\frac</span><span class="nb">{</span><span class="o">-</span><span class="nb">b </span><span class="nv">\pm</span><span class="nb"> </span><span class="nv">\sqrt</span><span class="nb">{b^</span><span class="m">2</span><span class="nb"> </span><span class="o">-</span><span class="nb"> </span><span class="m">4</span><span class="nb">ac}}{</span><span class="m">2</span><span class="nb">a}</span>
-</span><span data-line="4"><span class="s">\]</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>下面是二次方程求根公式：
+<span class="sb">\[</span>
+<span class="nb">	</span><span class="nv">\frac</span><span class="nb">{</span><span class="o">-</span><span class="nb">b </span><span class="nv">\pm</span><span class="nb"> </span><span class="nv">\sqrt</span><span class="nb">{b^</span><span class="m">2</span><span class="nb"> </span><span class="o">-</span><span class="nb"> </span><span class="m">4</span><span class="nb">ac}}{</span><span class="m">2</span><span class="nb">a}</span>
+<span class="s">\]</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="行间公式" src="../../_images/lab1-02-display-formula.png" /></p>
@@ -243,17 +496,17 @@ data-aria-dark="切换到自动模式">
 <section id="id5">
 <h2>实验题：公式 3（高级）复杂公式的多行排列<a class="headerlink" href="#id5" title="链接到此标题。">#</a></h2>
 <p><strong>题目</strong>：使用 <code class="docutils literal notranslate"><span class="pre">align</span></code> 环境排列下列公式:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1">a + b = c
-</span><span data-line="2">x = y/z + √w
-</span></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>a + b = c
+x = y/z + √w
+</pre></div>
 </div>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1">使用 <span class="k">\texttt</span><span class="nb">{</span>align<span class="nb">}</span> 环境排列多行公式：
-</span><span data-line="2"><span class="k">\begin</span><span class="nb">{</span>align<span class="nb">}</span>
-</span><span data-line="3">	a + b <span class="nb">&amp;</span>= c <span class="k">\\</span>
-</span><span data-line="4">	x <span class="nb">&amp;</span>= <span class="k">\frac</span><span class="nb">{</span>y<span class="nb">}{</span>z<span class="nb">}</span> + <span class="k">\sqrt</span><span class="nb">{</span>w<span class="nb">}</span>
-</span><span data-line="5"><span class="k">\end</span><span class="nb">{</span>align<span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>使用 <span class="k">\texttt</span><span class="nb">{</span>align<span class="nb">}</span> 环境排列多行公式：
+<span class="k">\begin</span><span class="nb">{</span>align<span class="nb">}</span>
+	a + b <span class="nb">&amp;</span>= c <span class="k">\\</span>
+	x <span class="nb">&amp;</span>= <span class="k">\frac</span><span class="nb">{</span>y<span class="nb">}{</span>z<span class="nb">}</span> + <span class="k">\sqrt</span><span class="nb">{</span>w<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>align<span class="nb">}</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="align 多行公式" src="../../_images/lab1-03-align.png" /></p>
@@ -274,15 +527,15 @@ data-aria-dark="切换到自动模式">
 <li><p>综合符号：结合希腊字母、矩阵求导与积分符号，表示一个矩阵微分方程。</p></li>
 </ol>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1">这里是一个复杂的微分方程和矩阵运算公式：
-</span><span data-line="2">
-</span><span data-line="3"><span class="sb">\[</span>
-</span><span data-line="4"><span class="nb">	</span><span class="nv">\frac</span><span class="nb">{d^</span><span class="m">2</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{y}</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb">}{dt^</span><span class="m">2</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="nv">\alpha</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{A} </span><span class="nv">\mathbf</span><span class="nb">{y}</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\beta</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{b},</span>
-</span><span data-line="5"><span class="nb">	</span><span class="nv">\quad</span><span class="nb"> </span><span class="nv">\text</span><span class="nb">{where} </span><span class="nv">\quad</span>
-</span><span data-line="6"><span class="nb">	</span><span class="nv">\mathbf</span><span class="nb">{A} </span><span class="o">=</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{pmatrix} a_{</span><span class="m">11</span><span class="nb">} &amp; a_{</span><span class="m">12</span><span class="nb">} </span><span class="nv">\\</span><span class="nb"> a_{</span><span class="m">21</span><span class="nb">} &amp; a_{</span><span class="m">22</span><span class="nb">} </span><span class="nv">\end</span><span class="nb">{pmatrix},</span>
-</span><span data-line="7"><span class="nb">	</span><span class="nv">\quad</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{y}</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{pmatrix} y_</span><span class="m">1</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"> y_</span><span class="m">2</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="nv">\end</span><span class="nb">{pmatrix}</span>
-</span><span data-line="8"><span class="s">\]</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>这里是一个复杂的微分方程和矩阵运算公式：
+
+<span class="sb">\[</span>
+<span class="nb">	</span><span class="nv">\frac</span><span class="nb">{d^</span><span class="m">2</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{y}</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb">}{dt^</span><span class="m">2</span><span class="nb">} </span><span class="o">+</span><span class="nb"> </span><span class="nv">\alpha</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{A} </span><span class="nv">\mathbf</span><span class="nb">{y}</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\beta</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{b},</span>
+<span class="nb">	</span><span class="nv">\quad</span><span class="nb"> </span><span class="nv">\text</span><span class="nb">{where} </span><span class="nv">\quad</span>
+<span class="nb">	</span><span class="nv">\mathbf</span><span class="nb">{A} </span><span class="o">=</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{pmatrix} a_{</span><span class="m">11</span><span class="nb">} &amp; a_{</span><span class="m">12</span><span class="nb">} </span><span class="nv">\\</span><span class="nb"> a_{</span><span class="m">21</span><span class="nb">} &amp; a_{</span><span class="m">22</span><span class="nb">} </span><span class="nv">\end</span><span class="nb">{pmatrix},</span>
+<span class="nb">	</span><span class="nv">\quad</span><span class="nb"> </span><span class="nv">\mathbf</span><span class="nb">{y}</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="o">=</span><span class="nb"> </span><span class="nv">\begin</span><span class="nb">{pmatrix} y_</span><span class="m">1</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="nv">\\</span><span class="nb"> y_</span><span class="m">2</span><span class="o">(</span><span class="nb">t</span><span class="o">)</span><span class="nb"> </span><span class="nv">\end</span><span class="nb">{pmatrix}</span>
+<span class="s">\]</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="复杂公式" src="../../_images/lab1-04-complex-formula.png" /></p>
@@ -300,18 +553,18 @@ data-aria-dark="切换到自动模式">
 <h2>实验题：表格 1（初级）2×2 简单表格<a class="headerlink" href="#id7" title="链接到此标题。">#</a></h2>
 <p><strong>题目</strong>：创建一个 2×2 的表格，内容为 A/B 和 C/D，表格要有边框。提示使用 <code class="docutils literal notranslate"><span class="pre">tabular</span></code> 环境并确保有 <code class="docutils literal notranslate"><span class="pre">|</span></code>。</p>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
-</span><span data-line="2">	<span class="k">\centering</span>
-</span><span data-line="3">	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|<span class="nb">}</span>
-</span><span data-line="4">		<span class="k">\hline</span>
-</span><span data-line="5">		A <span class="nb">&amp;</span> B <span class="k">\\</span>
-</span><span data-line="6">		<span class="k">\hline</span>
-</span><span data-line="7">		C <span class="nb">&amp;</span> D <span class="k">\\</span>
-</span><span data-line="8">		<span class="k">\hline</span>
-</span><span data-line="9">	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
-</span><span data-line="10">	<span class="k">\caption</span><span class="nb">{</span>简单的2x2表格<span class="nb">}</span>
-</span><span data-line="11"><span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|<span class="nb">}</span>
+		<span class="k">\hline</span>
+		A <span class="nb">&amp;</span> B <span class="k">\\</span>
+		<span class="k">\hline</span>
+		C <span class="nb">&amp;</span> D <span class="k">\\</span>
+		<span class="k">\hline</span>
+	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\caption</span><span class="nb">{</span>简单的2x2表格<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="2x2 表格" src="../../_images/lab1-05-basic-table.png" /></p>
@@ -328,20 +581,20 @@ data-aria-dark="切换到自动模式">
 <h2>实验题：表格 2（中级）带标题行和对齐设置的表格<a class="headerlink" href="#id8" title="链接到此标题。">#</a></h2>
 <p><strong>题目</strong>：创建 3×3 表格，表头为「编号 / 姓名 / 成绩」，数据为 <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">张三</span> <span class="pre">85</span></code>、<code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">李四</span> <span class="pre">90</span></code>、<code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">王五</span> <span class="pre">95</span></code>。要求<strong>姓名列左对齐、成绩列右对齐</strong>。</p>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
-</span><span data-line="2">	<span class="k">\centering</span>
-</span><span data-line="3">	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|l|r|<span class="nb">}</span>
-</span><span data-line="4">		<span class="k">\hline</span>
-</span><span data-line="5">		编号 <span class="nb">&amp;</span> 姓名 <span class="nb">&amp;</span> 成绩 <span class="k">\\</span>
-</span><span data-line="6">		<span class="k">\hline</span>
-</span><span data-line="7">		1 <span class="nb">&amp;</span> 张三 <span class="nb">&amp;</span> 85 <span class="k">\\</span>
-</span><span data-line="8">		2 <span class="nb">&amp;</span> 李四 <span class="nb">&amp;</span> 90 <span class="k">\\</span>
-</span><span data-line="9">		3 <span class="nb">&amp;</span> 王五 <span class="nb">&amp;</span> 95 <span class="k">\\</span>
-</span><span data-line="10">		<span class="k">\hline</span>
-</span><span data-line="11">	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
-</span><span data-line="12">	<span class="k">\caption</span><span class="nb">{</span>带对齐设置的表格<span class="nb">}</span>
-</span><span data-line="13"><span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|l|r|<span class="nb">}</span>
+		<span class="k">\hline</span>
+		编号 <span class="nb">&amp;</span> 姓名 <span class="nb">&amp;</span> 成绩 <span class="k">\\</span>
+		<span class="k">\hline</span>
+		1 <span class="nb">&amp;</span> 张三 <span class="nb">&amp;</span> 85 <span class="k">\\</span>
+		2 <span class="nb">&amp;</span> 李四 <span class="nb">&amp;</span> 90 <span class="k">\\</span>
+		3 <span class="nb">&amp;</span> 王五 <span class="nb">&amp;</span> 95 <span class="k">\\</span>
+		<span class="k">\hline</span>
+	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\caption</span><span class="nb">{</span>带对齐设置的表格<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="带对齐的表格" src="../../_images/lab1-06-aligned-table.png" /></p>
@@ -351,9 +604,9 @@ data-aria-dark="切换到自动模式">
 <li><p>数字列用 <code class="docutils literal notranslate"><span class="pre">r</span></code> 右对齐，位数不同时也能按位对齐，这是排版数字的惯例。</p></li>
 <li><p><strong>只在表头下画一条横线</strong>，数据行之间不加 <code class="docutils literal notranslate"><span class="pre">\hline</span></code>（完整横线只在表尾）。每行都加 <code class="docutils literal notranslate"><span class="pre">\hline</span></code> 会变成全网格表，学术论文里并不好看。</p></li>
 <li><p>想画标准三线表就加载 <code class="docutils literal notranslate"><span class="pre">booktabs</span></code>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\usepackage</span><span class="nb">{</span>booktabs<span class="nb">}</span>
-</span><span data-line="2"><span class="c">% 用 \toprule / \midrule / \bottomrule 替代 \hline</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\usepackage</span><span class="nb">{</span>booktabs<span class="nb">}</span>
+<span class="c">% 用 \toprule / \midrule / \bottomrule 替代 \hline</span>
+</pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">booktabs</span></code> 的规则是：<strong>不要与竖线同用</strong>，行距也会自动调得更舒展。</p>
 </li>
@@ -365,24 +618,24 @@ data-aria-dark="切换到自动模式">
 <p><strong>题目</strong>：创建一个包含合并行与列操作的复杂表格。</p>
 <p>要求：第一行 <code class="docutils literal notranslate"><span class="pre">Header</span> <span class="pre">2</span></code> 合并第二、三列；第二行 <code class="docutils literal notranslate"><span class="pre">Merge</span> <span class="pre">Across</span> <span class="pre">Columns</span></code> 合并第二、三列；第四行 <code class="docutils literal notranslate"><span class="pre">Merge</span> <span class="pre">Down</span> <span class="pre">Rows</span></code> 合并两行的第一列。</p>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
-</span><span data-line="2">	<span class="k">\centering</span>
-</span><span data-line="3">	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|c|<span class="nb">}</span>
-</span><span data-line="4">		<span class="k">\hline</span>
-</span><span data-line="5">		Header 1 <span class="nb">&amp;</span> <span class="k">\multicolumn</span><span class="nb">{</span>2<span class="nb">}{</span>|c|<span class="nb">}{</span>Header 2<span class="nb">}</span> <span class="k">\\</span>            <span class="c">% 合并 Header 2</span>
-</span><span data-line="6">		<span class="k">\hline</span>
-</span><span data-line="7">		Row 1    <span class="nb">&amp;</span> <span class="k">\multicolumn</span><span class="nb">{</span>2<span class="nb">}{</span>|c|<span class="nb">}{</span>Merge Across Columns<span class="nb">}</span> <span class="k">\\</span> <span class="c">% 合并第二行</span>
-</span><span data-line="8">		<span class="k">\hline</span>
-</span><span data-line="9">		Row 2    <span class="nb">&amp;</span> Data A <span class="nb">&amp;</span> Data B <span class="k">\\</span>                          <span class="c">% 普通数据行</span>
-</span><span data-line="10">		<span class="k">\hline</span>
-</span><span data-line="11">		<span class="k">\multirow</span><span class="nb">{</span>2<span class="nb">}{</span>*<span class="nb">}{</span>Merge Down Rows<span class="nb">}</span> <span class="nb">&amp;</span> Data C <span class="nb">&amp;</span> Data D <span class="k">\\</span>    <span class="c">% 合并行操作</span>
-</span><span data-line="12">		<span class="k">\cline</span><span class="nb">{</span>2-3<span class="nb">}</span>
-</span><span data-line="13">		<span class="nb">&amp;</span> Data E <span class="nb">&amp;</span> Data F <span class="k">\\</span>                                  <span class="c">% 第二部分数据行</span>
-</span><span data-line="14">		<span class="k">\hline</span>
-</span><span data-line="15">	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
-</span><span data-line="16">	<span class="k">\caption</span><span class="nb">{</span>复杂表格与单元格合并<span class="nb">}</span>
-</span><span data-line="17"><span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|c|<span class="nb">}</span>
+		<span class="k">\hline</span>
+		Header 1 <span class="nb">&amp;</span> <span class="k">\multicolumn</span><span class="nb">{</span>2<span class="nb">}{</span>|c|<span class="nb">}{</span>Header 2<span class="nb">}</span> <span class="k">\\</span>            <span class="c">% 合并 Header 2</span>
+		<span class="k">\hline</span>
+		Row 1    <span class="nb">&amp;</span> <span class="k">\multicolumn</span><span class="nb">{</span>2<span class="nb">}{</span>|c|<span class="nb">}{</span>Merge Across Columns<span class="nb">}</span> <span class="k">\\</span> <span class="c">% 合并第二行</span>
+		<span class="k">\hline</span>
+		Row 2    <span class="nb">&amp;</span> Data A <span class="nb">&amp;</span> Data B <span class="k">\\</span>                          <span class="c">% 普通数据行</span>
+		<span class="k">\hline</span>
+		<span class="k">\multirow</span><span class="nb">{</span>2<span class="nb">}{</span>*<span class="nb">}{</span>Merge Down Rows<span class="nb">}</span> <span class="nb">&amp;</span> Data C <span class="nb">&amp;</span> Data D <span class="k">\\</span>    <span class="c">% 合并行操作</span>
+		<span class="k">\cline</span><span class="nb">{</span>2-3<span class="nb">}</span>
+		<span class="nb">&amp;</span> Data E <span class="nb">&amp;</span> Data F <span class="k">\\</span>                                  <span class="c">% 第二部分数据行</span>
+		<span class="k">\hline</span>
+	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\caption</span><span class="nb">{</span>复杂表格与单元格合并<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="合并单元格表格" src="../../_images/lab1-07-merged-table.png" /></p>
@@ -407,30 +660,30 @@ data-aria-dark="切换到自动模式">
 <li><p>所有列宽调整，第二列和第三列占总宽度的 50%。</p></li>
 </ol>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
-</span><span data-line="2">	<span class="k">\centering</span>
-</span><span data-line="3">	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|p<span class="nb">{</span>2cm<span class="nb">}</span>|p<span class="nb">{</span>3cm<span class="nb">}</span>|p<span class="nb">{</span>3cm<span class="nb">}</span>|p<span class="nb">{</span>4cm<span class="nb">}</span>|<span class="nb">}</span>    <span class="c">% 设置列宽</span>
-</span><span data-line="4">		<span class="k">\hline</span>
-</span><span data-line="5">		<span class="k">\multicolumn</span><span class="nb">{</span>4<span class="nb">}{</span>|c|<span class="nb">}{</span>Complex Table Title<span class="nb">}</span> <span class="k">\\</span>   <span class="c">% 跨四列的标题行</span>
-</span><span data-line="6">		<span class="k">\hline</span>
-</span><span data-line="7">		<span class="k">\multirow</span><span class="nb">{</span>2<span class="nb">}{</span>*<span class="nb">}{</span>Row 1<span class="nb">}</span> <span class="nb">&amp;</span> Cell 1 <span class="nb">&amp;</span> Cell 2 <span class="nb">&amp;</span> Cell 3 <span class="k">\\</span> <span class="c">% 第一列跨两行</span>
-</span><span data-line="8">		<span class="k">\cline</span><span class="nb">{</span>2-4<span class="nb">}</span>
-</span><span data-line="9">		<span class="nb">&amp;</span> <span class="k">\multicolumn</span><span class="nb">{</span>2<span class="nb">}{</span>|c|<span class="nb">}{</span>Merge Across 2 Columns<span class="nb">}</span> <span class="nb">&amp;</span> Cell 3 <span class="k">\\</span> <span class="c">% 合并第二、三列</span>
-</span><span data-line="10">		<span class="k">\hline</span>
-</span><span data-line="11">		Row 2 <span class="nb">&amp;</span> Cell 4 <span class="nb">&amp;</span> Cell 5 <span class="nb">&amp;</span> Cell 6 <span class="k">\\</span>
-</span><span data-line="12">		<span class="k">\hline</span>
-</span><span data-line="13">		Row 3 <span class="nb">&amp;</span> Cell 7 <span class="nb">&amp;</span> Cell 8 <span class="nb">&amp;</span> <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|<span class="nb">}</span>  <span class="c">% 嵌套表格</span>
-</span><span data-line="14">			<span class="k">\hline</span>
-</span><span data-line="15">			N1 <span class="nb">&amp;</span> N2 <span class="k">\\</span>
-</span><span data-line="16">			<span class="k">\hline</span>
-</span><span data-line="17">			N3 <span class="nb">&amp;</span> N4 <span class="k">\\</span>
-</span><span data-line="18">			<span class="k">\hline</span>
-</span><span data-line="19">		<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span> <span class="k">\\</span>
-</span><span data-line="20">		<span class="k">\hline</span>
-</span><span data-line="21">	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
-</span><span data-line="22">	<span class="k">\caption</span><span class="nb">{</span>复杂嵌套表格与列宽控制<span class="nb">}</span>
-</span><span data-line="23"><span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|p<span class="nb">{</span>2cm<span class="nb">}</span>|p<span class="nb">{</span>3cm<span class="nb">}</span>|p<span class="nb">{</span>3cm<span class="nb">}</span>|p<span class="nb">{</span>4cm<span class="nb">}</span>|<span class="nb">}</span>    <span class="c">% 设置列宽</span>
+		<span class="k">\hline</span>
+		<span class="k">\multicolumn</span><span class="nb">{</span>4<span class="nb">}{</span>|c|<span class="nb">}{</span>Complex Table Title<span class="nb">}</span> <span class="k">\\</span>   <span class="c">% 跨四列的标题行</span>
+		<span class="k">\hline</span>
+		<span class="k">\multirow</span><span class="nb">{</span>2<span class="nb">}{</span>*<span class="nb">}{</span>Row 1<span class="nb">}</span> <span class="nb">&amp;</span> Cell 1 <span class="nb">&amp;</span> Cell 2 <span class="nb">&amp;</span> Cell 3 <span class="k">\\</span> <span class="c">% 第一列跨两行</span>
+		<span class="k">\cline</span><span class="nb">{</span>2-4<span class="nb">}</span>
+		<span class="nb">&amp;</span> <span class="k">\multicolumn</span><span class="nb">{</span>2<span class="nb">}{</span>|c|<span class="nb">}{</span>Merge Across 2 Columns<span class="nb">}</span> <span class="nb">&amp;</span> Cell 3 <span class="k">\\</span> <span class="c">% 合并第二、三列</span>
+		<span class="k">\hline</span>
+		Row 2 <span class="nb">&amp;</span> Cell 4 <span class="nb">&amp;</span> Cell 5 <span class="nb">&amp;</span> Cell 6 <span class="k">\\</span>
+		<span class="k">\hline</span>
+		Row 3 <span class="nb">&amp;</span> Cell 7 <span class="nb">&amp;</span> Cell 8 <span class="nb">&amp;</span> <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>|c|c|<span class="nb">}</span>  <span class="c">% 嵌套表格</span>
+			<span class="k">\hline</span>
+			N1 <span class="nb">&amp;</span> N2 <span class="k">\\</span>
+			<span class="k">\hline</span>
+			N3 <span class="nb">&amp;</span> N4 <span class="k">\\</span>
+			<span class="k">\hline</span>
+		<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span> <span class="k">\\</span>
+		<span class="k">\hline</span>
+	<span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+	<span class="k">\caption</span><span class="nb">{</span>复杂嵌套表格与列宽控制<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="嵌套表格" src="../../_images/lab1-08-nested-table.png" /></p>
@@ -448,12 +701,12 @@ data-aria-dark="切换到自动模式">
 <h2>实验题：图片 1（初级）基本图片插入<a class="headerlink" href="#id11" title="链接到此标题。">#</a></h2>
 <p><strong>题目</strong>：插入一张图片并添加标题。使用占位符图片 <code class="docutils literal notranslate"><span class="pre">example-image-a</span></code>，提示使用 <code class="docutils literal notranslate"><span class="pre">graphicx</span></code> 宏包、<code class="docutils literal notranslate"><span class="pre">\includegraphics</span></code> 和 <code class="docutils literal notranslate"><span class="pre">\caption</span></code>。</p>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
-</span><span data-line="2">	<span class="k">\centering</span>
-</span><span data-line="3">	<span class="k">\includegraphics</span><span class="na">[width=0.5\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入图片</span>
-</span><span data-line="4">	<span class="k">\caption</span><span class="nb">{</span>示例图片<span class="nb">}</span>
-</span><span data-line="5"><span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\includegraphics</span><span class="na">[width=0.5\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入图片</span>
+	<span class="k">\caption</span><span class="nb">{</span>示例图片<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="基本图片插入" src="../../_images/lab1-09-basic-figure.png" /></p>
@@ -471,12 +724,12 @@ data-aria-dark="切换到自动模式">
 <h2>实验题：图片 2（中级）调整图片大小与位置<a class="headerlink" href="#id12" title="链接到此标题。">#</a></h2>
 <p><strong>题目</strong>：插入图片，将其大小调整为<strong>文档宽度的 60%</strong>，并让图片<strong>居右显示</strong>。提示使用 <code class="docutils literal notranslate"><span class="pre">width</span></code> 参数和 <code class="docutils literal notranslate"><span class="pre">\raggedleft</span></code>。</p>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
-</span><span data-line="2">	<span class="k">\raggedleft</span>
-</span><span data-line="3">	<span class="k">\includegraphics</span><span class="na">[width=0.6\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入图片并调整大小</span>
-</span><span data-line="4">	<span class="k">\caption</span><span class="nb">{</span>调整大小与位置的图片<span class="nb">}</span>
-</span><span data-line="5"><span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
+	<span class="k">\raggedleft</span>
+	<span class="k">\includegraphics</span><span class="na">[width=0.6\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入图片并调整大小</span>
+	<span class="k">\caption</span><span class="nb">{</span>调整大小与位置的图片<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="调整大小与位置" src="../../_images/lab1-10-sized-figure.png" /></p>
@@ -492,18 +745,18 @@ data-aria-dark="切换到自动模式">
 <h2>实验题：图片 3（高级）多张图片并排显示<a class="headerlink" href="#id13" title="链接到此标题。">#</a></h2>
 <p><strong>题目</strong>：插入两张图片并排显示，每张占文档宽度的 40%，且每张图片有独立标题。提示使用 <code class="docutils literal notranslate"><span class="pre">minipage</span></code> 环境。</p>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
-</span><span data-line="2">	<span class="k">\centering</span>
-</span><span data-line="3">	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.4<span class="k">\textwidth</span><span class="nb">}</span>
-</span><span data-line="4">		<span class="k">\includegraphics</span><span class="na">[width=\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入左侧图片</span>
-</span><span data-line="5">		<span class="k">\caption</span><span class="nb">{</span>左侧图片<span class="nb">}</span>
-</span><span data-line="6">	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
-</span><span data-line="7">	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.4<span class="k">\textwidth</span><span class="nb">}</span>
-</span><span data-line="8">		<span class="k">\includegraphics</span><span class="na">[width=\textwidth]</span><span class="nb">{</span>example-image-b<span class="nb">}</span>  <span class="c">% 插入右侧图片</span>
-</span><span data-line="9">		<span class="k">\caption</span><span class="nb">{</span>右侧图片<span class="nb">}</span>
-</span><span data-line="10">	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
-</span><span data-line="11"><span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.4<span class="k">\textwidth</span><span class="nb">}</span>
+		<span class="k">\includegraphics</span><span class="na">[width=\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入左侧图片</span>
+		<span class="k">\caption</span><span class="nb">{</span>左侧图片<span class="nb">}</span>
+	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.4<span class="k">\textwidth</span><span class="nb">}</span>
+		<span class="k">\includegraphics</span><span class="na">[width=\textwidth]</span><span class="nb">{</span>example-image-b<span class="nb">}</span>  <span class="c">% 插入右侧图片</span>
+		<span class="k">\caption</span><span class="nb">{</span>右侧图片<span class="nb">}</span>
+	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="并排图片" src="../../_images/lab1-11-side-by-side.png" /></p>
@@ -521,17 +774,17 @@ data-aria-dark="切换到自动模式">
 <h2>实验题：图片 4（选做）图片与文字混排<a class="headerlink" href="#id14" title="链接到此标题。">#</a></h2>
 <p><strong>题目</strong>：在文档中插入一张图片，图片占文档右侧 40%，左侧 60% 放置一段文字描述，要求图文并排显示。</p>
 <p><strong>答案</strong>:</p>
-<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
-</span><span data-line="2">	<span class="k">\centering</span>
-</span><span data-line="3">	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.6<span class="k">\textwidth</span><span class="nb">}</span>
-</span><span data-line="4">		这是一段文字描述，它占据文档的 60<span class="k">\%</span> 宽度。图片放在文字的右侧，确保它们并排显示。
-</span><span data-line="5">	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
-</span><span data-line="6">	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.4<span class="k">\textwidth</span><span class="nb">}</span>
-</span><span data-line="7">		<span class="k">\includegraphics</span><span class="na">[width=\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入图片</span>
-</span><span data-line="8">		<span class="k">\caption</span><span class="nb">{</span>右侧图片<span class="nb">}</span>
-</span><span data-line="9">	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
-</span><span data-line="10"><span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
-</span></pre></div>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="k">\begin</span><span class="nb">{</span>figure<span class="nb">}</span>[h!]
+	<span class="k">\centering</span>
+	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.6<span class="k">\textwidth</span><span class="nb">}</span>
+		这是一段文字描述，它占据文档的 60<span class="k">\%</span> 宽度。图片放在文字的右侧，确保它们并排显示。
+	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+	<span class="k">\begin</span><span class="nb">{</span>minipage<span class="nb">}</span>[b]<span class="nb">{</span>0.4<span class="k">\textwidth</span><span class="nb">}</span>
+		<span class="k">\includegraphics</span><span class="na">[width=\textwidth]</span><span class="nb">{</span>example-image-a<span class="nb">}</span>  <span class="c">% 插入图片</span>
+		<span class="k">\caption</span><span class="nb">{</span>右侧图片<span class="nb">}</span>
+	<span class="k">\end</span><span class="nb">{</span>minipage<span class="nb">}</span>
+<span class="k">\end</span><span class="nb">{</span>figure<span class="nb">}</span>
+</pre></div>
 </div>
 <p><strong>编译结果</strong>:</p>
 <p><img alt="图文混排" src="../../_images/lab1-12-text-figure.png" /></p>
@@ -608,51 +861,119 @@ data-aria-dark="切换到自动模式">
 </table></section>
 </section>
 
-        </article><button class="back-to-top" type="button">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
-  </svg>
-  <span>回到顶部</span>
-</button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="prepare.html">
-      <i class="i-lucide chevron-left"></i>
-      <div class="page-info">
-        <span>上一章</span><div class="title">环境准备：宏包与文档从哪里来</div></div>
-    </a>
-  </div><div class="navigation-next">
-    <a href="lab2.html">
-      <div class="page-info">
-        <span>下一章</span>
-        <div class="title">实验课 02：列表、算法、颜色等</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="prepare.html"
+       title="上一页">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">上一页</p>
+        <p class="prev-next-title">环境准备：宏包与文档从哪里来</p>
       </div>
-      <i class="i-lucide chevron-right"></i>
     </a>
-  </div></div></div>
-    </div>
-  </main>
+    <a class="right-next"
+       href="lab2.html"
+       title="下一页">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title">实验课 02：列表、算法、颜色等</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
-<footer class="sy-foot">
-  <div class="sy-foot-inner sy-container mx-auto">
-    <div class="sy-foot-reserved md:flex justify-between items-center">
-      <div class="sy-foot-copyright"><p>2026, infinite-cloisters</p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 目录
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">编译环境与导言区</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">实验题：公式 1（初级）行内公式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">实验题：公式 2（中级）行间公式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">实验题：公式 3（高级）复杂公式的多行排列</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">实验题：公式 4（选做）复杂公式综合</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">实验题：表格 1（初级）2×2 简单表格</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">实验题：表格 2（中级）带标题行和对齐设置的表格</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">实验题：表格 3（高级）复杂表格与单元格合并</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">实验题：表格 4（选做）复杂嵌套表格与列宽控制</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">实验题：图片 1（初级）基本图片插入</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">实验题：图片 2（中级）调整图片大小与位置</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">实验题：图片 3（高级）多张图片并排显示</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">实验题：图片 4（选做）图片与文字混排</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">小结</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <p>
-    Made with
+  <div class="footer-item">
     
-    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+<p class="component-author">
+作者： infinite-cloisters
+</p>
+
+  </div>
+  
+  <div class="footer-item">
     
-    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+
+  <p class="copyright">
+    
+      © Copyright 2026, infinite-cloisters.
+      <br/>
+    
   </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
-      <div class="sy-foot-socials"></div>
+          </footer>
+        
+
+      </main>
     </div>
   </div>
-</footer>
-      <script src="../../_static/documentation_options.js?v=53716796"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../_static/translations.js?v=540d3cec"></script>
-      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>

@@ -1,169 +1,422 @@
+
 <!DOCTYPE html>
-<html lang="zh-CN" data-accent-color="violet" data-content_root="../../">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>环境准备：宏包与文档从哪里来 - Documentation 0.1.9 文档</title><link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="实验课 01：公式、表格、图等" href="lab1.html" /><link rel="prev" title="西北工业大学科技论文写作" href="index.html" /><script>
-    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
-    setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
-    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+
+
+<html lang="zh-CN" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>环境准备：宏包与文档从哪里来 &#8212; Documentation 0.1.9 文档</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=4418a689" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-}
-</style>
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=c587b00a"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../_static/translations.js?v=540d3cec"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'doc/techpapers/prepare';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="实验课 01：公式、表格、图等" href="lab1.html" />
+    <link rel="prev" title="西北工业大学科技论文写作" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="" />
+  
     
-  <meta property="og:type" content="website"/><meta property="og:title" content="环境准备：宏包与文档从哪里来"/>
-    <meta name="twitter:card" content="summary"/>
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
   </head>
-<body><div class="sy-head">
-  <div class="sy-head-blur"></div>
-  <div class="sy-head-inner sy-container mx-auto">
-    <a class="sy-head-brand" href="../../index.html">
-      
-      
-      <strong>Documentation</strong>
-    </a>
-    <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"></nav>
-      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
-  <input type="text" name="q" placeholder="搜索" />
-  <kbd>/</kbd>
-</form><div class="sy-head-socials"></div></div>
-    </div>
-    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
-data-aria-auto="切换到亮色模式"
-data-aria-light="切换到暗色模式"
-data-aria-dark="切换到自动模式">
-<i class="i-lucide theme-icon"></i>
-</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
-        <div class="hamburger">
-          <span class="hamburger_1"></span>
-          <span class="hamburger_2"></span>
-          <span class="hamburger_3"></span>
-        </div>
-      </button>
-    </div>
-  </div>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="版本警告"></aside>
 </div>
-<div class="sy-page sy-container flex mx-auto">
-  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
-    <div class="sy-lside-inner md:sticky">
-      <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><ul>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="当前页面">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Documentation 0.1.9 文档</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../wsl/wsl.html">在 Windows 上使用 WSL(以 Arch Linux 为例)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../wsl/wsl_use.html">在 VSCode 上使用 WSL2</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../linux/linux.html">Linux 相关</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/arm-none-eabi.html">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/gdb.html">使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../rust-stm32/rust-stm32.html">使用rust开发stm32体验</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../label-studio/backend.html">Backend_ml 接入</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../github/index.html">GitHub使用</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../github/git.html">GIT工具</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../github/githubpage.html">使用 GitHub Pages 挂载静态网页</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/nuedc.html">电赛介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/prepare.html">赛事准备相关</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/faq.html">FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/problem.html">全国大学生电子设计竞赛近年赛题</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../JLC/guide.html">开发环境与工具链选择</a></li>
 </ul>
-</li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">西北工业大学科技论文写作</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">环境准备：宏包与文档从哪里来</a></li>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">西北工业大学科技论文写作</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">环境准备：宏包与文档从哪里来</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab1.html">实验课 01：公式、表格、图等</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab2.html">实验课 02：列表、算法、颜色等</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab3.html">实验课 03：绘图（选学）</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
-        </div>
-      </div>
     </div>
-  </aside>
-  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
-  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
-    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
-      <i class="i-lucide close"></i>
-    </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#id2">&#23433;&#35013;&#26041;&#27861;</a><ul>
-<li><a class="reference internal" href="#install-tl-zip">1. &#19979;&#36733;&#24182;&#35299;&#21387;&#32553; install-tl.zip</a></li>
-<li><a class="reference internal" href="#id3">2. &#36816;&#34892;&#23433;&#35013;&#22120;</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id4">&#20999;&#25442;&#38236;&#20687;</a></li>
-<li><a class="reference internal" href="#miktex">MiKTeX</a></li>
-<li><a class="reference internal" href="#id5">&#23433;&#35013;&#22833;&#36133;&#25490;&#26597;</a><ul>
-<li><a class="reference internal" href="#id6">1. &#31995;&#32479;&#29992;&#20013;&#25991;&#20316;&#20026;&#29992;&#25143;&#21517;</a></li>
-<li><a class="reference internal" href="#mingw-jdk-conda-msys">2. &#32456;&#31471;&#29615;&#22659;&#34987; mingw / jdk / conda / msys &#27745;&#26579;</a></li>
-<li><a class="reference internal" href="#conda-msys">3. conda / MSYS&#65306;&#30452;&#25509;&#22312;&#33258;&#24049;&#30340;&#32456;&#31471;&#37324;&#23433;&#35013;</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id7">&#20160;&#20040;&#26102;&#20505;&#20250;&#29992;&#21040;&#23427;</a></li>
-</ul>
-</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
-  </aside>
-  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
-  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
-<div class="sy-breadcrumbs" role="navigation">
-  <div class="sy-breadcrumbs-inner flex items-center">
-    <div class="md:hidden mr-3">
-      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
-        <i class="i-lucide menu"></i>
-      </button>
+</nav></div>
     </div>
-    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="../../index.html"><span itemprop="name">Documentation</span></a>
-        <span>/</span>
-        <meta itemprop="position" content="1" />
-      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="index.html"><span itemprop="name">西北工业大学科技论文写作</span></a>
-        <span>/</span>
-        <meta itemprop="position" content="2" />
-      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">环境准备：宏包与文档从哪里来</strong>
-        <meta itemprop="position" content="3" />
-      </li></ol>
-    <div class="xl:hidden ml-1">
-      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
-        aria-expanded="false">
-        <i class="i-lucide outdent"></i>
-      </button>
-    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-</div><div class="flex flex-col break-words justify-between">
-      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
-  <article class="yue" role="main">
-          <section id="id1">
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="下载此页面">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/doc/techpapers/prepare.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="下载源文件"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="列印成 PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="全屏模式"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="亮色"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="暗色"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>亮色</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>暗色</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>环境准备：宏包与文档从哪里来</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> 目录 </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">安装方法</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-tl-zip">1. 下载并解压缩 install-tl.zip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. 运行安装器</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">切换镜像</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miktex">MiKTeX</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">安装失败排查</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1. 系统用中文作为用户名</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mingw-jdk-conda-msys">2. 终端环境被 mingw / jdk / conda / msys 污染</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-msys">3. conda / MSYS：直接在自己的终端里安装</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">什么时候会用到它</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="id1">
 <h1>环境准备：宏包与文档从哪里来<a class="headerlink" href="#id1" title="链接到此标题。">#</a></h1>
 <p>CTAN（The Comprehensive TeX Archive Network）是几乎所有 TeX 排版系统相关材料的汇集地，编译引擎、宏包、字体的源代码与说明文档都在上面。绝大多数 LaTeX 宏包会先上传到 CTAN 核心站点，再同步到全球各镜像——也就是说，你缺的宏包、想查的宏包手册，基本都能在这里找到。</p>
 <p>CTAN 主站在国外，国内直连下载很慢。建议把 TeX 发行版的下载源换成清华 TUNA 镜像，配置方法见清华镜像站的帮助页：</p>
@@ -181,27 +434,27 @@ data-aria-dark="切换到自动模式">
 <section id="install-tl-zip">
 <h3>1. 下载并解压缩 install-tl.zip<a class="headerlink" href="#install-tl-zip" title="链接到此标题。">#</a></h3>
 <p>下载地址：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span><span class="o">/</span><span class="n">install</span><span class="o">-</span><span class="n">tl</span><span class="o">.</span><span class="n">zip</span>
-</span></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span><span class="o">/</span><span class="n">install</span><span class="o">-</span><span class="n">tl</span><span class="o">.</span><span class="n">zip</span>
+</pre></div>
 </div>
 </section>
 <section id="id3">
 <h3>2. 运行安装器<a class="headerlink" href="#id3" title="链接到此标题。">#</a></h3>
 <p>Windows 下双击运行其中的 <code class="docutils literal notranslate"><span class="pre">install-tl.bat</span></code>。如果有图形化界面，可以在进入安装器前的右下角按钮指定使用镜像源。Linux 下使用如下命令：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">perl</span> <span class="n">install</span><span class="o">-</span><span class="n">tl</span> <span class="o">--</span><span class="n">repository</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span>
-</span></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">perl</span> <span class="n">install</span><span class="o">-</span><span class="n">tl</span> <span class="o">--</span><span class="n">repository</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span>
+</pre></div>
 </div>
 </section>
 </section>
 <section id="id4">
 <h2>切换镜像<a class="headerlink" href="#id4" title="链接到此标题。">#</a></h2>
 <p>TeX Live 使用的 CTAN 镜像源可以从内置的包管理器 <code class="docutils literal notranslate"><span class="pre">tlmgr</span></code> 更改（很可能需要管理员权限）。在命令行中执行：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">tlmgr</span> <span class="n">option</span> <span class="n">repository</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span>
-</span></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tlmgr</span> <span class="n">option</span> <span class="n">repository</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span>
+</pre></div>
 </div>
 <p>即可永久更改镜像源。如果只需要临时切换，可以用如下命令：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">tlmgr</span> <span class="n">update</span> <span class="o">--</span><span class="nb">all</span> <span class="o">--</span><span class="n">repository</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span>
-</span></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tlmgr</span> <span class="n">update</span> <span class="o">--</span><span class="nb">all</span> <span class="o">--</span><span class="n">repository</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">texlive</span><span class="o">/</span><span class="n">tlnet</span>
+</pre></div>
 </div>
 <p>其中的 <code class="docutils literal notranslate"><span class="pre">update</span> <span class="pre">--all</span></code> 指令可根据需要修改。</p>
 </section>
@@ -209,8 +462,8 @@ data-aria-dark="切换到自动模式">
 <h2>MiKTeX<a class="headerlink" href="#miktex" title="链接到此标题。">#</a></h2>
 <p>MiKTeX 发行版的特点在于仅安装用户需要的宏包，节省了磁盘空间占用，但在部分实现细节上与 TeX Live 有所出入。该发行版支持 Windows、Linux 和 macOS。</p>
 <p>MiKTeX 仅提供 Windows 和 macOS 的独立安装包，在 Linux 下的安装请参考官方文档。使用的 CTAN 镜像源可以从内置的 MiKTeX Console 图形化应用程序切换，也可以使用如下命令：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">mpm</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">repository</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">win32</span><span class="o">/</span><span class="n">miktex</span><span class="o">/</span><span class="n">tm</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span>
-</span></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mpm</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">repository</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">CTAN</span><span class="o">/</span><span class="n">systems</span><span class="o">/</span><span class="n">win32</span><span class="o">/</span><span class="n">miktex</span><span class="o">/</span><span class="n">tm</span><span class="o">/</span><span class="n">packages</span><span class="o">/</span>
+</pre></div>
 </div>
 </section>
 <section id="id5">
@@ -219,18 +472,18 @@ data-aria-dark="切换到自动模式">
 <section id="id6">
 <h3>1. 系统用中文作为用户名<a class="headerlink" href="#id6" title="链接到此标题。">#</a></h3>
 <p>Windows 用户名是中文时，安装器在处理临时文件路径时可能因路径含非 ASCII 字符而出错，典型表现是安装进行到一半突然失败。指南给出的办法是给安装过程单独指定一个纯英文的临时目录：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">mkdir</span> <span class="n">C</span><span class="p">:</span>\<span class="n">temp</span>
-</span><span data-line="2"><span class="nb">set</span> <span class="n">TEMP</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">temp</span>
-</span><span data-line="3"><span class="nb">set</span> <span class="n">TMP</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">temp</span>
-</span></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">C</span><span class="p">:</span>\<span class="n">temp</span>
+<span class="nb">set</span> <span class="n">TEMP</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">temp</span>
+<span class="nb">set</span> <span class="n">TMP</span><span class="o">=</span><span class="n">C</span><span class="p">:</span>\<span class="n">temp</span>
+</pre></div>
 </div>
 <p>这三条要在同一个命令行窗口里依次执行，然后<strong>在该窗口内</strong>运行 <code class="docutils literal notranslate"><span class="pre">install-tl.bat</span></code>，让安装器继承改过的环境变量。换个窗口再运行就不生效了。</p>
 </section>
 <section id="mingw-jdk-conda-msys">
 <h3>2. 终端环境被 mingw / jdk / conda / msys 污染<a class="headerlink" href="#mingw-jdk-conda-msys" title="链接到此标题。">#</a></h3>
 <p>安装前先看一眼当前的 <code class="docutils literal notranslate"><span class="pre">PATH</span></code>：</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">echo</span> <span class="o">%</span><span class="n">path</span><span class="p">:;</span><span class="o">=&amp;</span><span class="n">echo</span><span class="o">.%</span>
-</span></pre></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="o">%</span><span class="n">path</span><span class="p">:;</span><span class="o">=&amp;</span><span class="n">echo</span><span class="o">.%</span>
+</pre></div>
 </div>
 <p>一是确认其中包含 <code class="docutils literal notranslate"><span class="pre">C:\Windows\system32</span></code>；二是检查有没有混进 mingw、jdk、Cygwin 相关的内容。指南的建议是：<strong>安装期间把这些条目暂时删除</strong>，等 TeX Live 装完之后再重新加回去，并且放到 TeX Live 自己的路径之后。</p>
 <p>原因不难理解：conda、MSYS2、mingw、JDK 这类工具都会把自己的一整套运行时目录插到 <code class="docutils literal notranslate"><span class="pre">PATH</span></code> 的最前面。安装器和 <code class="docutils literal notranslate"><span class="pre">tlmgr</span></code> 在调用外部程序、加载 dll 时，可能优先命中这些目录里的同名文件，于是安装过程失败，或者出现「在某个终端里能用、换个终端就报错」这种看起来很玄学的结果。</p>
@@ -244,8 +497,8 @@ data-aria-dark="切换到自动模式">
 <h3>3. conda / MSYS：直接在自己的终端里安装<a class="headerlink" href="#conda-msys" title="链接到此标题。">#</a></h3>
 <p>如果 conda 或 MSYS2 是你的日常主力环境，把它们的路径从 <code class="docutils literal notranslate"><span class="pre">PATH</span></code> 里删掉并不现实。这时可以换个思路：不跟它们抢 <code class="docutils literal notranslate"><span class="pre">PATH</span></code>，而是在它们各自的终端环境内部安装 TeX Live，从根上避开冲突。</p>
 <p>例如在conda终端中:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">(</span><span class="n">Base</span><span class="p">)</span> <span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">28035</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">path</span><span class="p">&gt;/</span><span class="nb">install-tl</span><span class="p">.</span><span class="n">bat</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">Base</span><span class="p">)</span> <span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">28035</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="n">path</span><span class="p">&gt;/</span><span class="nb">install-tl</span><span class="p">.</span><span class="n">bat</span>
+</pre></div>
 </div>
 </section>
 </section>
@@ -255,51 +508,119 @@ data-aria-dark="切换到自动模式">
 </section>
 </section>
 
-        </article><button class="back-to-top" type="button">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
-  </svg>
-  <span>回到顶部</span>
-</button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="index.html">
-      <i class="i-lucide chevron-left"></i>
-      <div class="page-info">
-        <span>上一章</span><div class="title">西北工业大学科技论文写作</div></div>
-    </a>
-  </div><div class="navigation-next">
-    <a href="lab1.html">
-      <div class="page-info">
-        <span>下一章</span>
-        <div class="title">实验课 01：公式、表格、图等</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="上一页">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">上一页</p>
+        <p class="prev-next-title">西北工业大学科技论文写作</p>
       </div>
-      <i class="i-lucide chevron-right"></i>
     </a>
-  </div></div></div>
-    </div>
-  </main>
+    <a class="right-next"
+       href="lab1.html"
+       title="下一页">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title">实验课 01：公式、表格、图等</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
-<footer class="sy-foot">
-  <div class="sy-foot-inner sy-container mx-auto">
-    <div class="sy-foot-reserved md:flex justify-between items-center">
-      <div class="sy-foot-copyright"><p>2026, infinite-cloisters</p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 目录
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">安装方法</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-tl-zip">1. 下载并解压缩 install-tl.zip</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2. 运行安装器</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">切换镜像</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miktex">MiKTeX</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">安装失败排查</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1. 系统用中文作为用户名</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mingw-jdk-conda-msys">2. 终端环境被 mingw / jdk / conda / msys 污染</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-msys">3. conda / MSYS：直接在自己的终端里安装</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">什么时候会用到它</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <p>
-    Made with
+  <div class="footer-item">
     
-    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+<p class="component-author">
+作者： infinite-cloisters
+</p>
+
+  </div>
+  
+  <div class="footer-item">
     
-    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+
+  <p class="copyright">
+    
+      © Copyright 2026, infinite-cloisters.
+      <br/>
+    
   </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
-      <div class="sy-foot-socials"></div>
+          </footer>
+        
+
+      </main>
     </div>
   </div>
-</footer>
-      <script src="../../_static/documentation_options.js?v=53716796"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../_static/translations.js?v=540d3cec"></script>
-      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>

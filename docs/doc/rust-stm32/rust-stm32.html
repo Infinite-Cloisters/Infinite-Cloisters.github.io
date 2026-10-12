@@ -1,372 +1,652 @@
+
 <!DOCTYPE html>
-<html lang="zh-CN" data-accent-color="violet" data-content_root="../../">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>使用rust开发stm32体验 - Documentation 0.1.9 文档</title><link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="Label Studio 系列" href="../label-studio/index.html" /><link rel="prev" title="Rust STM32 开发" href="index.html" /><script>
-    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
-    setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
-    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+
+
+<html lang="zh-CN" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>使用rust开发stm32体验 &#8212; Documentation 0.1.9 文档</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=4418a689" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-}
-</style>
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=c587b00a"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../_static/translations.js?v=540d3cec"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'doc/rust-stm32/rust-stm32';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="Label Studio 系列" href="../label-studio/index.html" />
+    <link rel="prev" title="Rust STM32 开发" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="" />
+  
     
-  <meta property="og:type" content="website"/><meta property="og:title" content="使用rust开发stm32体验"/>
-    <meta name="twitter:card" content="summary"/>
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
   </head>
-<body><div class="sy-head">
-  <div class="sy-head-blur"></div>
-  <div class="sy-head-inner sy-container mx-auto">
-    <a class="sy-head-brand" href="../../index.html">
-      
-      
-      <strong>Documentation</strong>
-    </a>
-    <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"></nav>
-      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
-  <input type="text" name="q" placeholder="搜索" />
-  <kbd>/</kbd>
-</form><div class="sy-head-socials"></div></div>
-    </div>
-    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
-data-aria-auto="切换到亮色模式"
-data-aria-light="切换到暗色模式"
-data-aria-dark="切换到自动模式">
-<i class="i-lucide theme-icon"></i>
-</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
-        <div class="hamburger">
-          <span class="hamburger_1"></span>
-          <span class="hamburger_2"></span>
-          <span class="hamburger_3"></span>
-        </div>
-      </button>
-    </div>
-  </div>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="版本警告"></aside>
 </div>
-<div class="sy-page sy-container flex mx-auto">
-  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
-    <div class="sy-lside-inner md:sticky">
-      <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><ul>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Documentation 0.1.9 文档</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../wsl/wsl.html">在 Windows 上使用 WSL(以 Arch Linux 为例)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../wsl/wsl_use.html">在 VSCode 上使用 WSL2</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../linux/linux.html">Linux 相关</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/arm-none-eabi.html">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/gdb.html">使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试</a></li>
 </ul>
-</li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Rust STM32 开发</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">使用rust开发stm32体验</a></li>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Rust STM32 开发</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">使用rust开发stm32体验</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../label-studio/backend.html">Backend_ml 接入</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../github/index.html">GitHub使用</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../github/git.html">GIT工具</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../github/githubpage.html">使用 GitHub Pages 挂载静态网页</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/nuedc.html">电赛介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/prepare.html">赛事准备相关</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/faq.html">FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/problem.html">全国大学生电子设计竞赛近年赛题</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../JLC/guide.html">开发环境与工具链选择</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../techpapers/index.html">西北工业大学科技论文写作</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../techpapers/index.html">西北工业大学科技论文写作</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../techpapers/prepare.html">环境准备：宏包与文档从哪里来</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techpapers/lab1.html">实验课 01：公式、表格、图等</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techpapers/lab2.html">实验课 02：列表、算法、颜色等</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techpapers/lab3.html">实验课 03：绘图（选学）</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
-        </div>
-      </div>
     </div>
-  </aside>
-  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
-  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
-    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
-      <i class="i-lucide close"></i>
-    </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
-  </aside>
-  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
-  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
-<div class="sy-breadcrumbs" role="navigation">
-  <div class="sy-breadcrumbs-inner flex items-center">
-    <div class="md:hidden mr-3">
-      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
-        <i class="i-lucide menu"></i>
-      </button>
+</nav></div>
     </div>
-    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="../../index.html"><span itemprop="name">Documentation</span></a>
-        <span>/</span>
-        <meta itemprop="position" content="1" />
-      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="index.html"><span itemprop="name">Rust STM32 开发</span></a>
-        <span>/</span>
-        <meta itemprop="position" content="2" />
-      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">使用rust开发stm32体验</strong>
-        <meta itemprop="position" content="3" />
-      </li></ol>
-    <div class="xl:hidden ml-1">
-      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
-        aria-expanded="false">
-        <i class="i-lucide outdent"></i>
-      </button>
-    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-</div><div class="flex flex-col break-words justify-between">
-      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
-  <article class="yue" role="main">
-          <section id="ruststm32">
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="下载此页面">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/doc/rust-stm32/rust-stm32.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="下载源文件"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="列印成 PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="全屏模式"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="亮色"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="暗色"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>亮色</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>暗色</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>使用rust开发stm32体验</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ruststm32">
 <h1>使用rust开发stm32体验<a class="headerlink" href="#ruststm32" title="链接到此标题。">#</a></h1>
 <p>以下的示例是基于STM32F411的完整demo，需要安装rust相关工具链以及probe-rs</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># gnu工具链</span>
-</span><span data-line="2"><span class="n">rustup</span> <span class="n">toolchain</span> <span class="n">install</span> <span class="n">stable-x86_64-pc-windows-gnu</span> 
-</span><span data-line="3"><span class="n">rustup</span> <span class="k">default</span> <span class="n">stable-x86_64-pc-windows-gnu</span>
-</span><span data-line="4"><span class="c"># probe-rs</span>
-</span><span data-line="5"><span class="n">cargo</span> <span class="n">install</span> <span class="n">probe-rs</span> <span class="n">cargo-flash</span> <span class="n">cargo-embed</span> <span class="n">cargo</span> <span class="n">cargo-update</span>
-</span><span data-line="6"><span class="c"># cargo install-update -a 是用于更新rust install安装的工具</span>
-</span><span data-line="7"><span class="c"># 查看固件大小所要的包</span>
-</span><span data-line="8"><span class="n">cargo</span> <span class="n">install</span> <span class="n">cargo-bloat</span> <span class="n">cargo-binutils</span>
-</span><span data-line="9"><span class="c"># 如果安装失败可以尝试 --lock 参数避免本地包与原工程不一致，例如cargo install office2pdf --lock</span>
-</span><span data-line="10"><span class="n">rustup</span> <span class="n">component</span> <span class="n">add</span> <span class="n">llvm-tools-preview</span>
-</span><span data-line="11"><span class="c"># 查看固件大小，按需使用</span>
-</span><span data-line="12"><span class="n">cargo</span> <span class="n">size</span>
-</span><span data-line="13"><span class="n">cargo</span> <span class="n">size</span> <span class="p">--</span> <span class="n">-A</span>
-</span><span data-line="14"><span class="n">cargo</span> <span class="n">size</span> <span class="p">-</span><span class="n">-release</span> <span class="p">--</span> <span class="n">-A</span>
-</span><span data-line="15">
-</span><span data-line="16"><span class="n">cargo</span> <span class="n">bloat</span> <span class="p">-</span><span class="n">-release</span> <span class="c"># 查看最大的函数</span>
-</span><span data-line="17"><span class="n">cargo</span> <span class="n">bloat</span> <span class="p">-</span><span class="n">-release</span> <span class="p">-</span><span class="n">-crates</span><span class="c"># 只看你的 crate</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># gnu工具链</span>
+<span class="n">rustup</span> <span class="n">toolchain</span> <span class="n">install</span> <span class="n">stable-x86_64-pc-windows-gnu</span> 
+<span class="n">rustup</span> <span class="k">default</span> <span class="n">stable-x86_64-pc-windows-gnu</span>
+<span class="c"># probe-rs</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="n">probe-rs</span> <span class="n">cargo-flash</span> <span class="n">cargo-embed</span> <span class="n">cargo</span> <span class="n">cargo-update</span>
+<span class="c"># cargo install-update -a 是用于更新rust install安装的工具</span>
+<span class="c"># 查看固件大小所要的包</span>
+<span class="n">cargo</span> <span class="n">install</span> <span class="n">cargo-bloat</span> <span class="n">cargo-binutils</span>
+<span class="c"># 如果安装失败可以尝试 --lock 参数避免本地包与原工程不一致，例如cargo install office2pdf --lock</span>
+<span class="n">rustup</span> <span class="n">component</span> <span class="n">add</span> <span class="n">llvm-tools-preview</span>
+<span class="c"># 查看固件大小，按需使用</span>
+<span class="n">cargo</span> <span class="n">size</span>
+<span class="n">cargo</span> <span class="n">size</span> <span class="p">--</span> <span class="n">-A</span>
+<span class="n">cargo</span> <span class="n">size</span> <span class="p">-</span><span class="n">-release</span> <span class="p">--</span> <span class="n">-A</span>
+
+<span class="n">cargo</span> <span class="n">bloat</span> <span class="p">-</span><span class="n">-release</span> <span class="c"># 查看最大的函数</span>
+<span class="n">cargo</span> <span class="n">bloat</span> <span class="p">-</span><span class="n">-release</span> <span class="p">-</span><span class="n">-crates</span><span class="c"># 只看你的 crate</span>
+</pre></div>
 </div>
 <p>file path &gt;&gt; ./src/main.rs:</p>
-<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="cp">#![no_std]</span>
-</span><span data-line="2"><span class="cp">#![no_main]</span>
-</span><span data-line="3">
-</span><span data-line="4">
-</span><span data-line="5"><span class="k">use</span><span class="w"> </span><span class="n">stm32f4xx_hal</span><span class="p">::{</span><span class="bp">self</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">hal</span><span class="p">};</span><span class="w"> </span><span class="c1">// memory layout + panic handler</span>
-</span><span data-line="6">
-</span><span data-line="7"><span class="k">use</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
-</span><span data-line="8"><span class="k">use</span><span class="w"> </span><span class="n">cortex_m_rt</span><span class="p">::</span><span class="n">entry</span><span class="p">;</span>
-</span><span data-line="9"><span class="k">use</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">interrupt</span><span class="p">;</span>
-</span><span data-line="10">
-</span><span data-line="11"><span class="k">use</span><span class="w"> </span><span class="n">core</span><span class="p">::</span><span class="n">cell</span><span class="p">::</span><span class="n">RefCell</span><span class="p">;</span>
-</span><span data-line="12"><span class="k">use</span><span class="w"> </span><span class="n">cortex_m</span><span class="p">::</span><span class="n">interrupt</span><span class="p">::</span><span class="n">Mutex</span><span class="p">;</span>
-</span><span data-line="13">
-</span><span data-line="14"><span class="k">static</span><span class="w"> </span><span class="n">SERIAL1</span><span class="p">:</span><span class="w"> </span><span class="nc">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Serial</span><span class="o">&lt;</span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">USART1</span><span class="o">&gt;&gt;&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mutex</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">RefCell</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">));</span>
-</span><span data-line="15">
-</span><span data-line="16"><span class="c1">// use rtt_target::{rprintln, rtt_init_print};</span>
-</span><span data-line="17">
-</span><span data-line="18"><span class="k">use</span><span class="w"> </span><span class="n">defmt_rtt</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">_</span><span class="p">;</span><span class="w">  </span><span class="c1">// 全局日志通道，只需引入</span>
-</span><span data-line="19"><span class="k">use</span><span class="w"> </span><span class="n">panic_probe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">_</span><span class="p">;</span><span class="w"> </span><span class="c1">// 可选：panic 时打印 defmt 日志</span>
-</span><span data-line="20">
-</span><span data-line="21"><span class="cp">#[entry]</span>
-</span><span data-line="22"><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="p">{</span>
-</span><span data-line="23"><span class="w">    </span><span class="c1">//rtt_init_print!();</span>
-</span><span data-line="24">
-</span><span data-line="25"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">Peripherals</span><span class="p">::</span><span class="n">take</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
-</span><span data-line="26"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">cp</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">CorePeripherals</span><span class="p">::</span><span class="n">take</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
-</span><span data-line="27">
-</span><span data-line="28"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">RCC</span><span class="p">.</span><span class="n">freeze</span><span class="p">(</span><span class="n">hal</span><span class="p">::</span><span class="n">rcc</span><span class="p">::</span><span class="n">Config</span><span class="p">::</span><span class="n">hse</span><span class="p">(</span><span class="mf">25.</span><span class="n">MHz</span><span class="p">()).</span><span class="n">sysclk</span><span class="p">(</span><span class="mf">100.</span><span class="n">MHz</span><span class="p">()));</span>
-</span><span data-line="29"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cp</span><span class="p">.</span><span class="n">SYST</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rcc</span><span class="p">.</span><span class="n">clocks</span><span class="p">);</span>
-</span><span data-line="30">
-</span><span data-line="31"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">gpioc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">GPIOC</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="p">);</span>
-</span><span data-line="32"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">gpioa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">GPIOA</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="p">);</span>
-</span><span data-line="33">
-</span><span data-line="34"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">led</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpioc</span><span class="p">.</span><span class="n">pc13</span><span class="p">.</span><span class="n">into_push_pull_output</span><span class="p">();</span>
-</span><span data-line="35">
-</span><span data-line="36"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">usart1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">USART1</span><span class="p">;</span>
-</span><span data-line="37"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">tx_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpioa</span><span class="p">.</span><span class="n">pa9</span><span class="p">;</span>
-</span><span data-line="38"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">rx_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpioa</span><span class="p">.</span><span class="n">pa10</span><span class="p">;</span>
-</span><span data-line="39"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">serial</span><span class="p">:</span><span class="w"> </span><span class="nc">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Serial</span><span class="o">&lt;</span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">USART1</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Serial</span><span class="p">::</span><span class="n">new</span><span class="p">(</span>
-</span><span data-line="40"><span class="w">        </span><span class="n">usart1</span><span class="p">,</span>
-</span><span data-line="41"><span class="w">        </span><span class="p">(</span><span class="n">tx_pin</span><span class="p">,</span><span class="w"> </span><span class="n">rx_pin</span><span class="p">),</span>
-</span><span data-line="42"><span class="w">        </span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">config</span><span class="p">::</span><span class="n">Config</span><span class="p">::</span><span class="n">default</span><span class="p">().</span><span class="n">baudrate</span><span class="p">(</span><span class="mf">115_200.</span><span class="n">bps</span><span class="p">()),</span>
-</span><span data-line="43"><span class="w">        </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="p">,</span><span class="w">    </span>
-</span><span data-line="44"><span class="w">    </span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
-</span><span data-line="45"><span class="w">        </span>
-</span><span data-line="46"><span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span>
-</span><span data-line="47"><span class="w">        </span><span class="c1">// Enable USART1 interrupt</span>
-</span><span data-line="48"><span class="w">        </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">NVIC</span><span class="p">::</span><span class="n">unmask</span><span class="p">(</span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">Interrupt</span><span class="p">::</span><span class="n">USART1</span><span class="p">);</span>
-</span><span data-line="49"><span class="w">    </span><span class="p">}</span>
-</span><span data-line="50"><span class="w">    </span><span class="n">serial</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Event</span><span class="p">::</span><span class="n">RxNotEmpty</span><span class="p">);</span>
-</span><span data-line="51">
-</span><span data-line="52"><span class="w">    </span><span class="n">cortex_m</span><span class="p">::</span><span class="n">interrupt</span><span class="p">::</span><span class="n">free</span><span class="p">(</span><span class="o">|</span><span class="n">cs</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
-</span><span data-line="53"><span class="w">        </span><span class="n">SERIAL1</span><span class="p">.</span><span class="n">borrow</span><span class="p">(</span><span class="n">cs</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">serial</span><span class="p">));</span>
-</span><span data-line="54"><span class="w">    </span><span class="p">});</span>
-</span><span data-line="55">
-</span><span data-line="56"><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
-</span><span data-line="57"><span class="w">        </span><span class="n">led</span><span class="p">.</span><span class="n">set_low</span><span class="p">();</span>
-</span><span data-line="58"><span class="w">        </span><span class="n">delay</span><span class="p">.</span><span class="n">delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
-</span><span data-line="59"><span class="w">        </span><span class="n">led</span><span class="p">.</span><span class="n">set_high</span><span class="p">();</span>
-</span><span data-line="60"><span class="w">        </span><span class="n">delay</span><span class="p">.</span><span class="n">delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
-</span><span data-line="61"><span class="w">    </span><span class="p">}</span>
-</span><span data-line="62"><span class="p">}</span>
-</span><span data-line="63">
-</span><span data-line="64"><span class="cp">#[interrupt]</span>
-</span><span data-line="65"><span class="k">fn</span><span class="w"> </span><span class="nf">USART1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span data-line="66"><span class="w">    </span><span class="n">cortex_m</span><span class="p">::</span><span class="n">interrupt</span><span class="p">::</span><span class="n">free</span><span class="p">(</span><span class="o">|</span><span class="n">cs</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
-</span><span data-line="67"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">serial</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SERIAL1</span><span class="p">.</span><span class="n">borrow</span><span class="p">(</span><span class="n">cs</span><span class="p">).</span><span class="n">borrow_mut</span><span class="p">().</span><span class="n">as_mut</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span data-line="68"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">byte</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span><span class="p">.</span><span class="n">read</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span data-line="69"><span class="w">                </span><span class="c1">//rprintln!(&quot;Received: {} (&#39;{}&#39;)&quot;, byte, byte as char);</span>
-</span><span data-line="70"><span class="w">                </span><span class="n">defmt</span><span class="p">::</span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Received: {} (&#39;{}&#39;)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">char</span><span class="p">);</span><span class="w">           </span><span class="c1">// 类似 info!</span>
-</span><span data-line="71"><span class="w">                </span><span class="c1">// Echo received byte</span>
-</span><span data-line="72"><span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">byte</span><span class="p">);</span>
-</span><span data-line="73"><span class="w">            </span><span class="p">}</span>
-</span><span data-line="74"><span class="w">        </span><span class="p">}</span>
-</span><span data-line="75"><span class="w">    </span><span class="p">});</span>
-</span><span data-line="76"><span class="p">}</span>
-</span></pre></div>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#![no_std]</span>
+<span class="cp">#![no_main]</span>
+
+
+<span class="k">use</span><span class="w"> </span><span class="n">stm32f4xx_hal</span><span class="p">::{</span><span class="bp">self</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">hal</span><span class="p">};</span><span class="w"> </span><span class="c1">// memory layout + panic handler</span>
+
+<span class="k">use</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">prelude</span><span class="p">::</span><span class="o">*</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cortex_m_rt</span><span class="p">::</span><span class="n">entry</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">interrupt</span><span class="p">;</span>
+
+<span class="k">use</span><span class="w"> </span><span class="n">core</span><span class="p">::</span><span class="n">cell</span><span class="p">::</span><span class="n">RefCell</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">cortex_m</span><span class="p">::</span><span class="n">interrupt</span><span class="p">::</span><span class="n">Mutex</span><span class="p">;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">SERIAL1</span><span class="p">:</span><span class="w"> </span><span class="nc">Mutex</span><span class="o">&lt;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Serial</span><span class="o">&lt;</span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">USART1</span><span class="o">&gt;&gt;&gt;&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mutex</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">RefCell</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="nb">None</span><span class="p">));</span>
+
+<span class="c1">// use rtt_target::{rprintln, rtt_init_print};</span>
+
+<span class="k">use</span><span class="w"> </span><span class="n">defmt_rtt</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">_</span><span class="p">;</span><span class="w">  </span><span class="c1">// 全局日志通道，只需引入</span>
+<span class="k">use</span><span class="w"> </span><span class="n">panic_probe</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">_</span><span class="p">;</span><span class="w"> </span><span class="c1">// 可选：panic 时打印 defmt 日志</span>
+
+<span class="cp">#[entry]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//rtt_init_print!();</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">dp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">Peripherals</span><span class="p">::</span><span class="n">take</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">cp</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">CorePeripherals</span><span class="p">::</span><span class="n">take</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">RCC</span><span class="p">.</span><span class="n">freeze</span><span class="p">(</span><span class="n">hal</span><span class="p">::</span><span class="n">rcc</span><span class="p">::</span><span class="n">Config</span><span class="p">::</span><span class="n">hse</span><span class="p">(</span><span class="mf">25.</span><span class="n">MHz</span><span class="p">()).</span><span class="n">sysclk</span><span class="p">(</span><span class="mf">100.</span><span class="n">MHz</span><span class="p">()));</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cp</span><span class="p">.</span><span class="n">SYST</span><span class="p">.</span><span class="n">delay</span><span class="p">(</span><span class="o">&amp;</span><span class="n">rcc</span><span class="p">.</span><span class="n">clocks</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">gpioc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">GPIOC</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">gpioa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">GPIOA</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">led</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpioc</span><span class="p">.</span><span class="n">pc13</span><span class="p">.</span><span class="n">into_push_pull_output</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">usart1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dp</span><span class="p">.</span><span class="n">USART1</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">tx_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpioa</span><span class="p">.</span><span class="n">pa9</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">rx_pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gpioa</span><span class="p">.</span><span class="n">pa10</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">serial</span><span class="p">:</span><span class="w"> </span><span class="nc">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Serial</span><span class="o">&lt;</span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">USART1</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Serial</span><span class="p">::</span><span class="n">new</span><span class="p">(</span>
+<span class="w">        </span><span class="n">usart1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">(</span><span class="n">tx_pin</span><span class="p">,</span><span class="w"> </span><span class="n">rx_pin</span><span class="p">),</span>
+<span class="w">        </span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">config</span><span class="p">::</span><span class="n">Config</span><span class="p">::</span><span class="n">default</span><span class="p">().</span><span class="n">baudrate</span><span class="p">(</span><span class="mf">115_200.</span><span class="n">bps</span><span class="p">()),</span>
+<span class="w">        </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rcc</span><span class="p">,</span><span class="w">    </span>
+<span class="w">    </span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="w">        </span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Enable USART1 interrupt</span>
+<span class="w">        </span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">NVIC</span><span class="p">::</span><span class="n">unmask</span><span class="p">(</span><span class="n">hal</span><span class="p">::</span><span class="n">pac</span><span class="p">::</span><span class="n">Interrupt</span><span class="p">::</span><span class="n">USART1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">serial</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="n">hal</span><span class="p">::</span><span class="n">serial</span><span class="p">::</span><span class="n">Event</span><span class="p">::</span><span class="n">RxNotEmpty</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">cortex_m</span><span class="p">::</span><span class="n">interrupt</span><span class="p">::</span><span class="n">free</span><span class="p">(</span><span class="o">|</span><span class="n">cs</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SERIAL1</span><span class="p">.</span><span class="n">borrow</span><span class="p">(</span><span class="n">cs</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="nb">Some</span><span class="p">(</span><span class="n">serial</span><span class="p">));</span>
+<span class="w">    </span><span class="p">});</span>
+
+<span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">led</span><span class="p">.</span><span class="n">set_low</span><span class="p">();</span>
+<span class="w">        </span><span class="n">delay</span><span class="p">.</span><span class="n">delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">        </span><span class="n">led</span><span class="p">.</span><span class="n">set_high</span><span class="p">();</span>
+<span class="w">        </span><span class="n">delay</span><span class="p">.</span><span class="n">delay_ms</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cp">#[interrupt]</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">USART1</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">cortex_m</span><span class="p">::</span><span class="n">interrupt</span><span class="p">::</span><span class="n">free</span><span class="p">(</span><span class="o">|</span><span class="n">cs</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">serial</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SERIAL1</span><span class="p">.</span><span class="n">borrow</span><span class="p">(</span><span class="n">cs</span><span class="p">).</span><span class="n">borrow_mut</span><span class="p">().</span><span class="n">as_mut</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">byte</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span><span class="p">.</span><span class="n">read</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//rprintln!(&quot;Received: {} (&#39;{}&#39;)&quot;, byte, byte as char);</span>
+<span class="w">                </span><span class="n">defmt</span><span class="p">::</span><span class="n">info</span><span class="o">!</span><span class="p">(</span><span class="s">&quot;Received: {} (&#39;{}&#39;)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="p">,</span><span class="w"> </span><span class="n">byte</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">char</span><span class="p">);</span><span class="w">           </span><span class="c1">// 类似 info!</span>
+<span class="w">                </span><span class="c1">// Echo received byte</span>
+<span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">byte</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
 </div>
 <p>file path &gt;&gt; memory.x</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span data-line="1">MEMORY
-</span><span data-line="2"><span class="o">{</span>
-</span><span data-line="3"><span class="w">  </span>RAM<span class="w">     </span>:<span class="w"> </span><span class="nv">ORIGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x20000000,<span class="w">   </span><span class="nv">LENGTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>128K
-</span><span data-line="4"><span class="w">  </span>FLASH<span class="w">   </span>:<span class="w"> </span><span class="nv">ORIGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x8000000,<span class="w">   </span><span class="nv">LENGTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>512K
-</span><span data-line="5"><span class="o">}</span>
-</span><span data-line="6">
-</span><span data-line="7"><span class="nv">_stack_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ORIGIN<span class="o">(</span>RAM<span class="o">)</span><span class="w"> </span>+<span class="w"> </span>LENGTH<span class="o">(</span>RAM<span class="o">)</span><span class="p">;</span>
-</span></pre></div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>MEMORY
+<span class="o">{</span>
+<span class="w">  </span>RAM<span class="w">     </span>:<span class="w"> </span><span class="nv">ORIGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x20000000,<span class="w">   </span><span class="nv">LENGTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>128K
+<span class="w">  </span>FLASH<span class="w">   </span>:<span class="w"> </span><span class="nv">ORIGIN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>0x8000000,<span class="w">   </span><span class="nv">LENGTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>512K
+<span class="o">}</span>
+
+<span class="nv">_stack_start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ORIGIN<span class="o">(</span>RAM<span class="o">)</span><span class="w"> </span>+<span class="w"> </span>LENGTH<span class="o">(</span>RAM<span class="o">)</span><span class="p">;</span>
+</pre></div>
 </div>
 <p>file path &gt;&gt; Cargo.toml</p>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">[package]</span>
-</span><span data-line="2"><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;blinky_f411&quot;</span>
-</span><span data-line="3"><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
-</span><span data-line="4"><span class="n">edition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2024&quot;</span>
-</span><span data-line="5">
-</span><span data-line="6"><span class="k">[dependencies]</span>
-</span><span data-line="7"><span class="n">embedded-hal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
-</span><span data-line="8"><span class="n">nb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.1&quot;</span>
-</span><span data-line="9"><span class="n">cortex-m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.7.7&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;critical-section-single-core&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
-</span><span data-line="10"><span class="n">cortex-m-rt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.7&quot;</span>
-</span><span data-line="11"><span class="n">panic-halt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
-</span><span data-line="12"><span class="c1"># rtt-target = &quot;0.6&quot;</span>
-</span><span data-line="13"><span class="n">defmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
-</span><span data-line="14"><span class="n">defmt-rtt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.1&quot;</span><span class="w">      </span><span class="c1"># RTT 传输后端</span>
-</span><span data-line="15"><span class="n">panic-probe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="w">    </span><span class="c1"># 可选：panic 时打印 defmt 日志</span>
-</span><span data-line="16">
-</span><span data-line="17"><span class="k">[dependencies.stm32f4xx-hal]</span>
-</span><span data-line="18"><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.23.0&quot;</span>
-</span><span data-line="19"><span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;stm32f411&quot;</span><span class="p">]</span><span class="w"> </span><span class="c1"># replace the model of your microcontroller here</span>
-</span><span data-line="20"><span class="w">                         </span><span class="c1"># and add other required features</span>
-</span><span data-line="21">
-</span><span data-line="22"><span class="k">[[bin]]</span>
-</span><span data-line="23"><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;blinky_f411&quot;</span>
-</span><span data-line="24"><span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-</span><span data-line="25"><span class="n">bench</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-</span><span data-line="26">
-</span><span data-line="27"><span class="k">[profile.dev]</span>
-</span><span data-line="28"><span class="n">panic</span><span class="o">=</span><span class="s2">&quot;unwind&quot;</span>
-</span><span data-line="29"><span class="n">lto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-</span><span data-line="30">
-</span><span data-line="31"><span class="k">[profile.release]</span>
-</span><span data-line="32"><span class="n">panic</span><span class="o">=</span><span class="s2">&quot;unwind&quot;</span>
-</span><span data-line="33"><span class="n">lto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-</span><span data-line="34"><span class="n">opt-level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;z&quot;</span>
-</span><span data-line="35">
-</span><span data-line="36"><span class="k">[build-dependencies]</span>
-</span><span data-line="37"><span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.2&quot;</span>
-</span><span data-line="38"><span class="n">bindgen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.72&quot;</span>
-</span></pre></div>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[package]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;blinky_f411&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="n">edition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2024&quot;</span>
+
+<span class="k">[dependencies]</span>
+<span class="n">embedded-hal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
+<span class="n">nb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.1&quot;</span>
+<span class="n">cortex-m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;0.7.7&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;critical-section-single-core&quot;</span><span class="p">]</span><span class="w"> </span><span class="p">}</span>
+<span class="n">cortex-m-rt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.7&quot;</span>
+<span class="n">panic-halt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
+<span class="c1"># rtt-target = &quot;0.6&quot;</span>
+<span class="n">defmt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span>
+<span class="n">defmt-rtt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.1&quot;</span><span class="w">      </span><span class="c1"># RTT 传输后端</span>
+<span class="n">panic-probe</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="w">    </span><span class="c1"># 可选：panic 时打印 defmt 日志</span>
+
+<span class="k">[dependencies.stm32f4xx-hal]</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.23.0&quot;</span>
+<span class="n">features</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;stm32f411&quot;</span><span class="p">]</span><span class="w"> </span><span class="c1"># replace the model of your microcontroller here</span>
+<span class="w">                         </span><span class="c1"># and add other required features</span>
+
+<span class="k">[[bin]]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;blinky_f411&quot;</span>
+<span class="n">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="n">bench</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+
+<span class="k">[profile.dev]</span>
+<span class="n">panic</span><span class="o">=</span><span class="s2">&quot;unwind&quot;</span>
+<span class="n">lto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="k">[profile.release]</span>
+<span class="n">panic</span><span class="o">=</span><span class="s2">&quot;unwind&quot;</span>
+<span class="n">lto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">opt-level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;z&quot;</span>
+
+<span class="k">[build-dependencies]</span>
+<span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;1.2&quot;</span>
+<span class="n">bindgen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.72&quot;</span>
+</pre></div>
 </div>
 <p>file path &gt;&gt; .cargo/config.toml</p>
-<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">[target.thumbv7em-none-eabihf]</span>
-</span><span data-line="2"><span class="n">runner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;probe-rs download --chip STM32F411CE&quot;</span>
-</span><span data-line="3">
-</span><span data-line="4"><span class="k">[build]</span>
-</span><span data-line="5"><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;thumbv7em-none-eabihf&quot;</span>
-</span><span data-line="6"><span class="n">rustflags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
-</span><span data-line="7"><span class="w">    </span><span class="s2">&quot;-C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;link-arg=-Tlink.x&quot;</span><span class="p">,</span>
-</span><span data-line="8"><span class="w">    </span><span class="p">]</span>
-</span><span data-line="9">
-</span><span data-line="10"><span class="k">[alias]</span>
-</span><span data-line="11"><span class="c1"># 示例 cargo bin</span>
-</span><span data-line="12"><span class="n">bin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;objcopy --release -- -O binary target/firmware.bin&quot;</span>
-</span><span data-line="13"><span class="n">hex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;objcopy --release -- -O ihex target/firmware.hex&quot;</span>
-</span><span data-line="14">
-</span><span data-line="15"><span class="n">size-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;size --release -- -A&quot;</span>
-</span><span data-line="16"><span class="n">bloat-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bloat --release&quot;</span>
-</span><span data-line="17"><span class="n">build-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;build --release&quot;</span>
-</span><span data-line="18"><span class="n">run-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;run --release&quot;</span>
-</span></pre></div>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[target.thumbv7em-none-eabihf]</span>
+<span class="n">runner</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;probe-rs download --chip STM32F411CE&quot;</span>
+
+<span class="k">[build]</span>
+<span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;thumbv7em-none-eabihf&quot;</span>
+<span class="n">rustflags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;-C&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;link-arg=-Tlink.x&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">]</span>
+
+<span class="k">[alias]</span>
+<span class="c1"># 示例 cargo bin</span>
+<span class="n">bin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;objcopy --release -- -O binary target/firmware.bin&quot;</span>
+<span class="n">hex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;objcopy --release -- -O ihex target/firmware.hex&quot;</span>
+
+<span class="n">size-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;size --release -- -A&quot;</span>
+<span class="n">bloat-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bloat --release&quot;</span>
+<span class="n">build-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;build --release&quot;</span>
+<span class="n">run-rel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;run --release&quot;</span>
+</pre></div>
 </div>
 </section>
 
-        </article><button class="back-to-top" type="button">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
-  </svg>
-  <span>回到顶部</span>
-</button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="index.html">
-      <i class="i-lucide chevron-left"></i>
-      <div class="page-info">
-        <span>上一章</span><div class="title">Rust STM32 开发</div></div>
-    </a>
-  </div><div class="navigation-next">
-    <a href="../label-studio/index.html">
-      <div class="page-info">
-        <span>下一章</span>
-        <div class="title">Label Studio 系列</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="上一页">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">上一页</p>
+        <p class="prev-next-title">Rust STM32 开发</p>
       </div>
-      <i class="i-lucide chevron-right"></i>
     </a>
-  </div></div></div>
-    </div>
-  </main>
+    <a class="right-next"
+       href="../label-studio/index.html"
+       title="下一页">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title">Label Studio 系列</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
-<footer class="sy-foot">
-  <div class="sy-foot-inner sy-container mx-auto">
-    <div class="sy-foot-reserved md:flex justify-between items-center">
-      <div class="sy-foot-copyright"><p>2026, infinite-cloisters</p>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <p>
-    Made with
+  <div class="footer-item">
     
-    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+<p class="component-author">
+作者： infinite-cloisters
+</p>
+
+  </div>
+  
+  <div class="footer-item">
     
-    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+
+  <p class="copyright">
+    
+      © Copyright 2026, infinite-cloisters.
+      <br/>
+    
   </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
-      <div class="sy-foot-socials"></div>
+          </footer>
+        
+
+      </main>
     </div>
   </div>
-</footer>
-      <script src="../../_static/documentation_options.js?v=53716796"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../_static/translations.js?v=540d3cec"></script>
-      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>

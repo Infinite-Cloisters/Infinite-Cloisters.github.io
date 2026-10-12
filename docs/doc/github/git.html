@@ -1,193 +1,446 @@
+
 <!DOCTYPE html>
-<html lang="zh-CN" data-accent-color="violet" data-content_root="../../">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>GIT工具 - Documentation 0.1.9 文档</title><link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="使用 GitHub Pages 挂载静态网页" href="githubpage.html" /><link rel="prev" title="GitHub使用" href="index.html" /><script>
-    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
-    setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
-    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+
+
+<html lang="zh-CN" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>GIT工具 &#8212; Documentation 0.1.9 文档</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=4418a689" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-}
-</style>
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=c587b00a"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../_static/translations.js?v=540d3cec"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'doc/github/git';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="使用 GitHub Pages 挂载静态网页" href="githubpage.html" />
+    <link rel="prev" title="GitHub使用" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="" />
+  
     
-  <meta property="og:type" content="website"/><meta property="og:title" content="GIT工具"/>
-    <meta name="twitter:card" content="summary"/>
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
   </head>
-<body><div class="sy-head">
-  <div class="sy-head-blur"></div>
-  <div class="sy-head-inner sy-container mx-auto">
-    <a class="sy-head-brand" href="../../index.html">
-      
-      
-      <strong>Documentation</strong>
-    </a>
-    <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"></nav>
-      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
-  <input type="text" name="q" placeholder="搜索" />
-  <kbd>/</kbd>
-</form><div class="sy-head-socials"></div></div>
-    </div>
-    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
-data-aria-auto="切换到亮色模式"
-data-aria-light="切换到暗色模式"
-data-aria-dark="切换到自动模式">
-<i class="i-lucide theme-icon"></i>
-</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
-        <div class="hamburger">
-          <span class="hamburger_1"></span>
-          <span class="hamburger_2"></span>
-          <span class="hamburger_3"></span>
-        </div>
-      </button>
-    </div>
-  </div>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="版本警告"></aside>
 </div>
-<div class="sy-page sy-container flex mx-auto">
-  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
-    <div class="sy-lside-inner md:sticky">
-      <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><ul>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="当前页面">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Documentation 0.1.9 文档</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../wsl/wsl.html">在 Windows 上使用 WSL(以 Arch Linux 为例)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../wsl/wsl_use.html">在 VSCode 上使用 WSL2</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../linux/linux.html">Linux 相关</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/arm-none-eabi.html">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/gdb.html">使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../rust-stm32/rust-stm32.html">使用rust开发stm32体验</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../label-studio/backend.html">Backend_ml 接入</a></li>
 </ul>
-</li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">GitHub使用</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">GIT工具</a></li>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">GitHub使用</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">GIT工具</a></li>
 <li class="toctree-l2"><a class="reference internal" href="githubpage.html">使用 GitHub Pages 挂载静态网页</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/nuedc.html">电赛介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/prepare.html">赛事准备相关</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/faq.html">FAQ</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../nuedc/problem.html">全国大学生电子设计竞赛近年赛题</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../JLC/guide.html">开发环境与工具链选择</a></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../techpapers/index.html">西北工业大学科技论文写作</a><ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../techpapers/index.html">西北工业大学科技论文写作</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../techpapers/prepare.html">环境准备：宏包与文档从哪里来</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techpapers/lab1.html">实验课 01：公式、表格、图等</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techpapers/lab2.html">实验课 02：列表、算法、颜色等</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techpapers/lab3.html">实验课 03：绘图（选学）</a></li>
 </ul>
-</li>
+</details></li>
 </ul>
 
-        </div>
-      </div>
     </div>
-  </aside>
-  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
-  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
-    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
-      <i class="i-lucide close"></i>
-    </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
-<li><a class="reference internal" href="#id1">&#22522;&#26412;&#20351;&#29992;&#25351;&#20196;</a></li>
-<li><a class="reference internal" href="#id2">&#20998;&#25903;&#31649;&#29702;</a><ul>
-<li><a class="reference internal" href="#id3">&#36828;&#31243;&#20998;&#25903;&#24120;&#35265;&#25805;&#20316;</a></li>
-<li><a class="reference internal" href="#id4">&#20856;&#22411;&#21327;&#20316;&#27969;&#31243;</a></li>
-<li><a class="reference internal" href="#id5">&#21512;&#24182;&#20914;&#31361;&#22788;&#29702;</a></li>
-<li><a class="reference internal" href="#id6">&#20998;&#25903;&#21629;&#21517;&#24314;&#35758;</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#git-filter-repo-python-git">&#20351;&#29992; git-filter-repo (Python&#21253;) &#28165;&#29702; .git</a><ul>
-<li><a class="reference internal" href="#id7">1. &#23433;&#35013;&#24037;&#20855;</a></li>
-<li><a class="reference internal" href="#id8">2. &#20808;&#20570;&#22791;&#20221;(&#24314;&#35758;)</a></li>
-<li><a class="reference internal" href="#id9">3. &#24120;&#35265;&#20351;&#29992;</a></li>
-<li><a class="reference internal" href="#id10">4. &#28165;&#29702;&#21518;&#26816;&#26597;(&#21487;&#36873;)</a></li>
-<li><a class="reference internal" href="#id11">5. &#25512;&#36865;&#21040;&#36828;&#31243;(&#37325;&#20889;&#21382;&#21490;&#21518;)</a></li>
-<li><a class="reference internal" href="#id12">6. &#21327;&#20316;&#32773;&#38656;&#35201;&#20570;&#30340;&#20107;</a></li>
-</ul>
-</li>
-</ul>
-</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
-  </aside>
-  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
-  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
-<div class="sy-breadcrumbs" role="navigation">
-  <div class="sy-breadcrumbs-inner flex items-center">
-    <div class="md:hidden mr-3">
-      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
-        <i class="i-lucide menu"></i>
-      </button>
+</nav></div>
     </div>
-    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="../../index.html"><span itemprop="name">Documentation</span></a>
-        <span>/</span>
-        <meta itemprop="position" content="1" />
-      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="index.html"><span itemprop="name">GitHub使用</span></a>
-        <span>/</span>
-        <meta itemprop="position" content="2" />
-      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">GIT工具</strong>
-        <meta itemprop="position" content="3" />
-      </li></ol>
-    <div class="xl:hidden ml-1">
-      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
-        aria-expanded="false">
-        <i class="i-lucide outdent"></i>
-      </button>
-    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-</div><div class="flex flex-col break-words justify-between">
-      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
-  <article class="yue" role="main">
-          <section id="git">
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="下载此页面">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/doc/github/git.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="下载源文件"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="列印成 PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="全屏模式"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="亮色"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="暗色"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>亮色</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>暗色</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>GIT工具</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> 目录 </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">基本使用指令</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">分支管理</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">远程分支常见操作</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">典型协作流程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">合并冲突处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">分支命名建议</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-filter-repo-python-git">使用 git-filter-repo (Python包) 清理 .git</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1. 安装工具</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2. 先做备份(建议)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3. 常见使用</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">4. 清理后检查(可选)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">5. 推送到远程(重写历史后)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6. 协作者需要做的事</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="git">
 <h1>GIT工具<a class="headerlink" href="#git" title="链接到此标题。">#</a></h1>
 <section id="id1">
 <h2>基本使用指令<a class="headerlink" href="#id1" title="链接到此标题。">#</a></h2>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># 设置你的基本信息</span>
-</span><span data-line="2"><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span> <span class="s2">&quot;yourname&quot;</span>
-</span><span data-line="3"><span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="s2">&quot;you@example.com&quot;</span>
-</span><span data-line="4"><span class="c"># 初始化仓库</span>
-</span><span data-line="5"><span class="n">git</span> <span class="n">init</span>
-</span><span data-line="6"><span class="c"># 添加文件</span>
-</span><span data-line="7"><span class="n">git</span> <span class="n">add</span> <span class="p">*</span>
-</span><span data-line="8"><span class="c"># 提交本地</span>
-</span><span data-line="9"><span class="n">git</span> <span class="n">commit</span> <span class="c"># vim同款操作</span>
-</span><span data-line="10"><span class="n">git</span> <span class="n">commit</span> <span class="n">-m</span> <span class="s2">&quot;评论&quot;</span>
-</span><span data-line="11"><span class="c"># 添加远程源</span>
-</span><span data-line="12"><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="p">&lt;</span><span class="n">url</span><span class="p">&gt;</span>
-</span><span data-line="13"><span class="c"># 提交到远程，缺省则是默认使用当前本地分支名</span>
-</span><span data-line="14"><span class="c"># git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span>
-</span><span data-line="15"><span class="n">git</span> <span class="n">push</span>
-</span><span data-line="16">
-</span><span data-line="17"><span class="c"># 有些鉴权方式比如说GUI支持账户+密码，纯终端一般需要你手动创建auth token使用它进行仓库管理</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 设置你的基本信息</span>
+<span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">name</span> <span class="s2">&quot;yourname&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="p">-</span><span class="n">-global</span> <span class="n">user</span><span class="p">.</span><span class="n">email</span> <span class="s2">&quot;you@example.com&quot;</span>
+<span class="c"># 初始化仓库</span>
+<span class="n">git</span> <span class="n">init</span>
+<span class="c"># 添加文件</span>
+<span class="n">git</span> <span class="n">add</span> <span class="p">*</span>
+<span class="c"># 提交本地</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="c"># vim同款操作</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="n">-m</span> <span class="s2">&quot;评论&quot;</span>
+<span class="c"># 添加远程源</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span> <span class="p">&lt;</span><span class="n">url</span><span class="p">&gt;</span>
+<span class="c"># 提交到远程，缺省则是默认使用当前本地分支名</span>
+<span class="c"># git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;</span>
+<span class="n">git</span> <span class="n">push</span>
+
+<span class="c"># 有些鉴权方式比如说GUI支持账户+密码，纯终端一般需要你手动创建auth token使用它进行仓库管理</span>
+</pre></div>
 </div>
 <p>初学者可以配合GitHub Desktop或者VSCode进行辅助使用，此外<strong>一定要合理使用<code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>减少仓库大小</strong></p>
 <p>诸如gitee相比GitHub更快(在中国)，使用的流程基本上都差不多。</p>
@@ -195,37 +448,37 @@ data-aria-dark="切换到自动模式">
 <section id="id2">
 <h2>分支管理<a class="headerlink" href="#id2" title="链接到此标题。">#</a></h2>
 <p>分支用于隔离不同功能或修复任务，避免直接在主分支上修改。</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># 查看本地分支(* 表示当前所在分支)</span>
-</span><span data-line="2"><span class="n">git</span> <span class="n">branch</span>
-</span><span data-line="3"><span class="c"># 查看本地+远程分支</span>
-</span><span data-line="4"><span class="n">git</span> <span class="n">branch</span> <span class="n">-a</span>
-</span><span data-line="5"><span class="c"># 创建新分支</span>
-</span><span data-line="6"><span class="n">git</span> <span class="n">branch</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
-</span><span data-line="7"><span class="c"># 切换分支</span>
-</span><span data-line="8"><span class="n">git</span> <span class="k">switch</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span> <span class="c"># 老命令也可以:git checkout feature/login</span>
-</span><span data-line="9"><span class="c"># 创建并切换到新分支</span>
-</span><span data-line="10"><span class="n">git</span> <span class="k">switch</span> <span class="n">-c</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span> <span class="c"># 老命令也可以:git checkout -b feature/login</span>
-</span><span data-line="11"><span class="c"># 开发完成后切回主分支</span>
-</span><span data-line="12"><span class="n">git</span> <span class="k">switch</span> <span class="n">main</span>
-</span><span data-line="13"><span class="c"># 将功能分支合并到当前分支</span>
-</span><span data-line="14"><span class="n">git</span> <span class="n">merge</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
-</span><span data-line="15"><span class="c"># 删除本地分支(已经合并)</span>
-</span><span data-line="16"><span class="n">git</span> <span class="n">branch</span> <span class="n">-d</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
-</span><span data-line="17"><span class="c"># 强制删除本地分支(未合并也删除，谨慎)</span>
-</span><span data-line="18"><span class="n">git</span> <span class="n">branch</span> <span class="n">-D</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 查看本地分支(* 表示当前所在分支)</span>
+<span class="n">git</span> <span class="n">branch</span>
+<span class="c"># 查看本地+远程分支</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="n">-a</span>
+<span class="c"># 创建新分支</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
+<span class="c"># 切换分支</span>
+<span class="n">git</span> <span class="k">switch</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span> <span class="c"># 老命令也可以:git checkout feature/login</span>
+<span class="c"># 创建并切换到新分支</span>
+<span class="n">git</span> <span class="k">switch</span> <span class="n">-c</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span> <span class="c"># 老命令也可以:git checkout -b feature/login</span>
+<span class="c"># 开发完成后切回主分支</span>
+<span class="n">git</span> <span class="k">switch</span> <span class="n">main</span>
+<span class="c"># 将功能分支合并到当前分支</span>
+<span class="n">git</span> <span class="n">merge</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
+<span class="c"># 删除本地分支(已经合并)</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="n">-d</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
+<span class="c"># 强制删除本地分支(未合并也删除，谨慎)</span>
+<span class="n">git</span> <span class="n">branch</span> <span class="n">-D</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
+</pre></div>
 </div>
 <section id="id3">
 <h3>远程分支常见操作<a class="headerlink" href="#id3" title="链接到此标题。">#</a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># 首次推送分支并建立上游追踪关系(后续可直接 git push)</span>
-</span><span data-line="2"><span class="n">git</span> <span class="n">push</span> <span class="n">-u</span> <span class="n">origin</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
-</span><span data-line="3"><span class="c"># 拉取远程更新(抓取并合并当前分支)</span>
-</span><span data-line="4"><span class="n">git</span> <span class="n">pull</span>
-</span><span data-line="5"><span class="c"># 仅抓取远程更新，不自动合并</span>
-</span><span data-line="6"><span class="n">git</span> <span class="n">fetch</span>
-</span><span data-line="7"><span class="c"># 删除远程分支</span>
-</span><span data-line="8"><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="p">-</span><span class="n">-delete</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 首次推送分支并建立上游追踪关系(后续可直接 git push)</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">-u</span> <span class="n">origin</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
+<span class="c"># 拉取远程更新(抓取并合并当前分支)</span>
+<span class="n">git</span> <span class="n">pull</span>
+<span class="c"># 仅抓取远程更新，不自动合并</span>
+<span class="n">git</span> <span class="n">fetch</span>
+<span class="c"># 删除远程分支</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="p">-</span><span class="n">-delete</span> <span class="n">feature</span><span class="p">/</span><span class="n">login</span>
+</pre></div>
 </div>
 </section>
 <section id="id4">
@@ -248,11 +501,11 @@ data-aria-dark="切换到自动模式">
 <li><p>完成合并提交:<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code></p></li>
 </ol>
 <p>如果你在 rebase 过程中冲突:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># 解决冲突并 add 之后继续</span>
-</span><span data-line="2"><span class="n">git</span> <span class="n">rebase</span> <span class="p">-</span><span class="n">-continue</span>
-</span><span data-line="3"><span class="c"># 放弃本次 rebase</span>
-</span><span data-line="4"><span class="n">git</span> <span class="n">rebase</span> <span class="p">-</span><span class="n">-abort</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 解决冲突并 add 之后继续</span>
+<span class="n">git</span> <span class="n">rebase</span> <span class="p">-</span><span class="n">-continue</span>
+<span class="c"># 放弃本次 rebase</span>
+<span class="n">git</span> <span class="n">rebase</span> <span class="p">-</span><span class="n">-abort</span>
+</pre></div>
 </div>
 </section>
 <section id="id6">
@@ -274,54 +527,54 @@ data-aria-dark="切换到自动模式">
 </div></blockquote>
 <section id="id7">
 <h3>1. 安装工具<a class="headerlink" href="#id7" title="链接到此标题。">#</a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">git-filter-repo</span>
-</span><span data-line="2"><span class="c"># 验证</span>
-</span><span data-line="3"><span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-help</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">git-filter-repo</span>
+<span class="c"># 验证</span>
+<span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-help</span>
+</pre></div>
 </div>
 </section>
 <section id="id8">
 <h3>2. 先做备份(建议)<a class="headerlink" href="#id8" title="链接到此标题。">#</a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># 推荐做一个镜像备份仓库</span>
-</span><span data-line="2"><span class="n">git</span> <span class="n">clone</span> <span class="p">-</span><span class="n">-mirror</span> <span class="p">&lt;</span><span class="n">repo-url</span><span class="p">&gt;</span> <span class="n">repo-backup</span><span class="p">.</span><span class="n">git</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 推荐做一个镜像备份仓库</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="p">-</span><span class="n">-mirror</span> <span class="p">&lt;</span><span class="n">repo-url</span><span class="p">&gt;</span> <span class="n">repo-backup</span><span class="p">.</span><span class="n">git</span>
+</pre></div>
 </div>
 </section>
 <section id="id9">
 <h3>3. 常见使用<a class="headerlink" href="#id9" title="链接到此标题。">#</a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># 删除历史中的某个文件(例如密钥)</span>
-</span><span data-line="2"><span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-path</span> <span class="p">.</span><span class="n">env</span> <span class="p">-</span><span class="n">-invert-paths</span>
-</span><span data-line="3"><span class="c"># 删除历史中的某个目录</span>
-</span><span data-line="4"><span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-path</span> <span class="n">secrets</span><span class="p">/</span> <span class="p">-</span><span class="n">-invert-paths</span>
-</span><span data-line="5"><span class="c"># 删除历史中所有 .zip 文件</span>
-</span><span data-line="6"><span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-path-glob</span> <span class="p">*.</span><span class="n">zip</span> <span class="p">-</span><span class="n">-invert-paths</span>
-</span><span data-line="7"><span class="c"># 删除历史记录中所有大于 10M 的文件 (其实这个比较常用？)</span>
-</span><span data-line="8"><span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-strip-blobs-bigger-than</span> <span class="n">10M</span> <span class="p">-</span><span class="n">-force</span>
-</span><span data-line="9"><span class="c"># 批量替换敏感字符串(先准备 replacements.txt)</span>
-</span><span data-line="10"><span class="c"># 格式示例:</span>
-</span><span data-line="11"><span class="c"># old_token==&gt;REDACTED_TOKEN</span>
-</span><span data-line="12"><span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="o">-replace</span><span class="n">-text</span> <span class="n">replacements</span><span class="p">.</span><span class="n">txt</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 删除历史中的某个文件(例如密钥)</span>
+<span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-path</span> <span class="p">.</span><span class="n">env</span> <span class="p">-</span><span class="n">-invert-paths</span>
+<span class="c"># 删除历史中的某个目录</span>
+<span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-path</span> <span class="n">secrets</span><span class="p">/</span> <span class="p">-</span><span class="n">-invert-paths</span>
+<span class="c"># 删除历史中所有 .zip 文件</span>
+<span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-path-glob</span> <span class="p">*.</span><span class="n">zip</span> <span class="p">-</span><span class="n">-invert-paths</span>
+<span class="c"># 删除历史记录中所有大于 10M 的文件 (其实这个比较常用？)</span>
+<span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="n">-strip-blobs-bigger-than</span> <span class="n">10M</span> <span class="p">-</span><span class="n">-force</span>
+<span class="c"># 批量替换敏感字符串(先准备 replacements.txt)</span>
+<span class="c"># 格式示例:</span>
+<span class="c"># old_token==&gt;REDACTED_TOKEN</span>
+<span class="n">git</span> <span class="k">filter</span><span class="n">-repo</span> <span class="p">-</span><span class="o">-replace</span><span class="n">-text</span> <span class="n">replacements</span><span class="p">.</span><span class="n">txt</span>
+</pre></div>
 </div>
 </section>
 <section id="id10">
 <h3>4. 清理后检查(可选)<a class="headerlink" href="#id10" title="链接到此标题。">#</a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># 查看历史是否仍有目标文件</span>
-</span><span data-line="2"><span class="n">git</span> <span class="n">log</span> <span class="p">-</span><span class="n">-all</span> <span class="p">--</span> <span class="p">.</span><span class="n">env</span>
-</span><span data-line="3"><span class="c"># 查看仓库对象体积情况</span>
-</span><span data-line="4"><span class="n">git</span> <span class="n">count-objects</span> <span class="n">-vH</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 查看历史是否仍有目标文件</span>
+<span class="n">git</span> <span class="n">log</span> <span class="p">-</span><span class="n">-all</span> <span class="p">--</span> <span class="p">.</span><span class="n">env</span>
+<span class="c"># 查看仓库对象体积情况</span>
+<span class="n">git</span> <span class="n">count-objects</span> <span class="n">-vH</span>
+</pre></div>
 </div>
 </section>
 <section id="id11">
 <h3>5. 推送到远程(重写历史后)<a class="headerlink" href="#id11" title="链接到此标题。">#</a></h3>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c"># 注意一下清理可能会干掉远程分支，建议先查看一下当前远程分支，如果分支没有了需要重新添加远程仓库</span>
-</span><span data-line="2"><span class="n">git</span> <span class="n">remote</span> <span class="n">-v</span>
-</span><span data-line="3"><span class="c"># 强制推送当前分支</span>
-</span><span data-line="4"><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="p">-</span><span class="n">-force</span> <span class="p">-</span><span class="n">-all</span>
-</span><span data-line="5"><span class="c"># 如有标签也一起更新</span>
-</span><span data-line="6"><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="p">-</span><span class="n">-force</span> <span class="p">-</span><span class="n">-tags</span>
-</span></pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="c"># 注意一下清理可能会干掉远程分支，建议先查看一下当前远程分支，如果分支没有了需要重新添加远程仓库</span>
+<span class="n">git</span> <span class="n">remote</span> <span class="n">-v</span>
+<span class="c"># 强制推送当前分支</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="p">-</span><span class="n">-force</span> <span class="p">-</span><span class="n">-all</span>
+<span class="c"># 如有标签也一起更新</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="p">-</span><span class="n">-force</span> <span class="p">-</span><span class="n">-tags</span>
+</pre></div>
 </div>
 </section>
 <section id="id12">
@@ -336,51 +589,122 @@ data-aria-dark="切换到自动模式">
 </section>
 </section>
 
-        </article><button class="back-to-top" type="button">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
-  </svg>
-  <span>回到顶部</span>
-</button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="index.html">
-      <i class="i-lucide chevron-left"></i>
-      <div class="page-info">
-        <span>上一章</span><div class="title">GitHub使用</div></div>
-    </a>
-  </div><div class="navigation-next">
-    <a href="githubpage.html">
-      <div class="page-info">
-        <span>下一章</span>
-        <div class="title">使用 GitHub Pages 挂载静态网页</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="上一页">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">上一页</p>
+        <p class="prev-next-title">GitHub使用</p>
       </div>
-      <i class="i-lucide chevron-right"></i>
     </a>
-  </div></div></div>
-    </div>
-  </main>
+    <a class="right-next"
+       href="githubpage.html"
+       title="下一页">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title">使用 GitHub Pages 挂载静态网页</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
-<footer class="sy-foot">
-  <div class="sy-foot-inner sy-container mx-auto">
-    <div class="sy-foot-reserved md:flex justify-between items-center">
-      <div class="sy-foot-copyright"><p>2026, infinite-cloisters</p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 目录
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">基本使用指令</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">分支管理</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">远程分支常见操作</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">典型协作流程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">合并冲突处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">分支命名建议</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#git-filter-repo-python-git">使用 git-filter-repo (Python包) 清理 .git</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1. 安装工具</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2. 先做备份(建议)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3. 常见使用</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">4. 清理后检查(可选)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">5. 推送到远程(重写历史后)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6. 协作者需要做的事</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <p>
-    Made with
+  <div class="footer-item">
     
-    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+<p class="component-author">
+作者： infinite-cloisters
+</p>
+
+  </div>
+  
+  <div class="footer-item">
     
-    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+
+  <p class="copyright">
+    
+      © Copyright 2026, infinite-cloisters.
+      <br/>
+    
   </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
-      <div class="sy-foot-socials"></div>
+          </footer>
+        
+
+      </main>
     </div>
   </div>
-</footer>
-      <script src="../../_static/documentation_options.js?v=53716796"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../_static/translations.js?v=540d3cec"></script>
-      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>

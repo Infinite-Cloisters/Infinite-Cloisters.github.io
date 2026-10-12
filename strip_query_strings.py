@@ -16,8 +16,10 @@ import re
 import sys
 from pathlib import Path
 
-# Matches  ?v=  followed by one or more hex digits (Sphinx cache-buster format)
-QUERY_RE = re.compile(r'\?v=[0-9a-f]+')
+# Matches cache-busting query strings appended by Sphinx / the HTML theme:
+#   ?v=<hex>       Sphinx 自己的静态资源
+#   ?digest=<hex>  pydata-sphinx-theme / sphinx-book-theme 的资源
+QUERY_RE = re.compile(r'\?(?:v|digest)=[0-9a-f]+')
 
 
 def strip_file(path: Path) -> bool:

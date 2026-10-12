@@ -1,121 +1,181 @@
-
-
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" data-content_root="../../">
+<html lang="zh-CN" data-accent-color="violet" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>开发环境与工具链选择 &mdash; Documentation 0.1.9 文档</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
-      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-
-  
-      <script src="../../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=53716796"></script>
-      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
-      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
-      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../_static/translations.js?v=540d3cec"></script>
-    <script src="../../_static/js/theme.js"></script>
-    <link rel="index" title="索引" href="../../genindex.html" />
-    <link rel="search" title="搜索" href="../../search.html" />
-    <link rel="next" title="西北工业大学科技论文写作" href="../techpapers/index.html" />
-    <link rel="prev" title="南京理工大学嘉立创杯新生电赛" href="index.html" /> 
-</head>
-
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            Documentation
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>开发环境与工具链选择 - Documentation 0.1.9 文档</title><link rel="index" title="索引" href="../../genindex.html" /><link rel="search" title="搜索" href="../../search.html" /><link rel="next" title="西北工业大学科技论文写作" href="../techpapers/index.html" /><link rel="prev" title="南京理工大学嘉立创杯新生电赛" href="index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="开发环境与工具链选择"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      
+      
+      <strong>Documentation</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="搜索" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="切换到亮色模式"
+data-aria-light="切换到暗色模式"
+data-aria-dark="切换到自动模式">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../wsl/wsl.html">在 Windows 上使用 WSL(以 Arch Linux 为例)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wsl/wsl_use.html">在 VSCode 上使用 WSL2</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linux/linux.html">Linux 相关</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/arm-none-eabi.html">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/gdb.html">使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rust-stm32/rust-stm32.html">使用rust开发stm32体验</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../label-studio/backend.html">Backend_ml 接入</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../github/index.html">GitHub使用</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../github/git.html">GIT工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../github/githubpage.html">使用 GitHub Pages 挂载静态网页</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/nuedc.html">电赛介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/prepare.html">赛事准备相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/problem.html">全国大学生电子设计竞赛近年赛题</a></li>
+</ul>
+</li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">南京理工大学嘉立创杯新生电赛</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">开发环境与工具链选择</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">方案速览</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#stm32cubemx">零、通用的第一步:STM32CubeMX</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#vscode-eide-stm32cubemx-probe-rs">一、VSCode + EIDE + STM32CubeMX + Probe-rs（我个人比较喜欢的）</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">1.1 可能需要的软件或插件</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cubemx-eide">1.2 CubeMX 生成 + EIDE 手 动 导入</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">1.2 CubeMX 生成 + EIDE 手 动 导入</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">1.3 编译期最常见的三个坑</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#probe-rs">1.4 用 probe-rs 插件调试（照官方文档来）</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">开发环境与工具链选择</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#clion-stm32cubemx-st">二、CLion + STM32CubeMX（体验下来ST系列很舒服，但是其他厂家的配置需要一定动手能力）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#stm32cubeide-stm32cubemx-clion">三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#keil-mdk5-stm32cubemx">四、Keil MDK5 + STM32CubeMX（经典，教程比较多，但页面和路径管理太落后了）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rust">五、关于用 Rust 开发（个人不建议）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#git">六、强烈建议:学会用 Git 做版本管理</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id6">最小可用流程</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">几条实操建议</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techpapers/index.html">西北工业大学科技论文写作</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/prepare.html">环境准备：宏包与文档从哪里来</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/lab1.html">实验课 01：公式、表格、图等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/lab2.html">实验课 02：列表、算法、颜色等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/lab3.html">实验课 03：绘图（选学）</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">参考</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../techpapers/index.html">西北工业大学科技论文写作</a></li>
 </ul>
 
         </div>
       </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">Documentation</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="页面导航">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">南京理工大学嘉立创杯新生电赛</a></li>
-      <li class="breadcrumb-item active">开发环境与工具链选择</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../../_sources/doc/JLC/guide.md.txt" rel="nofollow"> 查看页面源码</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
-  <section id="id1">
-<h1>开发环境与工具链选择<a class="headerlink" href="#id1" title="链接到此标题。"></a></h1>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>该页内容</h3><ul>
+<li><a class="reference internal" href="#id2">&#26041;&#26696;&#36895;&#35272;</a></li>
+<li><a class="reference internal" href="#stm32cubemx">&#38646;&#12289;&#36890;&#29992;&#30340;&#31532;&#19968;&#27493;:STM32CubeMX</a></li>
+<li><a class="reference internal" href="#vscode-eide-stm32cubemx-probe-rs">&#19968;&#12289;VSCode + EIDE + STM32CubeMX + Probe-rs&#65288;&#25105;&#20010;&#20154;&#27604;&#36739;&#21916;&#27426;&#30340;&#65289;</a><ul>
+<li><a class="reference internal" href="#id3">1.1 &#21487;&#33021;&#38656;&#35201;&#30340;&#36719;&#20214;&#25110;&#25554;&#20214;</a></li>
+<li><a class="reference internal" href="#cubemx-eide">1.2 CubeMX &#29983;&#25104; + EIDE &#25163; &#21160; &#23548;&#20837;</a></li>
+<li><a class="reference internal" href="#id4">1.2 CubeMX &#29983;&#25104; + EIDE &#25163; &#21160; &#23548;&#20837;</a></li>
+<li><a class="reference internal" href="#id5">1.3 &#32534;&#35793;&#26399;&#26368;&#24120;&#35265;&#30340;&#19977;&#20010;&#22353;</a></li>
+<li><a class="reference internal" href="#probe-rs">1.4 &#29992; probe-rs &#25554;&#20214;&#35843;&#35797;&#65288;&#29031;&#23448;&#26041;&#25991;&#26723;&#26469;&#65289;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clion-stm32cubemx-st">&#20108;&#12289;CLion + STM32CubeMX&#65288;&#20307;&#39564;&#19979;&#26469;ST&#31995;&#21015;&#24456;&#33298;&#26381;&#65292;&#20294;&#26159;&#20854;&#20182;&#21378;&#23478;&#30340;&#37197;&#32622;&#38656;&#35201;&#19968;&#23450;&#21160;&#25163;&#33021;&#21147;&#65289;</a></li>
+<li><a class="reference internal" href="#stm32cubeide-stm32cubemx-clion">&#19977;&#12289;STM32CubeIDE + STM32CubeMX&#65288;&#25042;&#20154;&#24517;&#22791;&#65292;&#20854;&#23454;&#21644;CLion&#24046;&#19981;&#22810;&#65289;</a></li>
+<li><a class="reference internal" href="#keil-mdk5-stm32cubemx">&#22235;&#12289;Keil MDK5 + STM32CubeMX&#65288;&#32463;&#20856;&#65292;&#25945;&#31243;&#27604;&#36739;&#22810;&#65292;&#20294;&#39029;&#38754;&#21644;&#36335;&#24452;&#31649;&#29702;&#22826;&#33853;&#21518;&#20102;&#65289;</a></li>
+<li><a class="reference internal" href="#rust">&#20116;&#12289;&#20851;&#20110;&#29992; Rust &#24320;&#21457;&#65288;&#20010;&#20154;&#19981;&#24314;&#35758;&#65289;</a></li>
+<li><a class="reference internal" href="#git">&#20845;&#12289;&#24378;&#28872;&#24314;&#35758;:&#23398;&#20250;&#29992; Git &#20570;&#29256;&#26412;&#31649;&#29702;</a><ul>
+<li><a class="reference internal" href="#id6">&#26368;&#23567;&#21487;&#29992;&#27969;&#31243;</a></li>
+<li><a class="reference internal" href="#id7">&#20960;&#26465;&#23454;&#25805;&#24314;&#35758;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8">&#21442;&#32771;</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">Documentation</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">南京理工大学嘉立创杯新生电赛</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">开发环境与工具链选择</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="id1">
+<h1>开发环境与工具链选择<a class="headerlink" href="#id1" title="链接到此标题。">#</a></h1>
 <p>这篇写给第一次摸单片机、要在几天内把板子跑起来的同学。内含AI扩写内容，但我看了一下应该没有太大问题。</p>
 <p>先说结论:<strong>工具链不重要,能把代码烧进去、能在线打断点调试、能随时回退代码,才是真的</strong>。</p>
 <p>下面几套方案我都列出来,各有适用场景。如果你拿不定主意,直接照 <strong>方案一（VSCode + EIDE + probe-rs）</strong> 搭,跨平台、免费、不限代码大小、下载器随便换，也是电源组那边喜欢用的开放方案。</p>
 <section id="id2">
-<h2>方案速览<a class="headerlink" href="#id2" title="链接到此标题。"></a></h2>
+<h2>方案速览<a class="headerlink" href="#id2" title="链接到此标题。">#</a></h2>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -169,7 +229,7 @@
 </table></section>
 <hr class="docutils" />
 <section id="stm32cubemx">
-<h2>零、通用的第一步:STM32CubeMX<a class="headerlink" href="#stm32cubemx" title="链接到此标题。"></a></h2>
+<h2>零、通用的第一步:STM32CubeMX<a class="headerlink" href="#stm32cubemx" title="链接到此标题。">#</a></h2>
 <p>上面四套方案里,CubeMX 是共用的。它的作用只有一个:<strong>用图形界面配好时钟树和外设,然后生成初始化代码</strong>。</p>
 <p>几个必须记住的点:</p>
 <ol class="simple">
@@ -213,10 +273,10 @@
 </section>
 <hr class="docutils" />
 <section id="vscode-eide-stm32cubemx-probe-rs">
-<h2>一、VSCode + EIDE + STM32CubeMX + Probe-rs（我个人比较喜欢的）<a class="headerlink" href="#vscode-eide-stm32cubemx-probe-rs" title="链接到此标题。"></a></h2>
+<h2>一、VSCode + EIDE + STM32CubeMX + Probe-rs（我个人比较喜欢的）<a class="headerlink" href="#vscode-eide-stm32cubemx-probe-rs" title="链接到此标题。">#</a></h2>
 <p>如果你打算直接使用CMake完成编译，请参考<a class="reference external" href="https://blog.csdn.net/qq_42839452/article/details/153870471">&quot;VSCode使用CMake编译STM32&quot;</a>，这个其实就是另外一个方案中CLion帮你干的活，选择使用VSCode单纯是为了轻量（CLion软件相对较重），不要下载网盘里面的安装包，去官网上下载新的。</p>
 <section id="id3">
-<h3>1.1 可能需要的软件或插件<a class="headerlink" href="#id3" title="链接到此标题。"></a></h3>
+<h3>1.1 可能需要的软件或插件<a class="headerlink" href="#id3" title="链接到此标题。">#</a></h3>
 <table border="1" class="docutils">
 <thead>
 <tr>
@@ -274,20 +334,20 @@
 | probe-rs CLI | <strong>必须</strong> 烧录 + 在线调试（打断点、看变量、看寄存器） |</p>
 <p>如果你用<code class="docutils literal notranslate"><span class="pre">STM32CubeIDE</span> <span class="pre">for</span> <span class="pre">Visual</span> <span class="pre">Studio</span> <span class="pre">Code</span></code>，请忽略下面内容</p>
 <p>装 probe-rs（Windows,PowerShell）:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="nb">irm </span><span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">releases</span><span class="p">/</span><span class="n">latest</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">probe-rs-tools-installer</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
-</pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">irm </span><span class="n">https</span><span class="p">://</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">probe-rs</span><span class="p">/</span><span class="n">releases</span><span class="p">/</span><span class="n">latest</span><span class="p">/</span><span class="n">download</span><span class="p">/</span><span class="n">probe-rs-tools-installer</span><span class="p">.</span><span class="n">ps1</span> <span class="p">|</span> <span class="nb">iex</span>
+</span></pre></div>
 </div>
 <p>Linux / macOS 可以用 <code class="docutils literal notranslate"><span class="pre">cargo</span> <span class="pre">install</span> <span class="pre">probe-rs-tools</span></code>,或者直接去 GitHub Releases 下载。</p>
 <p>装完验证:</p>
-<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span class="n">probe-rs</span> <span class="p">-</span><span class="n">-version</span>
-</pre></div>
+<div class="highlight-powershell notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">probe-rs</span> <span class="p">-</span><span class="n">-version</span>
+</span></pre></div>
 </div>
 </section>
 <section id="cubemx-eide">
-<h3>1.2 CubeMX 生成 + EIDE 手 动 导入<a class="headerlink" href="#cubemx-eide" title="链接到此标题。"></a></h3>
+<h3>1.2 CubeMX 生成 + EIDE 手 动 导入<a class="headerlink" href="#cubemx-eide" title="链接到此标题。">#</a></h3>
 </section>
 <section id="id4">
-<h3>1.2 CubeMX 生成 + EIDE 手 动 导入<a class="headerlink" href="#id4" title="链接到此标题。"></a></h3>
+<h3>1.2 CubeMX 生成 + EIDE 手 动 导入<a class="headerlink" href="#id4" title="链接到此标题。">#</a></h3>
 <ol class="simple">
 <li><p>CubeMX 里 Toolchain / IDE 选 <strong>CMAKE or Makefile</strong>,GENERATE CODE。</p></li>
 <li><p>VSCode 打开工程目录,EIDE 面板 → 新建项目 → 其他步骤参考下文。 如果是<code class="docutils literal notranslate"><span class="pre">MDK-ARM</span></code>就直接导入。</p></li>
@@ -301,7 +361,7 @@
 <p>这种方案虽然没有CMake配合插件直接编译方便，但胜在简单、通用性好。</p>
 </section>
 <section id="id5">
-<h3>1.3 编译期最常见的三个坑<a class="headerlink" href="#id5" title="链接到此标题。"></a></h3>
+<h3>1.3 编译期最常见的三个坑<a class="headerlink" href="#id5" title="链接到此标题。">#</a></h3>
 <ol class="simple">
 <li><p><strong>FPU 没开</strong>:带硬件浮点的芯片（F4/F7/H7/G4）默认可能是 <code class="docutils literal notranslate"><span class="pre">soft</span></code>,FreeRTOS 的 <code class="docutils literal notranslate"><span class="pre">port.c</span></code> 会报 <code class="docutils literal notranslate"><span class="pre">selected</span> <span class="pre">FPU</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">support</span> <span class="pre">instruction</span></code>。到 Target Options 里把 FPU 改成 <code class="docutils literal notranslate"><span class="pre">fpv4-sp-d16</span></code>（M4）/ <code class="docutils literal notranslate"><span class="pre">fpv5-d16</span></code>（M7）。</p></li>
 <li><p><strong>链接脚本语法错误</strong>:CubeMX 生成的 <code class="docutils literal notranslate"><span class="pre">.ld</span></code> 偶尔会出现 <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">AT&gt;</span> <span class="pre">FLASH</span></code> 这类缺参数的写法,手动改成 <code class="docutils literal notranslate"><span class="pre">&gt;RAM</span> <span class="pre">AT&gt;</span> <span class="pre">FLASH</span></code>,<code class="docutils literal notranslate"><span class="pre">_estack</span></code> 写成 <code class="docutils literal notranslate"><span class="pre">ORIGIN(RAM)</span> <span class="pre">+</span> <span class="pre">LENGTH(RAM)</span></code>。</p></li>
@@ -310,40 +370,40 @@
 </ol>
 </section>
 <section id="probe-rs">
-<h3>1.4 用 probe-rs 插件调试（照官方文档来）<a class="headerlink" href="#probe-rs" title="链接到此标题。"></a></h3>
+<h3>1.4 用 probe-rs 插件调试（照官方文档来）<a class="headerlink" href="#probe-rs" title="链接到此标题。">#</a></h3>
 <p>probe-rs 的 VSCode 插件走的是微软 DAP 协议,<code class="docutils literal notranslate"><span class="pre">launch.json</span></code> 里 <code class="docutils literal notranslate"><span class="pre">type</span></code> 固定写 <code class="docutils literal notranslate"><span class="pre">probe-rs-debug</span></code>。</p>
 <p><strong>关键点:它不挑语言。</strong> 只要你有带符号的 <code class="docutils literal notranslate"><span class="pre">.elf</span></code> 和芯片名,C 工程、C++ 工程、汇编工程都能调,不是 Rust 专属。</p>
 <p>此外，这个东西是基于rust的，理论上直接写好<code class="docutils literal notranslate"><span class="pre">.cargo</span></code>内的配置文件，就可以直接使用预设命令一键下载。</p>
 <p>此外，这个东西是基于rust的，理论上直接写好<code class="docutils literal notranslate"><span class="pre">.cargo</span></code>内的配置文件，就可以直接使用预设命令一键下载。</p>
 <p>最小可用配置（改三处就能跑:芯片名、elf 路径、svd 路径）:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;probe-rs-debug&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;probe-rs Debug&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;cwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;chip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;STM32F407ZETx&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;flashingConfig&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;flashingEnabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;haltAfterReset&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;formatOptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;binaryFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;elf&quot;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;coreConfigs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">        </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;coreIndex&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;programBinary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build/YourProject.elf&quot;</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;svdFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;STM32F407.svd&quot;</span>
-<span class="w">        </span><span class="p">}</span>
-<span class="w">      </span><span class="p">],</span>
-<span class="w">      </span><span class="nt">&quot;consoleLogLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Console&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">]</span>
-<span class="p">}</span>
-</pre></div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="p">{</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span>
+</span><span data-line="3"><span class="w">  </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="4"><span class="w">    </span><span class="p">{</span>
+</span><span data-line="5"><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;probe-rs-debug&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">      </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;probe-rs Debug&quot;</span><span class="p">,</span>
+</span><span data-line="8"><span class="w">      </span><span class="nt">&quot;cwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}&quot;</span><span class="p">,</span>
+</span><span data-line="9"><span class="w">      </span><span class="nt">&quot;chip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;STM32F407ZETx&quot;</span><span class="p">,</span>
+</span><span data-line="10"><span class="w">      </span><span class="nt">&quot;flashingConfig&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="11"><span class="w">        </span><span class="nt">&quot;flashingEnabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span data-line="12"><span class="w">        </span><span class="nt">&quot;haltAfterReset&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span data-line="13"><span class="w">        </span><span class="nt">&quot;formatOptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span data-line="14"><span class="w">          </span><span class="nt">&quot;binaryFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;elf&quot;</span>
+</span><span data-line="15"><span class="w">        </span><span class="p">}</span>
+</span><span data-line="16"><span class="w">      </span><span class="p">},</span>
+</span><span data-line="17"><span class="w">      </span><span class="nt">&quot;coreConfigs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="18"><span class="w">        </span><span class="p">{</span>
+</span><span data-line="19"><span class="w">          </span><span class="nt">&quot;coreIndex&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span data-line="20"><span class="w">          </span><span class="nt">&quot;programBinary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build/YourProject.elf&quot;</span><span class="p">,</span>
+</span><span data-line="21"><span class="w">          </span><span class="nt">&quot;svdFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;STM32F407.svd&quot;</span>
+</span><span data-line="22"><span class="w">        </span><span class="p">}</span>
+</span><span data-line="23"><span class="w">      </span><span class="p">],</span>
+</span><span data-line="24"><span class="w">      </span><span class="nt">&quot;consoleLogLevel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Console&quot;</span>
+</span><span data-line="25"><span class="w">    </span><span class="p">}</span>
+</span><span data-line="26"><span class="w">  </span><span class="p">]</span>
+</span><span data-line="27"><span class="p">}</span>
+</span></pre></div>
 </div>
 <p>常用可选字段,按需加:</p>
 <table border="1" class="docutils">
@@ -397,22 +457,22 @@
 </tr>
 </tbody>
 </table><p><code class="docutils literal notranslate"><span class="pre">coreConfigs</span></code> 里还能开 RTT(不用串口就能打 log,速度快到可以放进中断):</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;coreConfigs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;coreIndex&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;programBinary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build/YourProject.elf&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;svdFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;STM32F407.svd&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;rttEnabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;rttChannelFormats&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;channelNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;dataFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;showTimestamps&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">]</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">]</span>
-</pre></div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">&quot;coreConfigs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="2"><span class="w">  </span><span class="p">{</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">&quot;coreIndex&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span data-line="4"><span class="w">    </span><span class="nt">&quot;programBinary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build/YourProject.elf&quot;</span><span class="p">,</span>
+</span><span data-line="5"><span class="w">    </span><span class="nt">&quot;svdFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;STM32F407.svd&quot;</span><span class="p">,</span>
+</span><span data-line="6"><span class="w">    </span><span class="nt">&quot;rttEnabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span data-line="7"><span class="w">    </span><span class="nt">&quot;rttChannelFormats&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span data-line="8"><span class="w">      </span><span class="p">{</span>
+</span><span data-line="9"><span class="w">        </span><span class="nt">&quot;channelNumber&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</span><span data-line="10"><span class="w">        </span><span class="nt">&quot;dataFormat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;String&quot;</span><span class="p">,</span>
+</span><span data-line="11"><span class="w">        </span><span class="nt">&quot;showTimestamps&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+</span><span data-line="12"><span class="w">      </span><span class="p">}</span>
+</span><span data-line="13"><span class="w">    </span><span class="p">]</span>
+</span><span data-line="14"><span class="w">  </span><span class="p">}</span>
+</span><span data-line="15"><span class="p">]</span>
+</span></pre></div>
 </div>
 <p>几个提醒:</p>
 <ul class="simple">
@@ -425,7 +485,7 @@
 </section>
 <hr class="docutils" />
 <section id="clion-stm32cubemx-st">
-<h2>二、CLion + STM32CubeMX（体验下来ST系列很舒服，但是其他厂家的配置需要一定动手能力）<a class="headerlink" href="#clion-stm32cubemx-st" title="链接到此标题。"></a></h2>
+<h2>二、CLion + STM32CubeMX（体验下来ST系列很舒服，但是其他厂家的配置需要一定动手能力）<a class="headerlink" href="#clion-stm32cubemx-st" title="链接到此标题。">#</a></h2>
 <p>CubeMX 里 Toolchain / IDE 选 <strong>STM32CubeIDE</strong>,生成完直接用 CLion 打开目录即可。</p>
 <p>优点:</p>
 <ul class="simple">
@@ -443,7 +503,7 @@
 </section>
 <hr class="docutils" />
 <section id="stm32cubeide-stm32cubemx-clion">
-<h2>三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）<a class="headerlink" href="#stm32cubeide-stm32cubemx-clion" title="链接到此标题。"></a></h2>
+<h2>三、STM32CubeIDE + STM32CubeMX（懒人必备，其实和CLion差不多）<a class="headerlink" href="#stm32cubeide-stm32cubemx-clion" title="链接到此标题。">#</a></h2>
 <p>ST 官方的一体化 IDE,基于 Eclipse,<strong>自带 CubeMX</strong>,装完就能用,不需要额外配工具链。</p>
 <p>优点:</p>
 <ul class="simple">
@@ -463,7 +523,7 @@
 </section>
 <hr class="docutils" />
 <section id="keil-mdk5-stm32cubemx">
-<h2>四、Keil MDK5 + STM32CubeMX（经典，教程比较多，但页面和路径管理太落后了）<a class="headerlink" href="#keil-mdk5-stm32cubemx" title="链接到此标题。"></a></h2>
+<h2>四、Keil MDK5 + STM32CubeMX（经典，教程比较多，但页面和路径管理太落后了）<a class="headerlink" href="#keil-mdk5-stm32cubemx" title="链接到此标题。">#</a></h2>
 <p>经典方案,国内教程最多,实验室和老项目里到处都是。CubeMX 里 Toolchain / IDE 选 <strong>MDK-ARM</strong>。</p>
 <p>优点:</p>
 <ul class="simple">
@@ -486,7 +546,7 @@
 </section>
 <hr class="docutils" />
 <section id="rust">
-<h2>五、关于用 Rust 开发（个人不建议）<a class="headerlink" href="#rust" title="链接到此标题。"></a></h2>
+<h2>五、关于用 Rust 开发（个人不建议）<a class="headerlink" href="#rust" title="链接到此标题。">#</a></h2>
 <p>Rust 写嵌入式确实很香——所有权模型能在编译期掐掉一大类内存 bug,<code class="docutils literal notranslate"><span class="pre">embedded-hal</span></code> 生态这几年也做得很漂亮。probe-rs、RTT、<code class="docutils literal notranslate"><span class="pre">defmt</span></code> 这套工具链就是 Rust 社区做起来的,我们前面用的东西其实都沾了它的光（本站也有 Rust 开发 STM32 的尝鲜记录,感兴趣可以去翻）。</p>
 <p><strong>但我不建议比赛/入门阶段用 Rust,原因是实打实的:</strong></p>
 <ol class="simple">
@@ -499,58 +559,58 @@
 </section>
 <hr class="docutils" />
 <section id="git">
-<h2>六、强烈建议:学会用 Git 做版本管理<a class="headerlink" href="#git" title="链接到此标题。"></a></h2>
+<h2>六、强烈建议:学会用 Git 做版本管理<a class="headerlink" href="#git" title="链接到此标题。">#</a></h2>
 <p>这条不是可选项。<strong>比赛里最常见的翻车不是写不出代码,而是&quot;刚才还好好的,改了两行就全崩了,还不知道改了哪两行&quot;。</strong></p>
 <p>学会 Git,最直接的收益就是:<strong>改坏了能从云端拉回来。</strong></p>
 <section id="id6">
-<h3>最小可用流程<a class="headerlink" href="#id6" title="链接到此标题。"></a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>init<span class="w">                        </span><span class="c1"># 或者 git clone &lt;仓库地址&gt;</span>
-git<span class="w"> </span>add<span class="w"> </span>.<span class="w">                       </span><span class="c1"># 把改动放进暂存区</span>
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;增加 PID 参数整定&quot;</span><span class="w">   </span><span class="c1"># 提交,写人话,别写 &quot;update&quot;</span>
-git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w">            </span><span class="c1"># 推到云端</span>
-</pre></div>
+<h3>最小可用流程<a class="headerlink" href="#id6" title="链接到此标题。">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>init<span class="w">                        </span><span class="c1"># 或者 git clone &lt;仓库地址&gt;</span>
+</span><span data-line="2">git<span class="w"> </span>add<span class="w"> </span>.<span class="w">                       </span><span class="c1"># 把改动放进暂存区</span>
+</span><span data-line="3">git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;增加 PID 参数整定&quot;</span><span class="w">   </span><span class="c1"># 提交,写人话,别写 &quot;update&quot;</span>
+</span><span data-line="4">git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w">            </span><span class="c1"># 推到云端</span>
+</span></pre></div>
 </div>
 <p>改坏了想回退:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status<span class="w">                      </span><span class="c1"># 看看动了哪些文件</span>
-git<span class="w"> </span>diff<span class="w">                        </span><span class="c1"># 看看具体改了什么</span>
-git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>Core/Src/main.c<span class="w"> </span><span class="c1"># 丢掉这个文件的改动</span>
-git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD~1<span class="w">         </span><span class="c1"># 干脆回退到上一次提交(注意:之后就找不回来了)</span>
-git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w">               </span><span class="c1"># 看历史提交</span>
-</pre></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>status<span class="w">                      </span><span class="c1"># 看看动了哪些文件</span>
+</span><span data-line="2">git<span class="w"> </span>diff<span class="w">                        </span><span class="c1"># 看看具体改了什么</span>
+</span><span data-line="3">git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>Core/Src/main.c<span class="w"> </span><span class="c1"># 丢掉这个文件的改动</span>
+</span><span data-line="4">git<span class="w"> </span>reset<span class="w"> </span>--hard<span class="w"> </span>HEAD~1<span class="w">         </span><span class="c1"># 干脆回退到上一次提交(注意:之后就找不回来了)</span>
+</span><span data-line="5">git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w">               </span><span class="c1"># 看历史提交</span>
+</span></pre></div>
 </div>
 </section>
 <section id="id7">
-<h3>几条实操建议<a class="headerlink" href="#id7" title="链接到此标题。"></a></h3>
+<h3>几条实操建议<a class="headerlink" href="#id7" title="链接到此标题。">#</a></h3>
 <ol class="simple">
 <li><p><strong>每个阶段性成果都 commit 一次</strong>。一个功能调通了就提交,别攒一天。commit message 写清楚做了什么,未来的你会感谢现在的你。</p></li>
 <li><p><strong>一定要推到云端</strong>（Gitee / GitHub / GitLab,建议开私有仓库）。只在本地 commit,硬盘挂了就全没了。</p></li>
 <li><p><strong>配好 <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code></strong>,别把编译产物传上去,否则仓库几天就几百 MB、clone 慢得要死:</p></li>
 </ol>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span># 编译产物
-build/
-Debug/
-Release/
-Objects/
-Listings/
-*.o
-*.elf
-*.axf
-*.hex
-*.bin
-*.map
-
-# CubeMX / IDE
-.mxproject
-.settings/
-.cproject
-.project
-*.launch
-.vscode/settings.json
-
-# 系统
-.DS_Store
-Thumbs.db
-</pre></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1"># 编译产物
+</span><span data-line="2">build/
+</span><span data-line="3">Debug/
+</span><span data-line="4">Release/
+</span><span data-line="5">Objects/
+</span><span data-line="6">Listings/
+</span><span data-line="7">*.o
+</span><span data-line="8">*.elf
+</span><span data-line="9">*.axf
+</span><span data-line="10">*.hex
+</span><span data-line="11">*.bin
+</span><span data-line="12">*.map
+</span><span data-line="13">
+</span><span data-line="14"># CubeMX / IDE
+</span><span data-line="15">.mxproject
+</span><span data-line="16">.settings/
+</span><span data-line="17">.cproject
+</span><span data-line="18">.project
+</span><span data-line="19">*.launch
+</span><span data-line="20">.vscode/settings.json
+</span><span data-line="21">
+</span><span data-line="22"># 系统
+</span><span data-line="23">.DS_Store
+</span><span data-line="24">Thumbs.db
+</span></pre></div>
 </div>
 <ol class="simple">
 <li><p><strong>不要提交 CubeMX 的 <code class="docutils literal notranslate"><span class="pre">.ioc</span></code> 之外的中间文件</strong>,但 <code class="docutils literal notranslate"><span class="pre">.ioc</span></code> <strong>必须提交</strong>——它是你的引脚和时钟配置,是最重要的文件之一。</p></li>
@@ -561,7 +621,7 @@ Thumbs.db
 </section>
 <hr class="docutils" />
 <section id="id8">
-<h2>参考<a class="headerlink" href="#id8" title="链接到此标题。"></a></h2>
+<h2>参考<a class="headerlink" href="#id8" title="链接到此标题。">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://probe.rs/docs/">probe-rs 官方文档</a> —— 尤其是 Debugger 一节的 <code class="docutils literal notranslate"><span class="pre">launch.json</span></code> 完整字段说明</p></li>
 <li><p><a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=probe-rs.probe-rs-debugger">probe-rs VSCode 插件</a></p></li>
@@ -577,35 +637,51 @@ Thumbs.db
 </section>
 </section>
 
-
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="index.html" class="btn btn-neutral float-left" title="南京理工大学嘉立创杯新生电赛" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../techpapers/index.html" class="btn btn-neutral float-right" title="西北工业大学科技论文写作" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; 版权所有 2026, infinite-cloisters。</p>
-  </div>
-
-  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
-    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
-   
-
-</footer>
-        </div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>回到顶部</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>上一章</span><div class="title">南京理工大学嘉立创杯新生电赛</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../techpapers/index.html">
+      <div class="page-info">
+        <span>下一章</span>
+        <div class="title">西北工业大学科技论文写作</div>
       </div>
-    </section>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, infinite-cloisters</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
-
-</body>
+</footer>
+      <script src="../../_static/documentation_options.js?v=53716796"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/translations.js?v=540d3cec"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script></body>
 </html>

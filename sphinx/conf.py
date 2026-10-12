@@ -31,3 +31,14 @@ language = 'zh_CN'
 # html_theme = 'shibuya'
 html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
+html_search_language = 'zh'
+
+try:
+    import jieba
+    html_search_options = {
+        'type': 'test',
+        'language': 'zh',
+        'tokenizer': 'jieba.sphinx_zh'
+    }
+except:
+    pass

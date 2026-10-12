@@ -313,7 +313,9 @@ x = y/z + √w
 
 **编译结果**:
 
-![嵌套表格](../../_static/techpapers/lab1-08-nested-table.png)
+<div align="left">
+  <img src="../../_static/techpapers/lab1-08-nested-table.png" alt="嵌套表格" width="100%">
+</div>
 
 **说明**:
 

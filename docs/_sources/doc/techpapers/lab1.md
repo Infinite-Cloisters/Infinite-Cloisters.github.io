@@ -313,7 +313,7 @@ x = y/z + √w
 
 **编译结果**:
 
-![嵌套表格](../../_static/techpapers/lab1-08-nested-table.png =100x20)
+![嵌套表格](../../_static/techpapers/lab1-08-nested-table.png)
 
 **说明**:
 

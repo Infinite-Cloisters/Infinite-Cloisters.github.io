@@ -12,12 +12,15 @@
   - `build.sh` / `build.ps1` 里的 `make clean` 与 `rm -rf ./docs/*` 会触发沙箱批量删除拦截，**不要照跑**；直接增量 `make html` + `cp -r` 覆盖即可。
   - 还需保证 `docs/.nojekyll` 与 `docs/CNAME` 存在。
 - `conf.py`：`extensions = ['recommonmark','sphinx_markdown_tables','sphinx_copybutton']`，`source_suffix = {'.rst':'restructuredtext', '.md':'markdown'}`，主题 **`sphinx_book_theme`**（pydata 系；早期用过 rtd/shibuya，都注释掉了），`language='zh_CN'`，`html_static_path=['_static']`。
-- 每个 doc 子目录有 `index.rst`（含 `.. _label:`、标题、`.. toctree::`），正文可用 `.md`。
+- 每个 doc 子目录有 `index.rst`（含 `.. _label:`、标题、`.. toctree::`），正文可用 `.md`。分区页模板：label → 标题（下划线给足，CJK 按双宽算）→ 简介 → `.. toctree::` → `.. role:: raw-html(raw)`。
+- **`doc/sphinx/`＝站点工具链专题区**（「Sphinx 使用笔记」），已有 `search.rst`（中文搜索排错）。这个区刻意写 `.rst` 而非 `.md`：需要 `.. note::`/`.. warning::` 提示框与 `.. code-block::` 高亮，markdown 在 recommonmark 下拿不到。
 - **markdown 里不能写 RST 指令**（recommonmark 不认 `.. note::`，也不认 ```eval_rst 围栏块，后者还会报 Pygments lexer 警告）。想用主题的提示框必须写 `.rst`；markdown 只能用引用块 `> **备注**` 代替。markdown 中也不要写 toctree——toctree 统一放在该目录的 `index.rst` 里。
 
 ## 中文排版硬规则（踩过坑）
 
-1. **RST 里中文加粗**必须用转义空白做边界：`\ **加粗**\ `。直接写 `**加粗**` 贴中文会配对错乱、漏出字面星号。详见同日工作日志。
+1. **RST 里中文加粗**：边界只能是空白或**全角标点**，**汉字不行**。`。**文字**，` 能正常加粗；`汉字**文字**汉字` 会让整对 `**` 原样漏到页面上。贴中文时保险做法一律用转义空白：`\ **加粗**\ `。
+   另外 **RST 行内标记不能嵌套**——`` `` `` 不能放进 `**` 里（如 `**``x`` 从来不存在**`），否则产物里出现 `problematic`，必须把字面量挪到加粗外面。
+   ⚠️ **docutils 对「起始标记不合法」往往不报警**，只是静默把 `**` 当普通文本输出。所以 `make html` 的 0 警告**不等于**排版没问题，必须查产物：`grep -c '\*\*' 产物.html` 与 `grep -c '``' 产物.html` 均应为 0。别相信「按规则预检」的脚本——把全角标点当不安全会误报。
 2. **RST 等宽字面量**用双反引号 ` ``x`` `；单反引号是 title-reference，渲染成斜体 `<cite>`。
 3. **Markdown（CommonMark）里 `**…**` 的闭合号后面不能紧跟汉字**（如 `**偶数行（…）**设置`），否则不闭合。把粗体范围收窄到 `**偶数行**` 即可。
 4. **Markdown 表格必须顶格**、前后留空行——缩进在列表项里 recommonmark 不解析，会退化成普通段落。
@@ -65,6 +68,16 @@ def setup(app):
 `html_search_options` **只认 `dict` 一个键**（自定义词典路径）。写 `type`/`language`/`tokenizer` 会被静默忽略；词典文件不存在时要走 `is_file()` 判断，别让异常被裸 `except` 吞掉。
 
 **排查手法（可复用）**：往页面 `<head>` 注入 `window.addEventListener('error', ...)` 探针把错误写进 `document.title`，再用 Edge headless `--virtual-time-budget=20000 --dump-dom` 读回；比猜快得多。搜索是否正常，看 `ul.search` 里的 `li` 条数。
+
+### 自定义词典：`sphinx/jieba_dict.txt`
+
+格式 `词 [频次] [词性]`，频次/词性可省（只写词就生效）。conf.py 里 `html_search_options = {'dict': str(jieba_dict)} if jieba_dict.is_file() else {}`，**文件不存在就自动不传**，所以建/删该文件都安全。只在**建索引**时生效，改完必须重新构建。
+⚠️ **jieba 不支持 `#` 注释**，注释行会被整行当成词条（实测），文件里只能放纯词条。
+
+**索引侧与查询侧不对称（最关键）**：Python 侧 jieba 分词；浏览器侧 `searchtools.js:187` 的 `splitQuery` 按 `[^\p{Letter}\p{Number}_\p{Emoji_Presentation}]+` 切，**汉字属 `\p{Letter}` → 中文整段不切**（zh 无自定义 splitter）。所以输入框里的整个中文串是**一个**查询词条 ⇒ 词典的价值就是把「用户会输入的词」变成索引里的独立词条。整句中文必然搜不到（实测「科技论文写作与交叉编译」0 条，「科技论文写作」5 条）。
+另外：多词查询是 **AND 语义**（同页共现），返回 0 时先算两词页集交集再怀疑分词；**单个汉字不入索引**（`word_filter` 要求 `len > 1`）；`cut_for_search` 会保留长度>2 词的 2/3-gram 子词，所以加了「交叉编译」不影响搜「交叉」。
+
+**挑词方法**：① `jieba.cut_for_search(词)`，判定标准是**整词在不在输出里**（它会同时吐子词+整词，别看错）；② grep 文档源确认该词真的出现在内容里，否则写进词典毫无意义。当前 10 词：科技论文写作/代码框架/镜像源/交叉编译/交叉工具链/断点调试/嘉立创/分支管理/远程分支/合并冲突。
 
 ## 文档写作约定（用户明确要求）
 

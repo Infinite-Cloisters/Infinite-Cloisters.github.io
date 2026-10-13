@@ -1,0 +1,771 @@
+
+<!DOCTYPE html>
+
+
+<html lang="zh-CN" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>中文搜索为什么搜不到：一次完整的排错 &#8212; Documentation 0.1.9 文档</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=90905a2f556bf617f1a9" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=4418a689" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=90905a2f556bf617f1a9"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9" />
+
+    <script src="../../_static/documentation_options.js?v=c587b00a"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script src="../../_static/translations.js?v=540d3cec"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'doc/sphinx/search';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="prev" title="Sphinx 使用笔记" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="zh-CN"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">跳转至主要内容</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>回到顶部</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="版本警告"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="网页导航">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="当前页面">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Documentation 0.1.9 文档</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">搜索</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../wsl/index.html">WSL2入门</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../wsl/wsl.html">在 Windows 上使用 WSL(以 Arch Linux 为例)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wsl/wsl_use.html">在 VSCode 上使用 WSL2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linux/index.html">Linux踩坑记录</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linux/linux.html">Linux 相关</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../arm-none-eabi/index.html">ARM Toolchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/arm-none-eabi.html">在 Windows 上安装 ARM GNU Toolchain(用于单片机/STM32 开发)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arm-none-eabi/gdb.html">使用 arm-none-eabi-gdb 和 probe-rs 实现程序调试</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rust-stm32/index.html">Rust STM32 开发</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rust-stm32/rust-stm32.html">使用rust开发stm32体验</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../label-studio/index.html">Label Studio 系列</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../label-studio/backend.html">Backend_ml 接入</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../github/index.html">GitHub使用</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../github/git.html">GIT工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../github/githubpage.html">使用 GitHub Pages 挂载静态网页</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../nuedc/index.html">全国大学生电子设计竞赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/nuedc.html">电赛介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/prepare.html">赛事准备相关</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nuedc/problem.html">全国大学生电子设计竞赛近年赛题</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../JLC/index.html">南京理工大学嘉立创杯新生电赛</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../JLC/guide.html">开发环境与工具链选择</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../techpapers/index.html">西北工业大学科技论文写作</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/prepare.html">环境准备：宏包与文档从哪里来</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/lab1.html">实验课 01：公式、表格、图等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/lab2.html">实验课 02：列表、算法、颜色等</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techpapers/lab3.html">实验课 03：绘图（选学）</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Sphinx 使用笔记</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">中文搜索为什么搜不到：一次完整的排错</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="下载此页面">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/doc/sphinx/search.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="下载源文件"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="列印成 PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="全屏模式"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="亮色"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="暗色"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>亮色</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>暗色</button></li>
+  </ul>
+</div>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="搜索" aria-label="搜索" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>中文搜索为什么搜不到：一次完整的排错</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> 目录 </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">症状</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">先排除的四个假象</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">定位：注入错误探针</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bug">根因：一个上游 bug</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">修复</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">为什么这样能生效</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#englishstemmer">为什么用 EnglishStemmer 而不是空词干</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">让中文词组真正能被搜到：自定义词典</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">怎么判断一个词该不该加</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">为什么整句中文搜不到</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">怎么验证搜索真的好了</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">小结</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="sphinx-chinese-search">
+<span id="id1"></span><h1>中文搜索为什么搜不到：一次完整的排错<a class="headerlink" href="#sphinx-chinese-search" title="链接到此标题。">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>本文内容由 AI 整理归纳，行文上会带一些 AI 味，请以文中的实际命令与实测结论为准。</p>
+</div>
+<p>本站的搜索一度是<strong>完全不可用</strong>的：搜索页能正常打开、输入框也能输入，但结果区永远停在「正在搜索中..」，中文英文一律搜不出任何东西。</p>
+<p>下面记录从现象到根因的完整过程，最后给出修法。结论是：<strong>问题不在本站的配置里，而在 Sphinx 9.1.0 自身</strong>——截至本文写作，9.1.0 已是最新版，上游尚未修复。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>如果你也遇到同样的问题，可以直接跳到「根因」一节，但建议看完「先排除的四个假象」——那几步能避免把时间花在错误的方向上。</p>
+</div>
+<section id="id2">
+<h2>症状<a class="headerlink" href="#id2" title="链接到此标题。">#</a></h2>
+<ul class="simple">
+<li><p>搜索结果区永远显示 <code class="docutils literal notranslate"><span class="pre">正在搜索中..</span></code>，结果列表 <code class="docutils literal notranslate"><span class="pre">&lt;ul</span> <span class="pre">class=&quot;search&quot;&gt;</span></code> 恒为空。</p></li>
+<li><p>中文、英文都搜不到，所以<strong>不是</strong>分词问题。</p></li>
+<li><p>页面本身不报错，界面上没有任何异常提示——这一点最容易误导人。</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>先排除的四个假象<a class="headerlink" href="#id3" title="链接到此标题。">#</a></h2>
+<p>排错最怕的是把「看起来像原因的东西」当成原因。下面这四条都被逐一排除掉了。</p>
+<p><strong>一、静态资源没加载？</strong> 不是。起一个本地服务（<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">http.server</span></code>）看访问日志，<code class="docutils literal notranslate"><span class="pre">searchtools.js</span></code>、<code class="docutils literal notranslate"><span class="pre">language_data.js</span></code>、<code class="docutils literal notranslate"><span class="pre">searchindex.js</span></code> 全部返回 200，整个页面只有 <code class="docutils literal notranslate"><span class="pre">favicon.ico</span></code> 是 404。</p>
+<p><strong>二、是查询串导致的 404？</strong> 不是。实测线上带浏览器 UA 请求 <code class="docutils literal notranslate"><span class="pre">_static/documentation_options.js?v=&lt;hash&gt;</span></code>，返回的是 200。</p>
+<p><strong>三、线上站点整站 403，是不是服务器挂了？</strong> 也不是。<code class="docutils literal notranslate"><span class="pre">curl</span></code> 不加 User-Agent 会被 WAF 当成爬虫拦掉，整站返回 403；加上浏览器 UA 之后一切正常。<strong>排查线上问题时 curl 必须带 UA</strong>，否则会得到一个完全错误的结论。</p>
+<p><strong>四、jieba 没装？</strong> 这个判断源于用错了 Python 解释器。裸 <code class="docutils literal notranslate"><span class="pre">python</span></code> 指向的环境里确实没有 jieba，但构建实际使用的是安装了 Sphinx 和 jieba 的那个解释器。反过来看索引内容也能证明分词是好的——索引里存在 <code class="docutils literal notranslate"><span class="pre">表格</span></code>、<code class="docutils literal notranslate"><span class="pre">安装</span></code>、<code class="docutils literal notranslate"><span class="pre">环境</span></code>、<code class="docutils literal notranslate"><span class="pre">宏包</span></code> 这些中文词。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>这一条值得记牢：判断「某个包有没有装」之前，先确认自己用的是<strong>构建时那个解释器</strong>，否则整条线索都是假的。</p>
+</div>
+</section>
+<section id="id4">
+<h2>定位：注入错误探针<a class="headerlink" href="#id4" title="链接到此标题。">#</a></h2>
+<p>四个假象排除之后，剩下的可能就只有「JS 运行时报错」。但页面不会把错误显示出来，所以在 <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code> 里注入一段探针，把错误写进 <code class="docutils literal notranslate"><span class="pre">document.title</span></code>，再用无头浏览器把渲染后的 DOM dump 回来看：</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">__diag</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nb">window</span><span class="p">.</span><span class="nx">__diag</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;ERROR: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39; @&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">filename</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;:&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">lineno</span><span class="p">);</span>
+<span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;DIAG::&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">__diag</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39; || &#39;</span><span class="p">);</span>
+<span class="p">},</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;unhandledrejection&#39;</span><span class="p">,</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nb">window</span><span class="p">.</span><span class="nx">__diag</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">&#39;REJECT: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">reason</span><span class="p">);</span>
+<span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;DIAG::&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">__diag</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39; || &#39;</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>抓到的错误是：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Uncaught ReferenceError: ChineseStemmer is not defined
+    @ /_static/language_data.js:13
+Uncaught ReferenceError: Stemmer is not defined
+    @ /_static/searchtools.js:304
+typeof Search=object;  Search.query=undefined;  Search._index=NULL
+</pre></div>
+</div>
+<p>到这里就清楚了：<code class="docutils literal notranslate"><span class="pre">language_data.js</span></code> 加载即抛错，紧接着 <code class="docutils literal notranslate"><span class="pre">searchtools.js</span></code> 也抛错，连 <code class="docutils literal notranslate"><span class="pre">Search.query</span></code> 都没挂上去，搜索功能自然整个瘫掉。</p>
+</section>
+<section id="bug">
+<h2>根因：一个上游 bug<a class="headerlink" href="#bug" title="链接到此标题。">#</a></h2>
+<p>打开生成的 <code class="docutils literal notranslate"><span class="pre">_static/language_data.js</span></code>，最后一行是：</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">window</span><span class="p">.</span><span class="nx">Stemmer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ChineseStemmer</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>而这个文件里内联进来的词干代码，只定义了 <code class="docutils literal notranslate"><span class="pre">BaseStemmer</span></code> 和 <code class="docutils literal notranslate"><span class="pre">EnglishStemmer</span></code>——<code class="docutils literal notranslate"><span class="pre">ChineseStemmer</span></code> 从来不存在。</p>
+<p>问题出在 Sphinx 的 <code class="docutils literal notranslate"><span class="pre">sphinx/search/__init__.py</span></code> 第 588 行：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_js_stemmer_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">js_stemmer_rawcode</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">js_stemmer_code</span>
+    <span class="n">base_js_path</span> <span class="o">=</span> <span class="n">_MINIFIED_JS_PATH</span> <span class="o">/</span> <span class="s1">&#39;base-stemmer.js&#39;</span>
+    <span class="n">language_js_path</span> <span class="o">=</span> <span class="n">_MINIFIED_JS_PATH</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">js_stemmer_rawcode</span>
+    <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span>
+        <span class="n">base_js_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
+        <span class="n">language_js_path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
+        <span class="sa">f</span><span class="s1">&#39;window.Stemmer = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">language_name</span><span class="si">}</span><span class="s1">Stemmer;&#39;</span><span class="p">,</span>   <span class="c1"># ← 用 language_name 拼变量名</span>
+    <span class="p">))</span>
+</pre></div>
+</div>
+<p>它用 <code class="docutils literal notranslate"><span class="pre">language_name</span></code> 去拼 JS 里的变量名，对绝大多数语言都成立。但中文搜索类 <code class="docutils literal notranslate"><span class="pre">SearchChinese</span></code> 里这两者并不一致：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">language_name</span> <span class="pre">=</span> <span class="pre">'Chinese'</span></code> → 拼出 <code class="docutils literal notranslate"><span class="pre">ChineseStemmer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">js_stemmer_rawcode</span> <span class="pre">=</span> <span class="pre">'english-stemmer.js'</span></code> → 文件里定义的是 <code class="docutils literal notranslate"><span class="pre">EnglishStemmer</span></code></p></li>
+</ul>
+<p>名字对不上，于是生成了一行引用未定义变量的代码。<strong>任何使用 zh 搜索的 Sphinx 9.1.0 站点都会中招</strong>，与主题、托管平台无关。</p>
+</section>
+<section id="id5">
+<h2>修复<a class="headerlink" href="#id5" title="链接到此标题。">#</a></h2>
+<p>思路很简单：注册一个自己的中文搜索类，把 <code class="docutils literal notranslate"><span class="pre">js_stemmer_code</span></code> 自己拼出来，让别名指向真实存在的 <code class="docutils literal notranslate"><span class="pre">EnglishStemmer</span></code>。在 <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> 里加上：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sphinx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sphinx.search.zh</span><span class="w"> </span><span class="kn">import</span> <span class="n">SearchChinese</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">zh_js_stemmer_code</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">js_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">sphinx</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;search&#39;</span> <span class="o">/</span> <span class="s1">&#39;minified-js&#39;</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="p">(</span><span class="n">js_dir</span> <span class="o">/</span> <span class="s1">&#39;base-stemmer.js&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="n">english</span> <span class="o">=</span> <span class="p">(</span><span class="n">js_dir</span> <span class="o">/</span> <span class="s1">&#39;english-stemmer.js&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">english</span><span class="si">}</span><span class="se">\n</span><span class="s1">window.Stemmer = EnglishStemmer;&#39;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ChineseSearch</span><span class="p">(</span><span class="n">SearchChinese</span><span class="p">):</span>
+    <span class="n">js_stemmer_rawcode</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>            <span class="c1"># 置空 -&gt; Sphinx 改用下面的 js_stemmer_code</span>
+    <span class="n">js_stemmer_code</span> <span class="o">=</span> <span class="n">zh_js_stemmer_code</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">add_search_language</span><span class="p">(</span><span class="n">ChineseSearch</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id6">
+<h3>为什么这样能生效<a class="headerlink" href="#id6" title="链接到此标题。">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">SearchLanguage</span></code> 自带 <code class="docutils literal notranslate"><span class="pre">lang</span> <span class="pre">=</span> <span class="pre">'zh'</span></code>，自定义类继承它，所以 <code class="docutils literal notranslate"><span class="pre">ChineseSearch.lang</span></code> 仍然是 <code class="docutils literal notranslate"><span class="pre">'zh'</span></code>；而 <code class="docutils literal notranslate"><span class="pre">app.add_search_language(cls)</span></code> 做的事情是：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">languages</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">lang</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
+</pre></div>
+</div>
+<p>也就是把注册表里的 <code class="docutils literal notranslate"><span class="pre">'zh'</span></code> 覆盖掉。之后 <code class="docutils literal notranslate"><span class="pre">IndexBuilder</span></code> 通过 <code class="docutils literal notranslate"><span class="pre">languages.get(html_search_language)</span></code> 拿到的就是我们的类。因此 <code class="docutils literal notranslate"><span class="pre">html_search_language</span> <span class="pre">=</span> <span class="pre">'zh'</span></code> 保持不变即可，不需要改任何配置。</p>
+</section>
+<section id="englishstemmer">
+<h3>为什么用 EnglishStemmer 而不是空词干<a class="headerlink" href="#englishstemmer" title="链接到此标题。">#</a></h3>
+<p>一个自然的想法是「中文不需要词干化，直接写个什么都不做的 Stemmer」。但这是错的：Python 侧的 <code class="docutils literal notranslate"><span class="pre">SearchChinese.stem()</span></code> 本来就用英文 snowball 词干处理拉丁词，如果 JS 侧不处理，两边就不一致——索引里存的是 <code class="docutils literal notranslate"><span class="pre">table</span></code>，而查询时输入 <code class="docutils literal notranslate"><span class="pre">tables</span></code> 词干化后仍是 <code class="docutils literal notranslate"><span class="pre">tables</span></code>，就对不上了。用 <code class="docutils literal notranslate"><span class="pre">EnglishStemmer</span></code> 才能和 Python 侧对齐。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>副作用：<code class="docutils literal notranslate"><span class="pre">js_stemmer_rawcode</span></code> 置空后，Sphinx 不再把 <code class="docutils literal notranslate"><span class="pre">base-stemmer.js</span></code> 和 <code class="docutils literal notranslate"><span class="pre">english-stemmer.js</span></code> 拷进 <code class="docutils literal notranslate"><span class="pre">_static/</span></code>。这两个文件本来就没有任何页面引用，属于纯参考文件，没有影响。</p>
+</div>
+</section>
+</section>
+<section id="id7">
+<h2>让中文词组真正能被搜到：自定义词典<a class="headerlink" href="#id7" title="链接到此标题。">#</a></h2>
+<p>修完上面那个 bug，搜索能用了，但还有一个体验问题：很多词组搜不到。原因是<strong>索引侧和查询侧的分词方式不一样</strong>。</p>
+<ul class="simple">
+<li><p>索引侧（Python）：jieba 把中文切成词。</p></li>
+<li><p>查询侧（浏览器）：<code class="docutils literal notranslate"><span class="pre">searchtools.js</span></code> 里的默认 <code class="docutils literal notranslate"><span class="pre">splitQuery</span></code> 按「非字母数字」切分，而汉字属于 Unicode 的 <code class="docutils literal notranslate"><span class="pre">Letter</span></code>，所以<strong>整段中文一个词都不会被切</strong>。中文没有自己的 JS 分词器。</p></li>
+</ul>
+<p>结果就是：你在输入框里输入的整个中文串，会被当成<strong>一个</strong>词条去查索引。所以只要 jieba 没有把它作为一个整体切出来，这个词就永远搜不到。</p>
+<p>解决办法是给 jieba 一份自定义词典。文件放在 <code class="docutils literal notranslate"><span class="pre">sphinx/jieba_dict.txt</span></code>，<code class="docutils literal notranslate"><span class="pre">conf.py</span></code> 里这样接：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_search_language</span> <span class="o">=</span> <span class="s1">&#39;zh&#39;</span>
+<span class="n">jieba_dict</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s1">&#39;jieba_dict.txt&#39;</span>
+<span class="n">html_search_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dict&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">jieba_dict</span><span class="p">)}</span> <span class="k">if</span> <span class="n">jieba_dict</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="k">else</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<p>文件格式是 <code class="docutils literal notranslate"><span class="pre">词</span> <span class="pre">[频次]</span> <span class="pre">[词性]</span></code>，<strong>频次和词性都可以省略</strong>：</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>科技论文写作
+交叉编译 1000 n
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>jieba 的用户词典<strong>不支持</strong><code class="docutils literal notranslate"><span class="pre">#</span></code> 注释。<code class="docutils literal notranslate"><span class="pre">load_userdict</span></code> 只跳过空行，注释行会被整行当成一个词条。所以这个文件里只能放纯词条，想记「为什么加这个词」请写在提交信息里。</p>
+</div>
+<p>改了词典<strong>必须重新构建</strong>才会生效——词典只在生成索引时起作用，对已经打开的页面无效。</p>
+<section id="id8">
+<h3>怎么判断一个词该不该加<a class="headerlink" href="#id8" title="链接到此标题。">#</a></h3>
+<p>两步实测，不要凭感觉：</p>
+<ol class="arabic">
+<li><p>看 jieba 能不能把整词切出来。判定标准是<strong>整词在不在输出列表里</strong>，而不是「输出是不是只有这一个元素」：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import jieba; print(list(jieba.cut_for_search(&#39;科技论文写作&#39;)))&quot;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cut_for_search</span></code> 是搜索引擎模式，对长度大于 2 的词会先吐出子词、再吐整词。以 <code class="docutils literal notranslate"><span class="pre">单片机</span></code> 为例，输出是 <code class="docutils literal notranslate"><span class="pre">['单片',</span> <span class="pre">'单片机']</span></code>——整词在，说明它本来就没问题，不需要加。</p>
+</li>
+<li><p>确认这个词真的出现在文档内容里。没有出现过的词写进词典毫无意义：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>grep<span class="w"> </span>-rl<span class="w"> </span><span class="s1">&#39;科技论文写作&#39;</span><span class="w"> </span>sphinx/doc<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="id9">
+<h2>为什么整句中文搜不到<a class="headerlink" href="#id9" title="链接到此标题。">#</a></h2>
+<p>修好词典之后仍然会有人问：「我把一整句话粘进去，怎么还是搜不到？」这不是故障，而是上面那个不对称的必然结果。</p>
+<ul class="simple">
+<li><p><strong>整句中文搜不到。</strong> 整串被当作一个词条，索引里不会有这么长的词。要按词搜。</p></li>
+<li><p><strong>多个词之间是「与」的关系。</strong> 用空格分隔出多个词时，只有<strong>同一页同时包含全部词</strong>才会命中。所以搜不到时，先算一下这几个词有没有同页共现，再怀疑分词。</p></li>
+<li><p><strong>单个汉字不入索引。</strong> <code class="docutils literal notranslate"><span class="pre">SearchChinese.word_filter</span></code> 要求词长大于 1，所以像 <code class="docutils literal notranslate"><span class="pre">源</span></code> 这样的单字永远搜不到。</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>怎么验证搜索真的好了<a class="headerlink" href="#id10" title="链接到此标题。">#</a></h2>
+<p>最直接的办法是问索引和问浏览器，两件事都要做。</p>
+<p>查索引里有没有这个词（不改任何东西，纯读取）：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">import json</span>
+<span class="s2">t = open(&#39;docs/searchindex.js&#39;, encoding=&#39;utf-8&#39;).read()</span>
+<span class="s2">d = json.loads(t[t.index(&#39;(&#39;) + 1:t.rindex(&#39;)&#39;)])</span>
+<span class="s2">print(&#39;科技论文写作&#39; in d[&#39;terms&#39;])</span>
+<span class="s2">&quot;</span>
+</pre></div>
+</div>
+<p>查浏览器里能不能搜出结果，仍然用无头浏览器把渲染结果 dump 回来：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>msedge<span class="w"> </span>--headless<span class="w"> </span>--disable-gpu<span class="w"> </span>--virtual-time-budget<span class="o">=</span><span class="m">15000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dump-dom<span class="w"> </span><span class="s2">&quot;file:///&lt;站点目录&gt;/search.html?q=安装&quot;</span>
+</pre></div>
+</div>
+<p>在 dump 出来的 HTML 里看 <code class="docutils literal notranslate"><span class="pre">&lt;ul</span> <span class="pre">class=&quot;search&quot;&gt;</span></code> 中有几个 <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code>，或者干脆在 URL 里带上 <code class="docutils literal notranslate"><span class="pre">?q=</span></code> 后截图看。本站修复前后的对比：</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 40.5%" />
+<col style="width: 29.7%" />
+<col style="width: 29.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>查询</p></th>
+<th class="head"><p>修复前</p></th>
+<th class="head"><p>修复后</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">科技论文写作</span></code></p></td>
+<td><p>0 条</p></td>
+<td><p>5 条</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">交叉编译</span></code></p></td>
+<td><p>0 条</p></td>
+<td><p>2 条</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">安装</span></code></p></td>
+<td><p>卡在「正在搜索中」</p></td>
+<td><p>16 条</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">table</span></code></p></td>
+<td><p>0 条</p></td>
+<td><p>2 条</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id11">
+<h2>小结<a class="headerlink" href="#id11" title="链接到此标题。">#</a></h2>
+<ul class="simple">
+<li><p>搜索整个瘫掉，是因为 Sphinx 9.1.0 给中文搜索生成了一个引用未定义变量 <code class="docutils literal notranslate"><span class="pre">ChineseStemmer</span></code> 的 JS 文件。<strong>先看浏览器控制台的报错</strong>，不要在配置里反复猜。</p></li>
+<li><p>修法是注册一个自定义中文搜索类，覆盖 <code class="docutils literal notranslate"><span class="pre">'zh'</span></code> 注册项。</p></li>
+<li><p>搜索「能用」和「好用」是两件事。查询串在浏览器端不会被切成中文词，所以要用自定义词典把常用的词组变成索引里的独立词条。</p></li>
+<li><p>排错时先排除假象：静态资源的 200、查询串、线上的 403、以及<strong>用错解释器</strong>得出的「包没装」。</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="上一页">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">上一页</p>
+        <p class="prev-next-title">Sphinx 使用笔记</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> 目录
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">症状</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">先排除的四个假象</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">定位：注入错误探针</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bug">根因：一个上游 bug</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">修复</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">为什么这样能生效</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#englishstemmer">为什么用 EnglishStemmer 而不是空词干</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">让中文词组真正能被搜到：自定义词典</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">怎么判断一个词该不该加</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">为什么整句中文搜不到</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">怎么验证搜索真的好了</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">小结</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+作者： infinite-cloisters
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, infinite-cloisters.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=90905a2f556bf617f1a9"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=90905a2f556bf617f1a9"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

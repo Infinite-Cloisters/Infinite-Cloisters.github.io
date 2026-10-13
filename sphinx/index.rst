@@ -19,6 +19,7 @@ DOCS Documentation
    doc/nuedc/index
    doc/JLC/index
    doc/techpapers/index
+   doc/sphinx/index
 
 欢迎来到Infinite-Cloisters的随记文档
 

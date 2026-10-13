@@ -30,6 +30,10 @@ language = 'zh_CN'
 # html_theme = 'sphinx_rtd_theme'
 # html_theme = 'shibuya'
 html_theme = 'sphinx_book_theme'
+html_theme_options = {
+    "repository_url": "https://github.com/Infinite-Cloisters/Infinite-Cloisters.github.io"
+}
+
 html_static_path = ['_static']
 
 import sphinx
@@ -40,20 +44,16 @@ html_search_language = 'zh'
 jieba_dict = Path(__file__).parent / 'jieba_dict.txt'
 html_search_options = {'dict': str(jieba_dict)} if jieba_dict.is_file() else {}
 
-
 def zh_js_stemmer_code() -> str:
     js_dir = Path(sphinx.__file__).parent / 'search' / 'minified-js'
-
     base = (js_dir / 'base-stemmer.js').read_text(encoding='utf-8')
     english = (js_dir / 'english-stemmer.js').read_text(encoding='utf-8')
 
     return f'{base}\n{english}\nwindow.Stemmer = EnglishStemmer;'
 
-
 class ChineseSearch(SearchChinese):
     js_stemmer_rawcode = '' 
     js_stemmer_code = zh_js_stemmer_code()
-
 
 def setup(app):
     app.add_search_language(ChineseSearch)

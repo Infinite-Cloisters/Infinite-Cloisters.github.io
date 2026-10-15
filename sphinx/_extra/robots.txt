@@ -1,0 +1,46 @@
+# robots.txt for https://www.cad.qzz.io
+# 规范: RFC 9309 (https://www.rfc-editor.org/rfc/rfc9309)
+# 站点同时可通过 https://cad.qzz.io 与 https://def.qzz.io 访问。
+
+# 默认规则：允许抓取正文，屏蔽构建产物与功能页
+User-agent: *
+Allow: /
+Disallow: /_sources/
+Disallow: /_static/
+Disallow: /_images/
+Disallow: /genindex.html
+Disallow: /search.html
+Disallow: /*?highlight=
+
+# --- AI 爬虫：同样只放行正文 ---
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+Disallow: /_sources/
+Disallow: /_static/
+Disallow: /_images/
+
+# Anthropic
+User-agent: ClaudeBot
+Allow: /
+Disallow: /_sources/
+Disallow: /_static/
+Disallow: /_images/
+
+# Google（Gemini 训练用）
+User-agent: Google-Extended
+Allow: /
+Disallow: /_sources/
+Disallow: /_static/
+Disallow: /_images/
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+Disallow: /_sources/
+Disallow: /_static/
+Disallow: /_images/
+
+# Sitemap 位置（绝对 URL，须与站点主域名一致）
+Sitemap: https://cad.qzz.io/sitemap.xml

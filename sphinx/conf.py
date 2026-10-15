@@ -36,6 +36,10 @@ html_theme_options = {
 
 html_static_path = ['_static']
 
+# 会被原样复制到构建产物根目录的文件（robots.txt、sitemap.xml 等必须位于站点根）。
+# 放在 _static 里只会得到 /_static/xxx，达不到 robots.txt 必须在根路径的要求。
+html_extra_path = ['_extra']
+
 import sphinx
 from pathlib import Path
 from sphinx.search.zh import SearchChinese

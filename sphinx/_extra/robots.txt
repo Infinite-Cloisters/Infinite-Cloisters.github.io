@@ -1,9 +1,15 @@
 # robots.txt for https://www.cad.qzz.io
 # 规范: RFC 9309 (https://www.rfc-editor.org/rfc/rfc9309)
 # 站点同时可通过 https://cad.qzz.io 与 https://def.qzz.io 访问。
+#
+# Content Signals（https://contentsignals.org/）语义：
+#   search=yes    允许建立搜索索引、返回链接与短摘要
+#   ai-input=yes  允许内容作为 AI 实时检索输入（RAG / grounding / 生成式搜索问答）
+#   ai-train=no   不允许用本站内容训练或微调 AI 模型
 
 # 默认规则：允许抓取正文，屏蔽构建产物与功能页
 User-agent: *
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 Disallow: /_sources/
 Disallow: /_static/
@@ -16,6 +22,7 @@ Disallow: /*?highlight=
 
 # OpenAI
 User-agent: GPTBot
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 Disallow: /_sources/
 Disallow: /_static/
@@ -23,6 +30,7 @@ Disallow: /_images/
 
 # Anthropic
 User-agent: ClaudeBot
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 Disallow: /_sources/
 Disallow: /_static/
@@ -30,6 +38,7 @@ Disallow: /_images/
 
 # Google（Gemini 训练用）
 User-agent: Google-Extended
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 Disallow: /_sources/
 Disallow: /_static/
@@ -37,6 +46,7 @@ Disallow: /_images/
 
 # Perplexity
 User-agent: PerplexityBot
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 Allow: /
 Disallow: /_sources/
 Disallow: /_static/

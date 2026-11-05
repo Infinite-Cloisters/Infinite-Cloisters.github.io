@@ -61,6 +61,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://cad.qzz.io/doc/linux/ssh.html</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://cad.qzz.io/doc/nuedc/faq.html</loc>
     <lastmod>2026-05-10</lastmod>
     <priority>0.6</priority>

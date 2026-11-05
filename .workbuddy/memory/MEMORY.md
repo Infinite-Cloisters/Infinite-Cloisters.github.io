@@ -20,8 +20,19 @@
 - ⚠️ 从 `_static/` 挪走后，**旧的 `_build/html/_static/robots.txt` 不会被 `cp -r` 删除**，需手工 `rm -f` 清一次。
 - `sitemap.xml` 由 **`gen_sitemap.py`** 生成（扫描 `docs/` 下 29 个正文页面；排除 `_sources/`/`_static/`/`_images/`/`genindex`/`search`/`404`）。要点：`index.html` 结尾的 URL 去掉文件名；priority 首页 1.0 / 分区 0.8 / 页面 0.6；**`lastmod` 取源文件最后一次 git 提交日期**（`git log -1 --format=%cs -- <src>`）而非构建时间——频繁变动的 lastmod 会被搜索引擎判为不可信；Windows 上用 `open(..., newline='')` 写，`write_text` 会转成 CRLF。
 - robots.txt 结构：默认 `User-agent: *` 组 + **四个 AI 爬虫各自独立组**（GPTBot / ClaudeBot / Google-Extended / PerplexityBot，规则同默认组）。**不要合并成逗号分隔的一行**——扫描器会逐名匹配。
+- **Content Signals 已启用**（2026-10-15，用户选定策略=「允许搜索 + AI 检索」）：每个组内第一行指令位置加
+  `Content-Signal: ai-train=no, search=yes, ai-input=yes`。
+  - 规范：三类别固定 `search`（建索引+链接短摘要，不含 AI 摘要）/ `ai-input`（RAG/grounding）/ `ai-train`（训练微调）；取值只有 `yes`/`no`；**省略某类别 = 既不授权也不限制**（≠ no）；**必须放在 `User-agent` 组内且在 `Allow`/`Disallow` 之前**。
+  - 它是**偏好声明**，不改变 `can_fetch` 结果（改完要做回归验证）。
+  - 校验脚本要点：解析分组 → 断言每组 Content-Signal 位置在指令之前 + 类别/取值合法。
+  - 参考：https://contentsignals.org/ 与 draft-romm-aipref-contentsignals-00。
 - 校验手法：① 语义用 stdlib `urllib.robotparser.RobotFileParser` 打 agent×路径矩阵判 allow/deny，别肉眼读；② MIME 用 `python -m http.server` 本地验（`run_in_background: true`，否则前台 subshell 被 reap）；③ XML 合法性用 `ElementTree` 解析（HTTP 200 不够，GitHub 的 404 页也可能 200）；④ `head -c 3 | xxd -p` 查 BOM、`grep -qU $'\r'` 查 CRLF。
-- isitagentready 校验：`POST https://isitagentready.com/api/scan` body `{"url":"https://cad.qzz.io"}`（需浏览器 UA）。关注 `checks.discoverability.robotsTxt` 与 `botAccessControl.robotsTxtAiRules`。2026-10-15 两者均 pass。
+- isitagentready 校验：`POST https://isitagentready.com/api/scan` body `{"url":"https://cad.qzz.io"}`（需浏览器 UA）。关注 `checks.discoverability.robotsTxt`、`botAccessControl.robotsTxtAiRules`、`botAccessControl.contentSignals`。前两者 2026-10-15 pass。
+- 🔴 **改 robots.txt 后别急着用第三方扫描器判成败——先排除 Cloudflare 边缘缓存**。踩过的坑：推送后源站已正确（直连 `https://infinite-cloisters.github.io/robots.txt` 可验），但扫描器三轮全 fail，因为 **Cloudflare 分 colo 各自缓存**，`HKG`/`KIX`/`MRS` 已是新版而 `SIN` 仍是旧版，且 **isitagentready 探针固定落 SIN**。
+  - 判别：看响应头 `cf-cache-status: HIT` + `Age` 很大 + 内容旧 ⇒ **是缓存不是配置**。`cf-ray` 后缀即 colo。
+  - **GitHub Pages 的 TTL 按扩展名不同：`.txt` = `max-age=14400`（4 小时），`.html` = `max-age=600`**。robots.txt 属前者，陈旧窗口特别长。
+  - `Cache-Control: no-cache` 只能推动**部分**节点回源，推不动已固定的节点；带 `If-None-Match: <旧ETag>` 会直接拿到 `304`（证明该节点不回源）。
+  - 解除：Cloudflare 仪表盘 Caching → Configuration → Purge Cache → 按 URL 清，或等 TTL 到期。**没有 API token 就无法自动 purge**。
 - 每个 doc 子目录有 `index.rst`（含 `.. _label:`、标题、`.. toctree::`），正文可用 `.md`。分区页模板：label → 标题（下划线给足，CJK 按双宽算）→ 简介 → `.. toctree::` → `.. role:: raw-html(raw)`。
 - **`doc/sphinx/`＝站点工具链专题区**（「Sphinx 使用笔记」），已有 `search.rst`（中文搜索排错）。这个区刻意写 `.rst` 而非 `.md`：需要 `.. note::`/`.. warning::` 提示框与 `.. code-block::` 高亮，markdown 在 recommonmark 下拿不到。
 - **markdown 里不能写 RST 指令**（recommonmark 不认 `.. note::`，也不认 ```eval_rst 围栏块，后者还会报 Pygments lexer 警告）。想用主题的提示框必须写 `.rst`；markdown 只能用引用块 `> **备注**` 代替。markdown 中也不要写 toctree——toctree 统一放在该目录的 `index.rst` 里。

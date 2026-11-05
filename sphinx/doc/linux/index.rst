@@ -7,6 +7,7 @@ Linux踩坑记录
 现在从manjaro到archlinux期间踩过不少坑,记录下来以备后续参考.
 
 .. toctree::
+    ssh
     linux
     
 .. role:: raw-html(raw)

@@ -30,8 +30,9 @@ ssh-keygen
 下面这段 PowerShell 脚本用于把本地公钥追加到远端 `authorized_keys`，保持原样不要改动：
 
 将公钥上传到服务器脚本如下：
+
 ```powershell
-[CmdletBinding(DefaultParameterSetName = "DeployMode")]
+﻿[CmdletBinding(DefaultParameterSetName = "DeployMode")]
 param(
     [Parameter(Mandatory = $true, ParameterSetName = "DeployMode", Position = 0)]
     [Alias("r")]
@@ -69,7 +70,7 @@ SSH 公钥部署工具 v2.1
   -h, -Help     显示帮助信息
 
 示例:
-  .\$scriptName 114.514.191.9 orz -Port 810
+  .\$scriptName REDACTED_IP xjq -Port 23
   .\$scriptName -RemoteHost 10.0.0.5 -User webuser -Port 2222
 
 注意事项:
@@ -78,6 +79,36 @@ SSH 公钥部署工具 v2.1
   3. 仍需在最后一步输入一次远端密码 (公钥尚未生效时)
 "@
     exit 0
+}
+
+# --- 终端动画 (opencode 风格 braille spinner) ----------------------------
+$frameList = @('⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏')
+
+function pause {
+    $null = Read-Host -Prompt "按 Enter 键退出"
+}
+
+function Start-Spinner {
+    param(
+        [Parameter(Mandatory = $true)]
+        [scriptblock]$Action,
+        [string]$Message = '',
+        [int]$StepMs = 90
+    )
+    # 在后台作业里跑命令: 作业进程不带用户控制台、不继承 stdin,
+    # 因此不会出现"卡住等回车"的问题
+    $job = Start-Job -ScriptBlock $Action
+    $idx = 0
+    while ($job.State -eq 'Running') {
+        Write-Host -NoNewline ("`r{0} {1}" -f $frameList[$idx % $frameList.Length], $Message)
+        Start-Sleep -Milliseconds $StepMs
+        $idx++
+    }
+    # 清掉动画行, 避免残留字符
+    Write-Host -NoNewline ("`r" + (" " * 80) + "`r")
+    $result = Receive-Job -Job $job -ErrorAction SilentlyContinue
+    Remove-Job -Job $job -Force
+    return $result
 }
 
 if ($Help) { Show-Help }
@@ -145,16 +176,19 @@ try {
     exit 1
 }
 
-# --- 验证 (BatchMode: 不再询问密码) --------------------------------------
-& ssh -p $Port -o BatchMode=yes -o StrictHostKeyChecking=accept-new $target "echo OK" 2>$null | Out-Null
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "`n[成功] 公钥已部署, 免密登录生效: ssh -p $Port $target" -ForegroundColor Green
-    exit 0
-} else {
-    Write-Host "`n[警告] 公钥已写入, 但免密验证未通过 (退出码 $LASTEXITCODE)" -ForegroundColor Yellow
-    Write-Host "请检查远端 ~/.ssh 权限、sshd 的 PubkeyAuthentication 与 AuthorizedKeysFile 配置" -ForegroundColor Yellow
-    exit 2
+# --- 验证 (BatchMode: 不再询问密码, 带 spinner) -------------------------
+$exitCode = Start-Spinner -Message "正在验证免密登录 $target" -Action {
+    & ssh -p $using:Port -o BatchMode=yes -o StrictHostKeyChecking=accept-new $using:target "echo OK" 2>$null | Out-Null
+    return $LASTEXITCODE
 }
+if ($exitCode -eq 0) {
+    Write-Host "[成功] 公钥已部署, 免密登录生效: ssh -p $Port $target" -ForegroundColor Green
+} else {
+    Write-Host "[警告] 公钥已写入, 但免密验证未通过 (退出码 $exitCode)" -ForegroundColor Yellow
+    Write-Host "请检查远端 ~/.ssh 权限、sshd 的 PubkeyAuthentication 与 AuthorizedKeysFile 配置" -ForegroundColor Yellow
+}
+pause
+exit $exitCode
 
 ```
 

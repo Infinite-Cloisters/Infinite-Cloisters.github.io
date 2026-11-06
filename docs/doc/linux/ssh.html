@@ -482,7 +482,7 @@ ssh-keygen
 <span class="sh">  -h, -Help     显示帮助信息</span>
 
 <span class="sh">示例:</span>
-<span class="sh">  .\$scriptName 114.514.191.9 orz -Port 810</span>
+<span class="sh">  .\$scriptName REDACTED_IP xjq -Port 23</span>
 <span class="sh">  .\$scriptName -RemoteHost 10.0.0.5 -User webuser -Port 2222</span>
 
 <span class="sh">注意事项:</span>
@@ -491,6 +491,36 @@ ssh-keygen
 <span class="sh">  3. 仍需在最后一步输入一次远端密码 (公钥尚未生效时)</span>
 <span class="sh">&quot;@</span>
     <span class="n">exit</span> <span class="n">0</span>
+<span class="p">}</span>
+
+<span class="c"># --- 终端动画 (opencode 风格 braille spinner) ----------------------------</span>
+<span class="nv">$frameList</span> <span class="p">=</span> <span class="p">@(</span><span class="s1">&#39;⠋&#39;</span><span class="p">,</span> <span class="s1">&#39;⠙&#39;</span><span class="p">,</span> <span class="s1">&#39;⠹&#39;</span><span class="p">,</span> <span class="s1">&#39;⠸&#39;</span><span class="p">,</span> <span class="s1">&#39;⠼&#39;</span><span class="p">,</span> <span class="s1">&#39;⠴&#39;</span><span class="p">,</span> <span class="s1">&#39;⠦&#39;</span><span class="p">,</span> <span class="s1">&#39;⠧&#39;</span><span class="p">,</span> <span class="s1">&#39;⠇&#39;</span><span class="p">,</span> <span class="s1">&#39;⠏&#39;</span><span class="p">)</span>
+
+<span class="k">function</span> <span class="n">pause</span> <span class="p">{</span>
+    <span class="nv">$null</span> <span class="p">=</span> <span class="nb">Read-Host</span> <span class="n">-Prompt</span> <span class="s2">&quot;按 Enter 键退出&quot;</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nb">Start-Spinner</span> <span class="p">{</span>
+    <span class="k">param</span><span class="p">(</span>
+        <span class="p">[</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span> <span class="p">=</span> <span class="nv">$true</span><span class="p">)]</span>
+        <span class="no">[scriptblock]</span><span class="nv">$Action</span><span class="p">,</span>
+        <span class="no">[string]</span><span class="nv">$Message</span> <span class="p">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="no">[int]</span><span class="nv">$StepMs</span> <span class="p">=</span> <span class="n">90</span>
+    <span class="p">)</span>
+    <span class="c"># 在后台作业里跑命令: 作业进程不带用户控制台、不继承 stdin,</span>
+    <span class="c"># 因此不会出现&quot;卡住等回车&quot;的问题</span>
+    <span class="nv">$job</span> <span class="p">=</span> <span class="nb">Start-Job</span> <span class="n">-ScriptBlock</span> <span class="nv">$Action</span>
+    <span class="nv">$idx</span> <span class="p">=</span> <span class="n">0</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nv">$job</span><span class="p">.</span><span class="n">State</span> <span class="o">-eq</span> <span class="s1">&#39;Running&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">Write-Host</span> <span class="n">-NoNewline</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">`r</span><span class="s2">{0} {1}&quot;</span> <span class="o">-f</span> <span class="nv">$frameList</span><span class="p">[</span><span class="nv">$idx</span> <span class="p">%</span> <span class="nv">$frameList</span><span class="p">.</span><span class="n">Length</span><span class="p">],</span> <span class="nv">$Message</span><span class="p">)</span>
+        <span class="nb">Start-Sleep</span> <span class="n">-Milliseconds</span> <span class="nv">$StepMs</span>
+        <span class="nv">$idx</span><span class="p">++</span>
+    <span class="p">}</span>
+    <span class="c"># 清掉动画行, 避免残留字符</span>
+    <span class="nb">Write-Host</span> <span class="n">-NoNewline</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">`r</span><span class="s2">&quot;</span> <span class="p">+</span> <span class="p">(</span><span class="s2">&quot; &quot;</span> <span class="p">*</span> <span class="n">80</span><span class="p">)</span> <span class="p">+</span> <span class="s2">&quot;</span><span class="se">`r</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nv">$result</span> <span class="p">=</span> <span class="nb">Receive-Job</span> <span class="n">-Job</span> <span class="nv">$job</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+    <span class="nb">Remove-Job</span> <span class="n">-Job</span> <span class="nv">$job</span> <span class="n">-Force</span>
+    <span class="k">return</span> <span class="nv">$result</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nv">$Help</span><span class="p">)</span> <span class="p">{</span> <span class="nb">Show-Help</span> <span class="p">}</span>
@@ -558,16 +588,19 @@ ssh-keygen
     <span class="n">exit</span> <span class="n">1</span>
 <span class="p">}</span>
 
-<span class="c"># --- 验证 (BatchMode: 不再询问密码) --------------------------------------</span>
-<span class="p">&amp;</span> <span class="n">ssh</span> <span class="n">-p</span> <span class="nv">$Port</span> <span class="n">-o</span> <span class="n">BatchMode</span><span class="p">=</span><span class="n">yes</span> <span class="n">-o</span> <span class="n">StrictHostKeyChecking</span><span class="p">=</span><span class="n">accept-new</span> <span class="nv">$target</span> <span class="s2">&quot;echo OK&quot;</span> <span class="n">2</span><span class="p">&gt;</span><span class="nv">$null</span> <span class="p">|</span> <span class="nb">Out-Null</span>
-<span class="k">if</span> <span class="p">(</span><span class="nv">$LASTEXITCODE</span> <span class="o">-eq</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[成功] 公钥已部署, 免密登录生效: ssh -p $Port $target&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
-    <span class="n">exit</span> <span class="n">0</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nb">Write-Host</span> <span class="s2">&quot;</span><span class="se">`n</span><span class="s2">[警告] 公钥已写入, 但免密验证未通过 (退出码 $LASTEXITCODE)&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
-    <span class="nb">Write-Host</span> <span class="s2">&quot;请检查远端 ~/.ssh 权限、sshd 的 PubkeyAuthentication 与 AuthorizedKeysFile 配置&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
-    <span class="n">exit</span> <span class="n">2</span>
+<span class="c"># --- 验证 (BatchMode: 不再询问密码, 带 spinner) -------------------------</span>
+<span class="nv">$exitCode</span> <span class="p">=</span> <span class="nb">Start-Spinner</span> <span class="n">-Message</span> <span class="s2">&quot;正在验证免密登录 $target&quot;</span> <span class="n">-Action</span> <span class="p">{</span>
+    <span class="p">&amp;</span> <span class="n">ssh</span> <span class="n">-p</span> <span class="nv">$using</span><span class="p">:</span><span class="n">Port</span> <span class="n">-o</span> <span class="n">BatchMode</span><span class="p">=</span><span class="n">yes</span> <span class="n">-o</span> <span class="n">StrictHostKeyChecking</span><span class="p">=</span><span class="n">accept-new</span> <span class="nv">$using</span><span class="p">:</span><span class="n">target</span> <span class="s2">&quot;echo OK&quot;</span> <span class="n">2</span><span class="p">&gt;</span><span class="nv">$null</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+    <span class="k">return</span> <span class="nv">$LASTEXITCODE</span>
 <span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$exitCode</span> <span class="o">-eq</span> <span class="n">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">Write-Host</span> <span class="s2">&quot;[成功] 公钥已部署, 免密登录生效: ssh -p $Port $target&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Green</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nb">Write-Host</span> <span class="s2">&quot;[警告] 公钥已写入, 但免密验证未通过 (退出码 $exitCode)&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+    <span class="nb">Write-Host</span> <span class="s2">&quot;请检查远端 ~/.ssh 权限、sshd 的 PubkeyAuthentication 与 AuthorizedKeysFile 配置&quot;</span> <span class="n">-ForegroundColor</span> <span class="n">Yellow</span>
+<span class="p">}</span>
+<span class="n">pause</span>
+<span class="n">exit</span> <span class="nv">$exitCode</span>
 </pre></div>
 </div>
 </section>

@@ -69,7 +69,7 @@ SSH 公钥部署工具 v2.1
   -h, -Help     显示帮助信息
 
 示例:
-  .\$scriptName REDACTED_IP xjq -Port 23
+  .\$scriptName 114.514.191.9 xjq -Port 810
   .\$scriptName -RemoteHost 10.0.0.5 -User webuser -Port 2222
 
 注意事项:

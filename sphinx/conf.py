@@ -9,7 +9,7 @@
 project = 'Documentation'
 copyright = '2026, infinite-cloisters'
 author = 'infinite-cloisters'
-release = '0.1.9'
+release = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

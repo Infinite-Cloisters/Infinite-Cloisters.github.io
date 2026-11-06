@@ -32,7 +32,7 @@ ssh-keygen
 将公钥上传到服务器脚本如下：
 
 ```powershell
-﻿[CmdletBinding(DefaultParameterSetName = "DeployMode")]
+[CmdletBinding(DefaultParameterSetName = "DeployMode")]
 param(
     [Parameter(Mandatory = $true, ParameterSetName = "DeployMode", Position = 0)]
     [Alias("r")]
